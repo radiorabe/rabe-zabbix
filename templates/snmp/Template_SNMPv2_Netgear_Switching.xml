@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-02-03T09:21:50Z</date>
+    <groups>
+        <group>
+            <name>SNMP templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SNMPv2 Netgear Switching</template>
+            <name>Template SNMPv2 Netgear Switching</name>
+            <description>Templeate for Netgear Private MIB for FastPath Switching based on NETGEAR-SWITCHING-MIB</description>
+            <groups>
+                <group>
+                    <name>SNMP templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>SNMPv2 Netgear Switching</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Total memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>NETGEAR-SWITCHING-MIB::agentSwitchCpuProcessMemAvailable.0</snmp_oid>
+                    <key>agentSwitchCpuProcessMemAvailable[]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total memory available in KBytes.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear Switching</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Free memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>NETGEAR-SWITCHING-MIB::agentSwitchCpuProcessMemFree.0</snmp_oid>
+                    <key>agentSwitchCpuProcessMemFree[]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total memory free for utilization in KBytes.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear Switching</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Total CPU utilization</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SWITCHING-MIB::agentSwitchCpuProcessTotalUtilization.0</snmp_oid>
+                    <key>agentSwitchCpuProcessTotalUtilization[]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Total CPU utilization over a period of 5, 60, 300 seconds, and the Rising threshold period also in seconds, if configured.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear Switching</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$SNMPV2_NETGEAR_SWITCHING_MEMORY_PFREE_HIGH_THRESHOLD}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_NETGEAR_SWITCHING_MEMORY_PFREE_WARNING_THRESHOLD}</macro>
+                    <value>10</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>100 / {Template SNMPv2 Netgear Switching:agentSwitchCpuProcessMemAvailable[].last()} *&#13;
+{Template SNMPv2 Netgear Switching:agentSwitchCpuProcessMemFree[].last()} &lt; {$SNMPV2_NETGEAR_SWITCHING_MEMORY_PFREE_WARNING_THRESHOLD}</expression>
+            <name>Free memory on {HOST.NAME} is low (&lt; $2 %, {ITEM.VALUE2} available)</name>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description/>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>Free memory on {HOST.NAME} is very low (&lt; $2 %, {ITEM.VALUE2} available)</name>
+                    <expression>100 / {Template SNMPv2 Netgear Switching:agentSwitchCpuProcessMemAvailable[].last()} *&#13;
+{Template SNMPv2 Netgear Switching:agentSwitchCpuProcessMemFree[].last()} &lt; {$SNMPV2_NETGEAR_SWITCHING_MEMORY_PFREE_HIGH_THRESHOLD}</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>100 / {Template SNMPv2 Netgear Switching:agentSwitchCpuProcessMemAvailable[].last()} *&#13;
+{Template SNMPv2 Netgear Switching:agentSwitchCpuProcessMemFree[].last()} &lt; {$SNMPV2_NETGEAR_SWITCHING_MEMORY_PFREE_HIGH_THRESHOLD}</expression>
+            <name>Free memory on {HOST.NAME} is very low (&lt; $2 %, {ITEM.VALUE2} available)</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Free memory</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>1</ymin_type_1>
+            <ymax_type_1>2</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>
+                <host>Template SNMPv2 Netgear Switching</host>
+                <key>agentSwitchCpuProcessMemAvailable[]</key>
+            </ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 Netgear Switching</host>
+                        <key>agentSwitchCpuProcessMemFree[]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
