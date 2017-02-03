@@ -2,6 +2,8 @@
 Monitors common network interface parameters exposed by the IF-MIB via SNMPv2.
 The template uses HC 64bit parameters (such as ifHCInOctets and ifHCOutOctets) where available.
 
+This template is part of [RaBe's Zabbix template and helpers collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Features
 * Uses low-level discovery for the available network interfaces
 * Uses HC 64bit parameters (such as ifHCInOctets and ifHCOutOctets)
@@ -52,10 +54,10 @@ Note, that the triggers support [macro contexts](https://www.zabbix.com/document
 
 ## Requirements
 * Your host must support SNMPv2
-* IF-MIB must be available and accessible by the Zabbix server (which is probably already present on your system)
+* IF-MIB must be available and accessible by the Zabbix server (which is probably already the case on your system)
 
 ## Usage
-1. Import the <code>Template_SNMPv2_Interfaces_HC.xml</code> into your Zabbix installation.
+1. Import the [Template_SNMPv2_Interfaces_HC.xml](Template_SNMPv2_Interfaces_HC.xml) into your Zabbix server.
 2. Add the template to your host (or stack template)
 3. Add an SNMP interface configuration to your host
 4. Set the <code>{$SNMP_COMMUNITY}</code> macro to your desired community if you don't use <code>public</code>
