@@ -1,0 +1,30 @@
+module rabezbxtimedatectl 1.0;
+
+require {
+    type zabbix_agent_t;
+    type system_dbusd_t;
+    type systemd_timedated_t;
+    class unix_stream_socket connectto;
+    class dbus send_msg;
+}
+
+#============= zabbix_agent_t ==============
+
+# let zabbix agent connect to the system dbus socket
+#!!!! The file '/run/dbus/system_bus_socket' is mislabeled on your system.  
+#!!!! Fix with $ restorecon -R -v /run/dbus/system_bus_socket
+#     The file is mistagged on all systems and restorecon does not
+#     fix it. matchpathcon seems to think everything is ok and I
+#     have concluded that the fail is the above error.
+allow zabbix_agent_t system_dbusd_t:unix_stream_socket connectto;
+
+# let zabbix agent send messages to dbus
+allow zabbix_agent_t system_dbusd_t:dbus send_msg;
+
+# allow zabbix agent to send timedatectl dbus messages in dbus user_avc
+allow zabbix_agent_t systemd_timedated_t:dbus send_msg;
+
+#============= systemd_timedated_t ==============
+
+# allow timedated to send answers to zabbix agent
+allow systemd_timedated_t zabbix_agent_t:dbus send_msg;
