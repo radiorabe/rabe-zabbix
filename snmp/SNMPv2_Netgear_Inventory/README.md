@@ -1,6 +1,6 @@
 # Zabbix SNMPv2 Netgear Inventory template
-Monitors Netgear Inventory parameters, namely switch units and stack ports
-exposed by the NETGEAR-INVENTORY-MIBvia SNMPv2.
+Monitors Netgear Inventory parameters (fastPathInventory), namely switch units
+and stack ports exposed by the NETGEAR-INVENTORY-MIB via SNMPv2.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
@@ -91,6 +91,13 @@ for example).
 * [SNMPv2 Netgear Box Services](../SNMPv2_Netgear_Box_Services)
 * [SNMPv2 Netgear SNTP client](../SNMPv2_Netgear_SNTP_client)
 * [SNMPv2 Netgear Switching](../SNMPv2_Netgear_Switching)
+
+# Notes
+## snmpwalk command
+The following <code>snmpwalk</code> command might be helpful for debugging:
+'''bash
+snmpwalk -v 2c -c public <HOST> NETGEAR-INVENTORY-MIB::fastPathInventory
+'''
 
 # License
 This template is free software: you can redistribute it and/or modify it under
