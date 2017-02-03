@@ -73,7 +73,7 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 # Copyright
-Copyright (c) 2017 [Radio Bern RaBe)(http://www.rabe.ch)
+Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
 # Authors
 Christian Affolter <c.affolter@purplehaze.ch>
