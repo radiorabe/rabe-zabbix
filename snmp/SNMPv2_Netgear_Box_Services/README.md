@@ -1,6 +1,7 @@
 # Zabbix SNMPv2 Netgear Box Services template
-Monitors Netgear Box Searvice Feature parameters, such as sensors, fans and
-power supplies exposed by the NETGEAR-BOXSERVICES-PRIVATE-MIB via SNMPv2.
+Monitors Netgear Box Searvice Feature (fastPathBoxServices) parameters, such as
+sensors, fans and power supplies exposed by the NETGEAR-BOXSERVICES-PRIVATE-MIB
+via SNMPv2.
 
 This template is part of [RaBe's Zabbix template and helpers collection](https://github.com/radiorabe/rabe-zabbix).
 
@@ -66,6 +67,13 @@ This template is part of [RaBe's Zabbix template and helpers collection](https:/
 * [SNMPv2 Netgear Inventory](../SNMPv2_Netgear_Inventory)
 * [SNMPv2 Netgear SNTP client](../SNMPv2_Netgear_SNTP_client)
 * [SNMPv2 Netgear Switching](../SNMPv2_Netgear_Switching)
+
+# Notes
+## snmpwalk command
+The following <code>snmpwalk</code> command might be helpful for debugging:
+```bash
+snmpwalk -v 2c -c public <HOST> NETGEAR-BOXSERVICES-PRIVATE-MIB::fastPathBoxServices
+```
 
 # License
 This template is free software: you can redistribute it and/or modify it under
