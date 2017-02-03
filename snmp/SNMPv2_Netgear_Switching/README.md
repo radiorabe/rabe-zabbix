@@ -37,7 +37,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 * NETGEAR-SWITCHING-MIB and its dependencies must be available and accessible by the Zabbix server (should be present within the MIB package of your Netgear device)
 
 ## Usage
-1. Import the [Template_SNMPv2_Netgear_SNTP_client.xml](Template_SNMPv2_Netgear_SNTP_client.xml) into your Zabbix server.
+1. Import the [Template_SNMPv2_Netgear_Switching.xml](Template_SNMPv2_Netgear_Switching.xml) into your Zabbix server.
 2. Add the template to your host (or stack template)
 3. Add an SNMP interface configuration to your host
 4. Set the <code>{$SNMP_COMMUNITY}</code> macro to your desired community if you don't use <code>public</code>
@@ -61,9 +61,10 @@ snmpwalk -v 2c -c public <HOST> NETGEAR-SWITCHING-MIB::fastPathSwitching
 The CPU utilization is currently only available as a string with 5, 60 and 300
 second values (<code>5 Secs ( 13.2483%)   60 Secs ( 11.3541%)  300 Secs (11.2930%)</code>
 which makes it very hard or impossible to create triggers.
+
 Please open up an issue if you know of an elegant way to either parse and split
-the item into separate float items or if you find other OIDs which expose the
-values separately - thanks.
+the item into separate float items or if you find other OIDs which separately
+expose the values - thanks.
 
 # License
 This template is free software: you can redistribute it and/or modify it under
