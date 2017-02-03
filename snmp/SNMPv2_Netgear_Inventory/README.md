@@ -95,9 +95,9 @@ for example).
 # Notes
 ## snmpwalk command
 The following <code>snmpwalk</code> command might be helpful for debugging:
-'''bash
+```bash
 snmpwalk -v 2c -c public <HOST> NETGEAR-INVENTORY-MIB::fastPathInventory
-'''
+```
 
 # License
 This template is free software: you can redistribute it and/or modify it under
