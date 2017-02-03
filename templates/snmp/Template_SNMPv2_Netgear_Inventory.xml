@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-02-03T09:21:09Z</date>
+    <groups>
+        <group>
+            <name>SNMP templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SNMPv2 Netgear Inventory</template>
+            <name>Template SNMPv2 Netgear Inventory</name>
+            <description>Template used for FastPath to configure and report information and status of units, slots and supported cards.&#13;
+&#13;
+Based on the NETGEAR-INVENTORY-MIB</description>
+            <groups>
+                <group>
+                    <name>SNMP templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Stack ports</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#AGENTINVENTORYSTACKPORTTAG},NETGEAR-INVENTORY-MIB::agentInventoryStackPortTag,{#AGENTINVENTORYSTACKPORTUNIT},NETGEAR-INVENTORY-MIB::agentInventoryStackPortUnit]</snmp_oid>
+                    <key>agentInventoryStackPortTag</key>
+                    <delay>300</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>30</lifetime>
+                    <description/>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Configured mode of stack port $1 on unit $2</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryStackPortConfiguredStackMode.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryStackPortConfiguredStackMode[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                            <delay>3600</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Configured mode of the Stack Port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Netgear Inventory Stack Port Mode</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#AGENTINVENTORYSTACKPORTUNIT}, Stack Port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Traffic on stack port $1 on unit $2</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>1</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryStackPortDataRate.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryStackPortDataRate[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>bps</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1000000</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Approximate data rate on the stacking port. Measured in Gb/s. Ports which are in ethernet mode will return 0.&#13;
+&#13;
+According to the above MIB description the values should be in Gb/s, however, it seems that they are actually in Mb/s (at least that's what &quot;show stack-port counter&quot; on a M5300-28G with firmware 11.0.0.12 shows).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#AGENTINVENTORYSTACKPORTUNIT}, Stack Port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Errors on stack port $1 on unit $2</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryStackPortErrorRate.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryStackPortErrorRate[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Approximate error rate on the stack port. Measured in Errors per Second. Ports which are in ethernet mode will return 0.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#AGENTINVENTORYSTACKPORTUNIT}, Stack Port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Speed of stack port $1 on unit $2</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>1</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryStackPortLinkSpeed.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryStackPortLinkSpeed[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>bps</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1000000000</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Speed of the Stack Port measured in Gb/s. Ports which are in ethernet mode will return a speed of 0.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#AGENTINVENTORYSTACKPORTUNIT}, Stack Port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Link status of stack port $1 on unit $2</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryStackPortLinkStatus.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryStackPortLinkStatus[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Link status of the Stack Port.  Ports which are in ethernet mode will return a status of down(2).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>SNMP interface status (ifAdminStatus)</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#AGENTINVENTORYSTACKPORTUNIT}, Stack Port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Operational mode of stack port $1 on unit $2</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryStackPortRunningStackMode.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryStackPortRunningStackMode[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Currently operational mode of the Stack Port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Netgear Inventory Stack Port Mode</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#AGENTINVENTORYSTACKPORTUNIT}, Stack Port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryStackPortLinkStatus[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].last()}&lt;&gt;1 and&#13;
+{Template SNMPv2 Netgear Inventory:agentInventoryStackPortRunningStackMode[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].last()}&lt;&gt;2</expression>
+                            <name>Link status down on {HOST.NAME} unit {#AGENTINVENTORYSTACKPORTUNIT} stack port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>Link status of the stack port is NOT up(1) and stack port is NOT in operational mode ethernet(2) (as those will be always down according to the MIB description).</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryStackPortRunningStackMode[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].diff(0)}=1</expression>
+                            <name>Operational mode on {HOST.NAME} unit {#AGENTINVENTORYSTACKPORTUNIT} stack port {#AGENTINVENTORYSTACKPORTTAG} changed to {ITEM.VALUE1}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>1</priority>
+                            <description>Currently operational mode of the stack port changed.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryStackPortDataRate[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].avg({$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_WARNING_TIME:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;})} &gt;&#13;
+{Template SNMPv2 Netgear Inventory:agentInventoryStackPortLinkSpeed[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].last(0)} / 100 * {$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_WARNING_PERCENTAGE:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;}</expression>
+                            <name>Port utilization is high (&gt; $2 % over {$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_WARNING_TIME:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;}) on {HOST.NAME} unit {#AGENTINVENTORYSTACKPORTUNIT} stack port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies>
+                                <dependency>
+                                    <name>Port utilization is very high (&gt; $2 % over {$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_TIME:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;}) on {HOST.NAME} unit {#AGENTINVENTORYSTACKPORTUNIT} stack port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                                    <expression>{Template SNMPv2 Netgear Inventory:agentInventoryStackPortDataRate[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].avg({$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_TIME:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;})} &gt;&#13;
+{Template SNMPv2 Netgear Inventory:agentInventoryStackPortLinkSpeed[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].last(0)} / 100 * {$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_PERCENTAGE:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryStackPortDataRate[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].avg({$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_TIME:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;})} &gt;&#13;
+{Template SNMPv2 Netgear Inventory:agentInventoryStackPortLinkSpeed[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}].last(0)} / 100 * {$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_PERCENTAGE:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;}</expression>
+                            <name>Port utilization is very high (&gt; $2 % over {$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_TIME:&quot;{#AGENTINVENTORYSTACKPORTUNIT}_{#AGENTINVENTORYSTACKPORTTAG}&quot;}) on {HOST.NAME} unit {#AGENTINVENTORYSTACKPORTUNIT} stack port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>Traffic on unit {#AGENTINVENTORYSTACKPORTUNIT}, stack port {#AGENTINVENTORYSTACKPORTTAG}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>1</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>1A7C11</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template SNMPv2 Netgear Inventory</host>
+                                        <key>agentInventoryStackPortDataRate[{#AGENTINVENTORYSTACKPORTTAG},{#AGENTINVENTORYSTACKPORTUNIT}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Units</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#AGENTINVENTORYUNITASSIGNNUMBER},NETGEAR-INVENTORY-MIB::agentInventoryUnitAssignNumber]</snmp_oid>
+                    <key>agentInventoryUnitAssignNumber</key>
+                    <delay>300</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>1</lifetime>
+                    <description>{$SNMP_COMMUNITY} is a global macro.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Description of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitDescription.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitDescription[{#SNMPINDEX}]</key>
+                            <delay>3600</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The description of the unit.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Code version of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitDetectedCodeVer.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitDetectedCodeVer[{#SNMPINDEX}]</key>
+                            <delay>3600</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The version of code running on this unit. If the unit is not detected then the code version is an empty string.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Management status of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitMgmtAdmin.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitMgmtAdmin[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Indicates whether the unit is a Management Unit, a Stack Unit, or has been configured to be a Management Unit.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Netgear Inventory Unit Management Status</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Serial number of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitSerialNumber.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitSerialNumber[{#SNMPINDEX}]</key>
+                            <delay>3600</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The Serial Number of the unit.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Standby status of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitStandby.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitStandby[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The standby status of this unit.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Netgear Inventory Unit Standby Status</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Status of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitStatus.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitStatus[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The unit status of this unit.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Netgear Inventory Unit Status</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Uptime of unit $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>1</multiplier>
+                            <snmp_oid>NETGEAR-INVENTORY-MIB::agentInventoryUnitUpTime.{#SNMPINDEX}</snmp_oid>
+                            <key>agentInventoryUnitUpTime[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>uptime</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>0.01</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The system up time of the unit.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Netgear Inventory - Unit {#SNMPINDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryUnitMgmtAdmin[{#SNMPINDEX}].diff(0)}&gt;0</expression>
+                            <name>Management status of unit {#SNMPINDEX} on {HOST.NAME} changed to {ITEM.VALUE1}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>1</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryUnitStandby[{#SNMPINDEX}].diff(0)}&gt;0</expression>
+                            <name>Standby status of unit {#SNMPINDEX} on {HOST.NAME} changed to {ITEM.VALUE1}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>1</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryUnitStatus[{#SNMPINDEX}].last()}&lt;&gt;1</expression>
+                            <name>Status of {HOST.NAME} unit {#SNMPINDEX} not ok ({ITEM.VALUE1})</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>Status of Unit is NOT ok(1)</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryUnitMgmtAdmin[{#SNMPINDEX}].last()}=3</expression>
+                            <name>Unassigned unit {#SNMPINDEX} on {HOST.NAME} ({ITEM.VALUE1})</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>Unit management status is mgmtUnassigned(3)</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 Netgear Inventory:agentInventoryUnitUpTime[{#SNMPINDEX}].last(0)}&lt;900</expression>
+                            <name>{HOST.NAME} unit {#SNMPINDEX} has been restarted (uptime {ITEM.VALUE1})</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>1</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_PERCENTAGE}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_HIGH_TIME}</macro>
+                    <value>1h</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_WARNING_PERCENTAGE}</macro>
+                    <value>80</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_NETGEAR_INVENTORY_UTILIZATION_WARNING_TIME}</macro>
+                    <value>15m</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <value_maps>
+        <value_map>
+            <name>Netgear Inventory Stack Port Mode</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>stack</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>ethernet</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Netgear Inventory Unit Management Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>mgmtUnit</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>stackUnit</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>mgmtUnassigned</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Netgear Inventory Unit Standby Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>unassigned</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>standby-opr</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>standby-cfg</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Netgear Inventory Unit Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>ok</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>unsupported</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>codeMismatch</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>configMismatch</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>sdmMismatch</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>notPresent</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>codeUpdate</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>stmMismatch</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>SNMP interface status (ifAdminStatus)</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>up</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>testing</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
