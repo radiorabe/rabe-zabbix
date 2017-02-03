@@ -1,4 +1,4 @@
-# Zabbix SNMPv2 Netgear Box Setvices template
+# Zabbix SNMPv2 Netgear Box Services template
 Monitors Netgear Box Searvice Feature parameters, such as sensors, fans and
 power supplies exposed by the NETGEAR-BOXSERVICES-PRIVATE-MIB via SNMPv2.
 
@@ -7,6 +7,7 @@ This template is part of [RaBe's Zabbix template and helpers collection](https:/
 ## Features
 * Uses low-level discovery in order to detect fans, power supplies and temperature sensors.
 * Supports multi-unit devices (such as switch stacks)
+* The power supply trigger respects the supply type and won't fire in case a power supply is not present but removable.
 
 ## Items
 ### Item prototypes for auto discovered fans
