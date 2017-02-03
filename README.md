@@ -3,16 +3,16 @@ Collection of various [Zabbix](http://www.zabbix.com/) templates and helper scri
 
 ## Zabbix Templates
 The Zabbix templates are located within the [templates](templates) subfolder and are further subdived into the following categories:
-* [Operating system (os)](templates/os): All operating system specific templates
+* [Operating system (os)](os): All operating system specific templates
   * Naming convention: <code>Template_OS_\<OPERATING-SYSTEM-NAME\>_active</code>
   * Example: <code>Template_OS_Linux_active</code>
-* [Application (app)](templates/app): All application specifc templates
+* [Application (app)](app): All application specifc templates
   * Naming convention: <code>Template_App_\[\<OPERATING-SYSTEM-NAME\]_\<APPLICATION-NAME\>_active</code>
   * Example: <code>Template_App_Linux_Postfix_active</code>
-* [SNMP (snmp)](templates/snmp): All SNMP based templates
+* [SNMP (snmp)](snmp): All SNMP based templates
   * Naming convention: <code>Template_SNMP\<SNMP-VERSION\>_\<NAME\></code>
   * Example: <code>Template_SNMPv2_Interfaces_HC</code>
-* [Stack (stack)](templates/stack): Stack templates define a single system (or role) and might inherit further stack templates, or exactly one operating system template as well as multiple application or SNMP templates.
+* [Stack (stack)](stack): Stack templates define a single system (or role) and might inherit further stack templates, or exactly one operating system template as well as multiple application or SNMP templates.
  * Naming convention: <code>Template_Stack_\<STACK-NAME\>_active</code>
  * Example: <code>Template_Stack_MediaWiki_active</code>
 
