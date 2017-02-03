@@ -79,6 +79,7 @@ This template is part of [RaBe's Zabbix template and helpers collection](https:/
 Note, that the triggers support [macro contexts](https://www.zabbix.com/documentation/3.0/manual/config/macros/usermacros#macro_context), so you can override a specific macro not only globally, but also per interface (such as <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_WARNING_PERCENTAGE:"{#SNMPVALUE}"}</code> for example).
 
 ## Requirements
+* [Zabbix](https://www.zabbix.com/) >= 3.0
 * Your host must support SNMPv2
 * IF-MIB must be available and accessible by the Zabbix server (which is probably already the case on your system)
 
