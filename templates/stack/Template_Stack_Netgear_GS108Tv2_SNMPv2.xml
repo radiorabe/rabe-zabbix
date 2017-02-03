@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-02-03T08:54:12Z</date>
+    <groups>
+        <group>
+            <name>Stack templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Stack Netgear GS108Tv2 SNMPv2</template>
+            <name>Template Stack Netgear GS108Tv2 SNMPv2</name>
+            <description>Netgear ProSAFE 8-port Gigabit Smart Managed Switch</description>
+            <groups>
+                <group>
+                    <name>Stack templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules/>
+            <macros/>
+            <templates>
+                <template>
+                    <name>Template SNMPv2 Generic</name>
+                </template>
+                <template>
+                    <name>Template SNMPv2 Interfaces HC</name>
+                </template>
+            </templates>
+            <screens/>
+        </template>
+    </templates>
+</zabbix_export>
