@@ -40,8 +40,14 @@ This template is part of [RaBe's Zabbix template and helpers collection](https:/
 * Traffic on interface (Inbound/Outbound)
 
 ## Macros
-* <code>{$SNMP_COMMUNITY}</code> - SNMPv2 community which defaults to <code>public</code>
-* <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_HIGH_PERCENTAGE}</code> - Inbound interface utilization/staturation in percent for HIGH trigger (90% per default)
+* <code>{$SNMP_COMMUNITY}</code>
+
+  SNMPv2 community which defaults to <code>public</code>
+
+* <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_HIGH_PERCENTAGE}</code>
+
+  Inbound interface utilization/staturation in percent for HIGH trigger (90% per default)
+
 * <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_HIGH_TIME}</code> - Inbound time for which the interface must be saturated for HIGH trigger (1h per default)
 * <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_WARNING_PERCENTAGE}</code> - Inbound interface utilization/staturation in percent for WARNING trigger (80% per default)
 * <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_WARNING_TIME}</code> - Inbound time for which the interface must be saturated for WARNING trigger (15m per default)
@@ -50,7 +56,7 @@ This template is part of [RaBe's Zabbix template and helpers collection](https:/
 * <code>{$SNMPV2_INTERFACES_HC_OUT_UTILIZATION_WARNING_PERCENTAGE}</code> - Outbound interface utilization/staturation in percent for WARNING trigger (80% per default)
 * <code>{$SNMPV2_INTERFACES_HC_OUT_UTILIZATION_WARNING_TIME}</code> - Outbound time for which the interface must be saturated for WARNING trigger (15m per default)
 
-Note, that the triggers support [macro contexts](https://www.zabbix.com/documentation/3.0/manual/config/macros/usermacros#macro_context), so you can override a specific macro no only globally, but also per interface (such as <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_WARNING_PERCENTAGE:"{#SNMPVALUE}"}</code> for example).
+Note, that the triggers support [macro contexts](https://www.zabbix.com/documentation/3.0/manual/config/macros/usermacros#macro_context), so you can override a specific macro not only globally, but also per interface (such as <code>{$SNMPV2_INTERFACES_HC_IN_UTILIZATION_WARNING_PERCENTAGE:"{#SNMPVALUE}"}</code> for example).
 
 ## Requirements
 * Your host must support SNMPv2
