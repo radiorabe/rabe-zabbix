@@ -7,7 +7,7 @@ This template is part of [RaBe's Zabbix template and helpers collection](https:/
 ## Features
 * Uses low-level discovery in order to detect fans, power supplies and temperature sensors.
 * Supports multi-unit devices (such as switch stacks)
-* The power supply trigger respects the supply type and won't fire in case a power supply is not present but removable.
+* The power supply trigger respects the supply type and won't fire in case a removable power supply is not present.
 
 ## Items
 ### Item prototypes for auto discovered fans
