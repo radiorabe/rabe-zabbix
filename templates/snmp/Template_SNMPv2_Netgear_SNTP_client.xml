@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-02-03T09:21:29Z</date>
+    <groups>
+        <group>
+            <name>SNMP templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SNMPv2 Netgear SNTP client</template>
+            <name>Template SNMPv2 Netgear SNTP client</name>
+            <description>Template for Netgear SNTP client configuration and statistical collection based on NETGEAR-SNTP-CLIENT-MIB</description>
+            <groups>
+                <group>
+                    <name>SNMP templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>SNMPv2 Netgear SNTP client</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>SNTP client last attempt status</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientLastAttemptStatus.0</snmp_oid>
+                    <key>agentSntpClientLastAttemptStatus.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The status of the last SNTP request or unsolicited SNTP message for this SNTP client since agent reboot.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Netgear SNTP Client Update Status</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client last attempt time</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SWITCHING-MIB::agentSntpClientLastAttemptTime.0</snmp_oid>
+                    <key>agentSntpClientLastAttemptTime.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The local date and time of the last SNTP request or unsolicited SNTP message for this SNTP client since agent reboot.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client last update time</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientLastUpdateTime.0</snmp_oid>
+                    <key>agentSntpClientLastUpdateTime.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The local date and time that the SNTP client last updated the system time on the device since agent reboot.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client mode</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientMode.0</snmp_oid>
+                    <key>agentSntpClientMode.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The current administrative mode of the SNTP client.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Netgear SNTP Client Mode</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client poll interval</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientPollInterval.0</snmp_oid>
+                    <key>agentSntpClientPollInterval.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>s</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The minimum number of seconds between successive SNTP polls of the server in seconds as a power of two. This polling interval is used for SNTP requests in unicast(1) or broadcast(2) administrative mode.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client server address</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientServerAddress.0</snmp_oid>
+                    <key>agentSntpClientServerAddress.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The encoded address of the SNTP server as identified by the last received packet.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client server address type</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientServerAddressType.0</snmp_oid>
+                    <key>agentSntpClientServerAddressType.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The address type of the SNTP server as identified by the last received packet.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>SNMP INET Address Type (InetAddressType)</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client server mode</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientServerMode.0</snmp_oid>
+                    <key>agentSntpClientServerMode.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>This is a 3-bit integer identifying the mode of the server as indicated in the last received packet.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Netgear SNTP Client Server Mode</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SNTP client server stratum</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>NETGEAR-SNTP-CLIENT-MIB::agentSntpClientServerStratum.0</snmp_oid>
+                    <key>agentSntpClientServerStratum.0</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>This is an 8-bit integer identifying the stratum of the server as indicated in the last received packet.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMPv2 Netgear SNTP client</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros/>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template SNMPv2 Netgear SNTP client:agentSntpClientLastAttemptStatus.0.last(#1)}&lt;&gt;2 and&#13;
+{Template SNMPv2 Netgear SNTP client:agentSntpClientLastAttemptStatus.0.last(#2)}&lt;&gt;2</expression>
+            <name>SNTP attempt status on {HOST.NAME} was unsuccessfull ({ITEM.VALUE1})</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>last and previous agentSntpClientLastAttemptStatus are not success(2) (ensure that the trigger only fires if at least tow values/attempts have failed)</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>SNTP client is disabled on {HOST.NAME}</name>
+                    <expression>{Template SNMPv2 Netgear SNTP client:agentSntpClientMode.0.last()}=0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template SNMPv2 Netgear SNTP client:agentSntpClientMode.0.last()}=0</expression>
+            <name>SNTP client is disabled on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>agentSntpClientMode is disabled(0)</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+    </triggers>
+    <value_maps>
+        <value_map>
+            <name>Netgear SNTP Client Mode</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>disabled</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>unicast</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>broadcast</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>broadcast</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Netgear SNTP Client Server Mode</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>reserved</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>symmetric active</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>symmetric passive</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>client</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>server</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>broadcast</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>reserved for NTP control message</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>reserved for private use</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Netgear SNTP Client Update Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>success</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>requestTimedOut</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>badDateEncoded</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>versionNotSupported</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>serverUnsychronized</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>serverKissOfDeath</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>serverKoDRateExceeded</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>SNMP INET Address Type (InetAddressType)</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>unknown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>ipv4</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>ipv6</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>ipv4z</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>ipv6z</newvalue>
+                </mapping>
+                <mapping>
+                    <value>16</value>
+                    <newvalue>dns</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
