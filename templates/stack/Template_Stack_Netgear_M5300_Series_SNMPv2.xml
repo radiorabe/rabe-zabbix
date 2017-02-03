@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-02-03T09:37:08Z</date>
+    <groups>
+        <group>
+            <name>Stack templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Stack Netgear M5300 Series SNMPv2</template>
+            <name>Template Stack Netgear M5300 Series SNMPv2</name>
+            <description>Netgear M5300 Series Stackable Gigabit L2/L3 Managed Switches</description>
+            <groups>
+                <group>
+                    <name>Stack templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules/>
+            <macros/>
+            <templates>
+                <template>
+                    <name>Template SNMPv2 Generic</name>
+                </template>
+                <template>
+                    <name>Template SNMPv2 Interfaces HC</name>
+                </template>
+                <template>
+                    <name>Template SNMPv2 Netgear Box Services</name>
+                </template>
+                <template>
+                    <name>Template SNMPv2 Netgear Inventory</name>
+                </template>
+                <template>
+                    <name>Template SNMPv2 Netgear SNTP client</name>
+                </template>
+                <template>
+                    <name>Template SNMPv2 Netgear Switching</name>
+                </template>
+            </templates>
+            <screens/>
+        </template>
+    </templates>
+</zabbix_export>
