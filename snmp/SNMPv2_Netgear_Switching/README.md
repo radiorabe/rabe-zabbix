@@ -1,4 +1,4 @@
-# Zabbix SNMPv2 Netgear SNTP client template
+# Zabbix SNMPv2 Netgear Switching template
 Monitors Netgear Switching parameters (fastPathSwitching), currently only CPU and memory exposed by the NETGEAR-SWITCHING-MIB via SNMPv2.
 
 This template is part of [RaBe's Zabbix template and helpers
