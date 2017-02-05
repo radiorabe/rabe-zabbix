@@ -101,7 +101,7 @@ wget http://www.downloads.netgear.com/files/GDC/M5300/m5300v11.0.0.23-mibs.zip
 unzip m5300v11.0.0.23-mibs.zip
 cd m5300v11.0.0.23-mibs/
 
-# Install only additional relevant MIBs 
+# Install only relevant MIBs 
 cp cheetahref.my \
    fastpath*.my \
    ospf.my \
@@ -120,23 +120,22 @@ rm -rf m5300v11.0.0.23-mibs*
 ```
 
 2. Restart your Zabbix server (on systemd systems: <code>systemctl restart zabbix.service</code>)
-3. Import the
-   [Template_SNMPv2_Generic.xml](../../snmp/Template_SNMPv2_Generic/Template_SNMPv2_Generic.xml),
-   [Template_SNMPv2_Interfaces_HC.xml](../../snmp/Template_SNMPv2_Interfaces_HC/Template_SNMPv2_Interfaces_HC.xml),
-   [Template_SNMPv2_Netgear_Box_Services.xml](../../snmp/SNMPv2_Netgear_Box_Services/Template_SNMPv2_Netgear_Box_Services.xml),
-   [Template_SNMPv2_Netgear_Inventory.xml](../../snmp/SNMPv2_Netgear_Inventory/Template_SNMPv2_Netgear_Inventory.xml),
-   [Template_SNMPv2_Netgear_SNTP_client.xml](../../snmp/SNMPv2_Netgear_SNTP_client/Template_SNMPv2_Netgear_SNTP_client.xml) and
-   [Template_SNMPv2_Netgear_Switching.xml](../../snmp/SNMPv2_Netgear_Switching/Template_SNMPv2_Netgear_Switching.xml)
-   sub-templates into your Zabbix server.
-2. Import the
+3. Import the following sub-templates into your Zabbix server:
+  * [Template_SNMPv2_Generic.xml](../../snmp/Template_SNMPv2_Generic/Template_SNMPv2_Generic.xml)
+  * [Template_SNMPv2_Interfaces_HC.xml](../../snmp/Template_SNMPv2_Interfaces_HC/Template_SNMPv2_Interfaces_HC.xml)
+  * [Template_SNMPv2_Netgear_Box_Services.xml](../../snmp/SNMPv2_Netgear_Box_Services/Template_SNMPv2_Netgear_Box_Services.xml)
+  * [Template_SNMPv2_Netgear_Inventory.xml](../../snmp/SNMPv2_Netgear_Inventory/Template_SNMPv2_Netgear_Inventory.xml)
+  * [Template_SNMPv2_Netgear_SNTP_client.xml](../../snmp/SNMPv2_Netgear_SNTP_client/Template_SNMPv2_Netgear_SNTP_client.xml)
+  * [Template_SNMPv2_Netgear_Switching.xml](../../snmp/SNMPv2_Netgear_Switching/Template_SNMPv2_Netgear_Switching.xml)
+4. Import the
    [Template_SNMPv2_Interfaces_HC.xml](Template_SNMPv2_Interfaces_HC.xml) into
    your Zabbix server.
-3. Add the template to your host (or stack template)
-4. Add an SNMP interface configuration to your host
-5. Set the <code>{$SNMP_COMMUNITY}</code> macro to your desired community if
+5. Add the template to your host (or stack template)
+6. Add an SNMP interface configuration to your host
+7. Set the <code>{$SNMP_COMMUNITY}</code> macro to your desired community if
    you don't use <code>public</code>
-6. Check if new data arrives
-7. You might want to disable the <code>Operational status down on ...</code>
+8. Check if new data arrives
+9. You might want to disable the <code>Operational status down on ...</code>
    triggers on interfaces which aren't supposed to be up all the time
 
 ## Linked templates
