@@ -66,7 +66,7 @@ following sub-templates:
    [Template_SNMPv2_Interfaces_HC.xml](../../snmp/Template_SNMPv2_Interfaces_HC/Template_SNMPv2_Interfaces_HC.xml)
    sub-templates into your Zabbix server.
 2. Import the
-   [Template_SNMPv2_Interfaces_HC.xml](Template_SNMPv2_Interfaces_HC.xml) into
+   [Template_Stack_Netgear_GS108Tv2_SNMPv2.xml](Template_Stack_Netgear_GS108Tv2_SNMPv2.xml) into
    your Zabbix server.
 3. Add the template to your host (or stack template)
 4. Add an SNMP interface configuration to your host
