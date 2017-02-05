@@ -1,0 +1,9 @@
+module rabezabbixagent 1.0;
+
+require {
+    type zabbix_agent_t;
+    class process setrlimit;
+}
+
+#============= zabbix_agent_t ==============
+allow zabbix_agent_t self:process setrlimit;
