@@ -47,6 +47,13 @@ curl -o /etc/yum.repos.d/home:radiorabe:zabbix.repo \
 yum install rabe-zabbix
 ```
 
+## Releasing
+
+* Bump the version in the Specfile and add a new commit to master with the version bump
+* Tag this commit with the same version you used in the Specfile
+* Push master and the tag to github
+* The openSUSE Build Service should get triggered and build a new package automagically
+
 ## License
 This template collection is free software: you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License as published by the Free
