@@ -17,6 +17,9 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 * High: Free memory is very low (< 5%)
 * Warning: Free memory is low (< 10%)
 
+## Graphs
+* Free memory statistics
+
 ## Macros
 * <code>{$SNMP_COMMUNITY}</code>
 
