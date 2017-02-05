@@ -28,3 +28,29 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 * Use an update interval of 300 seconds (5 minutes) by default
 * Create at least one unique application per app and snmp template
 * Use macros whenever possible and feasible, prefix them with a unique per template prefix
+
+### App specific conventions
+
+* Apps may contain configuration snippets in a `userparameters/` subdir.
+* SELinux policy modules for an app are in the `selinux/` subdir. They are prefixed with "rabe" to help differentiate them from system policy.
+* Apps have a Makefile to aid in compiling the SELinux policy.
+
+## RPM Packages
+
+The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version
+through the [openSUSE Build Server](https://build.opensuse.org/). They are available as part of the [home:radiorabe:zabbix Subproject](https://build.opensuse.org/project/show/home:radiorabe:zabbix). You can install them as follows.
+
+```bash
+curl -o /etc/yum.repos.d/home:radiorabe:zabbix.repo \
+     http://download.opensuse.org/repositories/home:/radiorabe:/zabbix/CentOS_7/home:radiorabe:zabbix.repo
+
+yum install rabe-zabbix
+```
+
+## License
+This template collection is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 of the License.
+
+## Copyright
+Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
