@@ -128,7 +128,7 @@ rm -rf m5300v11.0.0.23-mibs*
   * [Template_SNMPv2_Netgear_SNTP_client.xml](../../snmp/SNMPv2_Netgear_SNTP_client/Template_SNMPv2_Netgear_SNTP_client.xml)
   * [Template_SNMPv2_Netgear_Switching.xml](../../snmp/SNMPv2_Netgear_Switching/Template_SNMPv2_Netgear_Switching.xml)
 4. Import the
-   [Template_SNMPv2_Interfaces_HC.xml](Template_SNMPv2_Interfaces_HC.xml) into
+   [Template_Stack_Netgear_M5300_Series_SNMPv2.xml](Template_Stack_Netgear_M5300_Series_SNMPv2.xml) into
    your Zabbix server.
 5. Add the template to your host (or stack template)
 6. Add an SNMP interface configuration to your host
