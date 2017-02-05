@@ -3,7 +3,7 @@
 Basic Zabbix Agent operations.
 
 * [Template App Zabbix Agent active](Template_App_Zabbix_Agent_active.xml)
-* [SELinux policy module rabezabbixagent](selinux/rabezabbixagent.te)
+* [SELinux policy module rabezbxzabbixagent](selinux/rabezbxzabbixagent.te)
 
 ## Template
 Based on the [official Zabbix agent template from Zabbix distribution](https://share.zabbix.com/official-templates/applications/zabbix-agent) but made active.
@@ -28,7 +28,7 @@ Based on the [official Zabbix agent template from Zabbix distribution](https://s
 
 ## SELinux Policy
 
-The [rabezabbixagent](selinux/rabezabbixagent.te) policy allows the agent to set its rlimit
+The [rabezbxzabbixagent](selinux/rabezbxzabbixagent.te) policy allows the agent to set its rlimit
 as described by [ZBX-10086](https://support.zabbix.com/browse/ZBX-10086).
 
 ## License
