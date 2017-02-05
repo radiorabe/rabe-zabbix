@@ -23,7 +23,7 @@
 #
 
 Name:          rabe-zabbix
-Version:       master
+Version:       0.1.0
 Release:       0
 Summary:       RaBe Zabbix scripts and configs
 License:       AGPLv3
