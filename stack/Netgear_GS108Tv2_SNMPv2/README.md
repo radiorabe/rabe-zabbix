@@ -22,8 +22,8 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 For a detailed list of all supported items refer to the documentation of the
 following sub-templates:
-* [SNMPv2 Generic items](snmp/SNMPv2_Generic#items)
-* [SNMPv2 Interfaces HC items](snmp/SNMPv2_Interfaces_HC#items)
+* [SNMPv2 Generic items](../../snmp/SNMPv2_Generic#items)
+* [SNMPv2 Interfaces HC items](../../snmp/SNMPv2_Interfaces_HC#items)
 
 
 ## Triggers
@@ -32,8 +32,8 @@ following sub-templates:
 
 For a detailed list of all supported triggers refer to the documentation of the
 following sub-templates:
-* [SNMPv2 Generic triggers](snmp/SNMPv2_Generic#triggers)
-* [SNMPv2 Interfaces HC triggers](snmp/SNMPv2_Interfaces_HC#triggers)
+* [SNMPv2 Generic triggers](../../snmp/SNMPv2_Generic#triggers)
+* [SNMPv2 Interfaces HC triggers](../../snmp/SNMPv2_Interfaces_HC#triggers)
 
 ## Graphs
 * Bandwidth and package statistics of interfaces
@@ -41,8 +41,8 @@ following sub-templates:
 For a detailed list of all supported graphs refer to the documentation of the
 following sub-templates:
 Supports the graphs of the following sub-templates:
-* [SNMPv2 Generic graphs](snmp/SNMPv2_Generic#graphs)
-* [SNMPv2 Interfaces HC graphs](snmp/SNMPv2_Interfaces_HC#graphs)
+* [SNMPv2 Generic graphs](../../snmp/SNMPv2_Generic#graphs)
+* [SNMPv2 Interfaces HC graphs](../../snmp/SNMPv2_Interfaces_HC#graphs)
 
 ## Macros
 * SNMP community
@@ -50,8 +50,8 @@ Supports the graphs of the following sub-templates:
 
 For a detailed list of all supported macros refer to the documentation of the
 following sub-templates:
-* [SNMPv2 Generic macros](snmp/SNMPv2_Generic#macros)
-* [SNMPv2 Interfaces HC macros](snmp/SNMPv2_Interfaces_HC#macros)
+* [SNMPv2 Generic macros](../../snmp/SNMPv2_Generic#macros)
+* [SNMPv2 Interfaces HC macros](../../snmp/SNMPv2_Interfaces_HC#macros)
 
 ## Requirements
 * [Zabbix](https://www.zabbix.com/) >= 3.0
@@ -60,8 +60,10 @@ following sub-templates:
   probably already the case on your system)
 
 ## Usage
-1. Import the [Template SNMPv2 Generic](../../snmp/Template_SNMPv2_Generic) and
-   [Template SNMPv2 Interfaces HC](../../snmp/Template_SNMPv2_Interfaces_HC)
+1. Import the
+   [Template_SNMPv2_Generic.xml](../../snmp/Template_SNMPv2_Generic/Template_SNMPv2_Generic.xml)
+   and
+   [Template_SNMPv2_Interfaces_HC.xml](../../snmp/Template_SNMPv2_Interfaces_HC/Template_SNMPv2_Interfaces_HC.xml)
    sub-templates into your Zabbix server.
 2. Import the
    [Template_SNMPv2_Interfaces_HC.xml](Template_SNMPv2_Interfaces_HC.xml) into
