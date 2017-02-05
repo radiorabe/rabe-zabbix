@@ -1,5 +1,5 @@
 # Zabbix SNMPv2 Netgear Box Services template
-Monitors Netgear Box Searvice Feature (fastPathBoxServices) parameters, such as
+Monitors Netgear Box Service Feature (fastPathBoxServices) parameters, such as
 sensors, fans and power supplies exposed by the NETGEAR-BOXSERVICES-PRIVATE-MIB
 via SNMPv2.
 
