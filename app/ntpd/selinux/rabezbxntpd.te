@@ -1,0 +1,10 @@
+module rabezbxntpd 1.0;
+
+require {
+    type ntp_conf_t;
+    type zabbix_agent_t;
+    class file read;
+}
+
+#============= zabbix_agent_t ==============
+allow zabbix_agent_t ntp_conf_t:file read;
