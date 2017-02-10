@@ -57,7 +57,7 @@ The following Items are created for each discovered Server
 
 * High: No running ntpd processes on {HOST.NAME}
 
-* Warning: ntpd system peer mode is not client
+* Warning: ntpd system peer mode is not client on {HOST.NAME}
 
   Gets triggered when a system does not identify itself as in system peer mode "client".
 

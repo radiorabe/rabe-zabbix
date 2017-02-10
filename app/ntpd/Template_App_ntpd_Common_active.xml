@@ -601,8 +601,8 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>{Template App ntpd Common active:rabe.ntpdc.sysinfo[system peer mode].regexp(^client$)}&lt;&gt;0</expression>
-            <name>ntpd system peer mode is not client</name>
+            <expression>{Template App ntpd Common active:rabe.ntpdc.sysinfo[system peer mode].regexp(client)}&lt;&gt;0</expression>
+            <name>ntpd system peer mode is not client on {HOST.NAME}</name>
             <url/>
             <status>0</status>
             <priority>2</priority>
