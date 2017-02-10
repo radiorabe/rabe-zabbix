@@ -56,7 +56,7 @@ test-app:
 
 test: all test-app
 
-# install a policy per app that matches the rabezbx<app> policy naming policy
+# install a policy per app that matches the rabezbx<app> naming policy
 # allowed to fail since not all apps have such a policy
 install-app-selinux:
 	install -d $(SELINUXDIR)/targeted
@@ -66,17 +66,16 @@ install-app-selinux:
 	install -p -m 644 rabe.lst  $(SELINUXDIR)/targeted
 
 # install a userparameters config file per app that matches the <app>.conf config file naming policy
-# allowed to fail for for apps without such a config
+# allowed to fail for apps without such a config
 install-app-config:
 	install -d $(AGENTDDIR)
 	$(foreach app,$(APPS), \
-	    for config in `find -path '*/userparameters/*' -name '*.conf'`; do \
-	        install -p -m 644 $$config $(AGENTDDIR) || :; \
-	    done; \
+	    install -p -m 644 app/$(app)/userparameters/$(app).conf $(AGENTDDIR) || :; \
 	)
 
 # install any scripts found in a */scripts/* subdir
-# they all get put into /var/libexec/zabbix/rabe and you need to take care not to clash with existing scripts when adding new ones
+# they all get put into /var/libexec/zabbix/rabe and you need to take care not to 
+# clash with existing scripts when adding new ones
 install-scripts:
 	install -d $(AGENTEXECDIR)
 	for script in `find -path '*/scripts/*' -type f`; do \
