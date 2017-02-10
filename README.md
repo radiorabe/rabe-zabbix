@@ -32,7 +32,7 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 ### App specific conventions
 
 * Apps may contain configuration snippets in a `userparameters/` subdir.
-* SELinux policy modules for an app are in the `selinux/` subdir. They are prefixed with "rabe" to help differentiate them from system policy.
+* SELinux policy modules for an app are in the `selinux/` subdir. They are prefixed with "rabezbx" to help differentiate them from system policy.
 * Apps have a Makefile to aid in compiling the SELinux policy.
 
 ## RPM Packages
