@@ -11,8 +11,11 @@
 # 3 - if stripping the value fails
 # 255 - if no value was specified
 #
+# uses a low timeout on ntpdc to fail before zabbix thinks this is an unsupported item
+# see https://www.zabbix.com/documentation/3.0/manual/appendix/config/zabbix_agentd
+# for info on timeouts.
 
-readonly NTPDC_CMD="/sbin/ntpdc -c sysinfo"
+readonly NTPDC_CMD="/sbin/ntpdc -c 'timeout 1' -c sysinfo"
 
 # we always need a first arg
 [ -z "$1" ] && exit 255
