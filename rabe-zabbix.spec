@@ -32,7 +32,7 @@ Source:        rabe-zabbix-%{version}.tar.gz
 BuildArch:     noarch
 
 Requires:      zabbix-agent
-# requires for selinux packaging
+# requires for selinux packaging, see https://fedoraproject.org/wiki/SELinux_Policy_Modules_Packaging_Draft
 BuildRequires: checkpolicy, selinux-policy-devel, /usr/share/selinux/devel/policyhelp
 %{!?_selinux_policy_version: %global _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
 %if "%{_selinux_policy_version}" != ""
