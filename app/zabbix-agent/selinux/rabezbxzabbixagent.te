@@ -1,4 +1,4 @@
-module rabezabbixagent 1.0;
+module rabezbxzabbixagent 1.0;
 
 require {
     type zabbix_agent_t;

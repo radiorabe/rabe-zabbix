@@ -48,14 +48,10 @@ Contains helper scripts, UserParameter configs, SELinux policies to be used at R
 %setup -q -n %{name}-%{version}
 
 %build
-make
+make -j2
 
 %install
-install -d %{buildroot}%{_datadir}/selinux/targeted
-for policy in `find -name '*.pp'`; do
-  install -p -m 644 ${policy} %{buildroot}%{_datadir}/selinux/targeted/`basename ${policy}`
-  echo -n "`basename -s .pp ${policy}` " >> %{buildroot}%{_datadir}/selinux/targeted/rabe.lst
-done
+make install PREFIX=%{buildroot}%{_prefix} ETCDIR=%{buildroot}%{_sysconfdir}
 
 %post
 for policy in `cat %{_datadir}/selinux/targeted/rabe.lst`; do
@@ -72,6 +68,9 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %files
-%defattr(-,root,root,0755)
+%doc LICENSE README.md
+%defattr(-,root,root,-)
 %{_datadir}/selinux/*/rabe.lst
 %{_datadir}/selinux/*/*.pp
+%config %{_sysconfdir}/zabbix/zabbix_agentd.d/*.conf
+%{_libexecdir}/zabbix/rabe/*
