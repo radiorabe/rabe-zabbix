@@ -65,7 +65,7 @@ The following Items are created for each discovered Server
 
 The following Triggers are created for each discovered Server
 
-* Warning: NTP server {#SERVERNAME} is not a valid candidate 
+* Warning: NTP server {#SERVERNAME} is not a valid candidate  on {HOST.NAME}
 
   Gets triggered when a configured server is considered as invalid as indicated by it having a candidate order of 0.
   

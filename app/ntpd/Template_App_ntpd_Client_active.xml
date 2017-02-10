@@ -145,7 +145,7 @@
                     <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template App ntpd Client active:rabe.ntpd.server.candidate_order[{#SERVERNAME}].last()}=0</expression>
-                            <name>NTP server {#SERVERNAME} is not a valid candidate</name>
+                            <name>NTP server {#SERVERNAME} is not a valid candidate on {HOST.NAME}</name>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>
