@@ -38,6 +38,22 @@ SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
 
 APPS             = $(notdir $(wildcard app/*))
 
+update-app-doc:
+	$(foreach app,$(APPS), \
+	    xsltproc \
+	    	--output app/$(app)/README.md \
+	        --stringparam appName '$(app)' \
+	        --stringparam appHead "`cat app/$(app)/doc/README.head.md`" \
+	        --stringparam selinuxDoc "`cat app/$(app)/doc/README.SELinux.md`" \
+	        --stringparam userparamDoc "`cat app/$(app)/doc/README.UserParameters.md`" \
+	        --stringparam scriptDoc "`cat app/$(app)/doc/README.scripts.md`" \
+	    	update-app-doc.xsl app/$(app)/*.xml; \
+	)
+
+update-all: update-app-doc
+
+update: update-all
+
 make-app-selinux:
 	$(foreach app,$(APPS), \
 	    make -C app/$(app)/selinux NAME=rabezbx$(subst -,,$(app)) -f ${SELINUX_MAKEFILE} || :; \
