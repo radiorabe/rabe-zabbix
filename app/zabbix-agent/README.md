@@ -5,6 +5,9 @@ Basic Zabbix Agent operations.
 * [Template App Zabbix Agent active](Template_App_Zabbix_Agent_active.xml)
 * [SELinux policy module rabezbxzabbixagent](selinux/rabezbxzabbixagent.te)
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Template
 Based on the [official Zabbix agent template from Zabbix distribution](https://share.zabbix.com/official-templates/applications/zabbix-agent) but made active.
 
