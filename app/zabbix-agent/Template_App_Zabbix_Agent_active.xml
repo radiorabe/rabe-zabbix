@@ -11,7 +11,7 @@
         <template>
             <template>Template App Zabbix Agent active</template>
             <name>Template App Zabbix Agent active</name>
-            <description/>
+            <description>This template is part of RaBe's Zabbix template and helpers collection at https://github.com/radiorabe/rabe-zabbix.</description>
             <groups>
                 <group>
                     <name>App templates</name>
