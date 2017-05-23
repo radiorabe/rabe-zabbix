@@ -2,12 +2,12 @@
 
 Basic Zabbix Agent operations.
 
-Based on the [official Zabbix agent template from Zabbix distribution](https://share.zabbix.com/official-templates/applications/zabbix-agent) but made active.:1
+Based on the [official Zabbix agent template from Zabbix distribution](https://share.zabbix.com/official-templates/applications/zabbix-agent) but made active.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-## [Template App Zabbix Agent active](Template_App_Zabbix_Agent_active.xml)
+## Template App Zabbix Agent active
 
 ### Items 
 * Host name of zabbix_agentd running (`agent.hostname`)

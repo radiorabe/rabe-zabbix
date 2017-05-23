@@ -15,7 +15,7 @@ template which the individual server and client templates reference.
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-## [Template App ntpd Client active](Template_App_ntpd_Client_active.xml)
+## Template App ntpd Client active
 ### Discovery
 
 #### Discovery Items
@@ -26,7 +26,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 If a configured server has a candidate order of 0 it is not considered as a valid time source and most likely has some issues.
 
-## [Template App ntpd Common active](Template_App_ntpd_Common_active.xml)
+## Template App ntpd Common active
 
 ### Items 
 * Memory usage ($5) of "$1" processes (`proc.mem[ntpd,ntp,,,rss]`)
@@ -42,7 +42,7 @@ If a configured server has a candidate order of 0 it is not considered as a vali
 * ntpd $1 (`rabe.ntpdc.sysinfo[system flags]`)
 * ntpd $1 (`rabe.ntpdc.sysinfo[system peer mode]`)
 * ntpd $1 (`rabe.ntpdc.sysinfo[system peer]`)
-## [Template App ntpd Server active](Template_App_ntpd_Server_active.xml)
+## Template App ntpd Server active
 
 ### Triggers
 
@@ -65,7 +65,7 @@ The [rabezbxntpd](selinux/rabezbxntpd.te) policy allows the agent to access ntpd
 | `rabe.ntpdc.sysinfo[<value name>[,"single"]]` | Get value by name from `ntpdc -c sysinfo` using `rabe-ntpdc-sysinfo.sh` script (use "single" as "$2" if you only need the first value up to a whitespace) |
 ## Scripts
 
-* [rabe-ntpdc-sysinfo.sh](./scripts/rabe-ntpd-sysinfo.sh) for rabe.ntpdc.sysinfo UserParameter
+* [rabe-ntpdc-sysinfo.sh](./scripts/rabe-ntpdc-sysinfo.sh) for rabe.ntpdc.sysinfo UserParameter
 
 ## License
 This template is free software: you can redistribute it and/or modify it under
