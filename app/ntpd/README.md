@@ -29,19 +29,19 @@ If a configured server has a candidate order of 0 it is not considered as a vali
 ## Template App ntpd Common active
 
 ### Items 
-* Memory usage ($5) of "$1" processes (`proc.mem[ntpd,ntp,,,rss]`)
-* Number of "$1" processes (`proc.num[ntpd,ntp]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[authdelay,single]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[broadcastdelay,single]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[jitter,single]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[precision]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[root dispersion,single]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[root distance,single]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[stability,single]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[stratum]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[system flags]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[system peer mode]`)
-* ntpd $1 (`rabe.ntpdc.sysinfo[system peer]`)
+* Memory usage (rss) of "ntpd" processes (`proc.mem[ntpd,ntp,,,rss]`)
+* Number of "ntpd" processes (`proc.num[ntpd,ntp]`)
+* ntpd authdelay (`rabe.ntpdc.sysinfo[authdelay,single]`)
+* ntpd broadcastdelay (`rabe.ntpdc.sysinfo[broadcastdelay,single]`)
+* ntpd jitter (`rabe.ntpdc.sysinfo[jitter,single]`)
+* ntpd precision (`rabe.ntpdc.sysinfo[precision]`)
+* ntpd root dispersion (`rabe.ntpdc.sysinfo[root dispersion,single]`)
+* ntpd root distance (`rabe.ntpdc.sysinfo[root distance,single]`)
+* ntpd stability (`rabe.ntpdc.sysinfo[stability,single]`)
+* ntpd stratum (`rabe.ntpdc.sysinfo[stratum]`)
+* ntpd system flags (`rabe.ntpdc.sysinfo[system flags]`)
+* ntpd system peer mode (`rabe.ntpdc.sysinfo[system peer mode]`)
+* ntpd system peer (`rabe.ntpdc.sysinfo[system peer]`)
 ## Template App ntpd Server active
 
 ### Triggers

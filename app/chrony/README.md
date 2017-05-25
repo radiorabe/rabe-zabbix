@@ -8,8 +8,8 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 ## Template App chrony active
 
 ### Items 
-* Memory usage ($5) of "$1" processes (`proc.mem[chronyd,chrony,,,rss]`)
-* Number of "$1" processes (`proc.num[chronyd,chrony]`)
+* Memory usage (rss) of "chronyd" processes (`proc.mem[chronyd,chrony,,,rss]`)
+* Number of "chronyd" processes (`proc.num[chronyd,chrony]`)
 ### Triggers
 
 * High: No running chronyd processes on {HOST.NAME} (`{Template App chrony active:proc.num[chronyd,chrony].max(#5)}<1`)
