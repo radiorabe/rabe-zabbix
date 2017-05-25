@@ -48,11 +48,11 @@ If a configured server has a candidate order of 0 it is not considered as a vali
 
 * High: No running ntpd processes on {HOST.NAME} (`{Template App ntpd Common active:proc.num[ntpd,ntp].max(#5)}<1`)
 
-We expect ntpd to to run at all times
+We expect ntpd to run at all times
 
 * Warning: ntpd system peer mode is not client on {HOST.NAME} (`{Template App ntpd Common active:rabe.ntpdc.sysinfo[system peer mode].regexp(client)}<>0`)
 
-Out clients should always be in client peer mode. If they are not, chances are that they are not clients any more.
+Our clients should always be in client peer mode. If they are not, chances are that they are not clients any more.
 ## SELinux Policy
 
 The [rabezbxntpd](selinux/rabezbxntpd.te) policy allows the agent to access ntpd configuration files.

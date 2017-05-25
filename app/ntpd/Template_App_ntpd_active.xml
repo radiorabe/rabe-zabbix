@@ -774,7 +774,7 @@
             <url/>
             <status>0</status>
             <priority>4</priority>
-            <description>We expect ntpd to to run at all times</description>
+            <description>We expect ntpd to run at all times</description>
             <type>0</type>
             <dependencies/>
         </trigger>
@@ -784,7 +784,7 @@
             <url/>
             <status>0</status>
             <priority>2</priority>
-            <description>Out clients should always be in client peer mode. If they are not, chances are that they are not clients any more.</description>
+            <description>Our clients should always be in client peer mode. If they are not, chances are that they are not clients any more.</description>
             <type>0</type>
             <dependencies/>
         </trigger>
