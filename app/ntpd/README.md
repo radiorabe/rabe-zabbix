@@ -50,9 +50,11 @@ If a configured server has a candidate order of 0 it is not considered as a vali
 
 We expect ntpd to run at all times
 
+
 * Warning: ntpd system peer mode is not client on {HOST.NAME} (`{Template App ntpd Common active:rabe.ntpdc.sysinfo[system peer mode].regexp(client)}<>0`)
 
 Our clients should always be in client peer mode. If they are not, chances are that they are not clients any more.
+
 ## SELinux Policy
 
 The [rabezbxntpd](selinux/rabezbxntpd.te) policy allows the agent to access ntpd configuration files.

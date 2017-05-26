@@ -16,6 +16,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 We expect chronyd to to run at all times
 
+
 ## License
 This template is free software: you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License as published by the Free

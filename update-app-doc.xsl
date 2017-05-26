@@ -200,7 +200,8 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
     <xsl:when test="priority = 3">Average</xsl:when>
     <xsl:when test="priority = 4">High</xsl:when>
     <xsl:when test="priority = 5">Disaster</xsl:when>
-  </xsl:choose>: <xsl:value-of select="name"/> (`<xsl:value-of select="expression"/>`)<xsl:call-template name="output-description-if-available"/></xsl:template>
+  </xsl:choose>: <xsl:value-of select="name"/> (`<xsl:value-of select="expression"/>`)<xsl:call-template name="output-description-if-available"/><xsl:text>
+</xsl:text></xsl:template>
 
   <!-- macro templates -->
   <xsl:template match="macros"><xsl:if test="macro">

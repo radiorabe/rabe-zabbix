@@ -22,8 +22,11 @@ The agent always returns 1 for this item. It could be used in combination with n
 ### Triggers
 
 * Information: Host name of zabbix_agentd was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.hostname.diff(0)}>0`)
+
 * High: No current data from Zabbix agent on {HOST.NAME} (`{Template App Zabbix Agent active:agent.ping.nodata({$APP_ZABBIX_AGENT_NODATA_HIGH_TIME})}=1`)
-* Information: Version of zabbix_agent(d) was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.version.diff(0)}>0`)## SELinux Policy
+
+* Information: Version of zabbix_agent(d) was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.version.diff(0)}>0`)
+## SELinux Policy
 
 The [rabezbxzabbixagent](selinux/rabezbxzabbixagent.te) policy allows the agent to set its rlimit
 as described by [ZBX-10086](https://support.zabbix.com/browse/ZBX-10086).
