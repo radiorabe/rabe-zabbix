@@ -44,9 +44,9 @@ update-app-doc:
 	    	--output app/$(app)/README.md \
 	        --stringparam appName '$(app)' \
 	        --stringparam appHead "`cat app/$(app)/doc/README.head.md`" \
-	        --stringparam selinuxDoc "`cat app/$(app)/doc/README.SELinux.md`" \
-	        --stringparam userparamDoc "`cat app/$(app)/doc/README.UserParameters.md`" \
-	        --stringparam scriptDoc "`cat app/$(app)/doc/README.scripts.md`" \
+	        --stringparam selinuxDoc "`[ -f app/$(app)/doc/README.SELinux.md ] && cat app/$(app)/doc/README.SELinux.md`" \
+	        --stringparam userparamDoc "`[ -f app/$(app)/doc/README.UserParameters.md ] && cat app/$(app)/doc/README.UserParameters.md`" \
+	        --stringparam scriptDoc "`[ -f app/$(app)/doc/README.scripts.md ] && cat app/$(app)/doc/README.scripts.md`" \
 	    	update-app-doc.xsl app/$(app)/*.xml; \
 	)
 

@@ -4,6 +4,7 @@ const meow = require('meow');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const ora = require('ora');
+const spawn = require('child_process').spawn;
 
 const Zabbix = require('zabbix-api');
 const fs = require('fs');
@@ -21,6 +22,7 @@ const cli = meow(`
   Options
     --template=[name], -t [name]  Name of template to search, multiple templates allowed
     --insecure, -k                Ignore unauthorized TLS certs
+    --make-update                 Call make update after a successful export
     --config-get [key]            Get config value for key
     --config-set [key] [val]      Set config value key to val
     --help, -h                    Print this help
@@ -175,7 +177,27 @@ function export_templates(zbx, templates, target) {
       fs.writeFile(target, pd.xml(res), function (err) {
         if (err) throw err;
         spinner.succeed("Template exported to " + target);
+        make_update();
       });
     }
   });
+}
+
+function make_update() {
+  if (cli.flags.makeUpdate) {
+    spinner.text = 'Running make update';
+    spinner.start();
+    const make = spawn('make', ['update']);
+
+    make.stderr.on('data', function (data) {
+      spinner.warn(data).start();
+    });
+    make.on('close', function(code) {
+      if (code !== 0) {
+        spinner.fail('make update failed');
+      } else {
+        spinner.succeed('make update done');
+      }
+    });
+  }
 }
