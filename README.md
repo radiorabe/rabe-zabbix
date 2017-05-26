@@ -49,8 +49,25 @@ xmlName="${templateName// /_/}.xml"
 mkdir -p app/${appName}/doc
 touch app/${appName}/doc/README.head.md
 
+# see fetching below if you want help exporting
 mv zbx_export_templates.xml app/${appName}/${xmlName}
 ```
+
+#### Fetching an app from the Zabbix server
+Fetching a template into a file from the server is straightforward.
+
+```bash
+./helper/rabe-zabbix --template=${templateName} ${xmlName}
+```
+
+You need to have a working node environment and install any dependencies beforehand.
+
+```bash
+npm install
+```
+
+The helper will prompt for settings should they not be configured. Please see its `--help` for more information.
+
 #### optional selinux policy
 ```bash
 $avcViolation="" # multiple lines from /var/log/audit/audit.log

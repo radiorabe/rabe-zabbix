@@ -1,3 +1,4 @@
 /rabe.lst
 **/selinux/tmp
 **/selinux/*.pp
+node_modules/
