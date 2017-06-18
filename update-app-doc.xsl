@@ -226,14 +226,14 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
   <!-- discovery rule templates -->
   <xsl:template match="discovery_rules"><xsl:if test="discovery_rule"><xsl:text>### Discovery
 </xsl:text><xsl:apply-templates select="discovery_rule"/></xsl:if></xsl:template>
-  <xsl:template match="dicovery_rule"><xsl:text>#### </xsl:text><xsl:value-of select="name"/> (`<xsl:value-of select="key"/><xsl:text>`)
+  <xsl:template match="discovery_rule"><xsl:text>#### </xsl:text><xsl:value-of select="name"/> (`<xsl:value-of select="key"/><xsl:text>`)
 </xsl:text><xsl:if test="item_prototypes"><xsl:apply-templates select="item_prototypes"/></xsl:if>
 <xsl:if test="trigger_prototypes"><xsl:apply-templates select="trigger_prototypes"/></xsl:if>
 </xsl:template>
 
   <!-- item prototypes -->
   <xsl:template match="item_prototypes"><xsl:if test="item_prototype"><xsl:text>
-#### Discovery Items</xsl:text><xsl:apply-templates select="item_prototype"/>
+##### Discovery Items</xsl:text><xsl:apply-templates select="item_prototype"/>
 </xsl:if></xsl:template>
   <xsl:template match="item_prototype">
 * <xsl:value-of select="name"/> (`<xsl:value-of select="key"/>`)<xsl:call-template name="output-description-if-available"/>
@@ -241,7 +241,7 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
   <!-- trigger prototypes -->
   <xsl:template match="trigger_prototypes"><xsl:if test="trigger_prototype"><xsl:text>
-#### Discovery Triggers</xsl:text><xsl:apply-templates select="trigger_prototype"/>
+##### Discovery Triggers</xsl:text><xsl:apply-templates select="trigger_prototype"/>
 </xsl:if></xsl:template>
   <xsl:template match="trigger_prototype">
 * <xsl:value-of select="name"/> (`<xsl:value-of select="expression"/>`)<xsl:call-template name="output-description-if-available"/>
