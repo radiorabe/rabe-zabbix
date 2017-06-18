@@ -44,7 +44,7 @@ appName="" # app name
 templateName="Template App ${appName} active"
 
 shortName=${appName//-/}
-xmlName="${templateName// /_/}.xml"
+xmlName="${templateName// /_}.xml"
 
 mkdir -p app/${appName}/doc
 touch app/${appName}/doc/README.head.md
