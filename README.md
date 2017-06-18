@@ -70,7 +70,7 @@ EOD
 ```bash
 mkdir app/${appName}/userparameters
 
-cat > app/${appName}/userparameters/${appName}.conf <<EOD
+cat > app/${appName}/userparameters/rabe.${appName}.conf <<EOD
 #
 # dox here
 #
