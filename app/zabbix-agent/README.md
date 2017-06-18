@@ -2,33 +2,30 @@
 
 Basic Zabbix Agent operations.
 
-* [Template App Zabbix Agent active](Template_App_Zabbix_Agent_active.xml)
-* [SELinux policy module rabezbxzabbixagent](selinux/rabezbxzabbixagent.te)
+Based on the [official Zabbix agent template from Zabbix distribution](https://share.zabbix.com/official-templates/applications/zabbix-agent) but made active.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-## Template
-Based on the [official Zabbix agent template from Zabbix distribution](https://share.zabbix.com/official-templates/applications/zabbix-agent) but made active.
+## Template App Zabbix Agent active
 
-### Items
+### Items 
+* Host name of zabbix_agentd running (`agent.hostname`)
+* Agent ping (`agent.ping`)
 
-* Host name of zabbix_agentd running (agent.hostname)
-* Agent ping (agent.ping)
-* Version of zabbix_agent(d) running (agent.version)
+The agent always returns 1 for this item. It could be used in combination with nodata() for availability check.
 
-### Triggers
-
-* High: No current data from Zabbix agent on {HOST.NAME}
-* Information: Host name of zabbix_agentd was changed on {HOST.NAME}
-* Information: Version of zabbix_agent(d) was changed on {HOST.NAME}
-
+* Version of zabbix_agent(d) running (`agent.version`)
 ### Macros
 
-* `{$APP_ZABBIX_AGENT_NODATA_HIGH_TIME}`
+* `{$APP_ZABBIX_AGENT_NODATA_HIGH_TIME}` (default: 5m)
+### Triggers
 
-  Time for which no current data must be available for HIGH trigger (5m per default)
+* Information: Host name of zabbix_agentd was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.hostname.diff(0)}>0`)
 
+* High: No current data from Zabbix agent on {HOST.NAME} (`{Template App Zabbix Agent active:agent.ping.nodata({$APP_ZABBIX_AGENT_NODATA_HIGH_TIME})}=1`)
+
+* Information: Version of zabbix_agent(d) was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.version.diff(0)}>0`)
 ## SELinux Policy
 
 The [rabezbxzabbixagent](selinux/rabezbxzabbixagent.te) policy allows the agent to set its rlimit

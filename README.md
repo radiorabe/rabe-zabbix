@@ -33,7 +33,73 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 
 * Apps may contain configuration snippets in a `userparameters/` subdir.
 * SELinux policy modules for an app are in the `selinux/` subdir. They are prefixed with "rabezbx" to help differentiate them from system policy.
-* Apps have a Makefile to aid in compiling the SELinux policy.
+
+## Developing
+
+### Adding an app template
+
+```bash
+appName="" # app name
+
+templateName="Template App ${appName} active"
+
+shortName=${appName//-/}
+xmlName="${templateName// /_}.xml"
+
+mkdir -p app/${appName}/doc
+touch app/${appName}/doc/README.head.md
+
+mv zbx_export_templates.xml app/${appName}/${xmlName}
+```
+#### optional selinux policy
+```bash
+$avcViolation="" # multiple lines from /var/log/audit/audit.log
+
+mkdir app/${appName}/selinux
+
+echo ${avcViolation} | audit2allow -m rabezbx${appName} > \
+  app/${appName}/selinux/rabezbx${shortName}.te
+
+cat > app/${appName}/doc/README.SELinux.md <<EOD
+## SELinux Policy
+
+The [rabezbx${appName}](selinux/rabezbx${appName}.te) policy does <dox>.
+EOD
+```
+#### optional userparameters
+```bash
+mkdir app/${appName}/userparameters
+
+cat > app/${appName}/userparameters/${appName}.conf <<EOD
+#
+# dox here
+#
+UserParameter=rabe.${appName}.<key>,<script>
+EOD
+
+cat > app/${appName}/doc/README.UserParameters.md <<EOD
+## UserParameters
+
+| Key | Description |
+| --- | ----------- |
+| \`rabe.${appName}.<key>\` | <dox> |
+EOD
+```
+
+#### optional scripts
+```bash
+mkdir app/${appName}/scripts
+
+touch app/${appName}/scripts/rabe-${appName}.sh
+
+cat > app/${appName}/doc/README.scripts.md <<EOD
+## Scripts
+
+* [rabe-${appName}.sh](./scripts/rabe-${appName}.sh) for rabe.${appName}.<key> UserParameter
+
+<dox below listing if needed>
+EOD
+```
 
 ## RPM Packages
 
