@@ -226,8 +226,8 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
   <!-- discovery rule templates -->
   <xsl:template match="discovery_rules"><xsl:if test="discovery_rule"><xsl:text>### Discovery
 </xsl:text><xsl:apply-templates select="discovery_rule"/></xsl:if></xsl:template>
-  <xsl:template match="discovery_rule"><xsl:text>#### </xsl:text><xsl:value-of select="name"/> (`<xsl:value-of select="key"/><xsl:text>`)
-</xsl:text><xsl:if test="item_prototypes"><xsl:apply-templates select="item_prototypes"/></xsl:if>
+  <xsl:template match="discovery_rule"><xsl:text>#### </xsl:text><xsl:value-of select="name"/> (`<xsl:value-of select="key"/><xsl:text>`)</xsl:text><xsl:call-template name="output-description-if-available"/>
+<xsl:if test="item_prototypes"><xsl:apply-templates select="item_prototypes"/></xsl:if>
 <xsl:if test="trigger_prototypes"><xsl:apply-templates select="trigger_prototypes"/></xsl:if>
 </xsl:template>
 
