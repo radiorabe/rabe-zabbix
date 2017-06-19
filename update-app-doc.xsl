@@ -153,7 +153,7 @@
   </xsl:template>
 
   <!-- toplevel boilerplate -->
-  <xsl:template match="zabbix_export"># <xsl:value-of select="$appName"/><xsl:text>
+  <xsl:template match="zabbix_export"># Zabbix <xsl:value-of select="$appName"/> monitoring<xsl:text>
 
 </xsl:text>
 <xsl:value-of select="$appHead"/>
