@@ -181,8 +181,7 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
   <!-- per template template -->
   <xsl:template match="template">
-## <xsl:value-of select="name" /><xsl:text>
-</xsl:text>
+## <xsl:value-of select="name" /><xsl:text></xsl:text><xsl:call-template name="output-description-if-available"/>
 <xsl:apply-templates select="items"/>
 <xsl:apply-templates select="macros"/>
 <xsl:apply-templates select="discovery_rules"/>
