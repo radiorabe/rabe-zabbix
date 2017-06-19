@@ -233,7 +233,7 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
   <!-- item prototypes -->
   <xsl:template match="item_prototypes"><xsl:if test="item_prototype"><xsl:text>
-##### Discovery Items</xsl:text><xsl:apply-templates select="item_prototype"/>
+##### Item Prototypes</xsl:text><xsl:apply-templates select="item_prototype"/>
 </xsl:if></xsl:template>
   <xsl:template match="item_prototype">
 * <xsl:value-of select="name"/> (`<xsl:value-of select="key"/>`)<xsl:call-template name="output-description-if-available"/>
@@ -241,7 +241,7 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
   <!-- trigger prototypes -->
   <xsl:template match="trigger_prototypes"><xsl:if test="trigger_prototype"><xsl:text>
-##### Discovery Triggers</xsl:text><xsl:apply-templates select="trigger_prototype"/>
+##### Trigger Prototypes</xsl:text><xsl:apply-templates select="trigger_prototype"/>
 </xsl:if></xsl:template>
   <xsl:template match="trigger_prototype">
 * <xsl:value-of select="name"/> (`<xsl:value-of select="expression"/>`)<xsl:call-template name="output-description-if-available"/>
