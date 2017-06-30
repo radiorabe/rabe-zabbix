@@ -101,6 +101,58 @@ cat > app/${appName}/doc/README.scripts.md <<EOD
 EOD
 ```
 
+### Adding an IPMI template
+
+```bash
+ipmiName="" # IPMI sensor, board or server name
+
+lowercaseName="${ipmiName,,}"
+shortName=${lowercaseName//-/}
+
+templateName="Template IPMI ${ipmiName}"
+xmlName="${templateName// /_}.xml"
+
+mkdir -p "ipmi/${ipmiName}/doc"
+touch "ipmi/${ipmiName}/doc/README.head.md"
+
+mv zbx_export_templates.xml "ipmi/${ipmiName}/${xmlName}"
+```
+
+#### optional scripts
+```bash
+scriptName="ipmi-${lowercaseName// /-}"
+
+mkdir -p "ipmi/${ipmiName}/scripts"
+
+touch "ipmi/${ipmiName}/scripts/${scriptName}.sh"
+
+cat > "ipmi/${ipmiName}/doc/README.scripts.md" <<EOD
+## Scripts
+
+* [${scriptName}.sh](./scripts/${scriptName}.sh) <short description>
+
+<dox below listing if needed>
+EOD
+```
+
+#### optional SELinux policy
+```bash
+$avcViolation="" # multiple lines from "grep zabbix_t /var/log/audit/audit.log"
+
+moduleName="rabezbx${shortName// /}" # SELinux module name
+
+mkdir "ipmi/${ipmiName}/selinux"
+
+echo ${avcViolation} | audit2allow -m "${moduleName}" > \
+  "ipmi/${ipmiName}/selinux/${moduleName}.te"
+
+cat > "ipmi/${ipmiName}/doc/README.SELinux.md" <<EOD
+## SELinux Policy
+
+The [${moduleName}](selinux/${moduleName}.te) policy does <dox>.
+EOD
+```
+
 ## RPM Packages
 
 The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version
