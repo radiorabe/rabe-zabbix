@@ -1,0 +1,14 @@
+module rabezbxsensordiscovery 1.0;
+
+require {
+	type user_tmp_t;
+	type zabbix_t;
+	class dir { read write };
+	class file { execute open execute_no_trans };
+}
+
+#============= zabbix_t ==============
+
+allow zabbix_t user_tmp_t:dir { read write };
+
+allow zabbix_t user_tmp_t:file { execute open execute_no_trans };
