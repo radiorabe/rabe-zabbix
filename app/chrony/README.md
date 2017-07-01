@@ -1,4 +1,4 @@
-# chrony
+# Zabbix chrony monitoring
 
 Basic chrony NTP client monitoring.
 
@@ -6,7 +6,6 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 ## Template App chrony active
-
 ### Items 
 * Memory usage (rss) of "chronyd" processes (`proc.mem[chronyd,chrony,,,rss]`)
 * Number of "chronyd" processes (`proc.num[chronyd,chrony]`)
