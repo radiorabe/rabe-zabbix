@@ -51,11 +51,13 @@ update-app-doc:
 	    	update-app-doc.xsl app/$(app)/*.xml; \
 	)
 
+.PHONY: update-all
 update-all: update-app-doc
 
-update: update-all
+.PHONY: update
+update: update-all ## Update buildable docs from xml and docs/ directories.
 
-make-app-selinux:
+build-app-selinux:
 	$(foreach app,$(APPS), \
 	    make -C app/$(app)/selinux NAME=rabezbx$(subst -,,$(app)) -f ${SELINUX_MAKEFILE} || :; \
 	)
@@ -63,18 +65,27 @@ make-app-selinux:
 	    [[ -d app/$(app)/selinux ]] && echo -n 'rabezbx$(subst -,,$(app)) ' >> rabe.lst; \
 	)
 
-make-app: make-app-selinux
+.PHONY: build-app
+build-app: build-app-selinux
 
-make-all: make-app
+.PHONY: build-selinux
+build-selinux: build-app-selinux ## Build SELinux modules.
 
-make: make-all
+.PHONY: build-all
+build-all: build-app
 
+.PHONY: build
+build: build-all ## Build everything.
+
+.PHONY: test-app
 test-app:
 
+.PHONY: test
 test: all test-app
 
 # install a policy per app that matches the rabezbx<app> naming policy
 # allowed to fail since not all apps have such a policy
+.PHONY: install-app-selinux
 install-app-selinux:
 	install -d $(SELINUXDIR)/targeted
 	$(foreach app,$(APPS), \
@@ -84,6 +95,7 @@ install-app-selinux:
 
 # install a userparameters config file per app that matches the <app>.conf config file naming policy
 # allowed to fail for apps without such a config
+.PHONY: install-app-config
 install-app-config:
 	install -d $(AGENTDDIR)
 	$(foreach app,$(APPS), \
@@ -93,6 +105,7 @@ install-app-config:
 # install any scripts found in a */scripts/* subdir
 # they all get put into /var/libexec/zabbix/rabe and you need to take care not to 
 # clash with existing scripts when adding new ones
+.PHONY: install-scripts
 install-scripts:
 	install -d $(AGENTEXECDIR)
 	for script in `find -path '*/scripts/*' -type f`; do \
@@ -101,21 +114,33 @@ install-scripts:
 
 # install sudoers config droplets per app that matches the sudoers.d file
 # naming policy prefix
+.PHONY: install-app-sudoers
 install-app-sudoers:
 	install -d $(SUDOERSDIR)
 	install -p -m 600 app/*/sudoers.d/rabezbx-* $(SUDOERSDIR)
 
+.PHONY: install-app
 install-app: install-app-selinux install-app-config install-scripts \
 	     install-app-sudoers
 
-install: install-app
+.PHONY: install
+install: install-app ## Install rabe-zabbix to $(PREFIX)
 
+.PHONY: clean-app
 clean-app:
 	rm -rf rabe.lst
 	$(foreach app,$(APPS), \
 	    rm -rf app/$(app)/selinux/*.pp app/$(app)/selinux/tmp; \
 	)
 
-clean: clean-app
+.PHONY: clean
+clean: clean-app ## Clean working copy
 
-all: make test
+.PHONY: help
+.DEFAULT_GOAL := help
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
+	    awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: all
+all: build test
