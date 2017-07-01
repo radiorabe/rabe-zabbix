@@ -1,4 +1,4 @@
-# ntpd
+# Zabbix ntpd monitoring
 
 Monitoring for ntpd.
 
@@ -15,19 +15,17 @@ template which the individual server and client templates reference.
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-## Template App ntpd Client active
-### Discovery
-
-#### Discovery Items
+## Template App ntpd Client active### Discovery
+#### NTP servers (`rabe.ntpd.server.discovery`)
+##### Item Prototypes
 * NTP server {#SERVERNAME} candidate order (`rabe.ntpd.server.candidate_order[{#SERVERNAME}]`)
 * NTP server {#SERVERNAME} configuration (`vfs.file.regexp[/etc/ntp.conf,"^server.*{#SERVERNAME} (.*)",,,,\1]`)
-#### Discovery Triggers
+##### Trigger Prototypes
 * NTP server {#SERVERNAME} is not a valid candidate on {HOST.NAME} (`{Template App ntpd Client active:rabe.ntpd.server.candidate_order[{#SERVERNAME}].last()}=0`)
 
 If a configured server has a candidate order of 0 it is not considered as a valid time source and most likely has some issues.
 
 ## Template App ntpd Common active
-
 ### Items 
 * Memory usage (rss) of "ntpd" processes (`proc.mem[ntpd,ntp,,,rss]`)
 * Number of "ntpd" processes (`proc.num[ntpd,ntp]`)
@@ -43,7 +41,6 @@ If a configured server has a candidate order of 0 it is not considered as a vali
 * ntpd system peer mode (`rabe.ntpdc.sysinfo[system peer mode]`)
 * ntpd system peer (`rabe.ntpdc.sysinfo[system peer]`)
 ## Template App ntpd Server active
-
 ### Triggers
 
 * High: No running ntpd processes on {HOST.NAME} (`{Template App ntpd Common active:proc.num[ntpd,ntp].max(#5)}<1`)
