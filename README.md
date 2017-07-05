@@ -177,24 +177,6 @@ cat > "ipmi/${ipmiName}/doc/README.scripts.md" <<EOD
 EOD
 ```
 
-#### optional SELinux policy
-```bash
-$avcViolation="" # multiple lines from "grep zabbix_t /var/log/audit/audit.log"
-
-moduleName="rabezbx${shortName// /}" # SELinux module name
-
-mkdir "ipmi/${ipmiName}/selinux"
-
-echo ${avcViolation} | audit2allow -m "${moduleName}" > \
-  "ipmi/${ipmiName}/selinux/${moduleName}.te"
-
-cat > "ipmi/${ipmiName}/doc/README.SELinux.md" <<EOD
-## SELinux Policy
-
-The [${moduleName}](selinux/${moduleName}.te) policy does <dox>.
-EOD
-```
-
 ## RPM Packages
 
 The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version

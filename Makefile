@@ -37,7 +37,6 @@ AGENTEXECDIR     = ${LIBEXECDIR}/zabbix/${PN}
 SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
 
 APPS             = $(notdir $(wildcard app/*))
-IPMI             = $(notdir $(wildcard ipmi/*))
 
 update-app-doc:
 	$(foreach app,$(APPS), \
@@ -63,19 +62,9 @@ make-app-selinux:
 	    [[ -d app/$(app)/selinux ]] && echo -n 'rabezbx$(subst -,,$(app)) ' >> rabe.lst; \
 	)
 
-make-ipmi-selinux:
-	$(foreach ipmi,$(IPMI), \
-	    make -C ipmi/$(ipmi)/selinux NAME=rabezbx$(subst -,,$(ipmi)) -f ${SELINUX_MAKEFILE} || :; \
-	)
-	$(foreach ipmi,$(IPMI), \
-	    [[ -d ipmi/$(ipmi)/selinux ]] && echo -n 'rabezbx$(subst -,,$(ipmi)) ' >> rabe.lst; \
-	)
-
 make-app: make-app-selinux
 
-make-ipmi: make-ipmi-selinux
-
-make-all: make-app make-ipmi
+make-all: make-app
 
 make: make-all
 

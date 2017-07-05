@@ -18,9 +18,21 @@ required by most of the [IPMI templates](../../).
    script into your Zabbix servers/proxy external script directory
    ([`ExternalScripts`](https://www.zabbix.com/documentation/3.0/manual/appendix/config/zabbix_server)).
 3. Make sure the script is executable by the user running the zabbix-server
-4. If you have SELinux active, make sure that the Zabbix-Server is allowed to
-   execute the scripts (you might need to load the provided
-   [SELinux policy](../selinux/rabezbxsensordiscovery.te)). 
+4. If you have SELinux active, ensure that the Zabbix server is allowed to
+   execute the script and is allowed to operate on directories and files within
+   its home directory (this is required for `ipmi-sensor`'s cache
+   (`~/.freeipmi/).
+   On CentOS 7 the following steps were necessary:
+   ```bash
+   # Create the missing home directory of the zabbix user
+   mkdir -m 750 /var/lib/zabbix
+   chown zabbix:zabbix /var/lib/zabbix
+
+   # Restore default SELinux security context on the directory.
+   # This will set the following SELinux context on /var/lib/zabbix
+   # => unconfined_u:object_r:zabbix_var_lib_t:s0
+   restorecon -Rv /var/lib/zabbix
+   ```
 5. Reference the script within Zabbix by either
    * creating a new custom LLD rule (external check), item and trigger prototypes
    * importing an existing [IPMI template](../../) and add it to your host (or
