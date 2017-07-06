@@ -41,61 +41,72 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 ```bash
 appName="" # app name
 
-templateName="Template App ${appName} active"
+lowercaseName="${appName,,}"
+shortName="${lowercaseName//-/}"
 
-shortName=${appName//-/}
+templateName="Template App ${appName} active"
 xmlName="${templateName// /_}.xml"
 
-mkdir -p app/${appName}/doc
-touch app/${appName}/doc/README.head.md
+appDir="app/${appName// /_}"
 
-mv zbx_export_templates.xml app/${appName}/${xmlName}
+mkdir -p "${appDir}/doc"
+touch "${appDir}/doc/README.head.md"
+
+mv zbx_export_templates.xml "${appDir}/${xmlName}"
 ```
+
 #### optional selinux policy
 ```bash
 $avcViolation="" # multiple lines from /var/log/audit/audit.log
 
-mkdir app/${appName}/selinux
+moduleName="rabezbx${shortName// /}"
 
-echo ${avcViolation} | audit2allow -m rabezbx${appName} > \
-  app/${appName}/selinux/rabezbx${shortName}.te
+mkdir "${appDir}/selinux"
 
-cat > app/${appName}/doc/README.SELinux.md <<EOD
+echo ${avcViolation} | audit2allow -m ${moduleName} > \
+  "${appDir}/selinux/${moduleName}.te"
+
+cat > "${appDir}/doc/README.SELinux.md" <<EOD
 ## SELinux Policy
 
-The [rabezbx${appName}](selinux/rabezbx${appName}.te) policy does <dox>.
+The [${moduleName}](selinux/${moduleName}.te) policy does <dox>.
 EOD
 ```
+
 #### optional userparameters
 ```bash
-mkdir app/${appName}/userparameters
+mkdir "${appDir}/userparameters"
 
-cat > app/${appName}/userparameters/rabe.${appName}.conf <<EOD
+userParameterName="rabe.${lowercaseName// /-}"
+
+cat > "${appDir}/userparameters/${userParameterName}.conf" <<EOD
 #
 # dox here
 #
-UserParameter=rabe.${appName}.<key>,<script>
+UserParameter=${userParameterName}.<key>,<script>
 EOD
 
-cat > app/${appName}/doc/README.UserParameters.md <<EOD
+cat > "${appDir}/doc/README.UserParameters.md" <<EOD
 ## UserParameters
 
 | Key | Description |
 | --- | ----------- |
-| \`rabe.${appName}.<key>\` | <dox> |
+| \`${userParameterName}.<key>\` | <dox> |
 EOD
 ```
 
 #### optional scripts
 ```bash
-mkdir app/${appName}/scripts
+mkdir "${appDir}/scripts"
 
-touch app/${appName}/scripts/rabe-${appName}.sh
+scriptName="rabe-${lowercaseName// /-}.sh"
 
-cat > app/${appName}/doc/README.scripts.md <<EOD
+touch "${appDir}/scripts/${scriptName}"
+
+cat > "${appDir}/doc/README.scripts.md" <<EOD
 ## Scripts
 
-* [rabe-${appName}.sh](./scripts/rabe-${appName}.sh) for rabe.${appName}.<key> UserParameter
+* [${scriptName}](./scripts/${scriptName}) for ${userParameterName}.<key> UserParameter
 
 <dox below listing if needed>
 EOD
