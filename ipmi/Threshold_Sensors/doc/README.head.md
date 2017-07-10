@@ -9,7 +9,7 @@ advertised lower and upper non-critical, critical and non-recoverable
 thresholds.
 
 ## Usage
-1. [install the IPMI sensor discovery script](../../Sensor Discovery).
+1. Install the [IPMI sensor discovery script](../../Sensor_Discovery).
 2. Import the
    [Template_IPMI_Threshold_Sensors.xml](../Template_IPMI_Threshold_Sensors.xml)
    into your Zabbix server.
