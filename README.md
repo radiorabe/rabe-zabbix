@@ -149,26 +149,27 @@ EOD
 ipmiName="" # IPMI sensor, board or server name
 
 lowercaseName="${ipmiName,,}"
-shortName=${lowercaseName//-/}
 
 templateName="Template IPMI ${ipmiName}"
 xmlName="${templateName// /_}.xml"
 
-mkdir -p "ipmi/${ipmiName}/doc"
-touch "ipmi/${ipmiName}/doc/README.head.md"
+ipmiDir="ipmi/${ipmiName// /_}"
 
-mv zbx_export_templates.xml "ipmi/${ipmiName}/${xmlName}"
+mkdir -p "${ipmiDir}/doc"
+touch "${ipmiDir}/doc/README.head.md"
+
+mv zbx_export_templates.xml "${ipmiDir}/${xmlName}"
 ```
 
 #### optional scripts
 ```bash
 scriptName="ipmi-${lowercaseName// /-}"
 
-mkdir -p "ipmi/${ipmiName}/scripts"
+mkdir -p "${ipmiDir}/scripts"
 
-touch "ipmi/${ipmiName}/scripts/${scriptName}.sh"
+touch "${ipmiDir}/scripts/${scriptName}.sh"
 
-cat > "ipmi/${ipmiName}/doc/README.scripts.md" <<EOD
+cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
 ## Scripts
 
 * [${scriptName}.sh](./scripts/${scriptName}.sh) <short description>
