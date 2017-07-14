@@ -9,6 +9,9 @@ The Zabbix templates are located within the [templates](templates) subfolder and
 * [Application (app)](app): All application specifc templates
   * Naming convention: <code>Template_App_\[\<OPERATING-SYSTEM-NAME\]_\<APPLICATION-NAME\>_active</code>
   * Example: <code>Template_App_Linux_Postfix_active</code>
+* [IPMI (ipmi)](ipmi): All IPMI based templates
+  * Naming convention: <code>Template_IPMI_\<NAME\></code>
+  * Example: <code>Template_IPMI_Threshold_Sensors</code>
 * [SNMP (snmp)](snmp): All SNMP based templates
   * Naming convention: <code>Template_SNMP\<SNMP-VERSION\>_\<NAME\></code>
   * Example: <code>Template_SNMPv2_Interfaces_HC</code>
@@ -26,13 +29,52 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 ### Further template conventions
 * Use active mode for zabbix agent items by default
 * Use an update interval of 300 seconds (5 minutes) by default
-* Create at least one unique application per app and snmp template
+* Create at least one unique application per app, ipmi and snmp template
 * Use macros whenever possible and feasible, prefix them with a unique per template prefix
 
 ### App specific conventions
 
 * Apps may contain configuration snippets in a `userparameters/` subdir.
 * SELinux policy modules for an app are in the `selinux/` subdir. They are prefixed with "rabezbx" to help differentiate them from system policy.
+
+### IPMI specific conventions
+* Name server or motherboard templates according to `IPMI <VENDOR>
+  <PRODUCT-NAME>`, for example `Template IPMI Supermicro SSG-6048R-E1CR24N`
+* Try to build up a server or motherboard template from existing (or newly
+  created) standalone sensor templates (which can be reused for the same sensor
+  and reading type).
+* Standalone sensor templates which contain sensor-specific discrete IPMI
+  sensors (event/reading type code 6Fh)
+   * Template naming according to `IPMI <SENSOR-NAME> Sensors`, for example
+     `IPMI Power Supply Sensors`
+   * Item key naming according to
+     `ipmi.discrete-sensor[<SENSOR-TYPE>,<SENSOR-NAME>]`, for example
+     `ipmi.discrete-sensor[power-supply,{#IPMI_SENSOR_NAME}]`
+   * Create triggers according to the sensor's specific event/reading type code
+     and offsets (see [Table 42-3, Sensor Type
+     Codes](http://www.intel.com/content/dam/www/public/us/en/documents/product-briefs/second-gen-interface-spec-v2.pdf))
+     with the help of the Zabbix [band()
+     function](https://www.zabbix.com/documentation/3.0/manual/appendix/triggers/functions)
+* Standalone sensor templates which contain generic discrete IPMI sensors
+  (event/reading type code 02h - 0Ch)
+   * Template naming according to `IPMI <SENSOR-NAME> Generic Sensors`, for
+     example `IPMI Module Board Generic Sensors`
+   * Item key naming according to
+     `ipmi.discrete-generic-sensor[<SENSOR-TYPE>,<SENSOR-NAME>]`, for example
+     `ipmi.discrete-generic-sensor[module-board,{#IPMI_SENSOR_NAME}]`
+   * Create triggers according to the sensor's generic event/reading type code
+     and offsets (see [Table 42-2, Generic Event/Reading Type
+     Codes](http://www.intel.com/content/dam/www/public/us/en/documents/product-briefs/second-gen-interface-spec-v2.pdf))
+     with the help of the Zabbix [band()
+     function](https://www.zabbix.com/documentation/3.0/manual/appendix/triggers/functions)
+* Use the provided `ipmi-sensor-discovery.sh` external check script for
+  low-level auto-discovery of multiple sensors.
+* FreeIPMI's [interpret sensor
+  configuration](http://git.savannah.gnu.org/cgit/freeipmi.git/tree/etc/freeipmi_interpret_sensor.conf)
+  might be helpful for mapping sensor states to Zabbix trigger severities.
+* There should be no more need for threshold based sensor templates
+  (event/reading type code 01h), as they are already handled by the `IPMI
+  Threshold Sensors` template.
 
 ## Developing
 
@@ -41,16 +83,19 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 ```bash
 appName="" # app name
 
+lowercaseName="${appName,,}"
+shortName="${lowercaseName//-/}"
+
 templateName="Template App ${appName} active"
+xmlName="${templateName// /_}.xml"
 
-shortName=${appName//-/}
-xmlName="${templateName// /_/}.xml"
+appDir="app/${appName// /_}"
 
-mkdir -p app/${appName}/doc
-touch app/${appName}/doc/README.head.md
+mkdir -p "${appDir}/doc"
+touch "${appDir}/doc/README.head.md"
 
 # see fetching below if you want help exporting
-mv zbx_export_templates.xml app/${appName}/${xmlName}
+mv zbx_export_templates.xml "${appDir}/${xmlName}"
 ```
 
 #### Fetching an app from the Zabbix server
@@ -72,47 +117,89 @@ The helper will prompt for settings should they not be configured. Please see it
 ```bash
 $avcViolation="" # multiple lines from /var/log/audit/audit.log
 
-mkdir app/${appName}/selinux
+moduleName="rabezbx${shortName// /}"
 
-echo ${avcViolation} | audit2allow -m rabezbx${appName} > \
-  app/${appName}/selinux/rabezbx${shortName}.te
+mkdir "${appDir}/selinux"
 
-cat > app/${appName}/doc/README.SELinux.md <<EOD
+echo ${avcViolation} | audit2allow -m ${moduleName} > \
+  "${appDir}/selinux/${moduleName}.te"
+
+cat > "${appDir}/doc/README.SELinux.md" <<EOD
 ## SELinux Policy
 
-The [rabezbx${appName}](selinux/rabezbx${appName}.te) policy does <dox>.
+The [${moduleName}](selinux/${moduleName}.te) policy does <dox>.
 EOD
 ```
+
 #### optional userparameters
 ```bash
-mkdir app/${appName}/userparameters
+mkdir "${appDir}/userparameters"
 
-cat > app/${appName}/userparameters/${appName}.conf <<EOD
+userParameterName="rabe.${lowercaseName// /-}"
+
+cat > "${appDir}/userparameters/${userParameterName}.conf" <<EOD
 #
 # dox here
 #
-UserParameter=rabe.${appName}.<key>,<script>
+UserParameter=${userParameterName}.<key>,<script>
 EOD
 
-cat > app/${appName}/doc/README.UserParameters.md <<EOD
+cat > "${appDir}/doc/README.UserParameters.md" <<EOD
 ## UserParameters
 
 | Key | Description |
 | --- | ----------- |
-| \`rabe.${appName}.<key>\` | <dox> |
+| \`${userParameterName}.<key>\` | <dox> |
 EOD
 ```
 
 #### optional scripts
 ```bash
-mkdir app/${appName}/scripts
+mkdir "${appDir}/scripts"
 
-touch app/${appName}/scripts/rabe-${appName}.sh
+scriptName="rabe-${lowercaseName// /-}.sh"
 
-cat > app/${appName}/doc/README.scripts.md <<EOD
+touch "${appDir}/scripts/${scriptName}"
+
+cat > "${appDir}/doc/README.scripts.md" <<EOD
 ## Scripts
 
-* [rabe-${appName}.sh](./scripts/rabe-${appName}.sh) for rabe.${appName}.<key> UserParameter
+* [${scriptName}](./scripts/${scriptName}) for ${userParameterName}.<key> UserParameter
+
+<dox below listing if needed>
+EOD
+```
+
+### Adding an IPMI template
+
+```bash
+ipmiName="" # IPMI sensor, board or server name
+
+lowercaseName="${ipmiName,,}"
+
+templateName="Template IPMI ${ipmiName}"
+xmlName="${templateName// /_}.xml"
+
+ipmiDir="ipmi/${ipmiName// /_}"
+
+mkdir -p "${ipmiDir}/doc"
+touch "${ipmiDir}/doc/README.head.md"
+
+mv zbx_export_templates.xml "${ipmiDir}/${xmlName}"
+```
+
+#### optional scripts
+```bash
+scriptName="ipmi-${lowercaseName// /-}"
+
+mkdir -p "${ipmiDir}/scripts"
+
+touch "${ipmiDir}/scripts/${scriptName}.sh"
+
+cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
+## Scripts
+
+* [${scriptName}.sh](./scripts/${scriptName}.sh) <short description>
 
 <dox below listing if needed>
 EOD

@@ -86,7 +86,7 @@ install-app-selinux:
 install-app-config:
 	install -d $(AGENTDDIR)
 	$(foreach app,$(APPS), \
-	    install -p -m 644 app/$(app)/userparameters/$(app).conf $(AGENTDDIR) || :; \
+	    install -p -m 644 app/$(app)/userparameters/*$(app).conf $(AGENTDDIR) || :; \
 	)
 
 # install any scripts found in a */scripts/* subdir

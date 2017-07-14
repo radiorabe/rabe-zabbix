@@ -1,4 +1,4 @@
-# zabbix-agent
+# Zabbix zabbix-agent monitoring
 
 Basic Zabbix Agent operations.
 
@@ -8,6 +8,8 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 ## Template App Zabbix Agent active
+
+This template is part of RaBe's Zabbix template and helpers collection at https://github.com/radiorabe/rabe-zabbix.
 
 ### Items 
 * Host name of zabbix_agentd running (`agent.hostname`)

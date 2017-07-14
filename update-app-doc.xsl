@@ -153,7 +153,7 @@
   </xsl:template>
 
   <!-- toplevel boilerplate -->
-  <xsl:template match="zabbix_export"># <xsl:value-of select="$appName"/><xsl:text>
+  <xsl:template match="zabbix_export"># Zabbix <xsl:value-of select="$appName"/> monitoring<xsl:text>
 
 </xsl:text>
 <xsl:value-of select="$appHead"/>
@@ -181,8 +181,7 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
   <!-- per template template -->
   <xsl:template match="template">
-## <xsl:value-of select="name" /><xsl:text>
-</xsl:text>
+## <xsl:value-of select="name" /><xsl:text></xsl:text><xsl:call-template name="output-description-if-available"/>
 <xsl:apply-templates select="items"/>
 <xsl:apply-templates select="macros"/>
 <xsl:apply-templates select="discovery_rules"/>
@@ -226,14 +225,14 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
   <!-- discovery rule templates -->
   <xsl:template match="discovery_rules"><xsl:if test="discovery_rule"><xsl:text>### Discovery
 </xsl:text><xsl:apply-templates select="discovery_rule"/></xsl:if></xsl:template>
-  <xsl:template match="dicovery_rule"><xsl:text>#### </xsl:text><xsl:value-of select="name"/> (`<xsl:value-of select="key"/><xsl:text>`)
-</xsl:text><xsl:if test="item_prototypes"><xsl:apply-templates select="item_prototypes"/></xsl:if>
+  <xsl:template match="discovery_rule"><xsl:text>#### </xsl:text><xsl:value-of select="name"/> (`<xsl:value-of select="key"/><xsl:text>`)</xsl:text><xsl:call-template name="output-description-if-available"/>
+<xsl:if test="item_prototypes"><xsl:apply-templates select="item_prototypes"/></xsl:if>
 <xsl:if test="trigger_prototypes"><xsl:apply-templates select="trigger_prototypes"/></xsl:if>
 </xsl:template>
 
   <!-- item prototypes -->
   <xsl:template match="item_prototypes"><xsl:if test="item_prototype"><xsl:text>
-#### Discovery Items</xsl:text><xsl:apply-templates select="item_prototype"/>
+##### Item Prototypes</xsl:text><xsl:apply-templates select="item_prototype"/>
 </xsl:if></xsl:template>
   <xsl:template match="item_prototype">
 * <xsl:value-of select="name"/> (`<xsl:value-of select="key"/>`)<xsl:call-template name="output-description-if-available"/>
@@ -241,7 +240,7 @@ Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
 
   <!-- trigger prototypes -->
   <xsl:template match="trigger_prototypes"><xsl:if test="trigger_prototype"><xsl:text>
-#### Discovery Triggers</xsl:text><xsl:apply-templates select="trigger_prototype"/>
+##### Trigger Prototypes</xsl:text><xsl:apply-templates select="trigger_prototype"/>
 </xsl:if></xsl:template>
   <xsl:template match="trigger_prototype">
 * <xsl:value-of select="name"/> (`<xsl:value-of select="expression"/>`)<xsl:call-template name="output-description-if-available"/>
