@@ -189,6 +189,25 @@ cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
 EOD
 ```
 
+### Adding an os template
+
+```bash
+osName="" # OS name
+
+lowercaseName="${osName,,}"
+shortName="${lowercaseName//-/}"
+
+templateName="Template OS ${osName} active"
+xmlName="${templateName// /_}.xml"
+
+osDir="os/${osName// /_}"
+
+mkdir -p "${osDir}/doc"
+touch "${osDir}/doc/README.head.md"
+
+mv zbx_export_templates.xml "${osDir}/${xmlName}"
+```
+
 ## RPM Packages
 
 The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version
