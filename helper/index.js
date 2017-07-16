@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const inquirer = require('inquirer');
 const ora = require('ora');
 const spawn = require('child_process').spawn;
+const d = require('domain').create();
 
 const Zabbix = require('zabbix-api');
 const fs = require('fs');
@@ -27,7 +28,7 @@ const cli = meow(`
     --config-set [key] [val]      Set config value key to val
     --help, -h                    Print this help
 
-  The script will prompt for some configuration options on first run. These get persisted to 
+  The script will prompt for some configuration options on first run. These get persisted to
   the disk for later use and they may be queried/changed with the --config-get and --config-set
   options.
 
@@ -50,7 +51,7 @@ const cli = meow(`
     Set API endpoint to localhost.
 
     $ rabe-zabbix --config-set api http://localhost/zabbix/api_jsonrpc.php
-   
+
 `, {
     alias: {
       t: 'template',
@@ -94,6 +95,21 @@ if (cli.flags.insecure) {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 }
 
+// global error handler
+d.on('error', function(err){
+  // output the errors full info in any case
+  spinner.fail(err.stack);
+
+  // additional info for specific cases that land us here
+
+  // this is the case if the http request was aborted before a response header could be obtained
+  // see <https://github.com/v2e4lisp/zabbix-api/blob/882db6cf1aa748119636f65a7d49462a5893cdce/index.js#L106-L107>
+  if (err.message == "Cannot read property 'statusCode' of undefined") {
+    spinner.stopAndPersist({text: 'A request to Zabbix failed and the error wasn\'t properly handled. --insecure might help in case of TLS errors.'});
+  }
+  process.exit(1);
+});
+
 var questions = [];
 if (!config.has('api')) {
   questions.push({
@@ -129,14 +145,16 @@ inquirer.prompt(questions).then(function(input) {
     config.get('password'),
     config.get('api')
   );
-  zbx.login(function(err, result) {
-    if (err) {
-      spinner.fail(err.data);
-      process.exit(1); 
-    } else {
-      spinner.succeed('Zabbix login succeeded.');
-      fetch_templates(zbx, cli.flags.template, cli.input[0]);
-    }
+  d.run(function() {
+    zbx.login(function(err, result) {
+      if (err) {
+        spinner.fail(err.data);
+        process.exit(1);
+      } else {
+        spinner.succeed('Zabbix login succeeded.');
+        fetch_templates(zbx, cli.flags.template, cli.input[0]);
+      }
+    });
   });
 });
 
