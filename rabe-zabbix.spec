@@ -42,7 +42,7 @@ Requires(post):   /usr/sbin/semodule, /sbin/restorecon, /sbin/fixfiles
 Requires(postun): /usr/sbin/semodule, /sbin/restorecon, /sbin/fixfiles
 
 %description
-Contains helper scripts, UserParameter configs, SELinux policies to be used at RaBe for monitoring all the things.
+Contains helper scripts, UserParameter configs, SELinux policies and sudoers to be used at RaBe for monitoring all the things.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -73,4 +73,5 @@ fi
 %{_datadir}/selinux/*/rabe.lst
 %{_datadir}/selinux/*/*.pp
 %config %{_sysconfdir}/zabbix/zabbix_agentd.d/*.conf
+%config %{_sysconfdir}/sudoers.d/*
 %{_libexecdir}/zabbix/rabe/*
