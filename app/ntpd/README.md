@@ -14,44 +14,45 @@ template which the individual server and client templates reference.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
-## Template App ntpd Client active### Discovery
+## Template App ntpd Client active
+### Discovery
 #### NTP servers (`rabe.ntpd.server.discovery`)
 ##### Item Prototypes
-* NTP server {#SERVERNAME} candidate order (`rabe.ntpd.server.candidate_order[{#SERVERNAME}]`)
-* NTP server {#SERVERNAME} configuration (`vfs.file.regexp[/etc/ntp.conf,"^server.*{#SERVERNAME} (.*)",,,,\1]`)
+* NTP server {#SERVERNAME} candidate order (`rabe.ntpd.server.candidate_order[{#SERVERNAME}]`)  
+* NTP server {#SERVERNAME} configuration (`vfs.file.regexp[/etc/ntp.conf,"^server.*{#SERVERNAME} (.*)",,,,\1]`)  
 ##### Trigger Prototypes
-* NTP server {#SERVERNAME} is not a valid candidate on {HOST.NAME} (`{Template App ntpd Client active:rabe.ntpd.server.candidate_order[{#SERVERNAME}].last()}=0`)
-
-If a configured server has a candidate order of 0 it is not considered as a valid time source and most likely has some issues.
-
+* Warning: NTP server {#SERVERNAME} is not a valid candidate on {HOST.NAME}
+  ```
+  {Template App ntpd Client active:rabe.ntpd.server.candidate_order[{#SERVERNAME}].last()}=0
+  ```
+  If a configured server has a candidate order of 0 it is not considered as a valid time source and most likely has some issues.
 ## Template App ntpd Common active
-### Items 
-* Memory usage (rss) of "ntpd" processes (`proc.mem[ntpd,ntp,,,rss]`)
-* Number of "ntpd" processes (`proc.num[ntpd,ntp]`)
-* ntpd authdelay (`rabe.ntpdc.sysinfo[authdelay,single]`)
-* ntpd broadcastdelay (`rabe.ntpdc.sysinfo[broadcastdelay,single]`)
-* ntpd jitter (`rabe.ntpdc.sysinfo[jitter,single]`)
-* ntpd precision (`rabe.ntpdc.sysinfo[precision]`)
-* ntpd root dispersion (`rabe.ntpdc.sysinfo[root dispersion,single]`)
-* ntpd root distance (`rabe.ntpdc.sysinfo[root distance,single]`)
-* ntpd stability (`rabe.ntpdc.sysinfo[stability,single]`)
-* ntpd stratum (`rabe.ntpdc.sysinfo[stratum]`)
-* ntpd system flags (`rabe.ntpdc.sysinfo[system flags]`)
-* ntpd system peer mode (`rabe.ntpdc.sysinfo[system peer mode]`)
-* ntpd system peer (`rabe.ntpdc.sysinfo[system peer]`)
+### Items
+* Memory usage (rss) of "ntpd" processes (`proc.mem[ntpd,ntp,,,rss]`)  
+* Number of "ntpd" processes (`proc.num[ntpd,ntp]`)  
+* ntpd authdelay (`rabe.ntpdc.sysinfo[authdelay,single]`)  
+* ntpd broadcastdelay (`rabe.ntpdc.sysinfo[broadcastdelay,single]`)  
+* ntpd jitter (`rabe.ntpdc.sysinfo[jitter,single]`)  
+* ntpd precision (`rabe.ntpdc.sysinfo[precision]`)  
+* ntpd root dispersion (`rabe.ntpdc.sysinfo[root dispersion,single]`)  
+* ntpd root distance (`rabe.ntpdc.sysinfo[root distance,single]`)  
+* ntpd stability (`rabe.ntpdc.sysinfo[stability,single]`)  
+* ntpd stratum (`rabe.ntpdc.sysinfo[stratum]`)  
+* ntpd system flags (`rabe.ntpdc.sysinfo[system flags]`)  
+* ntpd system peer mode (`rabe.ntpdc.sysinfo[system peer mode]`)  
+* ntpd system peer (`rabe.ntpdc.sysinfo[system peer]`)  
 ## Template App ntpd Server active
 ### Triggers
-
-* High: No running ntpd processes on {HOST.NAME} (`{Template App ntpd Common active:proc.num[ntpd,ntp].max(#5)}<1`)
-
-We expect ntpd to run at all times
-
-
-* Warning: ntpd system peer mode is not client on host {HOST.NAME} (`{Template App ntpd Common active:rabe.ntpdc.sysinfo[system peer mode].regexp(client)}<>0`)
-
-Our clients should always be in client peer mode. If they are not, chances are that they are not clients any more.
-
+* High: No running ntpd processes on {HOST.NAME}
+  ```
+  {Template App ntpd Common active:proc.num[ntpd,ntp].max(#5)}<1
+  ```
+  We expect ntpd to run at all times
+* Warning: ntpd system peer mode is not client on host {HOST.NAME}
+  ```
+  {Template App ntpd Common active:rabe.ntpdc.sysinfo[system peer mode].regexp(client)}<>0
+  ```
+  Our clients should always be in client peer mode. If they are not, chances are that they are not clients any more.
 ## SELinux Policy
 
 The [rabezbxntpd](selinux/rabezbxntpd.te) policy allows the agent to access ntpd configuration files.

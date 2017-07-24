@@ -15,54 +15,44 @@ The discovery rules and user parameters were tested on
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
 ## Template App CARP active
-
 Application template for monitoring the Common Address Redundancy Protocol (CARP) on FreeBSD network interfaces.
 - https://www.freebsd.org/doc/handbook/carp.html
 - https://www.freebsd.org/cgi/man.cgi?query=carp&sektion=4
 ### Discovery
 #### CARP vhid discovery (`rabe.carp.vhid.discovery`)
-
 Low-Level discovery of FreeBSD's configured CARP virtual host IDs (vhid).
 
 Returns the following example macro for each configured vhid:
 {#CARP_VHID} = 3
-
 ##### Item Prototypes
-* CARP advbase of vhid $1 (`rabe.carp.vhid.advbase[{#CARP_VHID}]`)
-
-The current advertisement base in seconds of a specific CARP virtual host ID (vhid).
-
-* CARP advskew of vhid $1 (`rabe.carp.vhid.advskew[{#CARP_VHID}]`)
-
-The current advertisement skew in 1/256 second (as per the carp(4) man page) of a specific CARP virtual host ID (vhid).
-
-* CARP status of vhid $1 (`rabe.carp.vhid.status[{#CARP_VHID}]`)
-
-The current status of a specific CARP virtual host ID (vhid).
-
+* CARP advbase of vhid $1 (`rabe.carp.vhid.advbase[{#CARP_VHID}]`)  
+  The current advertisement base in seconds of a specific CARP virtual host ID (vhid).
+* CARP advskew of vhid $1 (`rabe.carp.vhid.advskew[{#CARP_VHID}]`)  
+  The current advertisement skew in 1/256 second (as per the carp(4) man page) of a specific CARP virtual host ID (vhid).
+* CARP status of vhid $1 (`rabe.carp.vhid.status[{#CARP_VHID}]`)  
+  The current status of a specific CARP virtual host ID (vhid).
 ##### Trigger Prototypes
-* CARP status of VHID {#CARP_VHID} changed to {ITEM.VALUE1} on {HOST.NAME} (`{Template App CARP active:rabe.carp.vhid.status[{#CARP_VHID}].diff()}>0`)
-
-The CARP virtual host ID (vhid) changed its status.
+* Information: CARP status of VHID {#CARP_VHID} changed to {ITEM.VALUE1} on {HOST.NAME}
+  ```
+  {Template App CARP active:rabe.carp.vhid.status[{#CARP_VHID}].diff()}>0
+  ```
+  The CARP virtual host ID (vhid) changed its status.
 #### CARP vip discovery (`rabe.carp.vip.discovery`)
-
 Low-Level discovery of FreeBSD's configured CARP virtual IP addresses (vip).
 
 Returns the following example macro pair for each configured CARP VIP
 {#CARP_IP} = 192.0.2.10
 {#CARP_VHID} = 3
-
 ##### Item Prototypes
-* CARP status of VIP $2 in vhid $1 (`rabe.carp.vhid.status[{#CARP_VHID},{#CARP_IP}]`)
-
-The current status of a specific CARP virtual IP address within a virtual host ID (vhid) group.
-
+* CARP status of VIP $2 in vhid $1 (`rabe.carp.vhid.status[{#CARP_VHID},{#CARP_IP}]`)  
+  The current status of a specific CARP virtual IP address within a virtual host ID (vhid) group.
 ##### Trigger Prototypes
-* CARP status of VIP {#CARP_IP} (VHID {#CARP_VHID}) changed to {ITEM.VALUE1} on {HOST.NAME} (`{Template App CARP active:rabe.carp.vhid.status[{#CARP_VHID},{#CARP_IP}].diff()}>0`)
-
-The CARP virtual IP address (vip) within a virtual host ID (vhid) group changed its status.
+* Information: CARP status of VIP {#CARP_IP} (VHID {#CARP_VHID}) changed to {ITEM.VALUE1} on {HOST.NAME}
+  ```
+  {Template App CARP active:rabe.carp.vhid.status[{#CARP_VHID},{#CARP_IP}].diff()}>0
+  ```
+  The CARP virtual IP address (vip) within a virtual host ID (vhid) group changed its status.
 ## UserParameters
 
 The following user parameters are available within [`rabe.carp.conf`](userparameters/rabe.carp.conf)
