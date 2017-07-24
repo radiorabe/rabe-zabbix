@@ -84,6 +84,8 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 appName="" # app name
 
 lowercaseName="${appName,,}"
+uppercaseName="${appName^^}"
+
 shortName="${lowercaseName//-/}"
 
 templateName="Template App ${appName} active"
@@ -169,6 +171,35 @@ cat > "${appDir}/doc/README.scripts.md" <<EOD
 <dox below listing if needed>
 EOD
 ```
+
+#### optional Sudo security policies
+```bash
+mkdir "${appDir}/sudoers.d"
+
+sudoersFileName="rabezbx-${lowercaseName// /_}"
+sudoersCmndAliasPrefix="RABEZBX_${uppercaseName//[ -]/_}"
+
+cat > "${appDir}/sudoers.d/${sudoersFileName}" << EOF
+##
+## Defaults specification for the zabbix user
+##
+Defaults:zabbix !requiretty
+
+##
+## Command alias specifications for ${appName}
+##
+Cmnd_Alias ${sudoersCmndAliasPrefix}_MYCMD = /sbin/mycmd -a -b -c
+Cmnd_Alias ${sudoersCmndAliasPrefix}_MYOTHERCMD = /sbin/myothercmd
+
+##
+## User privilege specifications for the zabbix user
+##
+zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYCMD
+zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYOTHERCMD
+EOF
+```
+
+Adapt the `MYCMD` and `MYOTHERMCD` command aliases accordingly.
 
 ### Adding an IPMI template
 
