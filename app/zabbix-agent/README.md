@@ -6,28 +6,28 @@ Based on the [official Zabbix agent template from Zabbix distribution](https://s
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
 ## Template App Zabbix Agent active
-
 This template is part of RaBe's Zabbix template and helpers collection at https://github.com/radiorabe/rabe-zabbix.
-
-### Items 
-* Host name of zabbix_agentd running (`agent.hostname`)
-* Agent ping (`agent.ping`)
-
-The agent always returns 1 for this item. It could be used in combination with nodata() for availability check.
-
-* Version of zabbix_agent(d) running (`agent.version`)
+### Items
+* Host name of zabbix_agentd running (`agent.hostname`)  
+* Agent ping (`agent.ping`)  
+  The agent always returns 1 for this item. It could be used in combination with nodata() for availability check.
+* Version of zabbix_agent(d) running (`agent.version`)  
 ### Macros
-
 * `{$APP_ZABBIX_AGENT_NODATA_HIGH_TIME}` (default: 5m)
 ### Triggers
-
-* Information: Host name of zabbix_agentd was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.hostname.diff(0)}>0`)
-
-* High: No current data from Zabbix agent on {HOST.NAME} (`{Template App Zabbix Agent active:agent.ping.nodata({$APP_ZABBIX_AGENT_NODATA_HIGH_TIME})}=1`)
-
-* Information: Version of zabbix_agent(d) was changed on {HOST.NAME} (`{Template App Zabbix Agent active:agent.version.diff(0)}>0`)
+* Information: Host name of zabbix_agentd was changed on {HOST.NAME}
+  ```
+  {Template App Zabbix Agent active:agent.hostname.diff(0)}>0
+  ```
+* High: No current data from Zabbix agent on {HOST.NAME}
+  ```
+  {Template App Zabbix Agent active:agent.ping.nodata({$APP_ZABBIX_AGENT_NODATA_HIGH_TIME})}=1
+  ```
+* Information: Version of zabbix_agent(d) was changed on {HOST.NAME}
+  ```
+  {Template App Zabbix Agent active:agent.version.diff(0)}>0
+  ```
 ## SELinux Policy
 
 The [rabezbxzabbixagent](selinux/rabezbxzabbixagent.te) policy allows the agent to set its rlimit

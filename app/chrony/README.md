@@ -4,17 +4,16 @@ Basic chrony NTP client monitoring.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
 ## Template App chrony active
-### Items 
-* Memory usage (rss) of "chronyd" processes (`proc.mem[chronyd,chrony,,,rss]`)
-* Number of "chronyd" processes (`proc.num[chronyd,chrony]`)
+### Items
+* Memory usage (rss) of "chronyd" processes (`proc.mem[chronyd,chrony,,,rss]`)  
+* Number of "chronyd" processes (`proc.num[chronyd,chrony]`)  
 ### Triggers
-
-* High: No running chronyd processes on {HOST.NAME} (`{Template App chrony active:proc.num[chronyd,chrony].max(#5)}<1`)
-
-We expect chronyd to to run at all times
-
+* High: No running chronyd processes on {HOST.NAME}
+  ```
+  {Template App chrony active:proc.num[chronyd,chrony].max(#5)}<1
+  ```
+  We expect chronyd to to run at all times
 
 ## License
 This template is free software: you can redistribute it and/or modify it under
