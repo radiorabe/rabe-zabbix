@@ -142,19 +142,19 @@ Returns the following macros for each available LV:
 * Warning: LVM thick snapshot allocation {HOST.NAME}:[{#LVM_LV_FULL_NAME} is high (< $2 %, {ITEM.VALUE1} free)
   ```
   {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot].last()} < {$LVM_LV_SNAPSHOT_DATA_FREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
-
-and
-
-{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} < {$LVM_LV_SNAPSHOT_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
+  
+  and
+  
+  {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} < {$LVM_LV_SNAPSHOT_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
   ```
   The free snapshot data of the LVM thick provisioned snapshot is below `{$LVM_LV_SNAPSHOT_DATA_FREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` and `{$LVM_LV_SNAPSHOT_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` percent. The snapshot will turn invalid soon.
 * High: LVM thick snapshot allocation {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very high (< $2 %, {ITEM.VALUE1} free)
   ```
   {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot].last()} < {$LVM_LV_SNAPSHOT_DATA_FREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
-
-and
-
-{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} < {$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
+  
+  and
+  
+  {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} < {$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
   ```
   The free snapshot data of the LVM thick provisioned snapshot is below `{$LVM_LV_SNAPSHOT_DATA_FREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` and `{$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` percent. The snapshot will turn invalid very soon.
 * High: LVM thick snapshot LV {#LVM_LV_FULL_NAME} is not active ({ITEM.VALUE1}) on {HOSTNAME}
@@ -218,37 +218,37 @@ Returns the following macros for each available LV:
 * Warning: LVM thin-pool free meta data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is low (< $2 %, {ITEM.VALUE1} free)
   ```
   {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool].last()} < {$LVM_LV_META_DATA_FREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"} 
-
-and
-
-{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} < {$LVM_LV_META_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
+  
+  and
+  
+  {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} < {$LVM_LV_META_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
   ```
   The free meta data of the LVM thin-pool is below `{$LVM_LV_META_DATA_FREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"} ` and `{$LVM_LV_META_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` percent.
 * High: LVM thin-pool free meta data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very low (< $2 %, {ITEM.VALUE1} free)
   ```
   {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool].last()} < {$LVM_LV_META_DATA_FREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"} 
-
-and
-
-{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} < {$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
+  
+  and
+  
+  {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} < {$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
   ```
   The free meta data of the LVM thin-pool is below `{$LVM_LV_META_DATA_FREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"} ` and `{$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` percent.
 * Warning: LVM thin-pool free pool data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is low (< $2 %, {ITEM.VALUE1} free)
   ```
   {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool].last()} < {$LVM_LV_POOL_DATA_FREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"} 
-
-and
-
-{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} < {$LVM_LV_POOL_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
+  
+  and
+  
+  {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} < {$LVM_LV_POOL_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
   ```
   The free pool data of the LVM thin-pool is below `{$LVM_LV_POOL_DATA_FREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"} ` and `{$LVM_LV_POOL_DATA_PFREE_WARNING_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` percent.
 * High: LVM thin-pool free pool data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very low (< $2 %, {ITEM.VALUE1} free)
   ```
   {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool].last()} < {$LVM_LV_POOL_DATA_FREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"} 
-
-and
-
-{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} < {$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
+  
+  and
+  
+  {Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} < {$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}
   ```
   The free pool data of the LVM thin-pool is below `{$LVM_LV_POOL_DATA_FREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"} ` and `{$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD:"{#LVM_LV_FULL_NAME}"}` percent.
 * High: LVM thin-pool LV {#LVM_LV_FULL_NAME} is not active ({ITEM.VALUE1}) on {HOSTNAME}
