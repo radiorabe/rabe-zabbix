@@ -205,6 +205,29 @@ cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
 EOD
 ```
 
+### Adding an SNMP template
+
+```bash
+snmpName=""     # Name, usually related to the MIB
+snmpVersion="2" # SNMP version, 2 or 3.
+
+templateName="Template SNMPv${snmpVersion} ${snmpName}"
+xmlName="${templateName// /_}.xml"
+
+snmpDir="snmp/SNMPv${snmpVersion}_${snmpName// /_}"
+
+mkdir -p "${snmpDir}/doc"
+touch "${snmpDir}/doc/README.head.md"
+
+# Download you template from the zabbix server
+
+mv zbx_export_templates.xml "${snmpDir}/${xmlName}"
+
+```
+Note, that you can also use the provided [template fetching
+helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
+template from your Zabbix server.
+
 ## RPM Packages
 
 The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version
