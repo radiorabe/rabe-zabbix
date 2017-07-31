@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2017-07-31T11:02:53Z</date>
+    <date>2017-07-31T12:31:12Z</date>
     <groups>
         <group>
             <name>SNMP templates</name>
@@ -65,7 +65,7 @@ Returns the following macros for each available Livewire destination&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::dstAudioGain.{#SNMPINDEX}</snmp_oid>
-                            <key>dstAudioGain[{#DST_INDEX}]</key>
+                            <key>rabe.snmp.livewire.dstAudioGain[{#DST_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
@@ -109,7 +109,7 @@ Returns the following macros for each available Livewire destination&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::dstMediaAddress.{#SNMPINDEX}</snmp_oid>
-                            <key>dstMediaAddress[{#DST_INDEX}]</key>
+                            <key>rabe.snmp.livewire.dstMediaAddress[{#DST_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>0</trends>
@@ -153,7 +153,7 @@ Returns the following macros for each available Livewire destination&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::dstName.{#SNMPINDEX}</snmp_oid>
-                            <key>dstName[{#DST_INDEX}]</key>
+                            <key>rabe.snmp.livewire.dstName[{#DST_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>0</trends>
@@ -197,7 +197,7 @@ Returns the following macros for each available Livewire destination&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::dstNumberOfChannels.{#SNMPINDEX}</snmp_oid>
-                            <key>dstNumberOfChannels[{#DST_INDEX}]</key>
+                            <key>rabe.snmp.livewire.dstNumberOfChannels[{#DST_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
@@ -243,7 +243,7 @@ Returns the following macros for each available Livewire destination&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::dstOutputMode.{#SNMPINDEX}</snmp_oid>
-                            <key>dstOutputMode[{#DST_INDEX}]</key>
+                            <key>rabe.snmp.livewire.dstOutputMode[{#DST_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
@@ -333,7 +333,7 @@ Returns the following macros for each available Livewire source&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::srcAudioGain.{#SNMPINDEX}</snmp_oid>
-                            <key>srcAudioGain[{#SRC_INDEX}]</key>
+                            <key>rabe.snmp.livewire.srcAudioGain[{#SRC_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
@@ -377,7 +377,7 @@ Returns the following macros for each available Livewire source&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::srcEnable.{#SNMPINDEX}</snmp_oid>
-                            <key>srcEnable[{#SRC_INDEX}]</key>
+                            <key>rabe.snmp.livewire.srcEnable[{#SRC_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
@@ -423,7 +423,7 @@ Returns the following macros for each available Livewire source&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::srcMediaAddress.{#SNMPINDEX}</snmp_oid>
-                            <key>srcMediaAddress[{#SRC_INDEX}]</key>
+                            <key>rabe.snmp.livewire.srcMediaAddress[{#SRC_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>0</trends>
@@ -467,7 +467,7 @@ Returns the following macros for each available Livewire source&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::srcName.{#SNMPINDEX}</snmp_oid>
-                            <key>srcName[{#SRC_INDEX}]</key>
+                            <key>rabe.snmp.livewire.srcName[{#SRC_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>0</trends>
@@ -511,7 +511,7 @@ Returns the following macros for each available Livewire source&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::srcNumberOfChannels.{#SNMPINDEX}</snmp_oid>
-                            <key>srcNumberOfChannels[{#SRC_INDEX}]</key>
+                            <key>rabe.snmp.livewire.srcNumberOfChannels[{#SRC_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
@@ -557,7 +557,7 @@ Returns the following macros for each available Livewire source&#13;
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <multiplier>0</multiplier>
                             <snmp_oid>TLS-LIVEWIRE-MIB::srcPacketSize.{#SNMPINDEX}</snmp_oid>
-                            <key>srcPacketSize[{#SRC_INDEX}]</key>
+                            <key>rabe.snmp.livewire.srcPacketSize[{#SRC_INDEX}]</key>
                             <delay>300</delay>
                             <history>30</history>
                             <trends>365</trends>
