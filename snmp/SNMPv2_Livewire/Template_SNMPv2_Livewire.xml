@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-07-31T11:02:53Z</date>
+    <groups>
+        <group>
+            <name>SNMP templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SNMPv2 Livewire</template>
+            <name>Template SNMPv2 Livewire</name>
+            <description>Telos Alliance Livewire Audio over IP routing control based on TLS-LIVEWIRE-MIB.</description>
+            <groups>
+                <group>
+                    <name>SNMP templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Livewire destinations</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#DST_INDEX},TLS-LIVEWIRE-MIB::dstIndex,{#DST_NAME},TLS-LIVEWIRE-MIB::dstName]</snmp_oid>
+                    <key>rabe.snmp.livewire.destinations.discovery</key>
+                    <delay>300</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>0</lifetime>
+                    <description>Discovery of Livewire destinations.&#13;
+&#13;
+Returns the following macros for each available Livewire destination&#13;
+* `{#DST_INDEX}`&#13;
+  * A unique value, greater than zero, for each destination (`TLS-LIVEWIRE-MIB::dstIndex`).&#13;
+* {#DST_NAME}`&#13;
+  * A textual string containing the label of the destination port (`TLS-LIVEWIRE-MIB::dstName`).</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Audio gain of destination port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::dstAudioGain.{#SNMPINDEX}</snmp_oid>
+                            <key>dstAudioGain[{#DST_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>dB</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Audio gain/attenuation trim [dB] of the destination port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Destination {#DST_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Media address of destination port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::dstMediaAddress.{#SNMPINDEX}</snmp_oid>
+                            <key>dstMediaAddress[{#DST_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>A textual string containing the destination media address (URI).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Destination {#DST_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Name of destination port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::dstName.{#SNMPINDEX}</snmp_oid>
+                            <key>dstName[{#DST_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>A textual string containing the label of the destination port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Destination {#DST_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Number of audio channels of destination port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::dstNumberOfChannels.{#SNMPINDEX}</snmp_oid>
+                            <key>dstNumberOfChannels[{#DST_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The number of audio channels (0 - port not available, 1 - mono, 2 - stereo, 8 - 8-channel surround (5.1 + stereo)) of the destination port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Livewire number of audio channels</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Destination {#DST_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Channel output mode of destination port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::dstOutputMode.{#SNMPINDEX}</snmp_oid>
+                            <key>dstOutputMode[{#DST_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Channel output mode of destination port. Default mode is passing all channels. Mono destinations can be left-only, right-only or left+righ sum.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Livewire output channel mode (LWRVMODValue)</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Destination {#DST_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes/>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Livewire sources</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#SRC_INDEX},TLS-LIVEWIRE-MIB::srcIndex,{#SRC_NAME},TLS-LIVEWIRE-MIB::srcName]</snmp_oid>
+                    <key>rabe.snmp.livewire.sources.discovery</key>
+                    <delay>300</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>0</lifetime>
+                    <description>Discovery of Livewire source ports.&#13;
+&#13;
+Returns the following macros for each available Livewire source&#13;
+* `{#SRC_INDEX}`&#13;
+  * A unique value, greater than zero, for each source port (`TLS-LIVEWIRE-MIB::srcIndex`).&#13;
+* {#SRC_NAME}`&#13;
+  * A textual string containing the label of the source port (`TLS-LIVEWIRE-MIB::srcName`).</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Audio gain of source port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::srcAudioGain.{#SNMPINDEX}</snmp_oid>
+                            <key>srcAudioGain[{#SRC_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>dB</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Audio gain/attenuation trim [dB] of the source port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Source {#SRC_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Enable status of source port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::srcEnable.{#SNMPINDEX}</snmp_oid>
+                            <key>srcEnable[{#SRC_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Status of the source port, true(1) if the port is enabled, false(2) otherwise. A source port needs to be enabled in order to transmit multicast streams or accept unicast connections.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>SNMP Truth Value (TruthValue)</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Source {#SRC_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Media address of source port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::srcMediaAddress.{#SNMPINDEX}</snmp_oid>
+                            <key>srcMediaAddress[{#SRC_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>IPv4 multicast destination address for the RTP media stream, or empty (0.0.0.0) for unicast-only ports.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Source {#SRC_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Name of source port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::srcName.{#SNMPINDEX}</snmp_oid>
+                            <key>srcName[{#SRC_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>A textual string containing the label of the source port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Source {#SRC_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Number of audio channels of source port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::srcNumberOfChannels.{#SNMPINDEX}</snmp_oid>
+                            <key>srcNumberOfChannels[{#SRC_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The number of audio channels (0 - port not available, 1 - mono, 2 - stereo, 8 - 8-channel surround (5.1 + stereo)) of the destination port.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap>
+                                <name>Livewire number of audio channels</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Source {#SRC_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Packet size of source port $1</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>TLS-LIVEWIRE-MIB::srcPacketSize.{#SNMPINDEX}</snmp_oid>
+                            <key>srcPacketSize[{#SRC_INDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The number of samples per each RTP media packet.&#13;
+Common values are:&#13;
+* 12 - Livewire Livestreams (channels with mininum latency)&#13;
+* 48 - AES67 1ms packet (low-latency, best interoperability)&#13;
+* 240 - Livewire Standard Streams (least resource intensive)</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>SNMPv2 Livewire Source {#SRC_INDEX}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes/>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$SNMP_COMMUNITY}</macro>
+                    <value>public</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <value_maps>
+        <value_map>
+            <name>Livewire number of audio channels</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>port not available</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>mono</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>stereo</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>8-channel surround (5.1 + stereo)</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Livewire output channel mode (LWRVMODValue)</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>pass</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>left</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>right</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>sum</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>SNMP Truth Value (TruthValue)</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>true</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>false</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
