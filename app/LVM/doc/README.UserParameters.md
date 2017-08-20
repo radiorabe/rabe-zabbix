@@ -36,6 +36,5 @@ su -l \
    zabbix
 ```
 
-The following logs might contain helpful hints
-* sudo related messages: `journalctl -r /usr/bin/sudo`
-* SELinux related messages: `/var/log/audit/audit.log`
+Also refer to the [main debugging section](../../README.md#Debugging) for
+further helpful commands and logs.
