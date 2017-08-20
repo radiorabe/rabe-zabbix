@@ -39,5 +39,5 @@ welcome):
    [`Include`](https://www.zabbix.com/documentation/3.0/manual/appendix/config/zabbix_agentd)
    directory (usually `/etc/zabbix/zabbix_agentd.d`).
 4. Import the [`Template_App_LVM_active.xml`](Template_App_LVM_active.xml) into your Zabbix server.
-5. Add the template to you host (or stack template)
+5. Add the template to your host (or stack template)
 6. Check if new data arrives
