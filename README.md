@@ -236,6 +236,27 @@ cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
 EOD
 ```
 
+## Debugging
+
+The following commands might be helpful for general debugging:
+* Test a specific Zabbix agent item  
+  `su -c 'zabbix_agentd -t <ITEM-KEY>' -s /bin/bash zabbix`
+* Restart the Zabbix agent  
+  `systemctl restart zabbix-agent`
+* Restart the Zabbix server  
+  `systemctl restart zabbix-server`
+
+The following logs might contain helpful hints:
+* Zabbix Agent related messages  
+  `/var/log/zabbix/zabbix_agentd.log`
+* Zabbix Server related messages  
+  `/var/log/zabbix/zabbix_server.log`
+* sudo related messages  
+  `journalctl -r /usr/bin/sudo`
+* SELinux related messages  
+  `/var/log/audit/audit.log`
+
+
 ## RPM Packages
 
 The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version
