@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:str="http://exslt.org/strings" version="1.0" extension-element-prefixes="str">
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:exsl="http://exslt.org/common"
+  xmlns:str="http://exslt.org/strings"
+  extension-element-prefixes="str">
+
   <xsl:output method="text"/>
 
   <xsl:param name="appName"/>
@@ -37,7 +42,12 @@
     <xsl:param name="code">Code</xsl:param>
     <xsl:param name="indent"></xsl:param>
     <xsl:value-of select="$indent"/><xsl:text>```&#xa;</xsl:text>
-    <xsl:value-of select="$indent"/><xsl:value-of select="$code"/>
+    <xsl:value-of select="$indent"/>
+    <xsl:call-template name="str:replace">
+      <xsl:with-param name="string" select="$code"/>
+      <xsl:with-param name="search" select="'&#xa;'"/>
+      <xsl:with-param name="replace" select="concat('&#xa;', $indent)"/>
+    </xsl:call-template>
     <xsl:text>&#xa;</xsl:text>
     <xsl:value-of select="$indent"/><xsl:text>```&#xa;</xsl:text>
   </xsl:template>

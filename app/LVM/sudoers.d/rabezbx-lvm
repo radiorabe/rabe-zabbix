@@ -1,0 +1,18 @@
+##
+## Defaults specification for the zabbix user
+##
+Defaults:zabbix !requiretty
+
+##
+## Command alias specifications for Linux Logical Volume Management (LVM)
+##
+Cmnd_Alias RABEZBX_LVM_PVS = /sbin/pvs
+Cmnd_Alias RABEZBX_LVM_VGS = /sbin/vgs
+Cmnd_Alias RABEZBX_LVM_LVS = /sbin/lvs
+
+##
+## User privilege specifications for the zabbix user
+##
+zabbix ALL=NOPASSWD: RABEZBX_LVM_LVS
+zabbix ALL=NOPASSWD: RABEZBX_LVM_VGS
+zabbix ALL=NOPASSWD: RABEZBX_LVM_PVS

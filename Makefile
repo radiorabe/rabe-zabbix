@@ -32,6 +32,7 @@ LIBEXECDIR       = ${PREFIX}/libexec
 SELINUXDIR       = ${DATADIR}/selinux
 AGENTDDIR        = ${ETCDIR}/zabbix/zabbix_agentd.d
 AGENTEXECDIR     = ${LIBEXECDIR}/zabbix/${PN}
+SUDOERSDIR       = ${ETCDIR}/sudoers.d
 
 # from package selinux-policy-devel
 SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
@@ -98,7 +99,14 @@ install-scripts:
 	    install -p -m 755 $$script $(AGENTEXECDIR); \
 	done
 
-install-app: install-app-selinux install-app-config install-scripts
+# install sudoers config droplets per app that matches the sudoers.d file
+# naming policy prefix
+install-app-sudoers:
+	install -d $(SUDOERSDIR)
+	install -p -m 600 app/*/sudoers.d/rabezbx-* $(SUDOERSDIR)
+
+install-app: install-app-selinux install-app-config install-scripts \
+	     install-app-sudoers
 
 install: install-app
 

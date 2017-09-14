@@ -84,6 +84,8 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 appName="" # app name
 
 lowercaseName="${appName,,}"
+uppercaseName="${appName^^}"
+
 shortName="${lowercaseName//-/}"
 
 templateName="Template App ${appName} active"
@@ -170,6 +172,35 @@ cat > "${appDir}/doc/README.scripts.md" <<EOD
 EOD
 ```
 
+#### optional Sudo security policies
+```bash
+mkdir "${appDir}/sudoers.d"
+
+sudoersFileName="rabezbx-${lowercaseName// /_}"
+sudoersCmndAliasPrefix="RABEZBX_${uppercaseName//[ -]/_}"
+
+cat > "${appDir}/sudoers.d/${sudoersFileName}" << EOF
+##
+## Defaults specification for the zabbix user
+##
+Defaults:zabbix !requiretty
+
+##
+## Command alias specifications for ${appName}
+##
+Cmnd_Alias ${sudoersCmndAliasPrefix}_MYCMD = /sbin/mycmd -a -b -c
+Cmnd_Alias ${sudoersCmndAliasPrefix}_MYOTHERCMD = /sbin/myothercmd
+
+##
+## User privilege specifications for the zabbix user
+##
+zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYCMD
+zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYOTHERCMD
+EOF
+```
+
+Adapt the `MYCMD` and `MYOTHERMCD` command aliases accordingly.
+
 ### Adding an IPMI template
 
 ```bash
@@ -223,6 +254,26 @@ touch "${osDir}/doc/README.head.md"
 
 mv zbx_export_templates.xml "${osDir}/${xmlName}"
 ```
+
+## Debugging
+
+The following commands might be helpful for general debugging:
+* Test a specific Zabbix agent item  
+  `su -c 'zabbix_agentd -t <ITEM-KEY>' -s /bin/bash zabbix`
+* Restart the Zabbix agent  
+  `systemctl restart zabbix-agent`
+* Restart the Zabbix server  
+  `systemctl restart zabbix-server`
+
+The following logs might contain helpful hints:
+* Zabbix Agent related messages  
+  `/var/log/zabbix/zabbix_agentd.log`
+* Zabbix Server related messages  
+  `/var/log/zabbix/zabbix_server.log`
+* sudo related messages  
+  `journalctl -r /usr/bin/sudo`
+* SELinux related messages  
+  `/var/log/audit/audit.log`
 
 ## RPM Packages
 
