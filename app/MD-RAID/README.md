@@ -68,7 +68,7 @@ Returns the following macros for each available MD device:
 * Sync action of MD {#MD_RAID_RAID_DEV_NAME} device (`vfs.file.contents[/sys/block/{#MD_RAID_RAID_DEV_NAME}/md/sync_action]`)  
   The current sync action (for rebuild or redundancy check processes) of a specific raid device (MD), according to `/sys/block/<MD-NAME>/md/sync_action`.
 ##### Trigger Prototypes
-* High: RAID array device MD {#MD_RAID_RAID_DEV_NAME} has $1 degraded device(s) on {HOST.NAME}
+* High: RAID array device MD {#MD_RAID_RAID_DEV_NAME} has {ITEM.VALUE1} degraded device(s) on {HOST.NAME}
   ```
   {Template App MD-RAID active:vfs.file.contents[/sys/block/{#MD_RAID_RAID_DEV_NAME}/md/degraded].last()}>0
   ```

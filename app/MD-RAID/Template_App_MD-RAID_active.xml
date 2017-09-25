@@ -471,7 +471,7 @@ Returns the following macros for each available MD device:&#13;
                     <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template App MD-RAID active:vfs.file.contents[/sys/block/{#MD_RAID_RAID_DEV_NAME}/md/degraded].last()}&gt;0</expression>
-                            <name>RAID array device MD {#MD_RAID_RAID_DEV_NAME} has $1 degraded device(s) on {HOST.NAME}</name>
+                            <name>RAID array device MD {#MD_RAID_RAID_DEV_NAME} has {ITEM.VALUE1} degraded device(s) on {HOST.NAME}</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
