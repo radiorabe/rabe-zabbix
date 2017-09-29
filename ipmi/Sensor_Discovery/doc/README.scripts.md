@@ -6,7 +6,7 @@
    discovery](https://www.zabbix.com/documentation/3.0/manual/discovery/low_level_discovery#low-level_discovery)
    of IPMI sensors, as Zabbix currently lacks LLD for IPMI items.
 
-   It uses [FreeIPMI](https://www.gnu.org/software/freeipmi/)'s
+   It uses the [FreeIPMI](https://www.gnu.org/software/freeipmi/)
    [`ipmi-sensors`](https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-sensors.8.html)
    command to produce a list of available sensors and transforms the output
    into the Zabbix LLD JSON format.
@@ -56,7 +56,7 @@
              "{#IPMI_SENSOR_UPPER_NC}" : "80.00",
              "{#IPMI_SENSOR_UPPER_C}" : "85.00",
              "{#IPMI_SENSOR_UPPER_NR}" : "90.00",
-             "{#IPMI_SENSOR_EVENT}" : "'OK'"
+             "{#IPMI_SENSOR_EVENT}" : "OK"
           },
           {
              "{#IPMI_SENSOR_ID}" : "2483",
@@ -70,7 +70,7 @@
              "{#IPMI_SENSOR_UPPER_NC}" : "25300.00",
              "{#IPMI_SENSOR_UPPER_C}" : "25400.00",
              "{#IPMI_SENSOR_UPPER_NR}" : "25500.00",
-             "{#IPMI_SENSOR_EVENT}" : "'OK'"
+             "{#IPMI_SENSOR_EVENT}" : "OK"
           },
           {
              "{#IPMI_SENSOR_ID}" : "4627",
@@ -84,7 +84,7 @@
              "{#IPMI_SENSOR_UPPER_NC}" : "N/A",
              "{#IPMI_SENSOR_UPPER_C}" : "N/A",
              "{#IPMI_SENSOR_UPPER_NR}" : "N/A",
-             "{#IPMI_SENSOR_EVENT}" : "'Presence detected'"
+             "{#IPMI_SENSOR_EVENT}" : "Presence detected"
           },
        ]
     }

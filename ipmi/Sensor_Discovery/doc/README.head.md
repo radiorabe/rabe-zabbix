@@ -20,8 +20,8 @@ required by most of the [IPMI templates](../../).
 3. Make sure the script is executable by the user running the zabbix-server
 4. If you have SELinux active, ensure that the Zabbix server is allowed to
    execute the script and is allowed to operate on directories and files within
-   its home directory (this is required for `ipmi-sensor`'s cache
-   (`~/.freeipmi/).
+   its home directory (this is required for accessing the cache directory of
+   the `ipmi-sensor` command, located at `~/.freeipmi/).
    On CentOS 7 the following steps were necessary:
    ```bash
    # Create the missing home directory of the zabbix user
