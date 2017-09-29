@@ -285,9 +285,20 @@
   </xsl:template>
 
   <!-- toplevel boilerplate -->
-  <xsl:template match="zabbix_export"># Zabbix <xsl:value-of select="$appName"/> monitoring<xsl:text>
+  <xsl:template match="zabbix_export">
+    <xsl:call-template name="md-h1">
+      <xsl:with-param name="title">
+        <xsl:text>Zabbix </xsl:text>
+        <!-- Replace underscores with white spaces in the primary header line -->
+        <xsl:call-template name="str:replace">
+          <xsl:with-param name="string" select="$appName"/>
+          <xsl:with-param name="search" select="'_'"/>
+          <xsl:with-param name="replace" select="' '"/>
+        </xsl:call-template>
+        <xsl:text> monitoring</xsl:text>
+      </xsl:with-param>
+    </xsl:call-template>
 
-</xsl:text>
 <xsl:value-of select="$appHead"/>
 
 This template is part of [RaBe's Zabbix template and helpers
