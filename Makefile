@@ -40,6 +40,10 @@ SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
 APPS             = $(notdir $(wildcard app/*))
 IPMIS            = $(notdir $(wildcard ipmi/*))
 
+# Filter out special packages, which doesn't provide a Zabbix template XML for
+# example.
+IPMIS            := $(filter-out Sensor_Discovery, $(IPMIS))
+
 update-app-doc:
 	$(foreach app,$(APPS), \
 	    xsltproc \
