@@ -48,7 +48,7 @@ Contains helper scripts, UserParameter configs, SELinux policies and sudoers to 
 %setup -q -n %{name}-%{version}
 
 %build
-make -j2
+make -j2 build
 
 %install
 make install PREFIX=%{buildroot}%{_prefix} ETCDIR=%{buildroot}%{_sysconfdir}
