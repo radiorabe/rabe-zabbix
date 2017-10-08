@@ -38,6 +38,11 @@ SUDOERSDIR       = ${ETCDIR}/sudoers.d
 SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
 
 APPS             = $(notdir $(wildcard app/*))
+IPMIS            = $(notdir $(wildcard ipmi/*))
+
+# Filter out special packages, which doesn't provide a Zabbix template XML for
+# example.
+IPMIS            := $(filter-out Sensor_Discovery, $(IPMIS))
 
 update-app-doc:
 	$(foreach app,$(APPS), \
@@ -51,8 +56,20 @@ update-app-doc:
 	    	update-app-doc.xsl app/$(app)/*.xml; \
 	)
 
+update-impi-doc:
+	$(foreach ipmi,$(IPMIS), \
+	    xsltproc \
+	        --output ipmi/$(ipmi)/README.md \
+	        --stringparam appName '$(ipmi)' \
+	        --stringparam appHead "`cat ipmi/$(ipmi)/doc/README.head.md`" \
+	        --stringparam selinuxDoc "`[ -f ipmi/$(ipmi)/doc/README.SELinux.md ] && cat ipmi/$(ipmi)/doc/README.SELinux.md`" \
+	        --stringparam userparamDoc "`[ -f ipmi/$(ipmi)/doc/README.UserParameters.md ] && cat ipmi/$(ipmi)/doc/README.UserParameters.md`" \
+	        --stringparam scriptDoc "`[ -f ipmi/$(ipmi)/doc/README.scripts.md ] && cat ipmi/$(ipmi)/doc/README.scripts.md`" \
+	        update-app-doc.xsl ipmi/$(ipmi)/*.xml; \
+	)
+
 .PHONY: update-all
-update-all: update-app-doc
+update-all: update-app-doc update-impi-doc
 
 .PHONY: update
 update: update-all ## Update buildable docs from xml and docs/ directories.
