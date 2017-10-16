@@ -75,11 +75,12 @@ update-all: update-app-doc update-impi-doc
 update: update-all ## Update buildable docs from xml and docs/ directories.
 
 build-app-selinux:
-	$(foreach app,$(APPS), \
-	    make -C app/$(app)/selinux NAME=rabezbx$(subst -,,$(app)) -f ${SELINUX_MAKEFILE} || :; \
-	)
-	$(foreach app,$(APPS), \
-	    [[ -d app/$(app)/selinux ]] && echo -n 'rabezbx$(subst -,,$(app)) ' >> rabe.lst; \
+# SELinux type enforcement files are named rabezbx<app>.te and will result
+# in a SELinux module name of rabezbx<app>
+	$(foreach teFile,$(wildcard app/*/selinux/rabezbx*.te), \
+		make -C $(dir $(teFile)) -f $(SELINUX_MAKEFILE) \
+			PREFIX=/usr NAME=$(notdir $(basename $(teFile))) && \
+			echo -n "$(notdir $(basename $(teFile))) " >> rabe.lst; \
 	)
 
 .PHONY: build-app
@@ -100,14 +101,11 @@ test-app:
 .PHONY: test
 test: all test-app
 
-# install a policy per app that matches the rabezbx<app> naming policy
-# allowed to fail since not all apps have such a policy
+# install a SELinux policy per app that matches the rabezbx*.pp files
 .PHONY: install-app-selinux
 install-app-selinux:
 	install -d $(SELINUXDIR)/targeted
-	$(foreach app,$(APPS), \
-	    install -p -m 644 app/$(app)/selinux/rabezbx$(subst -,,$(app)).pp  $(SELINUXDIR)/targeted || :; \
-	)
+	install -p -m 644 app/*/selinux/rabezbx*.pp $(SELINUXDIR)/targeted
 	install -p -m 644 rabe.lst  $(SELINUXDIR)/targeted
 
 # install a userparameters config file per app that matches the *.conf files
