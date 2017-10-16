@@ -115,14 +115,14 @@ install-app-config:
 	install -p -m 644 app/*/userparameters/*.conf $(AGENTDDIR)
 
 # install any scripts found in a */scripts/* subdir
-# they all get put into /var/libexec/zabbix/rabe and you need to take care not to 
-# clash with existing scripts when adding new ones
+# they all get put into /var/libexec/zabbix/rabe and you need to take care not
+# to clash with existing scripts when adding new ones
 .PHONY: install-scripts
 install-scripts:
 	install -d $(AGENTEXECDIR)
-	for script in `find -path '*/scripts/*' -type f`; do \
-	    install -p -m 755 $$script $(AGENTEXECDIR); \
-	done
+	$(foreach script,$(wildcard */*/scripts/*), \
+		install -p -m 755 $(script) $(AGENTEXECDIR); \
+	)
 
 # install sudoers config droplets per app that matches the sudoers.d file
 # naming policy prefix
