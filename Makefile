@@ -79,8 +79,8 @@ build-app-selinux:
 # in a SELinux module name of rabezbx<app>
 	$(foreach teFile,$(wildcard app/*/selinux/rabezbx*.te), \
 		make -C $(dir $(teFile)) -f $(SELINUX_MAKEFILE) \
-			PREFIX=/usr NAME=$(notdir $(basename $(teFile))) && \
-			echo -n "$(notdir $(basename $(teFile))) " >> rabe.lst; \
+			PREFIX=/usr NAME=$(notdir $(basename $(teFile))) \
+		&& echo -n "$(notdir $(basename $(teFile))) " >> rabe.lst; \
 	)
 
 .PHONY: build-app
