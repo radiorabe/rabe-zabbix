@@ -75,11 +75,12 @@ update-all: update-app-doc update-impi-doc
 update: update-all ## Update buildable docs from xml and docs/ directories.
 
 build-app-selinux:
-	$(foreach app,$(APPS), \
-	    make -C app/$(app)/selinux NAME=rabezbx$(subst -,,$(app)) -f ${SELINUX_MAKEFILE} || :; \
-	)
-	$(foreach app,$(APPS), \
-	    [[ -d app/$(app)/selinux ]] && echo -n 'rabezbx$(subst -,,$(app)) ' >> rabe.lst; \
+# SELinux type enforcement files are named rabezbx<app>.te and will result
+# in a SELinux module name of rabezbx<app>
+	$(foreach teFile,$(wildcard app/*/selinux/rabezbx*.te), \
+		make -C $(dir $(teFile)) -f $(SELINUX_MAKEFILE) \
+			PREFIX=/usr NAME=$(notdir $(basename $(teFile))) \
+		&& echo -n "$(notdir $(basename $(teFile))) " >> rabe.lst; \
 	)
 
 .PHONY: build-app
@@ -100,34 +101,28 @@ test-app:
 .PHONY: test
 test: all test-app
 
-# install a policy per app that matches the rabezbx<app> naming policy
-# allowed to fail since not all apps have such a policy
+# install a SELinux policy per app that matches the rabezbx*.pp files
 .PHONY: install-app-selinux
 install-app-selinux:
 	install -d $(SELINUXDIR)/targeted
-	$(foreach app,$(APPS), \
-	    install -p -m 644 app/$(app)/selinux/rabezbx$(subst -,,$(app)).pp  $(SELINUXDIR)/targeted || :; \
-	)
+	install -p -m 644 app/*/selinux/rabezbx*.pp $(SELINUXDIR)/targeted
 	install -p -m 644 rabe.lst  $(SELINUXDIR)/targeted
 
-# install a userparameters config file per app that matches the <app>.conf config file naming policy
-# allowed to fail for apps without such a config
+# install a userparameters config file per app that matches the *.conf files
 .PHONY: install-app-config
 install-app-config:
 	install -d $(AGENTDDIR)
-	$(foreach app,$(APPS), \
-	    install -p -m 644 app/$(app)/userparameters/*$(app).conf $(AGENTDDIR) || :; \
-	)
+	install -p -m 644 app/*/userparameters/*.conf $(AGENTDDIR)
 
 # install any scripts found in a */scripts/* subdir
-# they all get put into /var/libexec/zabbix/rabe and you need to take care not to 
-# clash with existing scripts when adding new ones
+# they all get put into /var/libexec/zabbix/rabe and you need to take care not
+# to clash with existing scripts when adding new ones
 .PHONY: install-scripts
 install-scripts:
 	install -d $(AGENTEXECDIR)
-	for script in `find -path '*/scripts/*' -type f`; do \
-	    install -p -m 755 $$script $(AGENTEXECDIR); \
-	done
+	$(foreach script,$(wildcard */*/scripts/*), \
+		install -p -m 755 $(script) $(AGENTEXECDIR); \
+	)
 
 # install sudoers config droplets per app that matches the sudoers.d file
 # naming policy prefix
