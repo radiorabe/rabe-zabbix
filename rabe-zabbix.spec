@@ -23,7 +23,7 @@
 #
 
 Name:          rabe-zabbix
-Version:       0.2.0
+Version:       0.3.1
 Release:       0
 Summary:       RaBe Zabbix scripts and configs
 License:       AGPLv3
@@ -42,13 +42,13 @@ Requires(post):   /usr/sbin/semodule, /sbin/restorecon, /sbin/fixfiles
 Requires(postun): /usr/sbin/semodule, /sbin/restorecon, /sbin/fixfiles
 
 %description
-Contains helper scripts, UserParameter configs, SELinux policies to be used at RaBe for monitoring all the things.
+Contains helper scripts, UserParameter configs, SELinux policies and sudoers to be used at RaBe for monitoring all the things.
 
 %prep
 %setup -q -n %{name}-%{version}
 
 %build
-make -j2
+make -j2 build
 
 %install
 make install PREFIX=%{buildroot}%{_prefix} ETCDIR=%{buildroot}%{_sysconfdir}
@@ -73,4 +73,5 @@ fi
 %{_datadir}/selinux/*/rabe.lst
 %{_datadir}/selinux/*/*.pp
 %config %{_sysconfdir}/zabbix/zabbix_agentd.d/*.conf
+%config %{_sysconfdir}/sudoers.d/*
 %{_libexecdir}/zabbix/rabe/*

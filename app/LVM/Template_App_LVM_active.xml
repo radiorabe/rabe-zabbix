@@ -1,0 +1,3163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-07-16T00:50:46Z</date>
+    <groups>
+        <group>
+            <name>App templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App LVM active</template>
+            <name>Template App LVM active</name>
+            <description>Application template for monitoring Linux Logical Volumen Management (LVM)</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>LVM logical linear volumes discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.lvs.discovery[linear]</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>1</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#LVM_LV_TYPE}</macro>
+                                <value>^linear$</value>
+                                <operator>8</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#LVM_LV_ROLE}</macro>
+                                <value>^public(,origin.*)?$</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Low-Level discovery of linear LVM logical volumes (LV)&#13;
+&#13;
+Returns the following macros for each available LV:&#13;
+* `{#LVM_LV_FULL_NAME}`&#13;
+  * Logical volume full name (`lvs -o lv_full_name`)&#13;
+  * Example: `vg_example_01/lv_example_01`&#13;
+* `{#LVM_LV_UUID}`&#13;
+  * Logical volume UUID (`lvs -o lv_uuid`)&#13;
+  * Example. `dxi5Hw-Xo2m-SAVi-ypZh-QO4I-krpI-sR3N67`&#13;
+* `{#LVM_LV_TYPE}`&#13;
+  * Logical volume segment type (`lvs -o segtype`)&#13;
+  * Example: `linear`, `thin`, `thin-pool`&#13;
+* `{#LVM_LV_ROLE}`&#13;
+  * Logical volume role (`lvs -o lv_role`)&#13;
+  * Example: `public`, `private`, `public,snapshot,thicksnapshot`&#13;
+* `{#LVM_LV_NAME}`&#13;
+  * Logical volume name (`lvs -o lv_name`)&#13;
+  * Example: `lv_example_01`&#13;
+* `{#LVM_LV_VG_NAME}`&#13;
+  * Volume group name (`lvs -o vg_name`)&#13;
+  * Example: `vg_example_01`&#13;
+* `{#LVM_LV_PATH}`&#13;
+  * Full pathname for LV. Blank for internal LVs. (`lvs -o lv_path`)&#13;
+  * Example: `/dev/vg_example_01/lv_example_01`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Active state of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,linear]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Active state of an linear LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,linear]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of a linear LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,linear].str(active)}=0</expression>
+                            <name>LVM linear LV {#LVM_LV_FULL_NAME} is not active ({ITEM.VALUE1}) on {HOSTNAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The linear LVM logical volume is not in state &quot;active&quot;, which is most likely a sign of a problem.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>LVM logical thick snapshot volumes discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.lvs.discovery[thicksnapshot]</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>1</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#LVM_LV_ROLE}</macro>
+                                <value>thicksnapshot</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>0</lifetime>
+                    <description>Low-Level discovery of a thick provisioned snapshot LVM logical volumes (LV)&#13;
+&#13;
+Returns the following macros for each available LV:&#13;
+* `{#LVM_LV_FULL_NAME}`&#13;
+  * Logical volume full name (`lvs -o lv_full_name`)&#13;
+  * Example: `vg_example_01/lv_example_01`&#13;
+* `{#LVM_LV_UUID}`&#13;
+  * Logical volume UUID (`lvs -o lv_uuid`)&#13;
+  * Example. `dxi5Hw-Xo2m-SAVi-ypZh-QO4I-krpI-sR3N67`&#13;
+* `{#LVM_LV_TYPE}`&#13;
+  * Logical volume segment type (`lvs -o segtype`)&#13;
+  * Example: `linear`, `thin`, `thin-pool`&#13;
+* `{#LVM_LV_ROLE}`&#13;
+  * Logical volume role (`lvs -o lv_role`)&#13;
+  * Example: `public`, `private`, `public,snapshot,thicksnapshot`&#13;
+* `{#LVM_LV_NAME}`&#13;
+  * Logical volume name (`lvs -o lv_name`)&#13;
+  * Example: `lv_example_01`&#13;
+* `{#LVM_LV_VG_NAME}`&#13;
+  * Volume group name (`lvs -o vg_name`)&#13;
+  * Example: `vg_example_01`&#13;
+* `{#LVM_LV_PATH}`&#13;
+  * Full pathname for LV. Blank for internal LVs. (`lvs -o lv_path`)&#13;
+  * Example: `/dev/vg_example_01/lv_example_01`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Active state of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thicksnapshot]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Active state of a thick provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thicksnapshot]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of a thick provisioned snapshot LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Origin of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},origin,thicksnapshot]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Origin device of a thick provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free snapshot data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot]</key>
+                            <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thicksnapshot]&quot;) - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_used,thicksnapshot]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The free snapshot data of a thick provisioned LVM snapshot in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free snapshot data of $3 LV $1 in %</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free_percent,thicksnapshot]</key>
+                            <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>100 - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of free snapshot data of a thick provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated snapshot data of $3 LV $1 in %</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of allocated snapshot data of a thick provisioned LVM snapshot in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated snapshot data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_used,thicksnapshot]</key>
+                            <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thicksnapshot]&quot;) / 100 * last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The allocated snapshot data of a thick provisioned LVM snapshot in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thick) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot].last()} &lt; {$LVM_LV_SNAPSHOT_DATA_FREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}&#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} &lt; {$LVM_LV_SNAPSHOT_DATA_PFREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                            <name>LVM thick snapshot allocation {HOST.NAME}:[{#LVM_LV_FULL_NAME} is high (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>The free snapshot data of the LVM thick provisioned snapshot is below `{$LVM_LV_SNAPSHOT_DATA_FREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` and `{$LVM_LV_SNAPSHOT_DATA_PFREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` percent. The snapshot will turn invalid soon.</description>
+                            <type>0</type>
+                            <dependencies>
+                                <dependency>
+                                    <name>LVM thick snapshot allocation {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very high (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                                    <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot].last()} &lt; {$LVM_LV_SNAPSHOT_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}&#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} &lt; {$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot].last()} &lt; {$LVM_LV_SNAPSHOT_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}&#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot].last()} &lt; {$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                            <name>LVM thick snapshot allocation {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very high (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The free snapshot data of the LVM thick provisioned snapshot is below `{$LVM_LV_SNAPSHOT_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` and `{$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` percent. The snapshot will turn invalid very soon.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thicksnapshot].str(active)}=0</expression>
+                            <name>LVM thick snapshot LV {#LVM_LV_FULL_NAME} is not active ({ITEM.VALUE1}) on {HOSTNAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The thick provisioned LVM snapshot is not in state &quot;active&quot;, which is most likely a sign of a problem.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>LVM usage of thick provisioned snapshot LV {#LVM_LV_FULL_NAME}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>C80000</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thicksnapshot]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free,thicksnapshot]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_used,thicksnapshot]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>LVM usage of thick provisioned snapshot LV {#LVM_LV_FULL_NAME} in %</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_free_percent,thicksnapshot]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},snap_percent,thicksnapshot]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>LVM logical thin-pool volumes discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.lvs.discovery[thin-pool]</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#LVM_LV_TYPE}</macro>
+                                <value>^thin-pool$</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Low-Level discovery of thin-pool LVM logical volumes (LV)&#13;
+&#13;
+Returns the following macros for each available LV:&#13;
+* `{#LVM_LV_FULL_NAME}`&#13;
+  * Logical volume full name (`lvs -o lv_full_name`)&#13;
+  * Example: `vg_example_01/lv_example_01`&#13;
+* `{#LVM_LV_UUID}`&#13;
+  * Logical volume UUID (`lvs -o lv_uuid`)&#13;
+  * Example. `dxi5Hw-Xo2m-SAVi-ypZh-QO4I-krpI-sR3N67`&#13;
+* `{#LVM_LV_TYPE}`&#13;
+  * Logical volume segment type (`lvs -o segtype`)&#13;
+  * Example: `linear`, `thin`, `thin-pool`&#13;
+* `{#LVM_LV_ROLE}`&#13;
+  * Logical volume role (`lvs -o lv_role`)&#13;
+  * Example: `public`, `private`, `public,snapshot,thicksnapshot`&#13;
+* `{#LVM_LV_NAME}`&#13;
+  * Logical volume name (`lvs -o lv_name`)&#13;
+  * Example: `lv_example_01`&#13;
+* `{#LVM_LV_VG_NAME}`&#13;
+  * Volume group name (`lvs -o vg_name`)&#13;
+  * Example: `vg_example_01`&#13;
+* `{#LVM_LV_PATH}`&#13;
+  * Full pathname for LV. Blank for internal LVs. (`lvs -o lv_path`)&#13;
+  * Example: `/dev/vg_example_01/lv_example_01`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Free pool data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin-pool]&quot;) - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_used,thin-pool]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The free pool data of a thin-pool LVM logical volume (LV) in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free pool data of $3 LV $1 in %</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>100 - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin-pool]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of free pool data of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated pool data of $3 LV $1 in %</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of allocated data of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated pool data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_used,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin-pool]&quot;) / 100 * last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin-pool]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The allocated pool data of a thin-pool LVM logical volume (LV) in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Active state of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Active state of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Metadata size of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_metadata_size,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of the LV that holds the metadata of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Full behavior of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_when_full,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The behaviour of thin-pool LVM logical volume (LV) when full.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free meta data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_metadata_size,thin-pool]&quot;) - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_used,thin-pool]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The free meta data of a thin-pool LVM logical volume (LV) in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free meta data of $3 LV $1 in %</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>100 - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_percent,thin-pool]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of free metadata of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated meta data of $3 LV $1 in %</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_percent,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of allocated metadata of a thin-pool LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated meta data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_used,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_metadata_size,thin-pool]&quot;) / 100 * last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_percent,thin-pool]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The allocated meta data of a thin-pool LVM logical volume (LV) in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Number of thin volumes in $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},thin_count,thin-pool]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The number of thin volumes in this pool.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool].last()} &lt; {$LVM_LV_META_DATA_FREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} &#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} &lt; {$LVM_LV_META_DATA_PFREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                            <name>LVM thin-pool free meta data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is low (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>The free meta data of the LVM thin-pool is below `{$LVM_LV_META_DATA_FREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} ` and `{$LVM_LV_META_DATA_PFREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` percent.</description>
+                            <type>0</type>
+                            <dependencies>
+                                <dependency>
+                                    <name>LVM thin-pool free meta data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very low (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                                    <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool].last()} &lt; {$LVM_LV_META_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} &#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} &lt; {$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool].last()} &lt; {$LVM_LV_META_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} &#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool].last()} &lt; {$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                            <name>LVM thin-pool free meta data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very low (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The free meta data of the LVM thin-pool is below `{$LVM_LV_META_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} ` and `{$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` percent.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool].last()} &lt; {$LVM_LV_POOL_DATA_FREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} &#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} &lt; {$LVM_LV_POOL_DATA_PFREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                            <name>LVM thin-pool free pool data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is low (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>The free pool data of the LVM thin-pool is below `{$LVM_LV_POOL_DATA_FREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} ` and `{$LVM_LV_POOL_DATA_PFREE_WARNING_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` percent.</description>
+                            <type>0</type>
+                            <dependencies>
+                                <dependency>
+                                    <name>LVM thin-pool free pool data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very low (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                                    <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool].last()} &lt; {$LVM_LV_POOL_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} &#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} &lt; {$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool].last()} &lt; {$LVM_LV_POOL_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} &#13;
+&#13;
+and&#13;
+&#13;
+{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool].last()} &lt; {$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}</expression>
+                            <name>LVM thin-pool free pool data on {HOST.NAME}:[{#LVM_LV_FULL_NAME} is very low (&lt; $2 %, {ITEM.VALUE1} free)</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The free pool data of the LVM thin-pool is below `{$LVM_LV_POOL_DATA_FREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;} ` and `{$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD:&quot;{#LVM_LV_FULL_NAME}&quot;}` percent.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thin-pool].str(active)}=0</expression>
+                            <name>LVM thin-pool LV {#LVM_LV_FULL_NAME} is not active ({ITEM.VALUE1}) on {HOSTNAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The thin-pool LVM logical volume is not in state &quot;active&quot;, which is most likely a sign of a problem.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>LVM usage of thin-pool LV {#LVM_LV_FULL_NAME}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>C80000</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_used,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>FF9999</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_metadata_size,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>4</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>99FF99</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>5</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>9999FF</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_used,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>LVM usage of thin-pool LV {#LVM_LV_FULL_NAME} in %</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>99FF99</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_free_percent,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>9999FF</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},metadata_percent,thin-pool]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>LVM logical thin snapshot volumes discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.lvs.discovery[thinsnapshot]</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>1</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#LVM_LV_ROLE}</macro>
+                                <value>thinsnapshot</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>0</lifetime>
+                    <description>Low-Level discovery of a thin provisioned snapshot LVM logical volumes (LV)&#13;
+&#13;
+Returns the following macros for each available LV:&#13;
+* `{#LVM_LV_FULL_NAME}`&#13;
+  * Logical volume full name (`lvs -o lv_full_name`)&#13;
+  * Example: `vg_example_01/lv_example_01`&#13;
+* `{#LVM_LV_UUID}`&#13;
+  * Logical volume UUID (`lvs -o lv_uuid`)&#13;
+  * Example. `dxi5Hw-Xo2m-SAVi-ypZh-QO4I-krpI-sR3N67`&#13;
+* `{#LVM_LV_TYPE}`&#13;
+  * Logical volume segment type (`lvs -o segtype`)&#13;
+  * Example: `linear`, `thin`, `thin-pool`&#13;
+* `{#LVM_LV_ROLE}`&#13;
+  * Logical volume role (`lvs -o lv_role`)&#13;
+  * Example: `public`, `private`, `public,snapshot,thicksnapshot`&#13;
+* `{#LVM_LV_NAME}`&#13;
+  * Logical volume name (`lvs -o lv_name`)&#13;
+  * Example: `lv_example_01`&#13;
+* `{#LVM_LV_VG_NAME}`&#13;
+  * Volume group name (`lvs -o vg_name`)&#13;
+  * Example: `vg_example_01`&#13;
+* `{#LVM_LV_PATH}`&#13;
+  * Full pathname for LV. Blank for internal LVs. (`lvs -o lv_path`)&#13;
+  * Example: `/dev/vg_example_01/lv_example_01`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Active state of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thinsnapshot]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Active state of a thin provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thin) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thinsnapshot]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of a thin provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thin) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Origin of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},origin,thinsnapshot]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Origin device of a thin provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thin) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Thin pool of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},pool_lv,thinsnapshot]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The thin pool LV name of a thin provisioned LVM snapshot.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM snapshot (thin) LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes/>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>LVM logical thin volumes discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.lvs.discovery[thin]</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#LVM_LV_TYPE}</macro>
+                                <value>^thin$</value>
+                                <operator>8</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#LVM_LV_ROLE}</macro>
+                                <value>^public(,origin.*)?$</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Low-Level discovery of thin LVM logical volumes (LV)&#13;
+&#13;
+Returns the following macros for each available LV:&#13;
+* `{#LVM_LV_FULL_NAME}`&#13;
+  * Logical volume full name (`lvs -o lv_full_name`)&#13;
+  * Example: `vg_example_01/lv_example_01`&#13;
+* `{#LVM_LV_UUID}`&#13;
+  * Logical volume UUID (`lvs -o lv_uuid`)&#13;
+  * Example. `dxi5Hw-Xo2m-SAVi-ypZh-QO4I-krpI-sR3N67`&#13;
+* `{#LVM_LV_TYPE}`&#13;
+  * Logical volume segment type (`lvs -o segtype`)&#13;
+  * Example: `linear`, `thin`, `thin-pool`&#13;
+* `{#LVM_LV_ROLE}`&#13;
+  * Logical volume role (`lvs -o lv_role`)&#13;
+  * Example: `public`, `private`, `public,snapshot,thicksnapshot`&#13;
+* `{#LVM_LV_NAME}`&#13;
+  * Logical volume name (`lvs -o lv_name`)&#13;
+  * Example: `lv_example_01`&#13;
+* `{#LVM_LV_VG_NAME}`&#13;
+  * Volume group name (`lvs -o vg_name`)&#13;
+  * Example: `vg_example_01`&#13;
+* `{#LVM_LV_PATH}`&#13;
+  * Full pathname for LV. Blank for internal LVs. (`lvs -o lv_path`)&#13;
+  * Example: `/dev/vg_example_01/lv_example_01`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Free data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin]</key>
+                            <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin]&quot;) - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_used,thin]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The free data of a thin provisioned LVM logical volume (LV) in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free data of $3 LV $1 in %</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>100 - last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of free data of a thin provisioned LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated data of $3 LV $1 in %</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The percentage of allocated data of a thin provisioned LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated data of $3 LV $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_used,thin]</key>
+                            <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin]&quot;) / 100 * last(&quot;rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The allocated data of a thin provisioned LVM logical volume (LV) in bytes.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Active state of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thin]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Active state of a thin provisioned LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of a thin provisioned LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Thin pool of $3 LV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},pool_lv,thin]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The thin pool LV name of a thin provisioned LVM logical volume (LV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM LV ({#LVM_LV_TYPE}) {#LVM_LV_FULL_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_active,thin].str(active)}=0</expression>
+                            <name>LVM thin LV {#LVM_LV_FULL_NAME} is not active ({ITEM.VALUE1}) on {HOSTNAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The thin provisioned LVM logical volume is not in state &quot;active&quot;, which is most likely a sign of a problem.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>LVM usage of thin provisioned LV {#LVM_LV_FULL_NAME}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>C80000</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},lv_size,thin]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free,thin]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_used,thin]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>LVM usage of thin provisioned LV {#LVM_LV_FULL_NAME} in %</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_free_percent,thin]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.lvs.value[{#LVM_LV_FULL_NAME},data_percent,thin]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>LVM physical volumes discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.pvs.discovery</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Low-Level discovery of LVM physical volumes (PV)&#13;
+&#13;
+Returns the following macros for each available PV:&#13;
+* `{#LVM_PV_NAME}`&#13;
+  * Physical volume name (`pvs -o pv_name`)&#13;
+  * Example: `/dev/sda`&#13;
+* `{#LVM_PV_UUID}`&#13;
+  * Physical volume UUID (`pvs -o pv_uuid`)&#13;
+  * Example. `S1qfoV-Jbmw-qjqH-koz3-HEyh-eNme-eHlBe8`&#13;
+* `{#LVM_PV_TYPE}`&#13;
+  * Physical volume metadata type (`pvs -o pv_fmt`)&#13;
+  * Example: `lvm2`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Underlying device size of PV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},dev_size]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of the underlying device of an LVM physical volume (PV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM PV {#LVM_PV_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Unallocated space on PV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},pv_free]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Unallocated (free) space on an LVM physical volume (PV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM PV {#LVM_PV_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of PV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},pv_size]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of an LVM physical volume (PV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM PV {#LVM_PV_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Allocated space on PV $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},pv_used]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Allocated (used) space on an LVM physical volume (PV).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM PV {#LVM_PV_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes/>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>LVM space usage on PV {#LVM_PV_NAME}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>C80000</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},pv_size]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},pv_free]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},pv_used]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>DDDD00</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.pvs.value[{#LVM_PV_NAME},dev_size]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>LVM volume groups discovery</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>rabe.lvm.vgs.discovery</key>
+                    <delay>900</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Low-Level discovery of LVM volume groups (VG)&#13;
+&#13;
+Returns the following macros for each available PV:&#13;
+* `{#LVM_VG_NAME}`&#13;
+  * Volume group name (`vgs -o vg_name`)&#13;
+  * Example: `vg_example_01`&#13;
+* `{#LVM_VG_UUID}`&#13;
+  * Volume group name (`vgs -o vg_uuid`)&#13;
+  * Example. `s83QZR-w6c4-Ngqk-u1fM-STAl-evYq-MLxiN0`&#13;
+* `{#LVM_VG_TYPE}`&#13;
+  * Volume group metadata type (`vgs -o vg_fmt`)&#13;
+  * Example: `lvm2`</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Number of LVs on VG $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},lv_count]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Number of logical volumes (LVs) on an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Number of PVs on VG $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},pv_count]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Number of physical volumes (PVs) belonging to an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Number of Snapshots on VG $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},snap_count]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Number of snapshots on an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Free space on VG $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_free]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Amount of free space of an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Number of missing PVs in VG $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_missing_pv_count]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Number of missing physical volumes (PVs) on an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Size of VG $1</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_size]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The size of an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Used space on VG $1</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_used]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>last(&quot;rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_size]&quot;) - last(&quot;rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_free]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Amount of used space of an LVM volume group (VG).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>LVM VG {#LVM_VG_NAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template App LVM active:rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_missing_pv_count].last()}&gt;0</expression>
+                            <name>{ITEM.VALUE1} LVM PVs missing on {HOST.NAME}:[{#LVM_VG_NAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The LVM volume group misses one ore more physical volumes.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>LVM LVs and snapshots on VG {#LVM_VG_NAME}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},lv_count]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},snap_count]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>LVM space usage on VG {#LVM_VG_NAME}</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>C80000</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_size]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_free]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template App LVM active</host>
+                                        <key>rabe.lvm.vgs.value[{#LVM_VG_NAME},vg_used]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$LVM_LV_META_DATA_FREE_HIGH_THRESHOLD}</macro>
+                    <value>3G</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_META_DATA_FREE_WARNING_THRESHOLD}</macro>
+                    <value>5G</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_META_DATA_PFREE_HIGH_THRESHOLD}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_META_DATA_PFREE_WARNING_THRESHOLD}</macro>
+                    <value>10</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_POOL_DATA_FREE_HIGH_THRESHOLD}</macro>
+                    <value>100G</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_POOL_DATA_FREE_WARNING_THRESHOLD}</macro>
+                    <value>150G</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_POOL_DATA_PFREE_HIGH_THRESHOLD}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_POOL_DATA_PFREE_WARNING_THRESHOLD}</macro>
+                    <value>10</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_SNAPSHOT_DATA_FREE_HIGH_THRESHOLD}</macro>
+                    <value>100G</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_SNAPSHOT_DATA_FREE_WARNING_THRESHOLD}</macro>
+                    <value>150G</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_SNAPSHOT_DATA_PFREE_HIGH_THRESHOLD}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$LVM_LV_SNAPSHOT_DATA_PFREE_WARNING_THRESHOLD}</macro>
+                    <value>10</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+</zabbix_export>

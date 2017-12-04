@@ -1,0 +1,49 @@
+module rabezbxlvm 1.0;
+
+require {
+	type kernel_t;
+	type sudo_exec_t;
+	type udev_var_run_t;
+	type lvm_etc_t;
+	type lvm_metadata_t;
+	type lvm_lock_t;
+	type selinux_config_t;
+	type devlog_t;
+	type fixed_disk_device_t;
+	type lvm_exec_t;
+	type lvm_control_t;
+	type lvm_t;
+	type zabbix_agent_t;
+	class process setfscreate;
+	class unix_stream_socket connectto;
+	class chr_file { ioctl open read write };
+	class capability { audit_write sys_admin sys_resource };
+	class netlink_tcpdiag_socket { create nlmsg_read read setopt write };
+	class file { append create execute execute_no_trans lock open read unlink };
+	class netlink_audit_socket { create nlmsg_relay read write };
+	class sock_file write;
+	class blk_file { ioctl open read };
+	class unix_dgram_socket { connect create sendto write };
+	class dir { add_name remove_name write };
+}
+
+#============= zabbix_agent_t ==============
+allow zabbix_agent_t devlog_t:sock_file write;
+allow zabbix_agent_t fixed_disk_device_t:blk_file { ioctl open read };
+allow zabbix_agent_t kernel_t:unix_dgram_socket sendto;
+allow zabbix_agent_t lvm_control_t:chr_file { ioctl open read write };
+allow zabbix_agent_t lvm_etc_t:file { open read };
+allow zabbix_agent_t lvm_exec_t:file { execute execute_no_trans };
+allow zabbix_agent_t lvm_lock_t:dir { add_name remove_name write };
+allow zabbix_agent_t lvm_lock_t:file { append create lock open read unlink };
+allow zabbix_agent_t lvm_metadata_t:file { open read };
+allow zabbix_agent_t lvm_t:unix_stream_socket connectto;
+allow zabbix_agent_t self:capability sys_admin;
+allow zabbix_agent_t self:capability { audit_write sys_resource };
+allow zabbix_agent_t self:netlink_audit_socket { create nlmsg_relay read write };
+allow zabbix_agent_t self:netlink_tcpdiag_socket { create nlmsg_read read setopt write };
+allow zabbix_agent_t self:process setfscreate;
+allow zabbix_agent_t self:unix_dgram_socket { connect create write };
+allow zabbix_agent_t selinux_config_t:file { open read };
+allow zabbix_agent_t sudo_exec_t:file { execute execute_no_trans };
+allow zabbix_agent_t udev_var_run_t:file { open read };
