@@ -274,7 +274,7 @@ mv zbx_export_templates.xml "${snmpDir}/${xmlName}"
 Note, that you can also use the provided [template fetching
 helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
 template from your Zabbix server.
-=======
+
 ### Adding an os template
 
 ```bash
