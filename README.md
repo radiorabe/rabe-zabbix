@@ -76,6 +76,22 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
   (event/reading type code 01h), as they are already handled by the `IPMI
   Threshold Sensors` template.
 
+### SNMP specific conventions
+* Name SNMP templates according to `Template SNMPv<SNMP-VERSION> <NAME>`, for example
+  `Template SNMPv2 Bridge`
+* Try to reflect the MIBs name within `<NAME>` whenever feasible
+* Use the textual form of MIB OIDs within your SNMP items.
+  As an example, use `BRIDGE-MIB::dot1dBaseNumPorts.0` instead of
+  `.1.3.6.1.2.1.17.1.2.0`
+* Include instructions on how to obtain and install the required MIBs for your
+  template.
+* Name items according to `rabe.snmp.<NAME>.<OID-NAME>` to avoid clashes with
+  other templates.
+  Example: `rabe.snmp.bridge.dot1dBaseNumPorts`
+* Name low-level discovery rule keys with `rabe.snmp.<NAME>.<OBJECT>.discovery`
+  Example: `rabe.snmp-bridge.ports.discovery`
+* Create value mappings according to the OID's syntax definition from the MIB.
+
 ## Developing
 
 ### Adding an app template
@@ -235,6 +251,29 @@ cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
 <dox below listing if needed>
 EOD
 ```
+
+### Adding an SNMP template
+
+```bash
+snmpName=""     # Name, usually related to the MIB
+snmpVersion="2" # SNMP version, 2 or 3.
+
+templateName="Template SNMPv${snmpVersion} ${snmpName}"
+xmlName="${templateName// /_}.xml"
+
+snmpDir="snmp/SNMPv${snmpVersion}_${snmpName// /_}"
+
+mkdir -p "${snmpDir}/doc"
+touch "${snmpDir}/doc/README.head.md"
+
+# Download you template from the zabbix server
+
+mv zbx_export_templates.xml "${snmpDir}/${xmlName}"
+
+```
+Note, that you can also use the provided [template fetching
+helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
+template from your Zabbix server.
 
 ### Adding an os template
 
