@@ -39,10 +39,18 @@ SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
 
 APPS             = $(notdir $(wildcard app/*))
 IPMIS            = $(notdir $(wildcard ipmi/*))
+SNMPS            = $(notdir $(wildcard snmp/*))
 
 # Filter out special packages, which doesn't provide a Zabbix template XML for
-# example.
+# example or have a legacy static documentation.
 IPMIS            := $(filter-out Sensor_Discovery, $(IPMIS))
+SNMPS            := $(filter-out README.md \
+								 SNMPv2_Generic \
+								 SNMPv2_Interfaces_HC \
+								 SNMPv2_Netgear_Box_Services \
+								 SNMPv2_Netgear_Inventory \
+								 SNMPv2_Netgear_SNTP_client \
+								 SNMPv2_Netgear_Switching, $(SNMPS))
 
 update-app-doc:
 	$(foreach app,$(APPS), \
@@ -68,8 +76,18 @@ update-impi-doc:
 	        update-app-doc.xsl ipmi/$(ipmi)/*.xml; \
 	)
 
+update-snmp-doc:
+	$(foreach snmp,$(SNMPS), \
+	    xsltproc \
+	        --output snmp/$(snmp)/README.md \
+	        --stringparam appName '$(snmp)' \
+	        --stringparam appHead "`cat snmp/$(snmp)/doc/README.head.md`" \
+	        --stringparam scriptDoc "`[ -f snmp/$(snmp)/doc/README.scripts.md ] && cat snmp/$(snmp)/doc/README.scripts.md`" \
+	        update-app-doc.xsl snmp/$(snmp)/*.xml; \
+	)
+
 .PHONY: update-all
-update-all: update-app-doc update-impi-doc
+update-all: update-app-doc update-impi-doc update-snmp-doc
 
 .PHONY: update
 update: update-all ## Update buildable docs from xml and docs/ directories.
