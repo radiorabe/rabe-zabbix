@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-09-14T19:03:42Z</date>
+    <groups>
+        <group>
+            <name>App templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App Axia Advertising Daemon active</template>
+            <name>Template App Axia Advertising Daemon active</name>
+            <description>Application template for the Axia Advertising Daemon (`axiaadvd`).</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Axia Advertising Daemon</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>LISTEN state of UDP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.udp.listen[{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_PORT}]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Listen state of the UDP port `{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_PORT}`</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Advertising Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>LISTEN state of UDP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.udp.listen[{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT}]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Listen state of the UDP port `{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT}`</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Advertising Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Memory usage ($5) of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.mem[axiaadvd,,,,rss]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Memory usage in bytes of the `axiaadvd` process</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Advertising Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[axiaadvd]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of running `axiaadvd` processes</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Advertising Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_PORT}</macro>
+                    <value>4001</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT}</macro>
+                    <value>4000</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+        <template>
+            <template>Template App Axia ALSA Soundcard Driver for Livewire active</template>
+            <name>Template App Axia ALSA Soundcard Driver for Livewire active</name>
+            <description>Application template for monitoring the AXIA - ALSA Soundcard Driver for Livewire related processes.</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Axia ALSA audio/network driver</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Existence of file $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>vfs.file.exists[/dev/axia0]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Check if the Axia `/dev/axia0`device node exists.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia ALSA audio/network driver</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Device status of axialivewire</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>vfs.file.regmatch[/proc/devices,&quot;[[:space:]]axialivewire$&quot;]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Check if the `axialivewire` device is available.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia ALSA audio/network driver</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Linux device availablility status</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Kernel module load status of snd_axia</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>vfs.file.regmatch[/proc/modules,&quot;^snd_axia[[:space:]]&quot;]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Check if the Axia Alsa kernel module `snd_axia` is available.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia ALSA audio/network driver</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Linux kernel module load status</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros/>
+            <templates>
+                <template>
+                    <name>Template App Axia Advertising Daemon active</name>
+                </template>
+                <template>
+                    <name>Template App Axia GPIO Bridge for Livewire Control Surface control active</name>
+                </template>
+                <template>
+                    <name>Template App Axia Livewire Routing Daemon active</name>
+                </template>
+            </templates>
+            <screens/>
+        </template>
+        <template>
+            <template>Template App Axia GPIO Bridge for Livewire Control Surface control active</template>
+            <name>Template App Axia GPIO Bridge for Livewire Control Surface control active</name>
+            <description>Application template for the Axia GPIO Bridge for Livewire/Control Surface control process (`axiagpr`).</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Axia GPIO Bridge for Livewire/Control Surface control</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Memory usage ($5) of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.mem[axiagpr,,,,rss]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Memory usage in bytes of the `axiagpr` process</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia GPIO Bridge for Livewire/Control Surface control</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[axiagpr]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of running `axiagpr` processes</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia GPIO Bridge for Livewire/Control Surface control</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros/>
+            <templates/>
+            <screens/>
+        </template>
+        <template>
+            <template>Template App Axia Livewire Routing Daemon active</template>
+            <name>Template App Axia Livewire Routing Daemon active</name>
+            <description>Application template for the Axia Livewire Routing Daemon (`axialwrd`).</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Axia Livewire Routing Daemon</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>LISTEN state of TCP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.listen[{$APP_AXIA_LIVEWIRE_ROUTING_DAEMON_ROUTING_PORT}]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Listen state of the TCP port `{$APP_AXIA_LIVEWIRE_ROUTING_DAEMON_ROUTING_PORT}`</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Livewire Routing Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Memory usage ($5) of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.mem[axialwrd,,,,rss]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Memory usage in bytes of the `axialwrd` process</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Livewire Routing Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[axialwrd]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of running `axialwrd` processes</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Axia Livewire Routing Daemon</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$APP_AXIA_LIVEWIRE_ROUTING_DAEMON_ROUTING_PORT}</macro>
+                    <value>93</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template App Axia ALSA Soundcard Driver for Livewire active:vfs.file.exists[/dev/axia0].last()}&lt;1</expression>
+            <name>Axia device node (/dev/axia0) missing on {HOST.NAME}</name>
+            <url/>
+            <status>1</status>
+            <priority>4</priority>
+            <description>There is no Axia device node (`/dev/axia0`) on this host.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Axia Advertising Daemon active:proc.num[axiaadvd].last(0)}&lt;1</expression>
+            <name>No running Axia Advertising Daemon (axiaadvd) processes on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>There is no Axia Advertising Daemon (`axiaadvd`) running on this host.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Axia GPIO Bridge for Livewire Control Surface control active:proc.num[axiagpr].last(0)}&lt;1</expression>
+            <name>No running Axia GPIO Bridge for Livewire/Control Surface control (axiagpr) processes on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>There is no Axia GPIO Bridge for Livewire/Control Surface control (`axiagpr`) process running on this host.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Axia Livewire Routing Daemon active:proc.num[axialwrd].last(0)}&lt;1</expression>
+            <name>No running Axia Livewire Routing Daemon (axialwrd) processes on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>There is no Axia Livewire Routing Daemon (`axialwrd`) running on this host.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Axia Livewire Routing Daemon active:net.tcp.listen[{$APP_AXIA_LIVEWIRE_ROUTING_DAEMON_ROUTING_PORT}].last(0)}=0</expression>
+            <name>TCP port {{$APP_AXIA_LIVEWIRE_ROUTING_DAEMON_ROUTING_PORT}} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Axia Livewire Routing Daemon's TCP port `{$APP_AXIA_LIVEWIRE_ROUTING_DAEMON_ROUTING_PORT}` is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running Axia Livewire Routing Daemon (axialwrd) processes on {HOST.NAME}</name>
+                    <expression>{Template App Axia Livewire Routing Daemon active:proc.num[axialwrd].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Axia Advertising Daemon active:net.udp.listen[{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT}].last(0)}=0</expression>
+            <name>UDP port {$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_PORT} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Axia Livewire Advertising Daemon's UDP port `{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_PORT}` is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running Axia Advertising Daemon (axiaadvd) processes on {HOST.NAME}</name>
+                    <expression>{Template App Axia Advertising Daemon active:proc.num[axiaadvd].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Axia Advertising Daemon active:net.udp.listen[{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT}].last(0)}=0</expression>
+            <name>UDP port {$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Axia Livewire Advertising Daemon's UDP port `{$APP_AXIA_ADVERTISING_DAEMON_LIVEWIRE_ADVERTISEMENT_REQ_PORT}` is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running Axia Advertising Daemon (axiaadvd) processes on {HOST.NAME}</name>
+                    <expression>{Template App Axia Advertising Daemon active:proc.num[axiaadvd].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+    </triggers>
+    <value_maps>
+        <value_map>
+            <name>Linux device availablility status</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>not available</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>available</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Linux kernel module load status</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>not loaded</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>loaded</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Service state</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Up</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
