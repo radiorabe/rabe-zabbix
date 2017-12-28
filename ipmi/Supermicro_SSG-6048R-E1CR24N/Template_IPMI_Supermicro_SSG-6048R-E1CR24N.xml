@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-12-28T11:38:33Z</date>
+    <groups>
+        <group>
+            <name>IPMI templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template IPMI Supermicro SSG-6048R-E1CR24N</template>
+            <name>Template IPMI Supermicro SSG-6048R-E1CR24N</name>
+            <description>IPMI template for Supermicro SuperStorage Server [6048R-E1CR24N](https://www.supermicro.com/products/system/4u/6048/ssg-6048r-e1cr24n.cfm)&#13;
+&#13;
+The `{$HOST.IPMI.CONN}`, `{$HOST.IPMI.USER}` and `{$HOST.IPMI.PASS}` macros have to be set according to your IPMI configuration.</description>
+            <groups>
+                <group>
+                    <name>IPMI templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$HOST.IPMI.CONN}</macro>
+                    <value>localhost</value>
+                </macro>
+                <macro>
+                    <macro>{$HOST.IPMI.PASS}</macro>
+                    <value>password</value>
+                </macro>
+                <macro>
+                    <macro>{$HOST.IPMI.USER}</macro>
+                    <value>admin</value>
+                </macro>
+            </macros>
+            <templates>
+                <template>
+                    <name>Template IPMI Drive Slot Sensors</name>
+                </template>
+                <template>
+                    <name>Template IPMI Power Supply Sensors</name>
+                </template>
+                <template>
+                    <name>Template IPMI Threshold Sensors</name>
+                </template>
+            </templates>
+            <screens/>
+        </template>
+    </templates>
+</zabbix_export>
