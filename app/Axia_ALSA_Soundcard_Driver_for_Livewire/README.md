@@ -1,5 +1,4 @@
-# Zabbix Axia_ALSA_Soundcard_Driver_for_Livewire monitoring
-
+# Zabbix Axia ALSA Soundcard Driver for Livewire monitoring
 Monitoring of the AXIA - ALSA soundcard driver for Livewire (_Axia IP Audio
 Driver for Linux_).
 
