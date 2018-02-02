@@ -217,6 +217,51 @@ EOF
 
 Adapt the `MYCMD` and `MYOTHERMCD` command aliases accordingly.
 
+### Adding an OS template
+
+```bash
+osName="" # Operating system name
+
+lowercaseName="${osName,,}"
+gitBranchName="feature/os-${lowercaseName// /-}"
+
+git checkout -b "${gitBranchName}"
+
+templateName="Template OS ${osName}"
+xmlName="${templateName// /_}.xml"
+
+osDir="os/${osName// /_}"
+
+
+mkdir -p "${osDir}/doc"
+touch "${osDir}/doc/README.head.md"
+
+# Write the documentation for your template
+vi "${osDir}/doc/README.head.md"
+
+git add "${osDir}/doc/README.head.md"
+git commit -m "${osName}: Added documentation"
+
+
+# Export the Zabbix template and move it to the final destination
+mv zbx_export_templates.xml "${osDir}/${xmlName}"
+
+git add "${osDir}/${xmlName}"
+git commit -m "${osName}: Added ${templateName}" \
+           "${osDir}/${xmlName}"
+
+
+# Generate the template documentation
+make update-os-doc
+git add "${osDir}/README.md"
+git commit -m "${osName}: Added generated documentation" \
+           "${osDir}/README.md"
+
+
+# Push and create a PR on GitHub afterwards
+git push --set-upstream origin "${gitBranchName}"
+```
+
 ### Adding an IPMI template
 
 ```bash

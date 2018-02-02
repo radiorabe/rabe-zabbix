@@ -39,6 +39,7 @@ SELINUX_MAKEFILE = /usr/share/selinux/devel/Makefile
 
 APPS             = $(notdir $(wildcard app/*))
 IPMIS            = $(notdir $(wildcard ipmi/*))
+OSS              = $(notdir $(wildcard os/*))
 SNMPS            = $(notdir $(wildcard snmp/*))
 
 # Filter out special packages, which doesn't provide a Zabbix template XML for
@@ -76,6 +77,15 @@ update-impi-doc:
 	        update-app-doc.xsl ipmi/$(ipmi)/*.xml; \
 	)
 
+update-os-doc:
+	$(foreach os,$(OSS), \
+	    xsltproc \
+	        --output os/$(os)/README.md \
+	        --stringparam appName '$(os)' \
+	        --stringparam appHead "`cat os/$(os)/doc/README.head.md`" \
+	        update-app-doc.xsl os/$(os)/*.xml; \
+	)
+
 update-snmp-doc:
 	$(foreach snmp,$(SNMPS), \
 	    xsltproc \
@@ -87,7 +97,7 @@ update-snmp-doc:
 	)
 
 .PHONY: update-all
-update-all: update-app-doc update-impi-doc update-snmp-doc
+update-all: update-app-doc update-impi-doc update-os-doc update-snmp-doc
 
 .PHONY: update
 update: update-all ## Update buildable docs from xml and docs/ directories.
