@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2017-12-28T11:29:18Z</date>
+    <groups>
+        <group>
+            <name>IPMI templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template IPMI Module Board Generic Sensors</template>
+            <name>Template IPMI Module Board Generic Sensors</name>
+            <description>IPMI template for Module/Board sensors (sensor type code `15h`) with generic 'digital' discrete values (reading type code `03h`).&#13;
+&#13;
+The `{$HOST.IPMI.CONN}`, `{$HOST.IPMI.USER}` and `{$HOST.IPMI.PASS}` macros have to be set according to your IPMI configuration.</description>
+            <groups>
+                <group>
+                    <name>IPMI templates</name>
+                </group>
+            </groups>
+            <applications/>
+            <items/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Module/Board IPMI sensor discovery</name>
+                    <type>10</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>ipmi-sensor-discovery.sh[&quot;{$HOST.IPMI.CONN}&quot;,&quot;{$HOST.IPMI.USER}&quot;,&quot;{$HOST.IPMI.PASS}&quot;, &quot;{$IPMI_MODULE_BOARD_SENSOR_TYPES}&quot;]</key>
+                    <delay>1800</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Discovers module/board IPMI sensors with the help of the external ipmi-sensor-discovery.sh script.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Sensor $2</name>
+                            <type>12</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>ipmi.discrete-generic-sensor[module-board,{#IPMI_SENSOR_NAME}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor>{#IPMI_SENSOR_NAME}</ipmi_sensor>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>IPMI generic 'digital' discrete sensor prototype item for a module/board (sensor type code 15h, reading type code 03h).</description>
+                            <inventory_link>0</inventory_link>
+                            <applications/>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>IPMI - {#IPMI_SENSOR_TYPE}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template IPMI Module Board Generic Sensors:ipmi.discrete-generic-sensor[module-board,{#IPMI_SENSOR_NAME}].band(#1,2)}=2</expression>
+                            <name>Module/Board {#IPMI_SENSOR_NAME} in critical state on {HOST.NAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The IPMI module/board 'digital' generic sensor (sensor&#13;
+type code 15h) is in &quot;State Asserted&quot; (sensor specific offset 01h) state. The second least significant bit = 1 (VALUE &amp; 10 = 10).</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$HOST.IPMI.CONN}</macro>
+                    <value>localhost</value>
+                </macro>
+                <macro>
+                    <macro>{$HOST.IPMI.PASS}</macro>
+                    <value>password</value>
+                </macro>
+                <macro>
+                    <macro>{$HOST.IPMI.USER}</macro>
+                    <value>admin</value>
+                </macro>
+                <macro>
+                    <macro>{$IPMI_MODULE_BOARD_SENSOR_TYPES}</macro>
+                    <value>Module_Board</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+</zabbix_export>
