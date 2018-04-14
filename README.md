@@ -98,6 +98,7 @@ This ensures great modularity, reusability and avoids unecessary inheritance pro
 
 ```bash
 appName="" # app name
+appURL=""  # URL to the upstream project/software
 
 lowercaseName="${appName,,}"
 uppercaseName="${appName^^}"
@@ -109,11 +110,39 @@ xmlName="${templateName// /_}.xml"
 
 appDir="app/${appName// /_}"
 
-mkdir -p "${appDir}/doc"
-touch "${appDir}/doc/README.head.md"
+gitBranchName="feature/app-${lowercaseName// /-}"
 
+
+git checkout -b "${gitBranchName}"
+mkdir -p "${appDir}/doc"
+
+# Generate a minimal documentation
+cat > "${appDir}/doc/README.head.md" << EOF
+Monitoring of [${appName}]($appURL).
+
+## Usage
+1. Import the
+   [\`${xmlName}\`](${xmlName})
+   into your Zabbix server (click on the \`Raw\` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+EOF
+
+# Extend the documentation as necessary
+vi "${appDir}/doc/README.head.md"
+
+# Commit the documentation
+git add "${appDir}/doc/README.head.md"
+git commit -m "${appName}: Added documentation"
+
+
+# Export the Zabbix template and move it to the final destination
 # see fetching below if you want help exporting
 mv zbx_export_templates.xml "${appDir}/${xmlName}"
+
+# Commit the Zabbix template
+git add "${appDir}/${xmlName}"
+git commit -m "${appName}: Added ${templateName}"
 ```
 
 #### Fetching an app from the Zabbix server
@@ -147,6 +176,12 @@ cat > "${appDir}/doc/README.SELinux.md" <<EOD
 
 The [${moduleName}](selinux/${moduleName}.te) policy does <dox>.
 EOD
+
+
+# Commit the SELinux policy and documentation
+git add "${appDir}/selinux/${moduleName}.te"
+git add "${appDir}/doc/README.SELinux.md"
+git commit -e -m "${appName}: Added SELinux module and documentation"
 ```
 
 #### optional userparameters
@@ -169,6 +204,12 @@ cat > "${appDir}/doc/README.UserParameters.md" <<EOD
 | --- | ----------- |
 | \`${userParameterName}.<key>\` | <dox> |
 EOD
+
+
+# Commit the userparameters and documentation
+git add "${appDir}/userparameters/${userParameterName}.conf"
+git add "${appDir}/doc/README.UserParameters.md"
+git commit -e -m "${appName}: Added user parameters and docs."
 ```
 
 #### optional scripts
@@ -186,6 +227,11 @@ cat > "${appDir}/doc/README.scripts.md" <<EOD
 
 <dox below listing if needed>
 EOD
+
+# Commit the scripts and documentation
+git add "${appDir}/scripts/*"
+git add "${appDir}/doc/README.scripts.md"
+git commit -e -m "${appName}: Added scripts and docs."
 ```
 
 #### optional Sudo security policies
@@ -213,9 +259,27 @@ Cmnd_Alias ${sudoersCmndAliasPrefix}_MYOTHERCMD = /sbin/myothercmd
 zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYCMD
 zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYOTHERCMD
 EOF
+
+
+# Commit the sudo configuration snippet
+git add "${appDir}/sudoers.d/${sudoersFileName}"
+git commit -e -m "${appName}: Added sudoers config."
 ```
 
 Adapt the `MYCMD` and `MYOTHERMCD` command aliases accordingly.
+
+#### Generate the template documentation and push
+As a final step you have to generate the template configuration and push to
+GitHub afterwards.
+```bash
+# Generate the template documentation
+make update-app-doc
+git add "${appDir}/README.md"
+git commit -m "${appName}: Added generated documentation"
+
+# Push and create a PR on GitHub afterwards
+git push --set-upstream origin "${gitBranchName}"
+```
 
 ### Adding an OS template
 
