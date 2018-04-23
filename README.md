@@ -311,15 +311,13 @@ git commit -m "${osName}: Added documentation"
 mv zbx_export_templates.xml "${osDir}/${xmlName}"
 
 git add "${osDir}/${xmlName}"
-git commit -m "${osName}: Added ${templateName}" \
-           "${osDir}/${xmlName}"
+git commit -m "${osName}: Added ${templateName}"
 
 
 # Generate the template documentation
 make update-os-doc
 git add "${osDir}/README.md"
-git commit -m "${osName}: Added generated documentation" \
-           "${osDir}/README.md"
+git commit -m "${osName}: Added generated documentation"
 
 
 # Push and create a PR on GitHub afterwards
