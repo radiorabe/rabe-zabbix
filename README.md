@@ -384,25 +384,6 @@ Note, that you can also use the provided [template fetching
 helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
 template from your Zabbix server.
 
-### Adding an os template
-
-```bash
-osName="" # OS name
-
-lowercaseName="${osName,,}"
-shortName="${lowercaseName//-/}"
-
-templateName="Template OS ${osName} active"
-xmlName="${templateName// /_}.xml"
-
-osDir="os/${osName// /_}"
-
-mkdir -p "${osDir}/doc"
-touch "${osDir}/doc/README.head.md"
-
-mv zbx_export_templates.xml "${osDir}/${xmlName}"
-```
-
 ## Debugging
 
 The following commands might be helpful for general debugging:
