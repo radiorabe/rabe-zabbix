@@ -311,15 +311,13 @@ git commit -m "${osName}: Added documentation"
 mv zbx_export_templates.xml "${osDir}/${xmlName}"
 
 git add "${osDir}/${xmlName}"
-git commit -m "${osName}: Added ${templateName}" \
-           "${osDir}/${xmlName}"
+git commit -m "${osName}: Added ${templateName}"
 
 
 # Generate the template documentation
 make update-os-doc
 git add "${osDir}/README.md"
-git commit -m "${osName}: Added generated documentation" \
-           "${osDir}/README.md"
+git commit -m "${osName}: Added generated documentation"
 
 
 # Push and create a PR on GitHub afterwards
@@ -383,25 +381,6 @@ mv zbx_export_templates.xml "${snmpDir}/${xmlName}"
 Note, that you can also use the provided [template fetching
 helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
 template from your Zabbix server.
-
-### Adding an os template
-
-```bash
-osName="" # OS name
-
-lowercaseName="${osName,,}"
-shortName="${lowercaseName//-/}"
-
-templateName="Template OS ${osName} active"
-xmlName="${templateName// /_}.xml"
-
-osDir="os/${osName// /_}"
-
-mkdir -p "${osDir}/doc"
-touch "${osDir}/doc/README.head.md"
-
-mv zbx_export_templates.xml "${osDir}/${xmlName}"
-```
 
 ## Debugging
 
