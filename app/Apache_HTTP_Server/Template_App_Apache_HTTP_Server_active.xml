@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2018-12-28T19:01:50Z</date>
+    <groups>
+        <group>
+            <name>App templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App Apache HTTP Server active</template>
+            <name>Template App Apache HTTP Server active</name>
+            <description>Application template for the [Apache HTTP server](http://httpd.apache.org/).</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Apache HTTP Server</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>LISTEN state of TCP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.listen[{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The TCP listen status of the Apache HTTP server HTTPS service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>LISTEN state of TCP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.listen[{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The TCP listen status of the Apache HTTP server HTTP service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Status of TCP connection to $1:$2</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.port[{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_IP},{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The status of the TCP connection to the Apache HTTP Server HTTPS service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Status of TCP connection to $1:$2</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.port[{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_IP},{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The status of the TCP connection to the Apache HTTP Server HTTP service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>CPU utilization ($3) of &quot;$1&quot; processes ($5) in %</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.cpu.util[httpd,,total,,avg5]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>5 minute average CPU utilization in percent of the `httpd` processes.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Memory usage ($5) of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.mem[httpd,,,,rss]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Memory usage in bytes of the `httpd` processes.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[httpd]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of running `httpd` processes.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Apache HTTP Server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_IP}</macro>
+                    <value>127.0.0.1</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}</macro>
+                    <value>443</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_IP}</macro>
+                    <value>127.0.0.1</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}</macro>
+                    <value>80</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template App Apache HTTP Server active:net.tcp.port[{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_IP},{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}].last(0)}=0</expression>
+            <name>Apache HTTP service is down on {HOST.NAME} {$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_IP}:{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>TCP connections to the Apache HTTP Server HTTP service are not possible.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>TCP port {$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+                    <expression>{Template App Apache HTTP Server active:net.tcp.listen[{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}].last(0)}=0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Apache HTTP Server active:net.tcp.port[{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_IP},{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}].last(0)}=0</expression>
+            <name>Apache HTTPS service is down on {HOST.NAME} {$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_IP}:{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>TCP connections to the Apache HTTP Server HTTPS service are not possible.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>TCP port {$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+                    <expression>{Template App Apache HTTP Server active:net.tcp.listen[{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}].last(0)}=0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Apache HTTP Server active:proc.num[httpd].last(0)}&lt;1</expression>
+            <name>No running httpd processes on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Apache HTTP Server active:net.tcp.listen[{$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT}].last(0)}=0</expression>
+            <name>TCP port {$APP_APACHE_HTTP_SERVER_HTTPS_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Apache HTTP Server HTTPS service TCP port is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running httpd processes on {HOST.NAME}</name>
+                    <expression>{Template App Apache HTTP Server active:proc.num[httpd].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Apache HTTP Server active:net.tcp.listen[{$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT}].last(0)}=0</expression>
+            <name>TCP port {$APP_APACHE_HTTP_SERVER_HTTP_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Apache HTTP Server HTTP service TCP port is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running httpd processes on {HOST.NAME}</name>
+                    <expression>{Template App Apache HTTP Server active:proc.num[httpd].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+    </triggers>
+</zabbix_export>
