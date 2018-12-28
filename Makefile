@@ -50,8 +50,7 @@ SNMPS            := $(filter-out README.md \
 								 SNMPv2_Interfaces_HC \
 								 SNMPv2_Netgear_Box_Services \
 								 SNMPv2_Netgear_Inventory \
-								 SNMPv2_Netgear_SNTP_client \
-								 SNMPv2_Netgear_Switching, $(SNMPS))
+								 SNMPv2_Netgear_SNTP_client, $(SNMPS))
 
 update-app-doc:
 	$(foreach app,$(APPS), \
