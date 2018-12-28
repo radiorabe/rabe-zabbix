@@ -362,22 +362,89 @@ EOD
 ### Adding an SNMP template
 
 ```bash
-snmpName=""     # Name, usually related to the MIB
-snmpVersion="2" # SNMP version, 2 or 3.
+snmpName=""       # Name, usually related to the MIB or device
+snmpVersion="2"   # SNMP version, 1, 2 or 3.
+snmpDeviceURL=""  # URL to the device (if any)
+snmpMibURL=""     # URL to the MIB (if any)
+
+lowercaseName="${snmpName,,}"
 
 templateName="Template SNMPv${snmpVersion} ${snmpName}"
 xmlName="${templateName// /_}.xml"
 
 snmpDir="snmp/SNMPv${snmpVersion}_${snmpName// /_}"
 
+gitBranchName="feature/snmp-${lowercaseName// /-}"
+
+git checkout -b "${gitBranchName}"
 mkdir -p "${snmpDir}/doc"
 touch "${snmpDir}/doc/README.head.md"
 
-# Download you template from the zabbix server
 
+# Generate a minimal documentation
+cat > "${snmpDir}/doc/README.head.md" << EOF
+<DEVICE-SPECIFIC-EXAMPLE>
+Monitoring of [${snmpName}](${snmpDeviceURL})
+devices via SNMPv${snmpVersion}
+</DEVICE-SPECIFIC-EXAMPLE
+
+<MIB-SPECIFIC-EXAMPLE>
+Monitors <EXAMPLE> parameters exposed by the
+[\`<EXAMPLE-MIB>\`](${snmpMibURL}) via SNMPv${snmpVersion}
+</MIB-SPECIFIC-EXAMPLE>
+
+## Usage
+1. Download the [<EXAMPLE-MIB>](${snmpMibURL})
+2. Place the MIB file(s) into your default MIB directory on the Zabbix server
+   and/or proxy (usually \`/usr/local/share/snmp/mibs\`) and make sure that the
+   Zabbix server and/or proxy loads them (see [Using and loading
+   MIBs](http://www.net-snmp.org/wiki/index.php/TUT:Using_and_loading_MIBS)).
+3. Import the
+   [\`${xmlName}\`](${xmlName})
+   into your Zabbix server (click on the \`Raw\` button to download).
+4. Add the template to your host (or stack template)
+5. Check if new data arrives
+
+## Notes
+### snmpwalk command
+The following \`snmpwalk\` command might be helpful for debugging:
+\`\`\`bash
+# Include and adapt me for SNMP version 1 or 2c
+snmpwalk -v <1|2c> -c public <HOST> <EXAMPLE-MIB::OID>
+
+# Include and adapt me for SNMP version 3
+snmpwalk -v 3 -l <noAuthNo‐Priv|authNoPriv|authPriv> \\
+         [-a <MD5|SHA> -A <AUTH-PASSPHRASE> \\
+         [-x <DES|AES> -X <PRIV-PASSPHRASE>]] \\
+         <HOST> <EXAMPLE-MIB::OID>
+\`\`\`
+EOF
+
+# Adapt and extend the documentation as necessary
+vi "${snmpDir}/doc/README.head.md"
+
+# Commit the documentation
+git add "${snmpDir}/doc/README.head.md"
+git commit -m "${snmpName}: Added documentation"
+
+
+# Export the Zabbix template and move it to its final destination
 mv zbx_export_templates.xml "${snmpDir}/${xmlName}"
 
+# Commit the Zabbix template
+git add "${snmpDir}/${xmlName}"
+git commit -m "${snmpName}: Added ${templateName}"
+
+
+# Generate the template documentation
+make update-snmp-doc
+git add "${snmpDir}/README.md"
+git commit -m "${snmpName}: Added generated documentation"
+
+# Push and create a PR on GitHub afterwards
+git push --set-upstream origin "${gitBranchName}"
 ```
+
 Note, that you can also use the provided [template fetching
 helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
 template from your Zabbix server.
