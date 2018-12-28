@@ -402,8 +402,11 @@ Monitors <EXAMPLE> parameters exposed by the
 3. Import the
    [\`${xmlName}\`](${xmlName})
    into your Zabbix server (click on the \`Raw\` button to download).
-4. Add the template to your host (or stack template)
-5. Check if new data arrives
+4. Add an SNMP interface configuration to your host
+5. Set the `{$SNMP_COMMUNITY}` macro to your desired community if you don't use
+   `public`
+6. Add the template to your host (or stack template)
+7. Check if new data arrives
 
 ## Notes
 ### snmpwalk command
