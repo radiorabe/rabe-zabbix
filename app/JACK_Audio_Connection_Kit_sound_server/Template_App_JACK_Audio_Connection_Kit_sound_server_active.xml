@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2018-12-29T08:40:15Z</date>
+    <groups>
+        <group>
+            <name>App templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App JACK Audio Connection Kit sound server active</template>
+            <name>Template App JACK Audio Connection Kit sound server active</name>
+            <description>Application template for [JACK Audio Connection Kit sound server](http://www.jackaudio.org).</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>JACK Audio Connection Kit sound server</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>CPU utilization ($3) of &quot;$1&quot; process(es) ($5, running as user $2 with cmdline filter $4) in %</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.cpu.util[jackd,{$APP_JACKD_USER},total,{$APP_JACKD_CMDLINE},avg5]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>5 minute average CPU utilization in percent of the `jackd` process(es).&#13;
+&#13;
+Use the `{$APP_JACKD_USER}` and/or `{$APP_JACKD_CMDLINE}` macros to filter for a specific instance.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>JACK Audio Connection Kit sound server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Memory usage ($5) of &quot;$1&quot; process(es) (running as user $2 with cmdline filter $4)</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.mem[jackd,{$APP_JACKD_USER},,{$APP_JACKD_CMDLINE},rss]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The RSS memory usage of the `jackd` process(es).&#13;
+&#13;
+Use the `{$APP_JACKD_USER}` and/or `{$APP_JACKD_CMDLINE}` macros to filter for a specific instance.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>JACK Audio Connection Kit sound server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of &quot;$1&quot; process(es) (running as user $2 with cmdline filter $4)</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[jackd,{$APP_JACKD_USER},,{$APP_JACKD_CMDLINE}]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The number of running `jackd` processes.&#13;
+&#13;
+Use the `{$APP_JACKD_USER}` and/or `{$APP_JACKD_CMDLINE}` macros to filter for a specific instance.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>JACK Audio Connection Kit sound server</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$APP_JACKD_CMDLINE}</macro>
+                    <value>.*</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_JACKD_USER}</macro>
+                    <value/>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template App JACK Audio Connection Kit sound server active:proc.num[jackd,{$APP_JACKD_USER},,{$APP_JACKD_CMDLINE}].last(0)}&lt;1</expression>
+            <name>No running jackd process(es) (running as user {$APP_JACKD_USER} with cmdline filter {$APP_JACKD_CMDLINE}) on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>There is no running `jackd` process (JACK Audio Connection Kit sound server) on this host.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+    </triggers>
+</zabbix_export>
