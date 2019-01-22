@@ -119,13 +119,6 @@ mkdir -p "${appDir}/doc"
 # Generate a minimal documentation
 cat > "${appDir}/doc/README.head.md" << EOF
 Monitoring of [${appName}]($appURL).
-
-## Usage
-1. Import the
-   [\`${xmlName}\`](${xmlName})
-   into your Zabbix server (click on the \`Raw\` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
 EOF
 
 # Extend the documentation as necessary
@@ -159,6 +152,24 @@ npm install
 ```
 
 The helper will prompt for settings should they not be configured. Please see its `--help` for more information.
+
+#### optional usage section override
+```bash
+cat > "${appDir}/doc/README.Usage.md" << EOF
+## Usage
+1. Import the
+   [\`${xmlName}\`](${xmlName})
+   into your Zabbix server (click on the \`Raw\` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+EOF
+
+vi "${appDir}/doc/README.Usage.md"
+
+git add "${appDir}/doc/README.Usage.md"
+git commit -m "${appName}: Added usage section"
+```
+
 
 #### optional selinux policy
 ```bash
