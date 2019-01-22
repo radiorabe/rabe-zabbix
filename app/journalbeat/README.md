@@ -10,6 +10,14 @@ Monitoring of [journalbeat](https://github.com/mheese/journalbeat).
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
+
+## Usage
+
+1. Import the [`Template_App_journalbeat_active.xml`](Template_App_journalbeat_active.xml)
+   into your Zabbix server (click on the `Raw` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+
 ## Template App journalbeat active
 Application template for [journalbeat](https://github.com/mheese/journalbeat/).
 ### Items
@@ -31,4 +39,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)

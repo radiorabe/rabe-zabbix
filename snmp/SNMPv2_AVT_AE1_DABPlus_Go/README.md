@@ -37,6 +37,14 @@ snmpwalk -v 2c -c public <HOST> AVT-AE1-DABPLUS-GO-MIB::avtMagicAe1DabPlusGoEnco
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
+
+## Usage
+
+1. Import the [`Template_SNMPv2_AVT_AE1_DABPlus_Go.xml`](Template_SNMPv2_AVT_AE1_DABPlus_Go.xml)
+   into your Zabbix server (click on the `Raw` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+
 ## Template SNMPv2 AVT AE1 DABPlus Go
 SNMP template for monitoring [AVT MAGIC AE1 DAB+ Go](http://www.avt-nbg.de/index.php/en/products/dab/encoders/magic-ae1-dab-go) devices based on the `AVT-MIB` and `AVT-AE1-DABPLUS-GO-MIB`.
 ### Items
@@ -117,4 +125,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)

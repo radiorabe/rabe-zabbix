@@ -29,6 +29,14 @@ An external script is used for low-level discovery of the sensors (as Zabbix cur
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
+
+## Usage
+
+1. Import the [`Template_IPMI_Supermicro_SSG-6048R-E1CR24N.xml`](Template_IPMI_Supermicro_SSG-6048R-E1CR24N.xml)
+   into your Zabbix server (click on the `Raw` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+
 ## Template IPMI Supermicro SSG-6048R-E1CR24N
 IPMI template for Supermicro SuperStorage Server [6048R-E1CR24N](https://www.supermicro.com/products/system/4u/6048/ssg-6048r-e1cr24n.cfm)
 
@@ -44,4 +52,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)
