@@ -8,7 +8,9 @@
   <xsl:output method="text"/>
 
   <xsl:param name="appName"/>
+  <xsl:param name="xmlName"/>
   <xsl:param name="appHead"/>
+  <xsl:param name="usageDoc"/>
   <xsl:param name="selinuxDoc"/>
   <xsl:param name="userparamDoc"/>
   <xsl:param name="scriptDoc"/>
@@ -303,6 +305,16 @@
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
+<xsl:choose><xsl:when test="$usageDoc"><xsl:value-of select="$usageDoc"/><xsl:text>
+</xsl:text></xsl:when><xsl:otherwise>
+## Usage
+
+1. Import the [`<xsl:value-of select="$xmlName"/>`](<xsl:value-of select="$xmlName"/>)
+   into your Zabbix server (click on the `Raw` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+
+</xsl:otherwise></xsl:choose>
 <xsl:apply-templates select="templates"/>
 <xsl:if test="triggers"><xsl:apply-templates select="triggers"/></xsl:if>
 <xsl:if test="$selinuxDoc"><xsl:value-of select="$selinuxDoc"/><xsl:text>
