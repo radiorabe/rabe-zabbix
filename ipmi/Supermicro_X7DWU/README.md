@@ -7,6 +7,9 @@ The template supports IPMI Module/Board sensors (sensor type code `15h`), power
 supplies sensors (sensor type code `08h`) and threshold based sensors (reading
 type `01h`).
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 An external script is used for low-level discovery of the sensors (as Zabbix currently lacks LLD of IPMI sensors).
 
 ## Usage
@@ -26,17 +29,6 @@ An external script is used for low-level discovery of the sensors (as Zabbix cur
 8. Add an IPMI interface to your host
 9. Configure the IPMI parameters of your host
 10. Check if new data arrives
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
-
-## Usage
-
-1. Import the [`Template_IPMI_Supermicro_X7DWU.xml`](Template_IPMI_Supermicro_X7DWU.xml)
-   into your Zabbix server (click on the `Raw` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
-
 ## Template IPMI Supermicro X7DWU
 IPMI template for Supermicro Motherboard [X7DWU](http://www.supermicro.com/products/motherboard/Xeon1333/5400/X7DWU.cfm)
 

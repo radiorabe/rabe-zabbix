@@ -4,7 +4,11 @@ Monitoring of [AVT MAGIC AE1 DAB+ Go](http://www.avt-nbg.de/index.php/en/product
 There are low-level discovery rules for detecting and monitoring the available
 alarms and encoders.
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Usage
+
 1. Download the [MAGIC AE1 DAB+
    GO](http://www.avt-nbg.de/index.php/en/download-2/software-download) software.
 2. Start the *MAGIC AE1 DAB+ GO* software (note that it might also run on
@@ -34,17 +38,6 @@ The following `snmpwalk` command might be helpful for debugging:
 ```bash
 snmpwalk -v 2c -c public <HOST> AVT-AE1-DABPLUS-GO-MIB::avtMagicAe1DabPlusGoEncoder
 ```
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
-
-## Usage
-
-1. Import the [`Template_SNMPv2_AVT_AE1_DABPlus_Go.xml`](Template_SNMPv2_AVT_AE1_DABPlus_Go.xml)
-   into your Zabbix server (click on the `Raw` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
-
 ## Template SNMPv2 AVT AE1 DABPlus Go
 SNMP template for monitoring [AVT MAGIC AE1 DAB+ Go](http://www.avt-nbg.de/index.php/en/products/dab/encoders/magic-ae1-dab-go) devices based on the `AVT-MIB` and `AVT-AE1-DABPLUS-GO-MIB`.
 ### Items

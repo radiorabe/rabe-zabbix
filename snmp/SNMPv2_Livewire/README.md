@@ -7,7 +7,11 @@ xNodes](https://www.telosalliance.com/Axia/xNodes).
 There are low-level discovery rules for detecting and monitoring the available
 Livewire source and destination ports.
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Usage
+
 1. Download the [MIB files for Axia
    xNodes](https://www.telosalliance.com/support/xNode-MIB-Files-for-SNMP-Support) 
 2. Place the MIB files into your default MIB directory (usually
@@ -25,17 +29,6 @@ The following `snmpwalk` command might be helpful for debugging:
 ```bash
 snmpwalk -v 2c -c public <HOST> TLS-SMI::livewire
 ```
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
-
-## Usage
-
-1. Import the [`Template_SNMPv2_Livewire.xml`](Template_SNMPv2_Livewire.xml)
-   into your Zabbix server (click on the `Raw` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
-
 ## Template SNMPv2 Livewire
 Telos Alliance Livewire Audio over IP routing control based on TLS-LIVEWIRE-MIB.
 ### Macros
