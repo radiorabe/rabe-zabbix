@@ -11,7 +11,7 @@ An external script is used for low-level discovery of the sensors (as Zabbix cur
 
 1. Install the [IPMI sensor discovery script](../Sensor_Discovery).
 2. Import the [`Template_IPMI_Power_Supply_Sensors.xml`](Template_IPMI_Power_Supply_Sensors.xml)
-   template into your Zabbix server.
+   template into your Zabbix server (click on the `Raw` button to download).
 3. Add the template to your host (or stack template)
 4. Set the following user macros on your host or template (those are required
    for the auto discovery to work)

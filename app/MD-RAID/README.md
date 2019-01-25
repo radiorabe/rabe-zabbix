@@ -13,12 +13,15 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 ## Usage
-
-1. Import the [`Template_App_MD-RAID_active.xml`](Template_App_MD-RAID_active.xml)
-   into your Zabbix server (click on the `Raw` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
-
+1. Install the [`rabe.md-raid.conf`](userparameters/rabe.md-raid.conf) Zabbix
+   user parameters into your Zabbix agent's
+   [`Include`](https://www.zabbix.com/documentation/3.0/manual/appendix/config/zabbix_agentd)
+   directory (usually `/etc/zabbix/zabbix_agentd.d`).
+4. Import the
+   [`Template_App_MD-RAID_active.xml`](Template_App_MD-RAID_active.xml) into
+   your Zabbix server (click on the `Raw` button to download).
+5. Add the template to you host (or stack template)
+6. Check if new data arrives
 ## Template App MD-RAID active
 Application template for monitoring Linux multi device RAID (MD-RAID).
 ### Discovery
