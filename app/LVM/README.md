@@ -20,13 +20,16 @@ welcome):
 * RAID volumes
 * Cache volumes
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Usage
 ### CentOS RPM installation
 1. Install the [`rabe-zabbix`](../../README.md#rpm-packages) RPM (which
    contains the required sudoers droplets, SELinux policies as well as the
    actual Zabbix user parameters).
 2. Import the [`Template_App_LVM_active.xml`](Template_App_LVM_active.xml) into
-   your Zabbix server.
+   your Zabbix server (click on the `Raw` button to download).
 3. Add the template to your host (or stack template)
 4. Check if new data arrives
 
@@ -50,20 +53,9 @@ welcome):
    [`Include`](https://www.zabbix.com/documentation/3.0/manual/appendix/config/zabbix_agentd)
    directory (usually `/etc/zabbix/zabbix_agentd.d`).
 4. Import the [`Template_App_LVM_active.xml`](Template_App_LVM_active.xml) into
-   your Zabbix server.
+   your Zabbix server (click on the `Raw` button to download).
 5. Add the template to your host (or stack template)
 6. Check if new data arrives
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
-
-## Usage
-
-1. Import the [`Template_App_LVM_active.xml`](Template_App_LVM_active.xml)
-   into your Zabbix server (click on the `Raw` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
-
 ## Template App LVM active
 Application template for monitoring Linux Logical Volumen Management (LVM)
 ### Macros
