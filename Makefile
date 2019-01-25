@@ -59,6 +59,7 @@ update-app-doc:
 	        --stringparam appName '$(app)' \
 		--stringparam xmlName '$(shell basename app/$(app)/*.xml)' \
 	        --stringparam appHead "`cat app/$(app)/doc/README.head.md`" \
+		--stringparam usageType "app"  \
 	        --stringparam usageDoc "`[ -f app/$(app)/doc/README.Usage.md ] && cat app/$(app)/doc/README.Usage.md`" \
 	        --stringparam selinuxDoc "`[ -f app/$(app)/doc/README.SELinux.md ] && cat app/$(app)/doc/README.SELinux.md`" \
 	        --stringparam userparamDoc "`[ -f app/$(app)/doc/README.UserParameters.md ] && cat app/$(app)/doc/README.UserParameters.md`" \
@@ -73,7 +74,8 @@ update-impi-doc:
 	        --stringparam appName '$(ipmi)' \
 		--stringparam xmlName '$(shell basename ipmi/$(ipmi)/*.xml)' \
 	        --stringparam appHead "`cat ipmi/$(ipmi)/doc/README.head.md`" \
-	        --stringparam usageDoc "`[ -f ipmi/$(app)/doc/README.Usage.md ] && cat ipmi/$(app)/doc/README.Usage.md`" \
+		--stringparam usageType "ipmi"  \
+	        --stringparam usageDoc "`[ -f ipmi/$(ipmi)/doc/README.Usage.md ] && cat ipmi/$(ipmi)/doc/README.Usage.md`" \
 	        --stringparam selinuxDoc "`[ -f ipmi/$(ipmi)/doc/README.SELinux.md ] && cat ipmi/$(ipmi)/doc/README.SELinux.md`" \
 	        --stringparam userparamDoc "`[ -f ipmi/$(ipmi)/doc/README.UserParameters.md ] && cat ipmi/$(ipmi)/doc/README.UserParameters.md`" \
 	        --stringparam scriptDoc "`[ -f ipmi/$(ipmi)/doc/README.scripts.md ] && cat ipmi/$(ipmi)/doc/README.scripts.md`" \
@@ -87,7 +89,8 @@ update-os-doc:
 	        --stringparam appName '$(os)' \
 		--stringparam xmlName '$(shell basename os/$(os)/*.xml)' \
 	        --stringparam appHead "`cat os/$(os)/doc/README.head.md`" \
-	        --stringparam usageDoc "`[ -f o/$(app)/doc/README.Usage.md ] && cat os/$(app)/doc/README.Usage.md`" \
+		--stringparam usageType "os"  \
+	        --stringparam usageDoc "`[ -f os/$(os)/doc/README.Usage.md ] && cat os/$(os)/doc/README.Usage.md`" \
 	        update-app-doc.xsl os/$(os)/*.xml; \
 	)
 
@@ -98,6 +101,8 @@ update-snmp-doc:
 	        --stringparam appName '$(snmp)' \
 		--stringparam xmlName '$(shell basename snmp/$(snmp)/*.xml)' \
 	        --stringparam appHead "`cat snmp/$(snmp)/doc/README.head.md`" \
+		--stringparam usageType "snmp"  \
+	        --stringparam usageDoc "`[ -f snmp/$(snmp)/doc/README.Usage.md ] && cat snmp/$(snmp)/doc/README.Usage.md`" \
 	        --stringparam scriptDoc "`[ -f snmp/$(snmp)/doc/README.scripts.md ] && cat snmp/$(snmp)/doc/README.scripts.md`" \
 	        update-app-doc.xsl snmp/$(snmp)/*.xml; \
 	)
