@@ -58,6 +58,7 @@ update-app-doc:
 			--output app/$(app)/README.md \
 			--stringparam appName '$(app)' \
 			--stringparam xmlName '$(shell basename app/$(app)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
 			--stringparam appHead "`cat app/$(app)/doc/README.head.md`" \
 			--stringparam usageType "app" \
 			--stringparam usageDoc "`[ -f app/$(app)/doc/README.Usage.md ] && cat app/$(app)/doc/README.Usage.md`" \
@@ -73,6 +74,7 @@ update-impi-doc:
 			--output ipmi/$(ipmi)/README.md \
 			--stringparam appName '$(ipmi)' \
 			--stringparam xmlName '$(shell basename ipmi/$(ipmi)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
 			--stringparam appHead "`cat ipmi/$(ipmi)/doc/README.head.md`" \
 			--stringparam usageType "ipmi" \
 			--stringparam usageDoc "`[ -f ipmi/$(ipmi)/doc/README.Usage.md ] && cat ipmi/$(ipmi)/doc/README.Usage.md`" \
@@ -88,6 +90,7 @@ update-os-doc:
 			--output os/$(os)/README.md \
 			--stringparam appName '$(os)' \
 			--stringparam xmlName '$(shell basename os/$(os)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
 			--stringparam appHead "`cat os/$(os)/doc/README.head.md`" \
 			--stringparam usageType "os" \
 			--stringparam usageDoc "`[ -f os/$(os)/doc/README.Usage.md ] && cat os/$(os)/doc/README.Usage.md`" \
@@ -100,6 +103,7 @@ update-snmp-doc:
 			--output snmp/$(snmp)/README.md \
 			--stringparam appName '$(snmp)' \
 			--stringparam xmlName '$(shell basename snmp/$(snmp)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
 			--stringparam appHead "`cat snmp/$(snmp)/doc/README.head.md`" \
 			--stringparam usageType "snmp" \
 			--stringparam usageDoc "`[ -f snmp/$(snmp)/doc/README.Usage.md ] && cat snmp/$(snmp)/doc/README.Usage.md`" \

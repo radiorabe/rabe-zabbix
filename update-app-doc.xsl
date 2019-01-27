@@ -9,6 +9,7 @@
 
   <xsl:param name="appName"/>
   <xsl:param name="xmlName"/>
+  <xsl:param name="currentYear"/>
   <xsl:param name="appHead"/>
   <xsl:param name="usageDoc"/>
   <xsl:param name="usageType"/>
@@ -348,7 +349,7 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - <xsl:value-of select="$currentYear"/> [Radio Bern RaBe](http://www.rabe.ch)
 </xsl:template>
 
   <xsl:template match="templates"><xsl:apply-templates select="template"/></xsl:template>
