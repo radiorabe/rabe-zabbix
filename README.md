@@ -119,13 +119,6 @@ mkdir -p "${appDir}/doc"
 # Generate a minimal documentation
 cat > "${appDir}/doc/README.head.md" << EOF
 Monitoring of [${appName}]($appURL).
-
-## Usage
-1. Import the
-   [\`${xmlName}\`](${xmlName})
-   into your Zabbix server (click on the \`Raw\` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
 EOF
 
 # Extend the documentation as necessary
@@ -159,6 +152,24 @@ npm install
 ```
 
 The helper will prompt for settings should they not be configured. Please see its `--help` for more information.
+
+#### optional usage section override
+```bash
+cat > "${appDir}/doc/README.Usage.md" << EOF
+## Usage
+1. Import the
+   [\`${xmlName}\`](${xmlName})
+   into your Zabbix server (click on the \`Raw\` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+EOF
+
+vi "${appDir}/doc/README.Usage.md"
+
+git add "${appDir}/doc/README.Usage.md"
+git commit -m "${appName}: Added usage section"
+```
+
 
 #### optional selinux policy
 ```bash
@@ -324,6 +335,19 @@ git commit -m "${osName}: Added generated documentation"
 git push --set-upstream origin "${gitBranchName}"
 ```
 
+#### optional usage section override
+```bash
+cat > "${osDir}/doc/README.Usage.md" << EOF
+## Usage
+EOF
+
+vi "${osDir}/doc/README.Usage.md"
+
+git add "${osDir}/doc/README.Usage.md"
+git commit -m "${osName}: Added usage section"
+```
+
+
 ### Adding an IPMI template
 
 ```bash
@@ -341,6 +365,19 @@ touch "${ipmiDir}/doc/README.head.md"
 
 mv zbx_export_templates.xml "${ipmiDir}/${xmlName}"
 ```
+
+#### optional usage section override
+```bash
+cat > "${ipmiDir}/doc/README.Usage.md" << EOF
+## Usage
+EOF
+
+vi "${ipmiDir}/doc/README.Usage.md"
+
+git add "${ipmiDir}/doc/README.Usage.md"
+git commit -m "${ipmiName}: Added usage section"
+```
+
 
 #### optional scripts
 ```bash
@@ -392,7 +429,9 @@ devices via SNMPv${snmpVersion}
 Monitors <EXAMPLE> parameters exposed by the
 [\`<EXAMPLE-MIB>\`](${snmpMibURL}) via SNMPv${snmpVersion}
 </MIB-SPECIFIC-EXAMPLE>
+EOF
 
+cat > "${snmpDir}/doc/README.Usage.md" << EOF
 ## Usage
 1. Download the [<EXAMPLE-MIB>](${snmpMibURL})
 2. Place the MIB file(s) into your default MIB directory on the Zabbix server
@@ -425,9 +464,11 @@ EOF
 
 # Adapt and extend the documentation as necessary
 vi "${snmpDir}/doc/README.head.md"
+vi "${snmpDir}/doc/README.Usage.md"
 
 # Commit the documentation
 git add "${snmpDir}/doc/README.head.md"
+git add "${snmpDir}/doc/README.Usage.md"
 git commit -m "${snmpName}: Added documentation"
 
 
@@ -497,4 +538,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)

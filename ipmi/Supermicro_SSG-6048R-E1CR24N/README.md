@@ -7,6 +7,9 @@ The template supports IPMI drive slots sensors (sensor type code `0Dh`), power
 supplies sensors (sensor type code `08h`) and threshold based sensors (reading
 type 01h).
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 An external script is used for low-level discovery of the sensors (as Zabbix currently lacks LLD of IPMI sensors).
 
 ## Usage
@@ -26,9 +29,6 @@ An external script is used for low-level discovery of the sensors (as Zabbix cur
 7. Add an IPMI interface to your host
 8. Configure the IPMI parameters of your host
 9. Check if new data arrives
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
 ## Template IPMI Supermicro SSG-6048R-E1CR24N
 IPMI template for Supermicro SuperStorage Server [6048R-E1CR24N](https://www.supermicro.com/products/system/4u/6048/ssg-6048r-e1cr24n.cfm)
 
@@ -44,4 +44,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)

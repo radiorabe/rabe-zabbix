@@ -3,6 +3,9 @@ Monitors Netgear Switching parameters (fastPathSwitching), currently only CPU,
 memory and spanning tree protocol information exposed by the
 NETGEAR-SWITCHING-MIB via SNMPv2.
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Usage
 1. Download the NETGEAR-SWITCHING-MIB and its dependencies (should be present
    within the MIB package of your Netgear device) 
@@ -26,7 +29,7 @@ The following `snmpwalk` command might be helpful for debugging:
 snmpwalk -v 2c -c public <HOST> NETGEAR-SWITCHING-MIB::fastPathSwitching
 ```
 
-## CPU utilization
+### CPU utilization
 The CPU utilization is currently only available as a string with 5, 60 and 300
 second values (`5 Secs ( 13.2483%)   60 Secs ( 11.3541%)  300 Secs (11.2930%)`
 which makes it very hard or impossible to create triggers.
@@ -35,15 +38,12 @@ Please open up an issue if you know of an elegant way to either parse and split
 the item into separate float items or if you find other OIDs which separately
 expose the values - thanks.
 
-## Related templates
+### Related templates
 * [SNMPv2 Generic](../SNMPv2_Generic)
 * [SNMPv2 Interface HC](../SNMPv2_Interface_HC)
 * [SNMPv2 Netgear Box Services](../SNMPv2_Netgear_Box_Services)
 * [SNMPv2 Netgear Inventory](../SNMPv2_Netgear_Inventory)
 * [SNMPv2 Netgear SNTP Client](../SNMPv2_Netgear_SNTP_CLIENT)
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
 ## Template SNMPv2 Netgear Switching
 Template for Netgear Private MIB for FastPath Switching based on NETGEAR-SWITCHING-MIB
 ### Items
@@ -126,4 +126,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 - 2018 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)

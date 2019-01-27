@@ -8,7 +8,11 @@
   <xsl:output method="text"/>
 
   <xsl:param name="appName"/>
+  <xsl:param name="xmlName"/>
+  <xsl:param name="currentYear"/>
   <xsl:param name="appHead"/>
+  <xsl:param name="usageDoc"/>
+  <xsl:param name="usageType"/>
   <xsl:param name="selinuxDoc"/>
   <xsl:param name="userparamDoc"/>
   <xsl:param name="scriptDoc"/>
@@ -303,6 +307,34 @@
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
+<xsl:choose><xsl:when test="$usageDoc"><xsl:text>
+</xsl:text><xsl:value-of select="$usageDoc"/><xsl:text>
+</xsl:text></xsl:when><xsl:when test="$usageType = 'ipmi'">
+An external script is used for low-level discovery of the sensors (as Zabbix currently lacks LLD of IPMI sensors).
+
+## Usage
+
+1. Install the [IPMI sensor discovery script](../Sensor_Discovery).
+2. Import the [`<xsl:value-of select="$xmlName"/>`](<xsl:value-of select="$xmlName"/>)
+   template into your Zabbix server (click on the `Raw` button to download).
+3. Add the template to your host (or stack template)
+4. Set the following user macros on your host or template (those are required
+   for the auto discovery to work)
+   * `{$HOST.IPMI.CONN}` IP address or domain name of your IPMI host
+   * `{$HOST.IPMI.USER}` IPMI user
+   * `{$HOST.IPMI.PASS}` IPMI password
+5. Add an IPMI interface to your host
+6. Configure the IPMI parameters of your host
+7. Check if new data arrives
+</xsl:when><xsl:otherwise>
+## Usage
+
+1. Import the [`<xsl:value-of select="$xmlName"/>`](<xsl:value-of select="$xmlName"/>)
+   into your Zabbix server (click on the `Raw` button to download).
+2. Add the template to your host (or stack template)
+3. Check if new data arrives
+
+</xsl:otherwise></xsl:choose>
 <xsl:apply-templates select="templates"/>
 <xsl:if test="triggers"><xsl:apply-templates select="triggers"/></xsl:if>
 <xsl:if test="$selinuxDoc"><xsl:value-of select="$selinuxDoc"/><xsl:text>
@@ -317,7 +349,7 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 - 2018 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - <xsl:value-of select="$currentYear"/> [Radio Bern RaBe](http://www.rabe.ch)
 </xsl:template>
 
   <xsl:template match="templates"><xsl:apply-templates select="template"/></xsl:template>

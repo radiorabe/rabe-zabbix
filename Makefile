@@ -2,21 +2,21 @@
 #
 # Makefile for package rabe-zabbix
 #
-# Copyright (c) 2017 Radio Bern RaBe
-#                    http://www.rabe.ch
+# Copyright (c) 2017 - 2019 Radio Bern RaBe
+#                           http://www.rabe.ch
 #
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU Affero General Public 
-# License as published  by the Free Software Foundation, version
+# License as published by the Free Software Foundation, version
 # 3 of the License.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
 #
 # You should have received a copy of the GNU Affero General Public
-# License  along with this program.
+# License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 #
 # Please submit enhancements, bugfixes or comments via GitHub:
@@ -54,45 +54,61 @@ SNMPS            := $(filter-out README.md \
 
 update-app-doc:
 	$(foreach app,$(APPS), \
-	    xsltproc \
-	    	--output app/$(app)/README.md \
-	        --stringparam appName '$(app)' \
-	        --stringparam appHead "`cat app/$(app)/doc/README.head.md`" \
-	        --stringparam selinuxDoc "`[ -f app/$(app)/doc/README.SELinux.md ] && cat app/$(app)/doc/README.SELinux.md`" \
-	        --stringparam userparamDoc "`[ -f app/$(app)/doc/README.UserParameters.md ] && cat app/$(app)/doc/README.UserParameters.md`" \
-	        --stringparam scriptDoc "`[ -f app/$(app)/doc/README.scripts.md ] && cat app/$(app)/doc/README.scripts.md`" \
-	    	update-app-doc.xsl app/$(app)/*.xml; \
+		xsltproc \
+			--output app/$(app)/README.md \
+			--stringparam appName '$(app)' \
+			--stringparam xmlName '$(shell basename app/$(app)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
+			--stringparam appHead "`cat app/$(app)/doc/README.head.md`" \
+			--stringparam usageType "app" \
+			--stringparam usageDoc "`[ -f app/$(app)/doc/README.Usage.md ] && cat app/$(app)/doc/README.Usage.md`" \
+			--stringparam selinuxDoc "`[ -f app/$(app)/doc/README.SELinux.md ] && cat app/$(app)/doc/README.SELinux.md`" \
+			--stringparam userparamDoc "`[ -f app/$(app)/doc/README.UserParameters.md ] && cat app/$(app)/doc/README.UserParameters.md`" \
+			--stringparam scriptDoc "`[ -f app/$(app)/doc/README.scripts.md ] && cat app/$(app)/doc/README.scripts.md`" \
+			update-app-doc.xsl app/$(app)/*.xml; \
 	)
 
 update-impi-doc:
 	$(foreach ipmi,$(IPMIS), \
-	    xsltproc \
-	        --output ipmi/$(ipmi)/README.md \
-	        --stringparam appName '$(ipmi)' \
-	        --stringparam appHead "`cat ipmi/$(ipmi)/doc/README.head.md`" \
-	        --stringparam selinuxDoc "`[ -f ipmi/$(ipmi)/doc/README.SELinux.md ] && cat ipmi/$(ipmi)/doc/README.SELinux.md`" \
-	        --stringparam userparamDoc "`[ -f ipmi/$(ipmi)/doc/README.UserParameters.md ] && cat ipmi/$(ipmi)/doc/README.UserParameters.md`" \
-	        --stringparam scriptDoc "`[ -f ipmi/$(ipmi)/doc/README.scripts.md ] && cat ipmi/$(ipmi)/doc/README.scripts.md`" \
-	        update-app-doc.xsl ipmi/$(ipmi)/*.xml; \
+		xsltproc \
+			--output ipmi/$(ipmi)/README.md \
+			--stringparam appName '$(ipmi)' \
+			--stringparam xmlName '$(shell basename ipmi/$(ipmi)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
+			--stringparam appHead "`cat ipmi/$(ipmi)/doc/README.head.md`" \
+			--stringparam usageType "ipmi" \
+			--stringparam usageDoc "`[ -f ipmi/$(ipmi)/doc/README.Usage.md ] && cat ipmi/$(ipmi)/doc/README.Usage.md`" \
+			--stringparam selinuxDoc "`[ -f ipmi/$(ipmi)/doc/README.SELinux.md ] && cat ipmi/$(ipmi)/doc/README.SELinux.md`" \
+			--stringparam userparamDoc "`[ -f ipmi/$(ipmi)/doc/README.UserParameters.md ] && cat ipmi/$(ipmi)/doc/README.UserParameters.md`" \
+			--stringparam scriptDoc "`[ -f ipmi/$(ipmi)/doc/README.scripts.md ] && cat ipmi/$(ipmi)/doc/README.scripts.md`" \
+			update-app-doc.xsl ipmi/$(ipmi)/*.xml; \
 	)
 
 update-os-doc:
 	$(foreach os,$(OSS), \
-	    xsltproc \
-	        --output os/$(os)/README.md \
-	        --stringparam appName '$(os)' \
-	        --stringparam appHead "`cat os/$(os)/doc/README.head.md`" \
-	        update-app-doc.xsl os/$(os)/*.xml; \
+		xsltproc \
+			--output os/$(os)/README.md \
+			--stringparam appName '$(os)' \
+			--stringparam xmlName '$(shell basename os/$(os)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
+			--stringparam appHead "`cat os/$(os)/doc/README.head.md`" \
+			--stringparam usageType "os" \
+			--stringparam usageDoc "`[ -f os/$(os)/doc/README.Usage.md ] && cat os/$(os)/doc/README.Usage.md`" \
+			update-app-doc.xsl os/$(os)/*.xml; \
 	)
 
 update-snmp-doc:
 	$(foreach snmp,$(SNMPS), \
-	    xsltproc \
-	        --output snmp/$(snmp)/README.md \
-	        --stringparam appName '$(snmp)' \
-	        --stringparam appHead "`cat snmp/$(snmp)/doc/README.head.md`" \
-	        --stringparam scriptDoc "`[ -f snmp/$(snmp)/doc/README.scripts.md ] && cat snmp/$(snmp)/doc/README.scripts.md`" \
-	        update-app-doc.xsl snmp/$(snmp)/*.xml; \
+		xsltproc \
+			--output snmp/$(snmp)/README.md \
+			--stringparam appName '$(snmp)' \
+			--stringparam xmlName '$(shell basename snmp/$(snmp)/*.xml)' \
+			--stringparam currentYear '$(shell date +%Y)' \
+			--stringparam appHead "`cat snmp/$(snmp)/doc/README.head.md`" \
+			--stringparam usageType "snmp" \
+			--stringparam usageDoc "`[ -f snmp/$(snmp)/doc/README.Usage.md ] && cat snmp/$(snmp)/doc/README.Usage.md`" \
+			--stringparam scriptDoc "`[ -f snmp/$(snmp)/doc/README.scripts.md ] && cat snmp/$(snmp)/doc/README.scripts.md`" \
+			update-app-doc.xsl snmp/$(snmp)/*.xml; \
 	)
 
 .PHONY: update-all
@@ -107,7 +123,7 @@ build-app-selinux:
 	$(foreach teFile,$(wildcard app/*/selinux/rabezbx*.te), \
 		make -C $(dir $(teFile)) -f $(SELINUX_MAKEFILE) \
 			PREFIX=/usr NAME=$(notdir $(basename $(teFile))) \
-		&& echo -n "$(notdir $(basename $(teFile))) " >> rabe.lst; \
+			&& echo -n "$(notdir $(basename $(teFile))) " >> rabe.lst; \
 	)
 
 .PHONY: build-app
@@ -133,7 +149,7 @@ test: all test-app
 install-app-selinux:
 	install -d $(SELINUXDIR)/targeted
 	install -p -m 644 app/*/selinux/rabezbx*.pp $(SELINUXDIR)/targeted
-	install -p -m 644 rabe.lst  $(SELINUXDIR)/targeted
+	install -p -m 644 rabe.lst $(SELINUXDIR)/targeted
 
 # install a userparameters config file per app that matches the *.conf files
 .PHONY: install-app-config
@@ -160,7 +176,7 @@ install-app-sudoers:
 
 .PHONY: install-app
 install-app: install-app-selinux install-app-config install-scripts \
-	     install-app-sudoers
+	install-app-sudoers
 
 .PHONY: install
 install: install-app ## Install rabe-zabbix to $(PREFIX)
@@ -169,7 +185,7 @@ install: install-app ## Install rabe-zabbix to $(PREFIX)
 clean-app:
 	rm -rf rabe.lst
 	$(foreach app,$(APPS), \
-	    rm -rf app/$(app)/selinux/*.pp app/$(app)/selinux/tmp; \
+		rm -rf app/$(app)/selinux/*.pp app/$(app)/selinux/tmp; \
 	)
 
 .PHONY: clean
@@ -179,7 +195,7 @@ clean: clean-app ## Clean working copy
 .DEFAULT_GOAL := help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
-	    awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: all
 all: build test

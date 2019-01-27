@@ -1,5 +1,4 @@
 # Zabbix MD-RAID monitoring
-
 Monitoring of Linux [MD-RAID](https://raid.wiki.kernel.org) devices (aka Linux
 Software RAID).
 
@@ -10,6 +9,9 @@ the underlying component devices (RD). The [sysfs md
 interface](https://www.kernel.org/doc/html/latest/admin-guide/md.html#md-devices-in-sysfs)
 is used for discovery and monitoring of the device parameters.
 
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
 ## Usage
 1. Install the [`rabe.md-raid.conf`](userparameters/rabe.md-raid.conf) Zabbix
    user parameters into your Zabbix agent's
@@ -17,12 +19,9 @@ is used for discovery and monitoring of the device parameters.
    directory (usually `/etc/zabbix/zabbix_agentd.d`).
 4. Import the
    [`Template_App_MD-RAID_active.xml`](Template_App_MD-RAID_active.xml) into
-   your Zabbix server.
+   your Zabbix server (click on the `Raw` button to download).
 5. Add the template to you host (or stack template)
 6. Check if new data arrives
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
 ## Template App MD-RAID active
 Application template for monitoring Linux multi device RAID (MD-RAID).
 ### Discovery
@@ -101,4 +100,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)
