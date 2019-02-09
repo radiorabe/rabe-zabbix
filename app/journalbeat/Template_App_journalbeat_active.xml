@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.0</version>
-  <date>2018-04-27T18:13:28Z</date>
+  <date>2019-02-09T16:29:35Z</date>
   <groups>
     <group>
       <name>App templates</name>
@@ -9,9 +9,9 @@
   </groups>
   <templates>
     <template>
-      <template>Template App journalbeat active</template>
-      <name>Template App journalbeat active</name>
-      <description>Application template for [journalbeat](https://github.com/mheese/journalbeat/).</description>
+      <template>Template App Journalbeat active</template>
+      <name>Template App Journalbeat active</name>
+      <description>Application template for [Journalbeat](https://github.com/mheese/journalbeat/).</description>
       <groups>
         <group>
           <name>App templates</name>
@@ -161,7 +161,7 @@
   </templates>
   <triggers>
     <trigger>
-      <expression>{Template App journalbeat active:proc.num[journalbeat,,].last(0)}&lt;1</expression>
+      <expression>{Template App Journalbeat active:proc.num[journalbeat,,].last(0)}&lt;1</expression>
       <name>No running journalbeat process on {HOST.NAME}</name>
       <url/>
       <status>0</status>

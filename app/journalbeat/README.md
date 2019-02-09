@@ -11,8 +11,8 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 2. Add the template to your host (or stack template)
 3. Check if new data arrives
 
-## Template App journalbeat active
-Application template for [journalbeat](https://github.com/mheese/journalbeat/).
+## Template App Journalbeat active
+Application template for [Journalbeat](https://github.com/mheese/journalbeat/).
 ### Items
 * CPU utilization (total) of "journalbeat" processes (avg5) in % (`proc.cpu.util[journalbeat,,total,,avg5]`)  
   5 minute average CPU utilization in percent of the journalbeat process.
@@ -23,7 +23,7 @@ Application template for [journalbeat](https://github.com/mheese/journalbeat/).
 ### Triggers
 * High: No running journalbeat process on {HOST.NAME}
   ```
-  {Template App journalbeat active:proc.num[journalbeat,,].last(0)}<1
+  {Template App Journalbeat active:proc.num[journalbeat,,].last(0)}<1
   ```
 
 ## License
