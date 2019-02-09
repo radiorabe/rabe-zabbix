@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2018-12-28T19:22:51Z</date>
+    <groups>
+        <group>
+            <name>App templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App Icecast active</template>
+            <name>Template App Icecast active</name>
+            <description>Application template for the [Icecast server](http://www.icecast.org).</description>
+            <groups>
+                <group>
+                    <name>App templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Icecast</name>
+                </application>
+                <application>
+                    <name>Web check - Icecast - Public Home</name>
+                </application>
+                <application>
+                    <name>Web check - Icecast - Public Home (HTTP)</name>
+                </application>
+                <application>
+                    <name>Web check - Icecast - Public Home (HTTPS)</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>LISTEN state of TCP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.listen[{$APP_ICECAST_HTTPS_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The TCP listen status of the Icecast HTTPS service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>LISTEN state of TCP port $1</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.listen[{$APP_ICECAST_HTTP_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The TCP listen status of the Icecast HTTP service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Status of TCP connection to $1:$2</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.port[{$APP_ICECAST_HTTPS_SERVICE_IP},{$APP_ICECAST_HTTPS_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The status of the TCP connection to the Icecast HTTPS service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Status of TCP connection to $1:$2</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.port[{$APP_ICECAST_HTTP_SERVICE_IP},{$APP_ICECAST_HTTP_SERVICE_PORT}]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The status of the TCP connection to the Icecast HTTP service.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>CPU utilization ($3) of &quot;$1&quot; processes ($5) in %</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.cpu.util[icecast,,total,,avg5]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>5 minute average CPU utilization in percent of the `icecast` process.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Memory usage ($5) of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.mem[icecast,,,,rss]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The RSS memory usage of the `icecast` process</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of &quot;$1&quot; processes</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[icecast]</key>
+                    <delay>300</delay>
+                    <history>7</history>
+                    <trends>60</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The number of running `icecast` processes.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Icecast</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$APP_ICECAST_HTTPS_BASE_URL}</macro>
+                    <value>https://icecast.example.com:8443</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_ICECAST_HTTPS_SERVICE_IP}</macro>
+                    <value>127.0.0.1</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_ICECAST_HTTPS_SERVICE_PORT}</macro>
+                    <value>8443</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_ICECAST_HTTP_BASE_URL}</macro>
+                    <value>http://icecast.example.com:8000</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_ICECAST_HTTP_SERVICE_IP}</macro>
+                    <value>127.0.0.1</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_ICECAST_HTTP_SERVICE_PORT}</macro>
+                    <value>8000</value>
+                </macro>
+                <macro>
+                    <macro>{$APP_ICECAST_PUBLIC_HOME_PATH}</macro>
+                    <value>/status.xsl</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template App Icecast active:net.tcp.port[{$APP_ICECAST_HTTP_SERVICE_IP},{$APP_ICECAST_HTTP_SERVICE_PORT}].last(0)}=0</expression>
+            <name>Icecast HTTP service is down on {HOST.NAME} {$APP_ICECAST_HTTP_SERVICE_IP}:{$APP_ICECAST_HTTP_SERVICE_PORT}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>TCP connections to the Icecast HTTP service are not possible.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>TCP port {$APP_ICECAST_HTTP_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+                    <expression>{Template App Icecast active:net.tcp.listen[{$APP_ICECAST_HTTP_SERVICE_PORT}].last(0)}=0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Icecast active:net.tcp.port[{$APP_ICECAST_HTTPS_SERVICE_IP},{$APP_ICECAST_HTTPS_SERVICE_PORT}].last(0)}=0</expression>
+            <name>Icecast HTTPS service is down on {HOST.NAME} {$APP_ICECAST_HTTPS_SERVICE_IP}:{$APP_ICECAST_HTTPS_SERVICE_PORT}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>TCP connections to the Icecast HTTPS service are not possible.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>TCP port {$APP_ICECAST_HTTPS_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+                    <expression>{Template App Icecast active:net.tcp.listen[{$APP_ICECAST_HTTPS_SERVICE_PORT}].last(0)}=0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Icecast active:proc.num[icecast].last(0)}&lt;1</expression>
+            <name>No running icecast processes on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>There is no running `icecast` process on this host.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Icecast active:net.tcp.listen[{$APP_ICECAST_HTTPS_SERVICE_PORT}].last(0)}=0</expression>
+            <name>TCP port {$APP_ICECAST_HTTPS_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Icecast HTTPS service TCP port is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running icecast processes on {HOST.NAME}</name>
+                    <expression>{Template App Icecast active:proc.num[icecast].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template App Icecast active:net.tcp.listen[{$APP_ICECAST_HTTP_SERVICE_PORT}].last(0)}=0</expression>
+            <name>TCP port {$APP_ICECAST_HTTP_SERVICE_PORT} not in listen state on {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The Icecast HTTP service TCP port is not in listen state.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>No running icecast processes on {HOST.NAME}</name>
+                    <expression>{Template App Icecast active:proc.num[icecast].last(0)}&lt;1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+    </triggers>
+</zabbix_export>
