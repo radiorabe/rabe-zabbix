@@ -1,4 +1,4 @@
-# Zabbix journalbeat monitoring
+# Zabbix Journalbeat monitoring
 Monitoring of [journalbeat](https://github.com/mheese/journalbeat).
 
 This template is part of [RaBe's Zabbix template and helpers
