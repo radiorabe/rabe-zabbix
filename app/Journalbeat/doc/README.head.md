@@ -1,1 +1,1 @@
-Monitoring of [Journalbeat](https://github.com/mheese/journalbeat/).
+Monitoring of [journalbeat](https://github.com/mheese/journalbeat).
