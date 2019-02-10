@@ -18,15 +18,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 ### Macros
 * `{$TIMEDATECTL_MAX_NO_SYNC_TIME}` (default: 60m)
 ### Triggers
-* Warning: NTP not enabled
+* Warning: NTP not enabled on {HOST.NAME}
   ```
   {Template App timedatectl active:rabe.timedatectl.ntp.enabled.last()}=0
   ```
-* Information: NTP not synchronized
+* Information: NTP not synchronized on {HOST.NAME}
   ```
   {Template App timedatectl active:rabe.timedatectl.ntp.synchronized.last()}=0
   ```
-* Warning: NTP not synchronized for more than {$TIMEDATECTL_MAX_NO_SYNC_TIME}
+* Warning: NTP not synchronized for more than {$TIMEDATECTL_MAX_NO_SYNC_TIME} on {HOST.NAME}
   ```
   {Template App timedatectl active:rabe.timedatectl.ntp.synchronized.last(,{$TIMEDATECTL_MAX_NO_SYNC_TIME})}<1
   ```
