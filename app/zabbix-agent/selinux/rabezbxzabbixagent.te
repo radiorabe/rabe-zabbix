@@ -2,8 +2,32 @@ module rabezbxzabbixagent 1.0;
 
 require {
     type zabbix_agent_t;
+    type chkpwd_exec_t;
+    type sssd_conf_t;
+    type shadow_t;
+    type system_dbusd_t;
     class process setrlimit;
+    class unix_stream_socket connectto;
+    class dbus send_msg;
+    class file { read open execute execute_no_trans };
+    class capability { dac_read_search };
 }
 
 #============= zabbix_agent_t ==============
+# zabbix wants to setrlimit for "security" reasons
 allow zabbix_agent_t self:process setrlimit;
+
+# basics needed for sudo to check the zabbix user
+allow zabbix_agent_t chkpwd_exec_t:file execute_no_trans;
+allow zabbix_agent_t shadow_t:file { read open };
+# this dac rule lets sudo check in the dac for (ie. pam_selinux)
+allow zabbix_agent_t self:capability { dac_read_search };
+# pam is configured with pam_sss at rabe
+allow zabbix_agent_t sssd_conf_t:file { read open };
+
+# agent may access system dbus, actual dbus requests get denied later,
+# mostly on the response level from where someone should be answering.
+# this is part of allowing sssd to operate in sudo but can also be
+# used elsewhere.
+allow zabbix_agent_t system_dbusd_t:unix_stream_socket connectto;
+allow zabbix_agent_t system_dbusd_t:dbus send_msg;
