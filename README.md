@@ -442,8 +442,8 @@ cat > "${snmpDir}/doc/README.Usage.md" << EOF
    [\`${xmlName}\`](${xmlName})
    into your Zabbix server (click on the \`Raw\` button to download).
 4. Add an SNMP interface configuration to your host
-5. Set the `{$SNMP_COMMUNITY}` macro to your desired community if you don't use
-   `public`
+5. Set the \`{$SNMP_COMMUNITY}\` macro to your desired community if you don't
+   use \`public\`
 6. Add the template to your host (or stack template)
 7. Check if new data arrives
 
