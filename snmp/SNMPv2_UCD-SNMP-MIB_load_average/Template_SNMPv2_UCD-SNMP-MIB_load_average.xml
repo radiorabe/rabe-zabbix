@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2019-11-03T08:45:46Z</date>
+    <groups>
+        <group>
+            <name>SNMP templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SNMPv2 UCD-SNMP-MIB load average</template>
+            <name>Template SNMPv2 UCD-SNMP-MIB load average</name>
+            <description>SNMPv2 template for monitoring the load average of a host exposing the [`UCD-SNMP-MIB`](http://www.net-snmp.org/docs/mibs/ucdavis.html) (University of California, Davis MIB) `laTable` table.</description>
+            <groups>
+                <group>
+                    <name>SNMP templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>UCD-SNMP-MIB load average</name>
+                </application>
+            </applications>
+            <items/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Load average entries</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#LA_INDEX},UCD-SNMP-MIB::laIndex,{#LA_NAME},UCD-SNMP-MIB::laNames]</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.laEntry.discovery</key>
+                    <delay>300</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Discovery of load average entries&#13;
+&#13;
+Returns the following macro for each available load average entry (`laEntry`)&#13;
+* `{#LA_INDEX}`&#13;
+  * Reference index/row number for each discovered load average entry (`UCD-SNMP-MIB::laIndex`)&#13;
+* `{#LA_NAME}`&#13;
+  * The name of each discovered load average entry (`UCD-SNMP-MIB::laNames`).</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Load watch point of &quot;{#LA_NAME}&quot;</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>UCD-SNMP-MIB::laConfig.{#SNMPINDEX}</snmp_oid>
+                            <key>rabe.snmp.ucd-snmp-mib.laConfig[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>30</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The watch point for load-average `{#LA_NAME}` to signal an error. &#13;
+&#13;
+If the load averages rises above this value, the laErrorFlag is set.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>UCD-SNMP-MIB load average</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Load error message for &quot;{#LA_NAME}&quot;</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>UCD-SNMP-MIB::laErrMessage.{#SNMPINDEX}</snmp_oid>
+                            <key>rabe.snmp.ucd-snmp-mib.laErrMessage[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>30</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>4</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>An error message describing the load-average and its surpased watch-point value.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>UCD-SNMP-MIB load average</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Error flag of &quot;{#LA_NAME}&quot;</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>UCD-SNMP-MIB::laErrorFlag.{#SNMPINDEX}</snmp_oid>
+                            <key>rabe.snmp.ucd-snmp-mib.laErrorFlag[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>A Error flag to indicate the load-average has crossed its threshold value defined in the snmpd.conf file.&#13;
+It is set to 1 if the threshold is crossed, 0 otherwise.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>UCD-SNMP-MIB load average</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>UCD-SNMP-MIB error flag</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Load &quot;{#LA_NAME}&quot;</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <multiplier>0</multiplier>
+                            <snmp_oid>UCD-SNMP-MIB::laLoad.{#SNMPINDEX}</snmp_oid>
+                            <key>rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>The `{#LA_NAME}` minute load average.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>UCD-SNMP-MIB load average</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}&quot;})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_THRESHOLD:&quot;{#LA_NAME}&quot;}</expression>
+                            <name>Processor load is high (&gt; $1 over {$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}&quot;} on {HOST.NAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>The average CPU load is over `{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}&quot;}` for the last `{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}}`.</description>
+                            <type>0</type>
+                            <dependencies>
+                                <dependency>
+                                    <name>Processor load is very high (&gt; $1 over {$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;} on {HOST.NAME}</name>
+                                    <expression>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_THRESHOLD:&quot;{#LA_NAME}&quot;}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_THRESHOLD:&quot;{#LA_NAME}&quot;}</expression>
+                            <name>Processor load is very high (&gt; $1 over {$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;} on {HOST.NAME}</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>The average CPU load is over `{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;}` for the last `{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;}`.</description>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].last()}&gt;{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laConfig[{#SNMPINDEX}].last()}</expression>
+                            <name>Processor load {#LA_NAME} is higher than the system watch point ({ITEM.VALUE1} &gt; {ITEM.VALUE2}) on {HOST.NAME})</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>The load average is higher than the system configured watch point (`UCD-SNMP-MIB::laConfig`).</description>
+                            <type>0</type>
+                            <dependencies>
+                                <dependency>
+                                    <name>Processor load is high (&gt; $1 over {$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}&quot;} on {HOST.NAME}</name>
+                                    <expression>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}&quot;})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_THRESHOLD:&quot;{#LA_NAME}&quot;}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>CPU load &quot;{#LA_NAME}&quot;</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>1A7C11</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template SNMPv2 UCD-SNMP-MIB load average</host>
+                                        <key>rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>F63100</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Template SNMPv2 UCD-SNMP-MIB load average</host>
+                                        <key>rabe.snmp.ucd-snmp-mib.laConfig[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <host_prototypes/>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_THRESHOLD}</macro>
+                    <value>15</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME}</macro>
+                    <value>30m</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_THRESHOLD}</macro>
+                    <value>15</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME}</macro>
+                    <value>15m</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <value_maps>
+        <value_map>
+            <name>UCD-SNMP-MIB error flag</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>noError</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>error</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
