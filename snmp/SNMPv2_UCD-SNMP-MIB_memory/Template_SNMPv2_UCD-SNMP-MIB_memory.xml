@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.0</version>
+    <date>2019-11-03T08:59:39Z</date>
+    <groups>
+        <group>
+            <name>SNMP templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SNMPv2 UCD-SNMP-MIB memory</template>
+            <name>Template SNMPv2 UCD-SNMP-MIB memory</name>
+            <description>SNMPv2 template for monitoring the memory usage of a host exposing the [`UCD-SNMP-MIB`](http://www.net-snmp.org/docs/mibs/ucdavis.html) (University of California, Davis MIB) `memory` table.</description>
+            <groups>
+                <group>
+                    <name>SNMP templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>UCD-SNMP-MIB memory</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Available memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memAvailReal.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memAvailReal[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The amount of real/physical memory currently unused or available.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Available swap space</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memAvailSwap.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memAvailSwap[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The amount of swap space currently unused or available.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Buffered memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memBuffer.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memBuffer[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total amount of real or virtual memory currently allocated for use as memory buffers.&#13;
+&#13;
+This object will not be implemented on hosts where the underlying operating system does not explicitly identify memory as specifically reserved for this purpose.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Cached memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memCached.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memCached[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total amount of real or virtual memory currently allocated for use as cached memory.&#13;
+&#13;
+This object will not be implemented on hosts where the underlying operating system does not explicitly identify memory as specifically reserved for this purpose.&quot;</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Minimum swap expected to be free</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memMinimumSwap.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memMinimumSwap[]</key>
+                    <delay>1800</delay>
+                    <history>7</history>
+                    <trends>30</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The minimum amount of swap space expected to be kept free or available during normal operation of this host.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Available memory in percent</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rabe.snmp.ucd-snmp-mib.memPercentAvailReal[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params>100 / last(&quot;rabe.snmp.ucd-snmp-mib.memTotalReal[]&quot;) * last(&quot;rabe.snmp.ucd-snmp-mib.memAvailReal[]&quot;)</params>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The amount of real/physical memory currently unused or available in percent.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Available swap in percent</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rabe.snmp.ucd-snmp-mib.memPercentAvailSwap[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params>100 / last(&quot;rabe.snmp.ucd-snmp-mib.memTotalSwap[]&quot;) * last(&quot;rabe.snmp.ucd-snmp-mib.memAvailSwap[]&quot;)</params>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The amount of swap space currently unused or available in percent.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Shared memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memShared.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memShared[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total amount of real or virtual memory currently allocated for use as shared memory.&#13;
+&#13;
+This object will not be implemented on hosts where the underlying operating system does not explicitly identify memory as specifically reserved for this purpose.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Swap error message</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memSwapErrorMsg.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memSwapErrorMsg[]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>4</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Describes whether the amount of available swap space (as reported by 'memAvailSwap(4)'), is less than the desired minimum (specified by 'memMinimumSwap(12)').</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Swap error flag</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memSwapError.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memSwapError[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Indicates whether the amount of available swap space (as reported by 'memAvailSwap(4)'), is less than the desired minimum (specified by 'memMinimumSwap(12)').</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>UCD-SNMP-MIB error flag</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Free memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memTotalFree.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memTotalFree[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total amount of memory free or available for use on this host. This value typically covers both real memory and swap space or virtual memory.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Total memory</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memTotalReal.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memTotalReal[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total amount of real/physical memory installed.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Total swap space</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>UCD-SNMP-MIB::memTotalSwap.0</snmp_oid>
+                    <key>rabe.snmp.ucd-snmp-mib.memTotalSwap[]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1024</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The total amount of swap space configured for this host.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>UCD-SNMP-MIB memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_HIGH_THRESHOLD}</macro>
+                    <value>10G</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_WARNING_THRESHOLD}</macro>
+                    <value>20G</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_HIGH_THRESHOLD}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_WARNING_THRESHOLD}</macro>
+                    <value>10</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_HIGH_THRESHOLD}</macro>
+                    <value>10G</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_WARNING_THRESHOLD}</macro>
+                    <value>20G</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_HIGH_THRESHOLD}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_WARNING_THRESHOLD}</macro>
+                    <value>10</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memAvailReal[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_WARNING_THRESHOLD}&#13;
+&#13;
+and&#13;
+&#13;
+{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memPercentAvailReal[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_WARNING_THRESHOLD}</expression>
+            <name>Available memory on {HOST.NAME} is low (&lt; $2 %, {ITEM.VALUE1} bytes available)</name>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>The available memory on the system is below ` {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_WARNING_THRESHOLD}` and `{$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_WARNING_THRESHOLD}` percent.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>Available memory on {HOST.NAME} is very low (&lt; $2 %, {ITEM.VALUE1} bytes available)</name>
+                    <expression>{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memAvailReal[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_HIGH_THRESHOLD}&#13;
+&#13;
+and&#13;
+&#13;
+{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memPercentAvailReal[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_HIGH_THRESHOLD}</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memAvailReal[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_HIGH_THRESHOLD}&#13;
+&#13;
+and&#13;
+&#13;
+{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memPercentAvailReal[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_HIGH_THRESHOLD}</expression>
+            <name>Available memory on {HOST.NAME} is very low (&lt; $2 %, {ITEM.VALUE1} bytes available)</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The available memory on the system is below ` {$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_AVAILABLE_HIGH_THRESHOLD}` and `{$SNMPV2_UCD_SNMP_MIB_MEMORY_MEMORY_PAVAILABLE_HIGH_THRESHOLD}` percent.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memAvailSwap[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_WARNING_THRESHOLD}&#13;
+&#13;
+and&#13;
+&#13;
+{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memPercentAvailSwap[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_WARNING_THRESHOLD}</expression>
+            <name>Available swap on {HOST.NAME} is low (&lt; $2 %, {ITEM.VALUE1} bytes available)</name>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>The available swap space on the system is below ` {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_WARNING_THRESHOLD}` and `{$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_WARNING_THRESHOLD}` percent.</description>
+            <type>0</type>
+            <dependencies>
+                <dependency>
+                    <name>Available swap on {HOST.NAME} is very low (&lt; $2 %, {ITEM.VALUE1} bytes available)</name>
+                    <expression>{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memAvailSwap[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_HIGH_THRESHOLD}&#13;
+&#13;
+and&#13;
+&#13;
+{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memPercentAvailSwap[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_HIGH_THRESHOLD}</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memAvailSwap[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_HIGH_THRESHOLD}&#13;
+&#13;
+and&#13;
+&#13;
+{Template SNMPv2 UCD-SNMP-MIB memory:rabe.snmp.ucd-snmp-mib.memPercentAvailSwap[].last()}&#13;
+  &lt; {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_HIGH_THRESHOLD}</expression>
+            <name>Available swap on {HOST.NAME} is very low (&lt; $2 %, {ITEM.VALUE1} bytes available)</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>The available swap space on the system is below ` {$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_AVAILABLE_HIGH_THRESHOLD}` and `{$SNMPV2_UCD_SNMP_MIB_MEMORY_SWAP_PAVAILABLE_HIGH_THRESHOLD}` percent.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Memory usage</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00DD00</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memAvailReal[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>2774A4</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memBuffer[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>A54F10</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memCached[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>6C59DC</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memShared[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>DD0000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memTotalReal[]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Swap usage</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00DD00</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memAvailSwap[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>DD0000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMPv2 UCD-SNMP-MIB memory</host>
+                        <key>rabe.snmp.ucd-snmp-mib.memTotalSwap[]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+    <value_maps>
+        <value_map>
+            <name>UCD-SNMP-MIB error flag</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>noError</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>error</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
