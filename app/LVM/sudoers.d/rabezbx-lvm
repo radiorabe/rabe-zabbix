@@ -11,6 +11,13 @@ Cmnd_Alias RABEZBX_LVM_VGS = /sbin/vgs
 Cmnd_Alias RABEZBX_LVM_LVS = /sbin/lvs
 
 ##
+## Disable logging for LVM sudo calls
+##
+Defaults!RABEZBX_LVM_PVS !syslog
+Defaults!RABEZBX_LVM_VGS !syslog
+Defaults!RABEZBX_LVM_LVS !syslog
+
+##
 ## User privilege specifications for the zabbix user
 ##
 zabbix ALL=NOPASSWD: RABEZBX_LVM_LVS
