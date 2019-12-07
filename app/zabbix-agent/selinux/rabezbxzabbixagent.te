@@ -22,6 +22,9 @@ allow zabbix_agent_t chkpwd_exec_t:file execute_no_trans;
 allow zabbix_agent_t shadow_t:file { read open };
 # this dac rule lets sudo check in the dac for (ie. pam_selinux)
 allow zabbix_agent_t self:capability { dac_read_search };
+# agent tries to dac_override and and blocking is the proper
+# resolution but we dontaudit to keep the logs somewhat clean
+dontaudit zabbix_agent_t self:capability { dac_override };
 # pam is configured with pam_sss at rabe
 allow zabbix_agent_t sssd_conf_t:file { read open };
 
