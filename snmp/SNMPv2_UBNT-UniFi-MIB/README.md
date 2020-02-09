@@ -7,7 +7,7 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 ## Usage
-1. Download the [`UBNT-UniFi-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB)
+1. Download the [`UBNT-UniFi-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB) and [`UBNT-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-MIB)
 2. Place the MIB file(s) into your default MIB directory on the Zabbix server
    and/or proxy (usually `/usr/local/share/snmp/mibs`) and make sure that the
    Zabbix server and/or proxy loads them (see [Using and loading
