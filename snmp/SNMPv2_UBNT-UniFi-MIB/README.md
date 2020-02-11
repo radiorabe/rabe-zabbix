@@ -1,13 +1,15 @@
 # Zabbix SNMPv2 UBNT-UniFi-MIB monitoring
 Monitors Ubiquiti device parameters, such as Ethernet, Radio and virtual access
 point interfaces, exposed by the
-[`UBNT-UniFi-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB) via SNMPv2.
+[`UBNT-UniFi-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB) and
+[`UBNT-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-MIB) via SNMPv2.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 ## Usage
-1. Download the [`UBNT-UniFi-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB) and [`UBNT-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-MIB)
+1. Download the [`UBNT-UniFi-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB)
+   and [`UBNT-MIB`](http://dl.ubnt-ut.com/snmp/UBNT-MIB).
 2. Place the MIB file(s) into your default MIB directory on the Zabbix server
    and/or proxy (usually `/usr/local/share/snmp/mibs`) and make sure that the
    Zabbix server and/or proxy loads them (see [Using and loading
@@ -210,4 +212,4 @@ the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.
 
 ## Copyright
-Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2020 [Radio Bern RaBe](http://www.rabe.ch)
