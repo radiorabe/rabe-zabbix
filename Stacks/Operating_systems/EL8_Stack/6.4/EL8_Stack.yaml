@@ -1,0 +1,29 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: e3797825aba640d9811af437183dab65
+      name: 'Stacks/Operating systems'
+  templates:
+    - uuid: 457a175a097c4d0199dbf18c4b6a1d51
+      template: 'EL8 Stack'
+      name: 'EL8 Stack'
+      description: |
+        Base stack template for CentOS 8 Stream based systems.
+        
+        Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
+      vendor:
+        name: RaBe
+        version: '6.4'
+      templates:
+        - name: 'Linux by Zabbix agent active'
+        - name: 'Systemd by Zabbix agent 2'
+        - name: 'Zabbix unsupported items'
+      groups:
+        - name: 'Stacks/Operating systems'
+      tags:
+        - tag: class
+          value: stack
+      macros:
+        - macro: '{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}'
+          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service)$
+          description: 'Filter of systemd service units by name'

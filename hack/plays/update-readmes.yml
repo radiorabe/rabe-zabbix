@@ -1,0 +1,185 @@
+
+---
+- name: Update README
+  hosts: [localhost]
+  gather_facts: yes
+
+  tasks:
+    - ansible.builtin.find:
+        path: "../../Stacks"
+        file_type: "directory"
+        depth: 3
+        recurse: yes
+      register: stacks
+
+    - ansible.builtin.find:
+        path: "../../Templates"
+        file_type: "directory"
+        depth: 3
+        recurse: yes
+      register: templates
+
+    - name: "Generate top-level README.md"
+      ansible.builtin.copy:
+        dest: '../../README.md'
+        content: |
+          # rabe-zabbix
+
+          Collection of various [Zabbix](http://www.zabbix.com/) templates and
+          helper scripts created or used by [Radio Bern RaBe](http://rabe.ch/).
+
+          See below for an overview of our templates. We group our templates
+          similar to how Zabbix-out-of-the-box templates are grouped.
+
+          ## Stacks
+
+          Every host within Zabbix gets a specifc stack template assigned according
+          to its role. The stack exactly defines the setup of this host and will be
+          re-used if there is more than one host with the same role.
+
+          As an example, a host which servers a MediaWiki instance, will get the
+          stack template <code>MediaWiki Stack</code> assigned. The stack template
+          might include the operating system template <code>EL9 Stack</code>, the
+          application templates <code>Apache by HTTP</code>, <code>PHP-FPM by HTTP</code>
+          and <code>MariaDB by agent 2</code>.
+
+          This ensures great modularity, reusability and avoids unecessary
+          inheritance problems.
+
+          {% set flat_stacks = (stacks.files | sort(attribute='path') | map(attribute='path')) %}
+          {% for stack in flat_stacks %}
+          {% if (stack.split('/') | length) == 4 %}
+
+          ### {{ stack.split('/')[2:4] | join(": ") | replace("_", " ") }}
+          
+          | Name | 3.0 | 6.4 |
+          | ---- | --- | --- |
+          {% endif %}
+          {% if (stack.split('/') | length) == 5 %}
+          | {{ stack.split('/')[4].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} |
+          {% endif %}
+          {% endfor %}
+
+          ## Templates
+          {% set flat_templates = (templates.files | sort(attribute='path') | map(attribute='path')) %}
+          {% for template in flat_templates %}
+          {% if (template.split('/') | length) == 4 %}
+
+          ### {{ template.split('/')[2:4] | join(": ") | replace("_", " ") }}
+          
+          | Name | 3.0 | 6.4 |
+          | ---- | --- | --- |
+          {% endif %}
+          {% if (template.split('/') | length) == 5 %}
+          | {{ template.split('/')[4].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} |
+          {% endif %}
+          {% endfor %}
+
+          ## Contributing
+          
+          See [CONTRIBUTING.md](./CONTRIBUTING.md) for our contributor documentation.
+
+          ## License
+          
+          This template collection is free software: you can redistribute it and/or modify it under
+          the terms of the GNU Affero General Public License as published by the Free
+          Software Foundation, version 3 of the License.
+
+          ## Copyright
+          
+          Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+
+    - ansible.builtin.find:
+        paths: 
+          - "../../Stacks"
+          - "../../Templates"
+        patterns:
+          - "*.yaml"
+        file_type: "file"
+        depth: 5
+        recurse: yes
+      register: yaml
+    - debug:
+        msg: "{{ yaml.files | map(attribute='path') }}"
+    - debug:
+        msg: "{{ lookup('ansible.builtin.file', item) | from_yaml }}"
+      loop: "{{ yaml.files | map(attribute='path') }}"
+      register: info
+
+    - name: "Generate template README.md"
+      ansible.builtin.copy:
+        dest: '{{ item | dirname }}/README.md'
+        content: |
+          {% set exp = (lookup('ansible.builtin.file', item) | from_yaml).zabbix_export %}
+          {% set triggers = [] %}
+          {% set tpl = exp.templates[0] %}
+          # {{ tpl.name }}
+
+          {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}) {% endfor %}
+
+          {{ tpl.description }}
+          {% if 'templates' in tpl %}
+
+          ## Dependant Templates
+
+          This Zabbix template depends on the following templates.
+
+          {% for dep in tpl.templates %}
+          * {{ dep.name }}
+          {% endfor %}
+          {% endif %}
+          {% if 'macros' in tpl %}
+
+          ## Macros
+
+          The following Zabbix macros are configured via this template.
+
+          | Macro | Value | Description |
+          | ----- | ----- | ----------- |
+          {% for macro in tpl.macros %}
+          | `{{ macro.macro }}` | `{{ macro.value }}` | {{ macro.description }} |
+          {% endfor %}
+          {% endif %}
+          {% if 'items' in tpl %}
+
+          ## Items
+          {% for item in tpl['items'] %}
+
+          ### Item: {{ item.name }}
+
+          {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}) {% endfor %}
+          {{- triggers.append(item.triggers) }}
+
+          {{ item.description }}
+          ```
+          {{ item.key }}
+          ```
+          {% endfor %}
+          {% endif %}
+          {% if triggers %}
+
+          ## Triggers
+          {% for trigger in ( triggers | flatten ) %}
+
+          ## Trigger: {{ trigger.name }}
+
+          {{ trigger.description }}
+
+          Priority: {{ trigger.priority }}
+
+          ```
+          {{ trigger.expression }}
+          ```
+          {% endfor %}
+          {% endif %}
+
+          ## License
+
+          This template is free software: you can redistribute it and/or modify it under
+          the terms of the GNU Affero General Public License as published by the Free
+          Software Foundation, version 3 of the License.
+
+          ## Copyright
+
+          Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+      loop: "{{ yaml.files | map(attribute='path') }}"
