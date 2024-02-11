@@ -99,21 +99,14 @@
         depth: 5
         recurse: yes
       register: yaml
-    - debug:
-        msg: "{{ yaml.files | map(attribute='path') }}"
-    - debug:
-        msg: "{{ lookup('ansible.builtin.file', item) | from_yaml }}"
-      loop: "{{ yaml.files | map(attribute='path') }}"
-      register: info
 
     - name: "Generate template README.md"
       ansible.builtin.copy:
         dest: '{{ item | dirname }}/README.md'
         content: |
-          {% set exp = (lookup('ansible.builtin.file', item) | from_yaml).zabbix_export %}
           {% set triggers = [] %}
-          {% set tpl = exp.templates[0] %}
-          # {{ tpl.name }}
+          {% set tpl = (lookup('ansible.builtin.file', item) | from_yaml).zabbix_export.templates[0] %}
+          # Zabbix Template: {{ tpl.name }}
 
           {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
 
@@ -121,7 +114,7 @@
           {{ tpl.description }}
           {% if 'templates' in tpl %}
 
-          ## Dependant Templates
+          ## Linked Templates
 
           This Zabbix template depends on the following templates.
 

@@ -69,6 +69,7 @@ inheritance problems.
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |
 | timedatectl | [✅](./Templates/Applications/timedatectl/3.0) |  |
 | zabbix-agent | [✅](./Templates/Applications/zabbix-agent/3.0) |  |
+| Zabbix unsupported items |  | [✅](./Templates/Applications/Zabbix_unsupported_items/6.4) |
 
 ### Templates: Network devices
 

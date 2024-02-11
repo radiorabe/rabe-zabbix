@@ -10,7 +10,7 @@ zabbix_export:
       description: |
         Base stack template for CentOS 8 Stream based systems.
         
-        Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
+        Managed by <https://github.com/radiorabe/rabe-zabbix>.
       vendor:
         name: RaBe
         version: '6.4'

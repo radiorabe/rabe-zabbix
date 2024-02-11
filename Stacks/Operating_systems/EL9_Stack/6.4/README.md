@@ -1,13 +1,13 @@
-# EL9 Stack
+# Zabbix Template: EL9 Stack
 
 ![class: stack](https://img.shields.io/badge/class-stack-00c9bf)
 
 Base stack template for AlmaLinux 9 based systems.
 
-Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
+Managed by <https://github.com/radiorabe/rabe-zabbix>.
 
 
-## Dependant Templates
+## Linked Templates
 
 This Zabbix template depends on the following templates.
 

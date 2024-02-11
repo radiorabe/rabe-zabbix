@@ -1,13 +1,13 @@
-# EL8 Stack
+# Zabbix Template: EL8 Stack
 
 ![class: stack](https://img.shields.io/badge/class-stack-00c9bf)
 
 Base stack template for CentOS 8 Stream based systems.
 
-Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
+Managed by <https://github.com/radiorabe/rabe-zabbix>.
 
 
-## Dependant Templates
+## Linked Templates
 
 This Zabbix template depends on the following templates.
 
