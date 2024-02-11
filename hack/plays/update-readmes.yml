@@ -52,11 +52,11 @@
 
           ### {{ stack.split('/')[2:4] | join(": ") | replace("_", " ") }}
           
-          | Name | 3.0 | 6.4 |
-          | ---- | --- | --- |
+          | Name | 3.0 | 6.4 | 7.0 |
+          | ---- | --- | --- | --- |
           {% endif %}
           {% if (stack.split('/') | length) == 5 %}
-          | {{ stack.split('/')[4].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} |
+          | {{ stack.split('/')[4].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if stack + '/7.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} |
           {% endif %}
           {% endfor %}
 
@@ -67,13 +67,23 @@
 
           ### {{ template.split('/')[2:4] | join(": ") | replace("_", " ") }}
           
-          | Name | 3.0 | 6.4 |
-          | ---- | --- | --- |
+          | Name | 3.0 | 6.4 | 7.0 |
+          | ---- | --- | --- | --- |
           {% endif %}
           {% if (template.split('/') | length) == 5 %}
-          | {{ template.split('/')[4].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} |
+          | {{ template.split('/')[4].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if template + '/7.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} |
           {% endif %}
           {% endfor %}
+
+          ## Zabbix Version Support
+
+          We primarily support versions of Zabbix we use in production.
+
+          | Version | Supported | Description |
+          | ------- | --------- | ----------- |
+          | 3.0 | ✅ | legacy RaBe environment |
+          | 6.4 | ✅ | for LTS preparation work |
+          | 7.0 | ✅ | once released |
 
           ## Contributing
           
