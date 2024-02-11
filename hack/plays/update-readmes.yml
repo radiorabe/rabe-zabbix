@@ -115,7 +115,8 @@
           {% set tpl = exp.templates[0] %}
           # {{ tpl.name }}
 
-          {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}) {% endfor %}
+          {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+
 
           {{ tpl.description }}
           {% if 'templates' in tpl %}
@@ -133,11 +134,16 @@
           ## Macros
 
           The following Zabbix macros are configured via this template.
-
-          | Macro | Value | Description |
-          | ----- | ----- | ----------- |
           {% for macro in tpl.macros %}
-          | `{{ macro.macro }}` | `{{ macro.value }}` | {{ macro.description }} |
+
+          ### Macro: `{{ macro.macro }}`
+
+          {{ macro.description }}
+
+          Default:
+          ```
+          {{ macro.value }}
+          ```
           {% endfor %}
           {% endif %}
           {% if 'items' in tpl %}
@@ -147,8 +153,8 @@
 
           ### Item: {{ item.name }}
 
-          {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}) {% endfor %}
-          {{- triggers.append(item.triggers) }}
+          {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+          {{ triggers.append(item.triggers) }}
 
           {{ item.description }}
           ```
@@ -162,6 +168,9 @@
           {% for trigger in ( triggers | flatten ) %}
 
           ## Trigger: {{ trigger.name }}
+
+          {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+
 
           {{ trigger.description }}
 

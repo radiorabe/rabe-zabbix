@@ -1,6 +1,7 @@
 # EL7 Stack
 
-![class: stack](https://img.shields.io/badge/class-stack) 
+![class: stack](https://img.shields.io/badge/class-stack-00c9bf)
+
 Base stack template for CentOS 7 based systems.
 
 Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
@@ -18,9 +19,14 @@ This Zabbix template depends on the following templates.
 
 The following Zabbix macros are configured via this template.
 
-| Macro | Value | Description |
-| ----- | ----- | ----------- |
-| `{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}` | `^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|abrt-vmcore\.service|dmraid-activation\.service|abrt-xorg\.service|rhel-configure\.service|systemd-readahead-collect\.service|rhel-autorelabel\.service|irqbalance\.service|rhel-loadmodules\.service|systemd-readahead-replay\.service|rhel-autorelabel-mark\.service)$` | Filter of systemd service units by name |
+### Macro: `{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}`
+
+Filter of systemd service units by name
+
+Default:
+```
+^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|abrt-vmcore\.service|dmraid-activation\.service|abrt-xorg\.service|rhel-configure\.service|systemd-readahead-collect\.service|rhel-autorelabel\.service|irqbalance\.service|rhel-loadmodules\.service|systemd-readahead-replay\.service|rhel-autorelabel-mark\.service)$
+```
 
 ## License
 
