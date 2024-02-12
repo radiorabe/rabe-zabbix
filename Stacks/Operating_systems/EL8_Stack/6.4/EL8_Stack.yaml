@@ -24,7 +24,7 @@ zabbix_export:
         - name: rpc.gssd
         - name: rsyslog
         - name: sssd
-        - name: 'Systemd by Zabbix agent 2'
+        - name: 'systemd Stack'
         - name: timedatectl
         - name: tuned
         - name: 'Zabbix unsupported items'

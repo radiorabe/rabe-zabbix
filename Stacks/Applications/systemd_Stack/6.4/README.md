@@ -16,6 +16,7 @@ This Zabbix template depends on the following templates.
 * systemd-journald
 * systemd-logind
 * systemd-udevd
+* Systemd by Zabbix agent 2
 
 ## License
 

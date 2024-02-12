@@ -19,7 +19,7 @@ This Zabbix template depends on the following templates.
 * rpc.gssd
 * rsyslog
 * sssd
-* Systemd by Zabbix agent 2
+* systemd Stack
 * tuned
 * Zabbix unsupported items
 

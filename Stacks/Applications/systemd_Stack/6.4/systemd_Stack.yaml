@@ -20,6 +20,7 @@ zabbix_export:
         - name: systemd-journald
         - name: systemd-logind
         - name: systemd-udevd
+        - name: 'Systemd by Zabbix agent 2'
       groups:
         - name: Stacks/Applications
       tags:
