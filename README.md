@@ -43,6 +43,14 @@ inheritance problems.
 | EL8 Stack |  | [✅](./Stacks/Operating_systems/EL8_Stack/6.4) |  |
 | EL9 Stack |  | [✅](./Stacks/Operating_systems/EL9_Stack/6.4) |  |
 
+### Stacks: Servers
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| EL7 KVM VM Stack |  | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/6.4) |  |
+| EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/6.4) |  |
+| EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/6.4) |  |
+
 ## Templates
 
 ### Templates: Applications

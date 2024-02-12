@@ -6,7 +6,7 @@ zabbix_export:
   templates:
     - uuid: 77a0624363cd4616a13d1902430ae186
       template: qemu-ga
-      name: QEMU Guest Agent
+      name: 'QEMU Guest Agent'
       description: |
         Monitoring of the [QEMU Guest Agent](https://www.qemu.org/docs/master/interop/qemu-ga.html).
         

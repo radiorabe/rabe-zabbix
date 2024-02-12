@@ -1,11 +1,11 @@
 zabbix_export:
   version: '6.4'
   template_groups:
-    - uuid: 'a571c0d144b14fd4a87a9d9b2aa9fcd6'
-      name: 'Templates/Applications'
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
   templates:
     - uuid: 16b1c17264c0460d92c29aa6b8adb8d1
-      template: 'sssd'
+      template: sssd
       name: sssd
       description: |
         Monitoring of [sssd](https://sssd.io).
@@ -16,7 +16,7 @@ zabbix_export:
         name: RaBe
         version: '6.4'
       groups:
-        - name: 'Templates/Applications'
+        - name: Templates/Applications
       items:
         - uuid: f794b260ca324da69dd3b551a94d617d
           name: 'sssd: process summary'
