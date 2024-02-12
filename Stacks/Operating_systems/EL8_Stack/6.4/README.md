@@ -17,6 +17,7 @@ This Zabbix template depends on the following templates.
 * firewalld
 * gssproxy
 * Linux by Zabbix agent active
+* rpc.gssd
 * rsyslog
 * sssd
 * Systemd by Zabbix agent 2

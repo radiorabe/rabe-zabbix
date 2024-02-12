@@ -11,6 +11,8 @@
       - search: "EL8 Stack"
       - search: "EL9 Stack"
       - search: "rsyslog"
+      - search: "rpc.gssd"
+      - search: "gssproxy"
       - search: "timedatectl"
       - search: "tuned"
       - search: "Zabbix unsupported items"

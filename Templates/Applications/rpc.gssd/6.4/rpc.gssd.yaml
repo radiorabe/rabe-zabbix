@@ -4,11 +4,11 @@ zabbix_export:
     - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
       name: Templates/Applications
   templates:
-    - uuid: 95c6a57fd45d41efa0a69adbcfe77f7d
-      template: gssproxy
-      name: gssproxy
+    - uuid: c17341b0f4ae4087a5356f695608cdce
+      template: rpc.gssd
+      name: rpc.gssd
       description: |
-        Monitoring of [gssproxy](https://pagure.io/gssproxy).
+        Monitoring of [rpc.gssd](https://linux.die.net/man/8/rpc.gssd).
         
         This template is part of [RaBe's Zabbix template and helpers
         collection](https://github.com/radiorabe/rabe-zabbix).
@@ -18,25 +18,25 @@ zabbix_export:
       groups:
         - name: Templates/Applications
       items:
-        - uuid: 564363b341d641eba0f8a5ac10bd0dd6
-          name: 'gssproxy: process summary'
+        - uuid: aa03535713e14255805c5c1017fe0357
+          name: 'rpc.gssd: process summary'
           type: ZABBIX_ACTIVE
-          key: 'proc.get[gssproxy,root,,summary]'
+          key: 'proc.get[rpc.gssd,root,,summary]'
           history: '0'
           trends: '0'
           value_type: TEXT
-          description: 'Get info about gssproxy processes'
+          description: 'Get info about rpc.gssd processes'
           tags:
             - tag: component
               value: raw
-        - uuid: 071714c8ab3a48f5ad3aa4940cc7fdcd
-          name: 'gssproxy: CPU seconds (system)'
+        - uuid: 2cd32fd6e6b64ed5aa3a0edc391bf436
+          name: 'rpc.gssd: CPU seconds (system)'
           type: DEPENDENT
-          key: rabe.gssproxy.cputime_system
+          key: rabe.rpc.gssd.cputime_system
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total CPU seconds (system) of gssproxy processes.'
+          description: 'Total CPU seconds (system) of rpc.gssd processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -48,18 +48,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[gssproxy,root,,summary]'
+            key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: gssproxy
-        - uuid: f623e4087c544a57afeba76b316f9691
-          name: 'gssproxy: CPU seconds (user)'
+              value: rpc.gssd
+        - uuid: b7977b94dd864c8dade8565e76133d61
+          name: 'rpc.gssd: CPU seconds (user)'
           type: DEPENDENT
-          key: rabe.gssproxy.cputime_user
+          key: rabe.rpc.gssd.cputime_user
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total CPU seconds (user) of gssproxy processes.'
+          description: 'Total CPU seconds (user) of rpc.gssd processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -71,17 +71,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[gssproxy,root,,summary]'
+            key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: gssproxy
-        - uuid: b4bd342079254211ad2e7963f344bce4
-          name: 'gssproxy: Number of processes'
+              value: rpc.gssd
+        - uuid: 600747130717406d96d09850419d282f
+          name: 'rpc.gssd: Number of processes'
           type: DEPENDENT
-          key: rabe.gssproxy.processes
+          key: rabe.rpc.gssd.processes
           delay: '0'
           history: 7d
-          description: 'Number of gssproxy processes.'
+          description: 'Number of rpc.gssd processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -90,27 +90,27 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[gssproxy,root,,summary]'
+            key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: gssproxy
+              value: rpc.gssd
           triggers:
-            - uuid: 63770c9832ac4b928c936eaeeb4feba2
-              expression: last(/gssproxy/rabe.gssproxy.processes)<1
-              name: 'gssproxy: No running processes'
+            - uuid: 4c40385bebe248cca1353f35a1814493
+              expression: last(/rpc.gssd/rabe.rpc.gssd.processes)<1
+              name: 'rpc.gssd: No running processes'
               priority: HIGH
-              description: 'No running gssproxy processes.'
+              description: 'No running rpc.gssd processes.'
               tags:
                 - tag: scope
                   value: availability
-        - uuid: c337e6fdbeb24b429fb1e335a52a7250
-          name: 'gssproxy: Memory usage (RSS)'
+        - uuid: 98482fdc7c6648c4b6bf9a04ab84516a
+          name: 'rpc.gssd: Memory usage (RSS)'
           type: DEPENDENT
-          key: rabe.gssproxy.rss
+          key: rabe.rpc.gssd.rss
           delay: '0'
           history: 7d
           units: B
-          description: 'Memory usage of gssproxy processes.'
+          description: 'Memory usage of rpc.gssd processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -119,18 +119,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[gssproxy,root,,summary]'
+            key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: gssproxy
-        - uuid: 61b026e0800149978bdd2ff1a829a53b
-          name: 'gssproxy: Swap usage'
+              value: rpc.gssd
+        - uuid: 49810a108bda4d88951f173cecacf02a
+          name: 'rpc.gssd: Swap usage'
           type: DEPENDENT
-          key: rabe.gssproxy.swap
+          key: rabe.rpc.gssd.swap
           delay: '0'
           history: 7d
           units: B
-          description: 'Swap usage of gssproxy processes.'
+          description: 'Swap usage of rpc.gssd processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -139,17 +139,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[gssproxy,root,,summary]'
+            key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: gssproxy
-        - uuid: 0fcb923c94e3464e81f4d1fb19fd46cd
-          name: 'gssproxy: Number of threads'
+              value: rpc.gssd
+        - uuid: 29c8d2dc65424d68901122945f79ea24
+          name: 'rpc.gssd: Number of threads'
           type: DEPENDENT
-          key: rabe.gssproxy.threads
+          key: rabe.rpc.gssd.threads
           delay: '0'
           history: 7d
-          description: 'Number of gssproxy threads.'
+          description: 'Number of rpc.gssd threads.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -158,18 +158,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[gssproxy,root,,summary]'
+            key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: gssproxy
+              value: rpc.gssd
       tags:
         - tag: class
           value: software
         - tag: target
-          value: gssproxy
+          value: rpc.gssd
       dashboards:
-        - uuid: 1dd7da0a2faf413895311fb37bc32bad
-          name: 'gssproxy: Overview'
+        - uuid: a0304f5c816e4d01acb1b5c39e608e11
+          name: 'rpc.gssd: Overview'
           pages:
             - widgets:
                 - type: graph
@@ -179,8 +179,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: gssproxy
-                        key: rabe.gssproxy.cputime_user
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.cputime_user
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -192,8 +192,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: gssproxy
-                        key: rabe.gssproxy.rss
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.rss
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -205,8 +205,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: gssproxy
-                        key: rabe.gssproxy.cputime_system
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.cputime_system
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -219,8 +219,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: gssproxy
-                        key: rabe.gssproxy.swap
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.swap
                     - type: INTEGER
                       name: source_type
                       value: '1'

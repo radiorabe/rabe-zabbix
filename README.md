@@ -68,6 +68,7 @@ inheritance problems.
 | MD-RAID | [✅](./Templates/Applications/MD-RAID/3.0) |  |  |
 | ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
+| rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) |  |
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |
 | sssd |  | [✅](./Templates/Applications/sssd/6.4) |  |
 | timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) |  |
