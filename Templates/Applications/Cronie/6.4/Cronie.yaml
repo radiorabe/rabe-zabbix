@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 68118ee2b30546478c4a6caf3cc257d8
+      template: Cronie
+      name: Cronie
+      description: |
+        Monitoring of [Cronie](https://github.com/cronie-crond/cronie).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: bfc5695c8f9a42369b6f20f8ca8f9198
+          name: 'Cronie: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[crond,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about Cronie processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 24d9fbaae29343c3ad35960410ef8f24
+          name: 'Cronie: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.Cronie.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: Cronie
+        - uuid: 3329d9db09dd42c2b4b79f7bb580b09a
+          name: 'Cronie: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.Cronie.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: Cronie
+        - uuid: fc21c63ac8c048ab82558630a5b4f8b1
+          name: 'Cronie: Number of processes'
+          type: DEPENDENT
+          key: rabe.Cronie.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: Cronie
+          triggers:
+            - uuid: ef13887e22f34a408992a818b6d68f2f
+              expression: last(/Cronie/rabe.Cronie.processes)<1
+              name: 'Cronie: No running processes'
+              priority: HIGH
+              description: 'No running Cronie processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 32752c9c060e4f0fa7f3c1726a38758c
+          name: 'Cronie: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.Cronie.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: Cronie
+        - uuid: 2367b7951dcf43528a91c2ab7358c8b5
+          name: 'Cronie: Swap usage'
+          type: DEPENDENT
+          key: rabe.Cronie.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: Cronie
+        - uuid: 5e6df906741a43eabb30f02f1aae47b8
+          name: 'Cronie: Number of threads'
+          type: DEPENDENT
+          key: rabe.Cronie.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of Cronie threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: Cronie
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: Cronie
+      dashboards:
+        - uuid: eb463a5714e746519592b864a1095030
+          name: 'Cronie: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'

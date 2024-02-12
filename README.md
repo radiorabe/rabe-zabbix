@@ -56,7 +56,7 @@ inheritance problems.
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
 | chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) |  |
-| Cronie | [✅](./Templates/Applications/Cronie/3.0) |  |  |
+| Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/6.4) |  |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
 | dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |
 | firewalld |  | [✅](./Templates/Applications/firewalld/6.4) |  |

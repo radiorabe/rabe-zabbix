@@ -17,6 +17,7 @@ zabbix_export:
         version: '6.4'
       templates:
         - name: auditd
+        - name: Cronie
         - name: firewalld
         - name: gssproxy
         - name: 'Linux by Zabbix agent active'

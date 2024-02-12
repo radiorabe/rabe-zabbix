@@ -18,6 +18,7 @@ zabbix_export:
       templates:
         - name: auditd
         - name: chrony
+        - name: Cronie
         - name: firewalld
         - name: gssproxy
         - name: 'Linux by Zabbix agent active'
