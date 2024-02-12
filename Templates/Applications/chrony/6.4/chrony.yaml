@@ -8,7 +8,7 @@ zabbix_export:
       template: chrony
       name: chrony
       description: |
-        Keeps track of chrony.
+        Keeps track of [chrony](https://chrony-project.org/).
         
         Needs the following configuration:
         ```
@@ -16,7 +16,8 @@ zabbix_export:
         AllowKey=system.run[/usr/bin/chronyc -c tracking]
         ```
         
-        Managed by <https://github.com/radiorabe/rabe-zabbix>.
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
       vendor:
         name: RaBe
         version: '6.4'

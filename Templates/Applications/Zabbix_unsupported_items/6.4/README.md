@@ -6,7 +6,8 @@ Implementation agnostic monitoring of unsupported items from Zabbix internal.
 
 Used as a mix-in to most low-level stack templates.
 
-Managed by <https://github.com/radiorabe/rabe-zabbix>.
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 
 ## Items

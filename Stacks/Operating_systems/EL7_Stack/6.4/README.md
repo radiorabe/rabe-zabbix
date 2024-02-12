@@ -4,7 +4,8 @@
 
 Base stack template for CentOS 7 based systems.
 
-Managed by <https://github.com/radiorabe/rabe-zabbix>.
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 
 ## Linked Templates
@@ -12,6 +13,7 @@ Managed by <https://github.com/radiorabe/rabe-zabbix>.
 This Zabbix template depends on the following templates.
 
 * auditd
+* firewalld
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
 * Zabbix unsupported items

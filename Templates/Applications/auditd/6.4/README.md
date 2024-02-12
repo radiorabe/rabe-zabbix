@@ -2,9 +2,10 @@
 
 ![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: auditd](https://img.shields.io/badge/target-auditd-00c9bf)
 
-Keeps track of auditd.
+Keeps track of [auditd](https://people.redhat.com/sgrubb/audit/).
 
-Managed by <https://github.com/radiorabe/rabe-zabbix>.
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 
 ## Items

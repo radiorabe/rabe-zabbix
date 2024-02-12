@@ -4,7 +4,8 @@
 
 Base stack template for CentOS 8 Stream based systems.
 
-Managed by <https://github.com/radiorabe/rabe-zabbix>.
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 
 ## Linked Templates
@@ -13,6 +14,7 @@ This Zabbix template depends on the following templates.
 
 * auditd
 * chrony
+* firewalld
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
 * timedatectl

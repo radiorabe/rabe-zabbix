@@ -53,6 +53,7 @@ inheritance problems.
 | Cronie | [✅](./Templates/Applications/Cronie/3.0) |  |  |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
 | dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |
+| firewalld |  | [✅](./Templates/Applications/firewalld/6.4) |  |
 | GlusterFS Client | [✅](./Templates/Applications/GlusterFS_Client/3.0) |  |  |
 | GlusterFS Server | [✅](./Templates/Applications/GlusterFS_Server/3.0) |  |  |
 | GssProxy Daemon | [✅](./Templates/Applications/GssProxy_Daemon/3.0) |  |  |

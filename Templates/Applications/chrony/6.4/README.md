@@ -2,7 +2,7 @@
 
 ![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: chrony](https://img.shields.io/badge/target-chrony-00c9bf)
 
-Keeps track of chrony.
+Keeps track of [chrony](https://chrony-project.org/).
 
 Needs the following configuration:
 ```
@@ -10,7 +10,8 @@ AllowKey=system.run[/usr/bin/chronyc -c activity]
 AllowKey=system.run[/usr/bin/chronyc -c tracking]
 ```
 
-Managed by <https://github.com/radiorabe/rabe-zabbix>.
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 
 ## Items

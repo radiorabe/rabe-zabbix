@@ -4,39 +4,39 @@ zabbix_export:
     - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
       name: Templates/Applications
   templates:
-    - uuid: cb33db846b0f4ca4bf01ada6228204ef
-      template: auditd
-      name: auditd
+    - uuid: dcfc6aa41ee44cf6a147e0390b959cca
+      template: firewalld
+      name: firewalld
       description: |
-        Keeps track of [auditd](https://people.redhat.com/sgrubb/audit/).
+        Keeps track of [firewalld](https://firewalld.org/).
         
         This template is part of [RaBe's Zabbix template and helpers
-        collection](https://github.com/radiorabe/rabe-zabbix).
+        collection](https://github.com/radiorabe/rabe-zabbix)
       vendor:
         name: RaBe
         version: '6.4'
       groups:
         - name: Templates/Applications
       items:
-        - uuid: 9238e7fe3ca14f3ab433837ded70c170
-          name: 'auditd: process summary'
+        - uuid: e58846d3d0f7441985e4c2536c267a87
+          name: 'firewalld: process summary'
           type: ZABBIX_ACTIVE
-          key: 'proc.get[auditd,root,,summary]'
+          key: 'proc.get[firewalld,root,,summary]'
           history: '0'
           trends: '0'
           value_type: TEXT
-          description: 'Get info about auditd processes'
+          description: 'Get info about firewalld processes'
           tags:
             - tag: component
               value: raw
-        - uuid: e7c1a45d007e4c2fbdf3c14d9e783837
-          name: 'auditd: CPU seconds (system)'
+        - uuid: c3d455aeb78c4b6a95e98b916cab7c7f
+          name: 'firewalld: CPU seconds (system)'
           type: DEPENDENT
-          key: rabe.auditd.cputime_system
+          key: rabe.firewalld.cputime_system
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total CPU seconds (system) of auditd processes.'
+          description: 'Total CPU seconds (system) of firewalld processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -48,18 +48,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[auditd,root,,summary]'
+            key: 'proc.get[firewalld,root,,summary]'
           tags:
             - tag: component
-              value: auditd
-        - uuid: 247b87f17abb489bad3df034c9cd2114
-          name: 'auditd: CPU seconds (user)'
+              value: firewalld
+        - uuid: 201794babb9043c3b984bf1dd522e6a8
+          name: 'firewalld: CPU seconds (user)'
           type: DEPENDENT
-          key: rabe.auditd.cputime_user
+          key: rabe.firewalld.cputime_user
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total CPU seconds (user) of auditd processes.'
+          description: 'Total CPU seconds (user) of firewalld processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -71,17 +71,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[auditd,root,,summary]'
+            key: 'proc.get[firewalld,root,,summary]'
           tags:
             - tag: component
-              value: auditd
-        - uuid: 00604ef169554ef192c6693f75ed1c35
-          name: 'auditd: Number of processes'
+              value: firewalld
+        - uuid: 3c59ca45dd3440cab29e426d3952fd35
+          name: 'firewalld: Number of processes'
           type: DEPENDENT
-          key: rabe.auditd.processes
+          key: rabe.firewalld.processes
           delay: '0'
           history: 7d
-          description: 'Number of auditd processes.'
+          description: 'Number of firewalld processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -90,27 +90,27 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[auditd,root,,summary]'
+            key: 'proc.get[firewalld,root,,summary]'
           tags:
             - tag: component
-              value: auditd
+              value: firewalld
           triggers:
-            - uuid: e87c0519b4f54aad9d7d71c9f7a86313
-              expression: last(/auditd/rabe.auditd.processes)<1
-              name: 'auditd: No running processes'
+            - uuid: 15a9761082ea433199dd5190c6c949a1
+              expression: last(/firewalld/rabe.firewalld.processes)<1
+              name: 'firewalld: No running processes'
               priority: HIGH
-              description: 'No running auditd processes.'
+              description: 'No running firewalld processes.'
               tags:
                 - tag: scope
                   value: availability
-        - uuid: 3536f3dfe8d34816af5299db7df961ba
-          name: 'auditd: Memory usage (RSS)'
+        - uuid: 13497879a89140f8a4f09f411e4fda05
+          name: 'firewalld: Memory usage (RSS)'
           type: DEPENDENT
-          key: rabe.auditd.rss
+          key: rabe.firewalld.rss
           delay: '0'
           history: 7d
           units: B
-          description: 'Memory usage of auditd processes.'
+          description: 'Memory usage of firewalld processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -119,18 +119,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[auditd,root,,summary]'
+            key: 'proc.get[firewalld,root,,summary]'
           tags:
             - tag: component
-              value: auditd
-        - uuid: 94ecaf2672fa4d069f221d117e9b9c58
-          name: 'auditd: Swap usage'
+              value: firewalld
+        - uuid: 174de31167f646178e70775d587721de
+          name: 'firewalld: Swap usage'
           type: DEPENDENT
-          key: rabe.auditd.swap
+          key: rabe.firewalld.swap
           delay: '0'
           history: 7d
           units: B
-          description: 'Swap usage of auditd processes.'
+          description: 'Swap usage of firewalld processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -139,17 +139,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[auditd,root,,summary]'
+            key: 'proc.get[firewalld,root,,summary]'
           tags:
             - tag: component
-              value: auditd
-        - uuid: aa01f91534c446f9ab3194f85ad42a32
-          name: 'auditd: Number of threads'
+              value: firewalld
+        - uuid: f7891157dea943a88b84e8df0ae2cd7b
+          name: 'firewalld: Number of threads'
           type: DEPENDENT
-          key: rabe.auditd.threads
+          key: rabe.firewalld.threads
           delay: '0'
           history: 7d
-          description: 'Number of auditd threads.'
+          description: 'Number of firewalld threads.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -158,17 +158,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[auditd,root,,summary]'
+            key: 'proc.get[firewalld,root,,summary]'
           tags:
             - tag: component
-              value: auditd
+              value: firewalld
       tags:
         - tag: class
           value: software
         - tag: target
-          value: auditd
+          value: firewalld
       dashboards:
-        - uuid: 872c608dda554c688ae39c4b33d564cc
+        - uuid: 46f9f3ee13c94536b056e62463d5c7ea
           name: 'auditd: Overview'
           pages:
             - widgets:
@@ -179,8 +179,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: auditd
-                        key: rabe.auditd.rss
+                        host: firewalld
+                        key: rabe.firewalld.cputime_user
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -192,8 +192,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: auditd
-                        key: rabe.auditd.cputime_user
+                        host: firewalld
+                        key: rabe.firewalld.rss
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -205,8 +205,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: auditd
-                        key: rabe.auditd.swap
+                        host: firewalld
+                        key: rabe.firewalld.cputime_system
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -219,8 +219,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: auditd
-                        key: rabe.auditd.cputime_system
+                        host: firewalld
+                        key: rabe.firewalld.swap
                     - type: INTEGER
                       name: source_type
                       value: '1'

@@ -12,7 +12,8 @@ zabbix_export:
         
         Used as a mix-in to most low-level stack templates.
         
-        Managed by <https://github.com/radiorabe/rabe-zabbix>.
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
       vendor:
         name: RaBe
         version: '6.4'

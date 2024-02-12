@@ -9,7 +9,11 @@ Needs the following configuration:
 AllowKey=system.run[/usr/bin/timedatectl show]
 ```
 
-Managed by <https://github.com/radiorabe/rabe-zabbix>.
+See [here](https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html)
+for more information about timedatectl.
+
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 
 ## Macros

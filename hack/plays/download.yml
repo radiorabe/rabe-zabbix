@@ -6,6 +6,7 @@
     rabe_zabbix_templates:
       - search: "auditd"
       - search: "chrony"
+      - search: "firewalld"
       - search: "EL7 Stack"
       - search: "EL8 Stack"
       - search: "EL9 Stack"

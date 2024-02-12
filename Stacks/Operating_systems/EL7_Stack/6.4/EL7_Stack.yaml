@@ -10,12 +10,14 @@ zabbix_export:
       description: |
         Base stack template for CentOS 7 based systems.
         
-        Managed by <https://github.com/radiorabe/rabe-zabbix>.
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
       vendor:
         name: RaBe
         version: '6.4'
       templates:
         - name: auditd
+        - name: firewalld
         - name: 'Linux by Zabbix agent active'
         - name: 'Systemd by Zabbix agent 2'
         - name: 'Zabbix unsupported items'
