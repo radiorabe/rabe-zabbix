@@ -21,6 +21,7 @@ zabbix_export:
         - name: firewalld
         - name: 'Linux by Zabbix agent active'
         - name: rsyslog
+        - name: sssd
         - name: 'Systemd by Zabbix agent 2'
         - name: timedatectl
         - name: tuned

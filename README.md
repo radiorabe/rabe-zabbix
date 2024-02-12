@@ -69,6 +69,7 @@ inheritance problems.
 | ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |
+| sssd |  | [✅](./Templates/Applications/sssd/6.4) |  |
 | timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) |  |
 | tuned |  | [✅](./Templates/Applications/tuned/6.4) |  |
 | zabbix-agent | [✅](./Templates/Applications/zabbix-agent/3.0) |  |  |

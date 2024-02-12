@@ -20,6 +20,7 @@ zabbix_export:
         - name: firewalld
         - name: 'Linux by Zabbix agent active'
         - name: rsyslog
+        - name: sssd
         - name: 'Systemd by Zabbix agent 2'
         - name: tuned
         - name: 'Zabbix unsupported items'

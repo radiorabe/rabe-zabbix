@@ -17,6 +17,7 @@ This Zabbix template depends on the following templates.
 * firewalld
 * Linux by Zabbix agent active
 * rsyslog
+* sssd
 * Systemd by Zabbix agent 2
 * timedatectl
 * tuned

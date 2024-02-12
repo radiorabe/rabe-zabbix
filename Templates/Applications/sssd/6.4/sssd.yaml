@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 'a571c0d144b14fd4a87a9d9b2aa9fcd6'
+      name: 'Templates/Applications'
+  templates:
+    - uuid: 16b1c17264c0460d92c29aa6b8adb8d1
+      template: 'sssd'
+      name: sssd
+      description: |
+        Monitoring of [sssd](https://sssd.io).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: 'Templates/Applications'
+      items:
+        - uuid: f794b260ca324da69dd3b551a94d617d
+          name: 'sssd: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[sssd,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about sssd processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 42a91aec255a4c42bae147c8588bd660
+          name: 'sssd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.sssd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 95cb13a3d1cf4aae85429a3b3d29a01f
+          name: 'sssd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.sssd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 65ba0f18eac0408cae1afee4f4b53046
+          name: 'sssd: Number of processes'
+          type: DEPENDENT
+          key: rabe.sssd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+          triggers:
+            - uuid: c47f07f0cd5b437082c2293f17812b6b
+              expression: last(/sssd/rabe.sssd.processes)<1
+              name: 'sssd: No running processes'
+              priority: HIGH
+              description: 'No running sssd processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 4b7f1921c57f4b0c8c0f970e3674c4b7
+          name: 'sssd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.sssd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 7c7eaf25cf29483db288a7a06b832944
+          name: 'sssd: Swap usage'
+          type: DEPENDENT
+          key: rabe.sssd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: b55d87f2113b4a28a53ac8dd5aeeefa7
+          name: 'sssd: Number of threads'
+          type: DEPENDENT
+          key: rabe.sssd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of sssd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: sssd
+      dashboards:
+        - uuid: b7b75193454546dc98336f500ae4ff49
+          name: 'sssd: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
