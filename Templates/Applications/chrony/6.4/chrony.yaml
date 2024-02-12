@@ -13,11 +13,12 @@ zabbix_export:
         Needs the following configuration:
         ```
         AllowKey=system.run[/usr/bin/chronyc -c activity]
+        AllowKey=system.run[/usr/bin/chronyc -c tracking]
         ```
         
         Managed by <https://github.com/radiorabe/rabe-zabbix>.
       vendor:
-        name: 'RaBe'
+        name: RaBe
         version: '6.4'
       groups:
         - name: Templates/Applications
@@ -273,6 +274,109 @@ zabbix_export:
               value: chrony
             - tag: component
               value: chronyd
+        - uuid: 674b727174904227bae9d2e93234803c
+          name: 'chrony: Reference ID'
+          type: DEPENDENT
+          key: rabe.chrony.tracking.reference_id
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          description: 'Reference ID.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[0]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c tracking]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: d8c6446e98bd40efb779ec32169492f0
+          name: 'chrony: Reference IP'
+          type: DEPENDENT
+          key: rabe.chrony.tracking.reference_ip
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          description: 'Reference IP.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[1]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c tracking]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: bb49bcde746d4c60923ccf971847ca34
+          name: 'chrony: Skew'
+          type: DEPENDENT
+          key: rabe.chrony.tracking.skew
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: ppm
+          description: Skew.
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[9]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c tracking]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: 0e487eabb0a443f19a7e27c420dd88e5
+          name: 'chrony: Stratum'
+          type: DEPENDENT
+          key: rabe.chrony.tracking.stratum
+          delay: '0'
+          history: 7d
+          description: Stratum.
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[2]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c tracking]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: 585d7ab3c8744de3a083718b928f3d2c
+          name: 'chrony: System time slowness'
+          type: DEPENDENT
+          key: rabe.chrony.tracking.system_time
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: s
+          description: 'System time is seconds slow of NTP time'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[4]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c tracking]'
+          tags:
+            - tag: component
+              value: chrony
         - uuid: 4a02236adda54a649de3efc6470c56f5
           name: 'chrony: Activitiy'
           type: ZABBIX_ACTIVE
@@ -281,6 +385,17 @@ zabbix_export:
           trends: '0'
           value_type: TEXT
           description: 'Results of chronyc -c activity'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: a6379b74b39c40558b08b5a3cb699f4b
+          name: 'chrony: Tracking'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[/usr/bin/chronyc -c tracking]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Results of chronyc -c tracking'
           tags:
             - tag: component
               value: raw
@@ -305,14 +420,11 @@ zabbix_export:
                     - type: INTEGER
                       name: decimal_places
                       value: '0'
-                    - type: INTEGER
-                      name: desc_size
-                      value: '10'
                     - type: ITEM
                       name: itemid
                       value:
                         host: chrony
-                        key: rabe.chrony.activity.sources_online
+                        key: rabe.chrony.tracking.stratum
                     - type: INTEGER
                       name: show
                       value: '1'
@@ -331,12 +443,25 @@ zabbix_export:
                       name: itemid
                       value:
                         host: chrony
-                        key: rabe.chrony.chronyd.rss
+                        key: rabe.chrony.tracking.system_time
                     - type: INTEGER
                       name: source_type
                       value: '1'
                 - type: graph
                   'y': '8'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '13'
                   width: '12'
                   height: '5'
                   fields:
@@ -367,6 +492,41 @@ zabbix_export:
                       name: itemid
                       value:
                         host: chrony
+                        key: rabe.chrony.activity.sources_online
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: 43A047
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '3'
+                - type: item
+                  x: '6'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '10'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
                         key: rabe.chrony.activity.sources_offline
                     - type: INTEGER
                       name: show
@@ -377,8 +537,14 @@ zabbix_export:
                     - type: INTEGER
                       name: show
                       value: '4'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF465C
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
                 - type: item
-                  x: '6'
+                  x: '9'
                   width: '3'
                   height: '3'
                   hide_header: 'YES'
@@ -406,8 +572,14 @@ zabbix_export:
                     - type: INTEGER
                       name: show
                       value: '4'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF9800
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
                 - type: item
-                  x: '9'
+                  x: '12'
                   width: '3'
                   height: '3'
                   hide_header: 'YES'
@@ -435,8 +607,56 @@ zabbix_export:
                     - type: INTEGER
                       name: show
                       value: '4'
-                - type: item
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF465C
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
+                - type: graph
                   x: '12'
+                  'y': '3'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.tracking.skew
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '8'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '13'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '15'
                   width: '3'
                   height: '3'
                   hide_header: 'YES'
@@ -464,33 +684,11 @@ zabbix_export:
                     - type: INTEGER
                       name: show
                       value: '4'
-                - type: graph
-                  x: '12'
-                  'y': '3'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: chrony
-                        key: rabe.chrony.chronyd.swap
-                    - type: INTEGER
-                      name: source_type
-                      value: '1'
-                - type: graph
-                  x: '12'
-                  'y': '8'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: chrony
-                        key: rabe.chrony.chronyd.cputime_system
-                    - type: INTEGER
-                      name: source_type
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF465C
+                    - type: STRING
+                      name: thresholds.threshold.0
                       value: '1'
                 - type: item
                   x: '18'
@@ -521,6 +719,18 @@ zabbix_export:
                     - type: INTEGER
                       name: show
                       value: '4'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF465C
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 43A047
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
                 - type: clock
                   x: '21'
                   width: '3'

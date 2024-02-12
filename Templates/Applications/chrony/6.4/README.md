@@ -7,6 +7,7 @@ Keeps track of chrony.
 Needs the following configuration:
 ```
 AllowKey=system.run[/usr/bin/chronyc -c activity]
+AllowKey=system.run[/usr/bin/chronyc -c tracking]
 ```
 
 Managed by <https://github.com/radiorabe/rabe-zabbix>.
@@ -226,6 +227,96 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 | JSONPATH | `["$[*].threads.first()"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
+### Item: chrony: Reference ID
+
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
+
+Reference ID.
+
+Type: DEPENDENT
+
+```
+rabe.chrony.tracking.reference_id
+```
+Source item: `system.run[/usr/bin/chronyc -c tracking]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["return value.split(\",\")[0]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["1h"]` |
+
+### Item: chrony: Reference IP
+
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
+
+Reference IP.
+
+Type: DEPENDENT
+
+```
+rabe.chrony.tracking.reference_ip
+```
+Source item: `system.run[/usr/bin/chronyc -c tracking]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["return value.split(\",\")[1]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["1h"]` |
+
+### Item: chrony: Skew
+
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
+
+Skew.
+
+Type: DEPENDENT
+
+```
+rabe.chrony.tracking.skew
+```
+Source item: `system.run[/usr/bin/chronyc -c tracking]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["return value.split(\",\")[9]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: chrony: Stratum
+
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
+
+Stratum.
+
+Type: DEPENDENT
+
+```
+rabe.chrony.tracking.stratum
+```
+Source item: `system.run[/usr/bin/chronyc -c tracking]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["return value.split(\",\")[2]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["1h"]` |
+
+### Item: chrony: System time slowness
+
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
+
+System time is seconds slow of NTP time
+
+Type: DEPENDENT
+
+```
+rabe.chrony.tracking.system_time
+```
+Source item: `system.run[/usr/bin/chronyc -c tracking]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["return value.split(\",\")[4]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
 ### Item: chrony: Activitiy
 
 ![component: raw](https://img.shields.io/badge/component-raw-00c9bf)
@@ -236,6 +327,18 @@ Type: ZABBIX_ACTIVE
 
 ```
 system.run[/usr/bin/chronyc -c activity]
+```
+
+### Item: chrony: Tracking
+
+![component: raw](https://img.shields.io/badge/component-raw-00c9bf)
+
+Results of chronyc -c tracking
+
+Type: ZABBIX_ACTIVE
+
+```
+system.run[/usr/bin/chronyc -c tracking]
 ```
 
 ## Triggers

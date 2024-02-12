@@ -12,7 +12,7 @@ zabbix_export:
         
         Managed by <https://github.com/radiorabe/rabe-zabbix>.
       vendor:
-        name: 'RaBe'
+        name: RaBe
         version: '6.4'
       groups:
         - name: Templates/Applications
