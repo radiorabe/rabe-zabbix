@@ -71,6 +71,9 @@ inheritance problems.
 | rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) |  |
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |
 | sssd |  | [✅](./Templates/Applications/sssd/6.4) |  |
+| systemd-journald |  | [✅](./Templates/Applications/systemd-journald/6.4) |  |
+| systemd-logind |  | [✅](./Templates/Applications/systemd-logind/6.4) |  |
+| systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/6.4) |  |
 | timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) |  |
 | tuned |  | [✅](./Templates/Applications/tuned/6.4) |  |
 | zabbix-agent | [✅](./Templates/Applications/zabbix-agent/3.0) |  |  |

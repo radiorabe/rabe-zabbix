@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 
+      template: systemd-udevd
+      name: systemd-udevd
+      description: |
+        Monitoring of [systemd-udevd](https://www.freedesktop.org/software/systemd/man/latest/systemd-udevd.service.html).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 
+          name: 'systemd-udevd: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[systemd-udevd,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about systemd-udevd processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 
+          name: 'systemd-udevd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 
+          name: 'systemd-udevd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 
+          name: 'systemd-udevd: Number of processes'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+          triggers:
+            - uuid: 
+              expression: last(/systemd-udevd/rabe.systemd-udevd.processes)<1
+              name: 'systemd-udevd: No running processes'
+              priority: HIGH
+              description: 'No running systemd-udevd processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 
+          name: 'systemd-udevd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 
+          name: 'systemd-udevd: Swap usage'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 
+          name: 'systemd-udevd: Number of threads'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-udevd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: systemd-udevd
+      dashboards:
+        - uuid: 
+          name: 'systemd-udevd: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'

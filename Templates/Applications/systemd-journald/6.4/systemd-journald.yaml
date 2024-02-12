@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: c0d178b0ba524448b7bf7b5644009d37
+      template: systemd-journald
+      name: systemd-journald
+      description: |
+        Monitoring of [systemd-journald](https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 363fe7de80bd462aa3d37146674de67c
+          name: 'systemd-journald: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[systemd-journald,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about systemd-journald processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: c7931c7ada3747f39a4982111ad85344
+          name: 'systemd-journald: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.systemd-journald.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: 945b74e98c744651a681109fe71ff16b
+          name: 'systemd-journald: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.systemd-journald.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: 7545d90e87ab4f8396591f0d1d0498b6
+          name: 'systemd-journald: Number of processes'
+          type: DEPENDENT
+          key: rabe.systemd-journald.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+          triggers:
+            - uuid: 2e718d635eee47f8987d572b690dd20a
+              expression: last(/systemd-journald/rabe.systemd-journald.processes)<1
+              name: 'systemd-journald: No running processes'
+              priority: HIGH
+              description: 'No running systemd-journald processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: ee555340f7544fb0b0ba742826baf5ab
+          name: 'systemd-journald: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.systemd-journald.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: c11f4d417aa74fb8be1f4d5501eaf3f1
+          name: 'systemd-journald: Swap usage'
+          type: DEPENDENT
+          key: rabe.systemd-journald.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: fe6b759f836041878266787446195030
+          name: 'systemd-journald: Number of threads'
+          type: DEPENDENT
+          key: rabe.systemd-journald.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-journald threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: systemd-journald
+      dashboards:
+        - uuid: e7954e35bcb845b39fd8fb0b4a5b9654
+          name: 'systemd-journald: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'

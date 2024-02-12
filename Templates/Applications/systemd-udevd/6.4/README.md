@@ -1,0 +1,162 @@
+# Zabbix Template: systemd-udevd
+
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: systemd-udevd](https://img.shields.io/badge/target-systemd-udevd-00c9bf)
+
+Monitoring of [systemd-udevd](https://www.freedesktop.org/software/systemd/man/latest/systemd-udevd.service.html).
+
+This template is part of [RaBe's Zabbix template and helpers
+collection](https://github.com/radiorabe/rabe-zabbix).
+
+
+## Items
+
+### Item: systemd-udevd: process summary
+
+![component: raw](https://img.shields.io/badge/component-raw-00c9bf)
+
+Get info about systemd-udevd processes
+
+Type: ZABBIX_ACTIVE
+
+```
+proc.get[systemd-udevd,root,,summary]
+```
+
+### Item: systemd-udevd: CPU seconds (system)
+
+![component: systemd-udevd](https://img.shields.io/badge/component-systemd-udevd-00c9bf)
+
+Total CPU seconds (system) of systemd-udevd processes.
+
+Type: DEPENDENT
+
+```
+rabe.systemd-udevd.cputime_system
+```
+Source item: `proc.get[systemd-udevd,root,,summary]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$[*].cputime_system.first()"]` |
+| SIMPLE_CHANGE | `[""]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: systemd-udevd: CPU seconds (user)
+
+![component: systemd-udevd](https://img.shields.io/badge/component-systemd-udevd-00c9bf)
+
+Total CPU seconds (user) of systemd-udevd processes.
+
+Type: DEPENDENT
+
+```
+rabe.systemd-udevd.cputime_user
+```
+Source item: `proc.get[systemd-udevd,root,,summary]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$[*].cputime_user.first()"]` |
+| SIMPLE_CHANGE | `[""]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: systemd-udevd: Number of processes
+
+![component: systemd-udevd](https://img.shields.io/badge/component-systemd-udevd-00c9bf)
+
+Number of systemd-udevd processes.
+
+Type: DEPENDENT
+
+```
+rabe.systemd-udevd.processes
+```
+Source item: `proc.get[systemd-udevd,root,,summary]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$[*].processes.first()"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: systemd-udevd: Memory usage (RSS)
+
+![component: systemd-udevd](https://img.shields.io/badge/component-systemd-udevd-00c9bf)
+
+Memory usage of systemd-udevd processes.
+
+Type: DEPENDENT
+
+```
+rabe.systemd-udevd.rss
+```
+Source item: `proc.get[systemd-udevd,root,,summary]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$[*].rss.first()"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: systemd-udevd: Swap usage
+
+![component: systemd-udevd](https://img.shields.io/badge/component-systemd-udevd-00c9bf)
+
+Swap usage of systemd-udevd processes.
+
+Type: DEPENDENT
+
+```
+rabe.systemd-udevd.swap
+```
+Source item: `proc.get[systemd-udevd,root,,summary]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$[*].swap.first()"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: systemd-udevd: Number of threads
+
+![component: systemd-udevd](https://img.shields.io/badge/component-systemd-udevd-00c9bf)
+
+Number of systemd-udevd threads.
+
+Type: DEPENDENT
+
+```
+rabe.systemd-udevd.threads
+```
+Source item: `proc.get[systemd-udevd,root,,summary]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$[*].threads.first()"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+## Triggers
+
+## Trigger: systemd-udevd: No running processes
+
+![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
+
+No running systemd-udevd processes.
+
+Priority: HIGH
+
+```
+last(/systemd-udevd/rabe.systemd-udevd.processes)<1
+```
+
+## Dashboards
+
+The following Zabbix dashboards are included in this template.
+* systemd-udevd: Overview
+
+## License
+
+This template is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 of the License.
+
+## Copyright
+
+Copyright (c) 2017 - 2024 [Radio Bern RaBe](http://www.rabe.ch)

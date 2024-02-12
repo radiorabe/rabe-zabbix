@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: a30e5c013f51405f9a91afa1a6a978f2
+      template: systemd-logind
+      name: systemd-logind
+      description: |
+        Monitoring of [systemd-logind](https://www.freedesktop.org/software/systemd/man/latest/systemd-logind.service.html).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: e77759138ce440cc85b1071b1a8ee9a0
+          name: 'systemd-logind: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[systemd-logind,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about systemd-logind processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 9ea5c628669045dc83525cf198f9d55f
+          name: 'systemd-logind: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.systemd-logind.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of systemd-logind processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-logind,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-logind
+        - uuid: 150d11e553684077b6a55cc0fb04fd08
+          name: 'systemd-logind: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.systemd-logind.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of systemd-logind processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-logind,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-logind
+        - uuid: 0a44678ec5d14449944e9b3e315f4755
+          name: 'systemd-logind: Number of processes'
+          type: DEPENDENT
+          key: rabe.systemd-logind.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-logind processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-logind,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-logind
+          triggers:
+            - uuid: faff94d6d02e440aae18fdd7b59bd73b
+              expression: last(/systemd-logind/rabe.systemd-logind.processes)<1
+              name: 'systemd-logind: No running processes'
+              priority: HIGH
+              description: 'No running systemd-logind processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 6f538469a1d54a7586a721bd115cbdcf
+          name: 'systemd-logind: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.systemd-logind.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of systemd-logind processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-logind,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-logind
+        - uuid: 61251f313d8b47f0860dc9983840c7e5
+          name: 'systemd-logind: Swap usage'
+          type: DEPENDENT
+          key: rabe.systemd-logind.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of systemd-logind processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-logind,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-logind
+        - uuid: 1b10af6c40224d29b2cc68628e3ab617
+          name: 'systemd-logind: Number of threads'
+          type: DEPENDENT
+          key: rabe.systemd-logind.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-logind threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-logind,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-logind
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: systemd-logind
+      dashboards:
+        - uuid: 9fd3c447ca7441b1834af2750b6feda6
+          name: 'systemd-logind: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-logind
+                        key: rabe.systemd-logind.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-logind
+                        key: rabe.systemd-logind.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-logind
+                        key: rabe.systemd-logind.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-logind
+                        key: rabe.systemd-logind.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
