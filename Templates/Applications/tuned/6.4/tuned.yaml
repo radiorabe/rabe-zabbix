@@ -4,39 +4,39 @@ zabbix_export:
     - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
       name: Templates/Applications
   templates:
-    - uuid: dcfc6aa41ee44cf6a147e0390b959cca
-      template: firewalld
-      name: firewalld
+    - uuid: 0093431a499f44038cc53fb8add37607
+      template: tuned
+      name: tuned
       description: |
-        Keeps track of [firewalld](https://firewalld.org/).
+        Monitoring of [tuned](https://tuned-project.org/).
         
         This template is part of [RaBe's Zabbix template and helpers
-        collection](https://github.com/radiorabe/rabe-zabbix)
+        collection](https://github.com/radiorabe/rabe-zabbix).
       vendor:
         name: RaBe
         version: '6.4'
       groups:
         - name: Templates/Applications
       items:
-        - uuid: e58846d3d0f7441985e4c2536c267a87
-          name: 'firewalld: process summary'
+        - uuid: e0742602ab444139bcafa095b2b89e24
+          name: 'tuned: process summary'
           type: ZABBIX_ACTIVE
-          key: 'proc.get[firewalld,root,,summary]'
+          key: 'proc.get[tuned,root,,summary]'
           history: '0'
           trends: '0'
           value_type: TEXT
-          description: 'Get info about firewalld processes'
+          description: 'Get info about tuned processes'
           tags:
             - tag: component
               value: raw
-        - uuid: c3d455aeb78c4b6a95e98b916cab7c7f
-          name: 'firewalld: CPU seconds (system)'
+        - uuid: 6ca6b762c1784a02ae25870f3e4e5f3e
+          name: 'tuned: CPU seconds (system)'
           type: DEPENDENT
-          key: rabe.firewalld.cputime_system
+          key: rabe.tuned.cputime_system
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total CPU seconds (system) of firewalld processes.'
+          description: 'Total CPU seconds (system) of tuned processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -48,18 +48,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[firewalld,root,,summary]'
+            key: 'proc.get[tuned,root,,summary]'
           tags:
             - tag: component
-              value: firewalld
-        - uuid: 201794babb9043c3b984bf1dd522e6a8
-          name: 'firewalld: CPU seconds (user)'
+              value: tuned
+        - uuid: 9efc7e6794754e3b9015b3b7fa97c0ad
+          name: 'tuned: CPU seconds (user)'
           type: DEPENDENT
-          key: rabe.firewalld.cputime_user
+          key: rabe.tuned.cputime_user
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total CPU seconds (user) of firewalld processes.'
+          description: 'Total CPU seconds (user) of tuned processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -71,17 +71,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[firewalld,root,,summary]'
+            key: 'proc.get[tuned,root,,summary]'
           tags:
             - tag: component
-              value: firewalld
-        - uuid: 3c59ca45dd3440cab29e426d3952fd35
-          name: 'firewalld: Number of processes'
+              value: tuned
+        - uuid: 8913fbd5c5ca456d9724bdb315dbf99f
+          name: 'tuned: Number of processes'
           type: DEPENDENT
-          key: rabe.firewalld.processes
+          key: rabe.tuned.processes
           delay: '0'
           history: 7d
-          description: 'Number of firewalld processes.'
+          description: 'Number of tuned processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -90,27 +90,27 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[firewalld,root,,summary]'
+            key: 'proc.get[tuned,root,,summary]'
           tags:
             - tag: component
-              value: firewalld
+              value: tuned
           triggers:
-            - uuid: 15a9761082ea433199dd5190c6c949a1
-              expression: last(/firewalld/rabe.firewalld.processes)<1
-              name: 'firewalld: No running processes'
+            - uuid: cdfbb7c4e736486583ce79b51764f4e5
+              expression: last(/tuned/rabe.tuned.processes)<1
+              name: 'tuned: No running processes'
               priority: HIGH
-              description: 'No running firewalld processes.'
+              description: 'No running tuned processes.'
               tags:
                 - tag: scope
                   value: availability
-        - uuid: 13497879a89140f8a4f09f411e4fda05
-          name: 'firewalld: Memory usage (RSS)'
+        - uuid: 15f6e52e00514036ad1f70083f69130e
+          name: 'tuned: Memory usage (RSS)'
           type: DEPENDENT
-          key: rabe.firewalld.rss
+          key: rabe.tuned.rss
           delay: '0'
           history: 7d
           units: B
-          description: 'Memory usage of firewalld processes.'
+          description: 'Memory usage of tuned processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -119,18 +119,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[firewalld,root,,summary]'
+            key: 'proc.get[tuned,root,,summary]'
           tags:
             - tag: component
-              value: firewalld
-        - uuid: 174de31167f646178e70775d587721de
-          name: 'firewalld: Swap usage'
+              value: tuned
+        - uuid: 289ff0de70cf4872aa01e22e90894834
+          name: 'tuned: Swap usage'
           type: DEPENDENT
-          key: rabe.firewalld.swap
+          key: rabe.tuned.swap
           delay: '0'
           history: 7d
           units: B
-          description: 'Swap usage of firewalld processes.'
+          description: 'Swap usage of tuned processes.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -139,17 +139,17 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[firewalld,root,,summary]'
+            key: 'proc.get[tuned,root,,summary]'
           tags:
             - tag: component
-              value: firewalld
-        - uuid: f7891157dea943a88b84e8df0ae2cd7b
-          name: 'firewalld: Number of threads'
+              value: tuned
+        - uuid: 535cb5ec169d49d4a6f34eb57cbf2102
+          name: 'tuned: Number of threads'
           type: DEPENDENT
-          key: rabe.firewalld.threads
+          key: rabe.tuned.threads
           delay: '0'
           history: 7d
-          description: 'Number of firewalld threads.'
+          description: 'Number of tuned threads.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -158,18 +158,18 @@ zabbix_export:
               parameters:
                 - 5m
           master_item:
-            key: 'proc.get[firewalld,root,,summary]'
+            key: 'proc.get[tuned,root,,summary]'
           tags:
             - tag: component
-              value: firewalld
+              value: tuned
       tags:
         - tag: class
           value: software
         - tag: target
-          value: firewalld
+          value: tuned
       dashboards:
-        - uuid: 46f9f3ee13c94536b056e62463d5c7ea
-          name: 'firewalld: Overview'
+        - uuid: c76c64463c3c4170a40c224c04b3ff4c
+          name: 'tuned: Overview'
           pages:
             - widgets:
                 - type: graph
@@ -179,8 +179,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: firewalld
-                        key: rabe.firewalld.cputime_user
+                        host: tuned
+                        key: rabe.tuned.cputime_user
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -192,8 +192,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: firewalld
-                        key: rabe.firewalld.rss
+                        host: tuned
+                        key: rabe.tuned.rss
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -205,8 +205,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: firewalld
-                        key: rabe.firewalld.cputime_system
+                        host: tuned
+                        key: rabe.tuned.cputime_system
                     - type: INTEGER
                       name: source_type
                       value: '1'
@@ -219,8 +219,8 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: firewalld
-                        key: rabe.firewalld.swap
+                        host: tuned
+                        key: rabe.tuned.swap
                     - type: INTEGER
                       name: source_type
                       value: '1'

@@ -149,7 +149,7 @@ last(/firewalld/rabe.firewalld.processes)<1
 ## Dashboards
 
 The following Zabbix dashboards are included in this template.
-* auditd: Overview
+* firewalld: Overview
 
 ## License
 

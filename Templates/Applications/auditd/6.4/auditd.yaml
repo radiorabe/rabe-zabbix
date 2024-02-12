@@ -180,25 +180,12 @@ zabbix_export:
                       name: itemid
                       value:
                         host: auditd
-                        key: rabe.auditd.rss
-                    - type: INTEGER
-                      name: source_type
-                      value: '1'
-                - type: graph
-                  'y': '5'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: auditd
                         key: rabe.auditd.cputime_user
                     - type: INTEGER
                       name: source_type
                       value: '1'
                 - type: graph
-                  x: '12'
+                  'y': '5'
                   width: '12'
                   height: '5'
                   fields:
@@ -206,13 +193,12 @@ zabbix_export:
                       name: itemid
                       value:
                         host: auditd
-                        key: rabe.auditd.swap
+                        key: rabe.auditd.rss
                     - type: INTEGER
                       name: source_type
                       value: '1'
                 - type: graph
                   x: '12'
-                  'y': '5'
                   width: '12'
                   height: '5'
                   fields:
@@ -221,6 +207,20 @@ zabbix_export:
                       value:
                         host: auditd
                         key: rabe.auditd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: auditd
+                        key: rabe.auditd.swap
                     - type: INTEGER
                       name: source_type
                       value: '1'

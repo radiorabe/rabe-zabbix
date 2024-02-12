@@ -14,7 +14,7 @@ zabbix_export:
         ```
         AllowKey=system.run[/usr/bin/timedatectl show]
         ```
-
+        
         See [here](https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html)
         for more information about timedatectl.
         
