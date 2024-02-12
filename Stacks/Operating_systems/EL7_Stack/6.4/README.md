@@ -25,7 +25,7 @@ Filter of systemd service units by name
 
 Default:
 ```
-^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|abrt-vmcore\.service|dmraid-activation\.service|abrt-xorg\.service|rhel-configure\.service|systemd-readahead-collect\.service|rhel-autorelabel\.service|irqbalance\.service|rhel-loadmodules\.service|systemd-readahead-replay\.service|rhel-autorelabel-mark\.service)$
+^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|abrt-vmcore\.service|dmraid-activation\.service|abrt-xorg\.service|rhel-configure\.service|systemd-readahead-collect\.service|rhel-autorelabel\.service|irqbalance\.service|rhel-loadmodules\.service|systemd-readahead-replay\.service|rhel-autorelabel-mark\.service|timedatex\.service)$
 ```
 
 ## License

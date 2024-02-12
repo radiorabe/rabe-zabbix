@@ -1,0 +1,193 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 6d986f76224c4737991379018a5053df
+      template: timedatectl
+      name: timedatectl
+      description: |
+        Keeps track of the time and date subsystem by running timedatectl status.
+        
+        Needs the following configuration:
+        ```
+        AllowKey=system.run[/usr/bin/timedatectl show]
+        ```
+        
+        Managed by <https://github.com/radiorabe/rabe-zabbix>.
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: f99cb96f1a434eb0a18695b599be6aa2
+          name: 'timedatectl: NTP service status'
+          type: DEPENDENT
+          key: rabe.timedatectl.status.ntp_service
+          delay: '0'
+          history: 7d
+          description: 'NTP service status'
+          valuemap:
+            name: 'Service status'
+          preprocessing:
+            - type: REGEX
+              parameters:
+                - 'NTP=(.*)'
+                - \1
+            - type: JAVASCRIPT
+              parameters:
+                - 'return {"yes": 1, "no": 0}[value]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/timedatectl show]'
+          tags:
+            - tag: component
+              value: timedatectl
+          triggers:
+            - uuid: 60519a0277a346359eb813d619835bea
+              expression: last(/timedatectl/rabe.timedatectl.status.ntp_service)<>1
+              name: 'timedatectl: NTP not active'
+              priority: WARNING
+              description: 'The NTP service is not active, check `timedatectl status` for more info.'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 2e27ec62a973426a9dfbf2ee6ec80df5
+          name: 'timedatectl: RTC in local TZ'
+          type: DEPENDENT
+          key: rabe.timedatectl.status.rtc_in_local_tz
+          delay: '0'
+          history: 7d
+          description: 'Is the RTC in local TZ?'
+          valuemap:
+            name: Status
+          preprocessing:
+            - type: REGEX
+              parameters:
+                - 'LocalRTC=(.*)'
+                - \1
+            - type: JAVASCRIPT
+              parameters:
+                - 'return {"yes": 1, "no": 0}[value]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/timedatectl show]'
+          tags:
+            - tag: component
+              value: timedatectl
+          triggers:
+            - uuid: fd6e89cd7a284eb09fb98f15ed011a04
+              expression: last(/timedatectl/rabe.timedatectl.status.rtc_in_local_tz)<>0
+              name: 'timedatectl: RTC not in local TZ'
+              priority: INFO
+              description: 'The RTC not in local TZ, check `timedatectl status` for more info.'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: c5e288f97d6d4a52959358a890409fd4
+          name: 'timedatectl: System clock synchronized'
+          type: DEPENDENT
+          key: rabe.timedatectl.status.system_clock_synchronized
+          delay: '0'
+          history: 7d
+          description: 'Is the system clock synchronized?'
+          valuemap:
+            name: Status
+          preprocessing:
+            - type: REGEX
+              parameters:
+                - 'NTPSynchronized=(.*)'
+                - \1
+            - type: JAVASCRIPT
+              parameters:
+                - 'return {"yes": 1, "no": 0}[value]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/timedatectl show]'
+          tags:
+            - tag: component
+              value: timedatectl
+          triggers:
+            - uuid: 8b917fa2bc904bfcba0467a968819020
+              expression: last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized)<>1
+              name: 'timedatectl: NTP not synchronized'
+              priority: INFO
+              description: 'NTP is not in sync, check `timedatectl status` for more info.'
+              tags:
+                - tag: scope
+                  value: availability
+                - tag: scope
+                  value: notice
+            - uuid: 40264d8d024b4a7c8e7eceadf719f43b
+              expression: 'last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized,{$TIMEDATECTL_MAX_NO_SYNC_TIME})<1'
+              name: 'timedatectl: NTP not synchronized for more than {$TIMEDATECTL_MAX_NO_SYNC_TIME}'
+              priority: WARNING
+              description: 'NTP is not in sync, check `timedatectl status` for more info.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: f4af343dc2c14673b8439c197f909239
+          name: 'timedatectl: Time zone'
+          type: DEPENDENT
+          key: rabe.timedatectl.status.time_zone
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          description: 'Time zone'
+          preprocessing:
+            - type: REGEX
+              parameters:
+                - 'Timezone=(.*)'
+                - \1
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: 'system.run[/usr/bin/timedatectl show]'
+          tags:
+            - tag: component
+              value: timedatectl
+        - uuid: 913f9a76ee83464886433833455bd83f
+          name: 'timedatectl: Get status'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[/usr/bin/timedatectl show]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get output from timedatectl status.'
+          tags:
+            - tag: component
+              value: raw
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: timedatectl
+      macros:
+        - macro: '{$TIMEDATECTL_MAX_NO_SYNC_TIME}'
+          value: 60m
+          description: 'How long can time be out if sync before we care?'
+      valuemaps:
+        - uuid: b2a114b092954391a1d6828f7b1f8bc0
+          name: 'Service status'
+          mappings:
+            - value: '1'
+              newvalue: active
+            - type: DEFAULT
+              newvalue: inactive
+        - uuid: 53732806df7e4a8aa9263ee9f928badc
+          name: Status
+          mappings:
+            - value: '1'
+              newvalue: 'yes'
+            - value: '0'
+              newvalue: 'no'

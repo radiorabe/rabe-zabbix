@@ -17,6 +17,7 @@ zabbix_export:
       templates:
         - name: 'Linux by Zabbix agent active'
         - name: 'Systemd by Zabbix agent 2'
+        - name: timedatectl
         - name: 'Zabbix unsupported items'
       groups:
         - name: 'Stacks/Operating systems'
@@ -25,5 +26,5 @@ zabbix_export:
           value: stack
       macros:
         - macro: '{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}'
-          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service)$
+          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service|timedatex\.service)$
           description: 'Filter of systemd service units by name'

@@ -157,7 +157,7 @@
           ### Item: {{ item.name }}
 
           {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
-          {{ triggers.append(item.triggers) }}
+          {{ triggers.append(item.triggers) if 'triggers' in item }}
 
           {{ item.description }}
           ```

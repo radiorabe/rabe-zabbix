@@ -13,6 +13,7 @@ This Zabbix template depends on the following templates.
 
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
+* timedatectl
 * Zabbix unsupported items
 
 ## Macros
@@ -25,7 +26,7 @@ Filter of systemd service units by name
 
 Default:
 ```
-^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service)$
+^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service|timedatex\.service)$
 ```
 
 ## License

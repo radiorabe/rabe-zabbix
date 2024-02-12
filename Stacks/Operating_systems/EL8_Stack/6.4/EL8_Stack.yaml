@@ -25,5 +25,5 @@ zabbix_export:
           value: stack
       macros:
         - macro: '{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}'
-          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service)$
+          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service|timedatex\.service)$
           description: 'Filter of systemd service units by name'

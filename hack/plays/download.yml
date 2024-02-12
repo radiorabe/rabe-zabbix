@@ -7,6 +7,7 @@
       - search: "EL7 Stack"
       - search: "EL8 Stack"
       - search: "EL9 Stack"
+      - search: "timedatectl"
       - search: "Zabbix unsupported items"
     ansible_host: 'vm-0040.service.int.rabe.ch'
     ansible_network_os: community.zabbix.zabbix
