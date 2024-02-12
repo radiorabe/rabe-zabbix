@@ -16,6 +16,7 @@ This Zabbix template depends on the following templates.
 * firewalld
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
+* tuned
 * Zabbix unsupported items
 
 ## Macros

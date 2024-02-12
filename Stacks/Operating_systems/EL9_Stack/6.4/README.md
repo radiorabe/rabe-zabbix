@@ -18,6 +18,7 @@ This Zabbix template depends on the following templates.
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
 * timedatectl
+* tuned
 * Zabbix unsupported items
 
 ## Macros

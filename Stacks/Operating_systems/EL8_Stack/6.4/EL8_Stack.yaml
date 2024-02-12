@@ -22,6 +22,7 @@ zabbix_export:
         - name: 'Linux by Zabbix agent active'
         - name: 'Systemd by Zabbix agent 2'
         - name: timedatectl
+        - name: tuned
         - name: 'Zabbix unsupported items'
       groups:
         - name: 'Stacks/Operating systems'
