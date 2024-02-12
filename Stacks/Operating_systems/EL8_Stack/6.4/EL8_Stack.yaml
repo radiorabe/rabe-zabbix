@@ -15,6 +15,7 @@ zabbix_export:
         name: RaBe
         version: '6.4'
       templates:
+        - name: auditd
         - name: chrony
         - name: 'Linux by Zabbix agent active'
         - name: 'Systemd by Zabbix agent 2'

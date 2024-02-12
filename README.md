@@ -8,7 +8,7 @@ similar to how Zabbix-out-of-the-box templates are grouped.
 
 ## Stacks
 
-Every host within Zabbix gets a specifc stack template assigned according
+Every host within Zabbix gets a specific stack template assigned according
 to its role. The stack exactly defines the setup of this host and will be
 re-used if there is more than one host with the same role.
 
@@ -45,7 +45,7 @@ inheritance problems.
 | ---- | --- | --- | --- |
 | Alarm Pinger | [✅](./Templates/Applications/Alarm_Pinger/3.0) |  |  |
 | Apache HTTP Server | [✅](./Templates/Applications/Apache_HTTP_Server/3.0) |  |  |
-| auditd | [✅](./Templates/Applications/auditd/3.0) |  |  |
+| auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) |  |
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
@@ -114,7 +114,7 @@ We primarily support versions of Zabbix we use in production.
 | Version | Supported | Description |
 | ------- | --------- | ----------- |
 | 3.0 | ✅ | legacy RaBe environment |
-| 6.4 | ✅ | for LTS preparation work |
+| 6.4 | ✅ | for LTS preparation work until 7.0 is available |
 | 7.0 | ✅ | once released |
 
 ## Contributing

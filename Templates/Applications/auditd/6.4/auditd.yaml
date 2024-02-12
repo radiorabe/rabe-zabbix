@@ -1,0 +1,225 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: cb33db846b0f4ca4bf01ada6228204ef
+      template: auditd
+      name: auditd
+      description: |
+        Keeps track of auditd.
+        
+        Managed by <https://github.com/radiorabe/rabe-zabbix>.
+      vendor:
+        name: 'RaBe'
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 9238e7fe3ca14f3ab433837ded70c170
+          name: 'auditd: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[auditd,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about auditd processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: e7c1a45d007e4c2fbdf3c14d9e783837
+          name: 'auditd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.auditd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of auditd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[auditd,root,,summary]'
+          tags:
+            - tag: component
+              value: auditd
+        - uuid: 247b87f17abb489bad3df034c9cd2114
+          name: 'auditd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.auditd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of auditd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[auditd,root,,summary]'
+          tags:
+            - tag: component
+              value: auditd
+        - uuid: 00604ef169554ef192c6693f75ed1c35
+          name: 'auditd: Number of processes'
+          type: DEPENDENT
+          key: rabe.auditd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of auditd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[auditd,root,,summary]'
+          tags:
+            - tag: component
+              value: auditd
+          triggers:
+            - uuid: e87c0519b4f54aad9d7d71c9f7a86313
+              expression: last(/auditd/rabe.auditd.processes)<1
+              name: 'auditd: No running processes'
+              priority: HIGH
+              description: 'No running auditd processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 3536f3dfe8d34816af5299db7df961ba
+          name: 'auditd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.auditd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of auditd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[auditd,root,,summary]'
+          tags:
+            - tag: component
+              value: auditd
+        - uuid: 94ecaf2672fa4d069f221d117e9b9c58
+          name: 'auditd: Swap usage'
+          type: DEPENDENT
+          key: rabe.auditd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of auditd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[auditd,root,,summary]'
+          tags:
+            - tag: component
+              value: auditd
+        - uuid: aa01f91534c446f9ab3194f85ad42a32
+          name: 'auditd: Number of threads'
+          type: DEPENDENT
+          key: rabe.auditd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of auditd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[auditd,root,,summary]'
+          tags:
+            - tag: component
+              value: auditd
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: auditd
+      dashboards:
+        - uuid: 872c608dda554c688ae39c4b33d564cc
+          name: 'auditd: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: auditd
+                        key: rabe.auditd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: auditd
+                        key: rabe.auditd.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: auditd
+                        key: rabe.auditd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: auditd
+                        key: rabe.auditd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'

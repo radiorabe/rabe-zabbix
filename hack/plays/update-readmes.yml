@@ -33,7 +33,7 @@
 
           ## Stacks
 
-          Every host within Zabbix gets a specifc stack template assigned according
+          Every host within Zabbix gets a specific stack template assigned according
           to its role. The stack exactly defines the setup of this host and will be
           re-used if there is more than one host with the same role.
 
@@ -56,7 +56,7 @@
           | ---- | --- | --- | --- |
           {% endif %}
           {% if (stack.split('/') | length) == 5 %}
-          | {{ stack.split('/')[4].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if stack + '/7.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} |
+          | {{ stack.split('/')[4].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if stack + '/7.0' in flat_stacks %}[✅](./{{ stack.split('/')[2:] | join('/') }}/7.0){% endif %} |
           {% endif %}
           {% endfor %}
 
@@ -71,7 +71,7 @@
           | ---- | --- | --- | --- |
           {% endif %}
           {% if (template.split('/') | length) == 5 %}
-          | {{ template.split('/')[4].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if template + '/7.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} |
+          | {{ template.split('/')[4].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if template + '/7.0' in flat_templates %}[✅](./{{ template.split('/')[2:] | join('/') }}/7.0){% endif %} |
           {% endif %}
           {% endfor %}
 
@@ -82,7 +82,7 @@
           | Version | Supported | Description |
           | ------- | --------- | ----------- |
           | 3.0 | ✅ | legacy RaBe environment |
-          | 6.4 | ✅ | for LTS preparation work |
+          | 6.4 | ✅ | for LTS preparation work until 7.0 is available |
           | 7.0 | ✅ | once released |
 
           ## Contributing

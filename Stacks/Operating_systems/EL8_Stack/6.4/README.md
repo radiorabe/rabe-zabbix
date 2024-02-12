@@ -11,6 +11,7 @@ Managed by <https://github.com/radiorabe/rabe-zabbix>.
 
 This Zabbix template depends on the following templates.
 
+* auditd
 * chrony
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
