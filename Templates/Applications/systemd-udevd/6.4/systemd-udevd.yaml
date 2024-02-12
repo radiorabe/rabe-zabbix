@@ -4,7 +4,7 @@ zabbix_export:
     - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
       name: Templates/Applications
   templates:
-    - uuid: 
+    - uuid: 68c64cee88374d66840dc22b430809d1
       template: systemd-udevd
       name: systemd-udevd
       description: |
@@ -18,7 +18,7 @@ zabbix_export:
       groups:
         - name: Templates/Applications
       items:
-        - uuid: 
+        - uuid: e84cdf8391e84b0bb54750115c7575f6
           name: 'systemd-udevd: process summary'
           type: ZABBIX_ACTIVE
           key: 'proc.get[systemd-udevd,root,,summary]'
@@ -29,7 +29,7 @@ zabbix_export:
           tags:
             - tag: component
               value: raw
-        - uuid: 
+        - uuid: 865669d5334043fbbea0cbb8ebb76ff8
           name: 'systemd-udevd: CPU seconds (system)'
           type: DEPENDENT
           key: rabe.systemd-udevd.cputime_system
@@ -52,7 +52,7 @@ zabbix_export:
           tags:
             - tag: component
               value: systemd-udevd
-        - uuid: 
+        - uuid: f1764724074e4af6b847345962f89bb9
           name: 'systemd-udevd: CPU seconds (user)'
           type: DEPENDENT
           key: rabe.systemd-udevd.cputime_user
@@ -75,7 +75,7 @@ zabbix_export:
           tags:
             - tag: component
               value: systemd-udevd
-        - uuid: 
+        - uuid: ed587c3a2b304a169b26b5a5ef6d1685
           name: 'systemd-udevd: Number of processes'
           type: DEPENDENT
           key: rabe.systemd-udevd.processes
@@ -95,7 +95,7 @@ zabbix_export:
             - tag: component
               value: systemd-udevd
           triggers:
-            - uuid: 
+            - uuid: e05fd53525de4f05a5abf0406704bb95
               expression: last(/systemd-udevd/rabe.systemd-udevd.processes)<1
               name: 'systemd-udevd: No running processes'
               priority: HIGH
@@ -103,7 +103,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: availability
-        - uuid: 
+        - uuid: 962006696ce140938b981b211f6805a5
           name: 'systemd-udevd: Memory usage (RSS)'
           type: DEPENDENT
           key: rabe.systemd-udevd.rss
@@ -123,7 +123,7 @@ zabbix_export:
           tags:
             - tag: component
               value: systemd-udevd
-        - uuid: 
+        - uuid: 10a6f83b779840adbe4c961108171faa
           name: 'systemd-udevd: Swap usage'
           type: DEPENDENT
           key: rabe.systemd-udevd.swap
@@ -143,7 +143,7 @@ zabbix_export:
           tags:
             - tag: component
               value: systemd-udevd
-        - uuid: 
+        - uuid: decff16e2eac4cd58d4adc84f5423871
           name: 'systemd-udevd: Number of threads'
           type: DEPENDENT
           key: rabe.systemd-udevd.threads
@@ -168,7 +168,7 @@ zabbix_export:
         - tag: target
           value: systemd-udevd
       dashboards:
-        - uuid: 
+        - uuid: aaa56c2502e344e49062c6d1d21ae124
           name: 'systemd-udevd: Overview'
           pages:
             - widgets:

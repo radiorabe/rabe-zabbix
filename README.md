@@ -22,6 +22,12 @@ This ensures great modularity, reusability and avoids unecessary
 inheritance problems.
 
 
+### Stacks: Applications
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) |  |
+
 ### Stacks: Network devices
 
 | Name | 3.0 | 6.4 | 7.0 |

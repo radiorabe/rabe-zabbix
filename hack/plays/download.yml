@@ -15,6 +15,7 @@
       - search: "systemd-journald"
       - search: "systemd-logind"
       - search: "systemd-udevd"
+      - search: "systemd Stack"
       - search: "gssproxy"
       - search: "timedatectl"
       - search: "tuned"
