@@ -1,0 +1,525 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: c4a24054ed3c4085aba8cfe5a077c2ca
+      template: chrony
+      name: chrony
+      description: |
+        Keeps track of chrony.
+        
+        Needs the following configuration:
+        ```
+        AllowKey=system.run[/usr/bin/chronyc -c activity]
+        ```
+        
+        Managed by <https://github.com/radiorabe/rabe-zabbix>.
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 1ad40d5c3d814204b84506a4f553a941
+          name: 'chrony: chronyd process'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[chronyd,chrony,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about chrony processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: e0f3a9d2b1cc40d4ada050409d94070a
+          name: 'chrony: Sources doing burst (return to offline)'
+          type: DEPENDENT
+          key: rabe.chrony.activity.sources_burst_to_offline
+          delay: '0'
+          history: 7d
+          description: 'Sources doing burst (return to offline).'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[3]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c activity]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: 26f9f34d7f944260bbcb7c85e057b299
+          name: 'chrony: Sources doing burst (return to online)'
+          type: DEPENDENT
+          key: rabe.chrony.activity.sources_burst_to_online
+          delay: '0'
+          history: 7d
+          description: 'Sources doing burst (return to online).'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[2]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c activity]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: debb8c9d77334ec68bce647216d06e4d
+          name: 'chrony: Sources offline'
+          type: DEPENDENT
+          key: rabe.chrony.activity.sources_offline
+          delay: '0'
+          history: 7d
+          description: 'Sources offline.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[1]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c activity]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: 2ad24b1b0a9a4697a4d7e446bb446f0c
+          name: 'chrony: Sources online'
+          type: DEPENDENT
+          key: rabe.chrony.activity.sources_online
+          delay: '0'
+          history: 7d
+          description: 'Sources online.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[0]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c activity]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: f70864b390ae4217b6c41b42261f3476
+          name: 'chrony: Sources with unknown address'
+          type: DEPENDENT
+          key: rabe.chrony.activity.sources_with_unknown_address
+          delay: '0'
+          history: 7d
+          description: 'Sources with unknown address.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[4]'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c activity]'
+          tags:
+            - tag: component
+              value: chrony
+        - uuid: 543eeacffc944ceca2a5e58bdbd5f808
+          name: 'chronyd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.chrony.chronyd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of chronyd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[chronyd,chrony,,summary]'
+          tags:
+            - tag: component
+              value: chrony
+            - tag: component
+              value: chronyd
+        - uuid: 714e726fbc3d407499df68217972219e
+          name: 'chronyd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.chrony.chronyd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of chronyd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[chronyd,chrony,,summary]'
+          tags:
+            - tag: component
+              value: chrony
+            - tag: component
+              value: chronyd
+        - uuid: 81b60ced2d504d3b89ecb6cffb2d8923
+          name: 'chronyd: Number of processes'
+          type: DEPENDENT
+          key: rabe.chrony.chronyd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of chronyd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[chronyd,chrony,,summary]'
+          tags:
+            - tag: component
+              value: chrony
+            - tag: component
+              value: chronyd
+          triggers:
+            - uuid: 613dcabbede04f0eb95d60c87e75ffef
+              expression: last(/chrony/rabe.chrony.chronyd.processes)<1
+              name: 'chronyd: No running processes'
+              priority: HIGH
+              description: 'No running chronyd processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 75fc457172ab4673ad5a07daaf84e229
+          name: 'chronyd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.chrony.chronyd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of chronyd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[chronyd,chrony,,summary]'
+          tags:
+            - tag: component
+              value: chrony
+            - tag: component
+              value: chronyd
+        - uuid: f3a04d588f3748cd9ff81faa33b6fd3f
+          name: 'chronyd: Swap usage'
+          type: DEPENDENT
+          key: rabe.chrony.chronyd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of chronyd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[chronyd,chrony,,summary]'
+          tags:
+            - tag: component
+              value: chrony
+            - tag: component
+              value: chronyd
+        - uuid: a2e73469d6584108b941dbbe3d516447
+          name: 'chronyd: Number of threads'
+          type: DEPENDENT
+          key: rabe.chrony.chronyd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of chronyd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[chronyd,chrony,,summary]'
+          tags:
+            - tag: component
+              value: chrony
+            - tag: component
+              value: chronyd
+        - uuid: 4a02236adda54a649de3efc6470c56f5
+          name: 'chrony: Activitiy'
+          type: ZABBIX_ACTIVE
+          key: 'system.run[/usr/bin/chronyc -c activity]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Results of chronyc -c activity'
+          tags:
+            - tag: component
+              value: raw
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: chrony
+      dashboards:
+        - uuid: 503d0b61ebde46aea00f259664f23252
+          name: 'chrony: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '10'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.activity.sources_online
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: graph
+                  'y': '3'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '8'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '3'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '10'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.activity.sources_offline
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: item
+                  x: '6'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '5'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.activity.sources_burst_to_online
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: item
+                  x: '9'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '5'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.activity.sources_burst_to_offline
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: item
+                  x: '12'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '5'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.activity.sources_with_unknown_address
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: graph
+                  x: '12'
+                  'y': '3'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '8'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '18'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: desc_size
+                      value: '10'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: chrony
+                        key: rabe.chrony.chronyd.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: clock
+                  x: '21'
+                  width: '3'
+                  height: '3'
+                  hide_header: 'YES'

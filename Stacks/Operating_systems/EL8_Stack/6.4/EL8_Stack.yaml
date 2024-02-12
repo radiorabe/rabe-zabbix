@@ -15,8 +15,10 @@ zabbix_export:
         name: RaBe
         version: '6.4'
       templates:
+        - name: chrony
         - name: 'Linux by Zabbix agent active'
         - name: 'Systemd by Zabbix agent 2'
+        - name: timedatectl
         - name: 'Zabbix unsupported items'
       groups:
         - name: 'Stacks/Operating systems'

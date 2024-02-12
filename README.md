@@ -49,7 +49,7 @@ inheritance problems.
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
-| chrony | [✅](./Templates/Applications/chrony/3.0) |  |  |
+| chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) |  |
 | Cronie | [✅](./Templates/Applications/Cronie/3.0) |  |  |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
 | dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |

@@ -160,9 +160,21 @@
           {{ triggers.append(item.triggers) if 'triggers' in item }}
 
           {{ item.description }}
+
+          Type: {{ item.type }}
+
           ```
           {{ item.key }}
           ```
+          {% if item.type == 'DEPENDENT' %}
+          Source item: `{{ item.master_item.key }}`
+
+          | Type | Parameters |
+          | ---- | ---------- |
+          {% for prep in item.preprocessing %}
+          | {{ prep.type }} | `{{ prep.parameters | to_json }}` |
+          {% endfor %}
+          {% endif %}
           {% endfor %}
           {% endif %}
           {% if triggers %}
@@ -182,6 +194,15 @@
           ```
           {{ trigger.expression }}
           ```
+          {% endfor %}
+          {% endif %}
+          {% if 'dashboards' in tpl %}
+
+          ## Dashboards
+
+          The following Zabbix dashboards are included in this template.
+          {% for dashboard in tpl.dashboards %}
+          * {{ dashboard.name }}
           {% endfor %}
           {% endif %}
 

@@ -11,8 +11,10 @@ Managed by <https://github.com/radiorabe/rabe-zabbix>.
 
 This Zabbix template depends on the following templates.
 
+* chrony
 * Linux by Zabbix agent active
 * Systemd by Zabbix agent 2
+* timedatectl
 * Zabbix unsupported items
 
 ## Macros

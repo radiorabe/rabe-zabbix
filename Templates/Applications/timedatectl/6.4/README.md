@@ -32,42 +32,84 @@ Default:
 ![component: timedatectl](https://img.shields.io/badge/component-timedatectl-00c9bf)
 
 NTP service status
+
+Type: DEPENDENT
+
 ```
 rabe.timedatectl.status.ntp_service
 ```
+Source item: `system.run[/usr/bin/timedatectl show]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| REGEX | `["NTP=(.*)", "\\1"]` |
+| JAVASCRIPT | `["return {\"yes\": 1, \"no\": 0}[value]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
 ### Item: timedatectl: RTC in local TZ
 
 ![component: timedatectl](https://img.shields.io/badge/component-timedatectl-00c9bf)
 
 Is the RTC in local TZ?
+
+Type: DEPENDENT
+
 ```
 rabe.timedatectl.status.rtc_in_local_tz
 ```
+Source item: `system.run[/usr/bin/timedatectl show]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| REGEX | `["LocalRTC=(.*)", "\\1"]` |
+| JAVASCRIPT | `["return {\"yes\": 1, \"no\": 0}[value]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
 ### Item: timedatectl: System clock synchronized
 
 ![component: timedatectl](https://img.shields.io/badge/component-timedatectl-00c9bf)
 
 Is the system clock synchronized?
+
+Type: DEPENDENT
+
 ```
 rabe.timedatectl.status.system_clock_synchronized
 ```
+Source item: `system.run[/usr/bin/timedatectl show]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| REGEX | `["NTPSynchronized=(.*)", "\\1"]` |
+| JAVASCRIPT | `["return {\"yes\": 1, \"no\": 0}[value]"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
 ### Item: timedatectl: Time zone
 
 ![component: timedatectl](https://img.shields.io/badge/component-timedatectl-00c9bf)
 
 Time zone
+
+Type: DEPENDENT
+
 ```
 rabe.timedatectl.status.time_zone
 ```
+Source item: `system.run[/usr/bin/timedatectl show]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| REGEX | `["Timezone=(.*)", "\\1"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["1d"]` |
 
 ### Item: timedatectl: Get status
 
 ![component: raw](https://img.shields.io/badge/component-raw-00c9bf)
 
 Get output from timedatectl status.
+
+Type: ZABBIX_ACTIVE
+
 ```
 system.run[/usr/bin/timedatectl show]
 ```

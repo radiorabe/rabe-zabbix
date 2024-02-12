@@ -16,6 +16,9 @@ Managed by <https://github.com/radiorabe/rabe-zabbix>.
 ![component: zabbix](https://img.shields.io/badge/component-zabbix-00c9bf)![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf)
 
 The number of unsupported items on this host
+
+Type: INTERNAL
+
 ```
 zabbix[host,,items_unsupported]
 ```

@@ -4,6 +4,7 @@
 
   vars:
     rabe_zabbix_templates:
+      - search: "chrony"
       - search: "EL7 Stack"
       - search: "EL8 Stack"
       - search: "EL9 Stack"
