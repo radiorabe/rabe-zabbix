@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about certmonger processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[certmonger,root,,summary]
@@ -28,7 +31,11 @@ proc.get[certmonger,root,,summary]
 
 Total CPU seconds (system) of certmonger processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.certmonger.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Total CPU seconds (user) of certmonger processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.certmonger.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Number of certmonger processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.certmonger.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Memory usage of certmonger processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.certmonger.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Swap usage of certmonger processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.certmonger.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Number of certmonger threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.certmonger.threads

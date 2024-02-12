@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix)
 
 Get info about firewalld processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[firewalld,root,,summary]
@@ -28,7 +31,11 @@ proc.get[firewalld,root,,summary]
 
 Total CPU seconds (system) of firewalld processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.firewalld.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[firewalld,root,,summary]`
 
 Total CPU seconds (user) of firewalld processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.firewalld.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[firewalld,root,,summary]`
 
 Number of firewalld processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.firewalld.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[firewalld,root,,summary]`
 
 Memory usage of firewalld processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.firewalld.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[firewalld,root,,summary]`
 
 Swap usage of firewalld processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.firewalld.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[firewalld,root,,summary]`
 
 Number of firewalld threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.firewalld.threads

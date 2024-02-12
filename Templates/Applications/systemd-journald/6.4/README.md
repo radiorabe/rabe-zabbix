@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about systemd-journald processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[systemd-journald,root,,summary]
@@ -28,7 +31,11 @@ proc.get[systemd-journald,root,,summary]
 
 Total CPU seconds (system) of systemd-journald processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.systemd-journald.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Total CPU seconds (user) of systemd-journald processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.systemd-journald.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Number of systemd-journald processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.systemd-journald.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Memory usage of systemd-journald processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.systemd-journald.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Swap usage of systemd-journald processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.systemd-journald.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Number of systemd-journald threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.systemd-journald.threads

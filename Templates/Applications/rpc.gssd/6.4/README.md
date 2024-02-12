@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about rpc.gssd processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[rpc.gssd,root,,summary]
@@ -28,7 +31,11 @@ proc.get[rpc.gssd,root,,summary]
 
 Total CPU seconds (system) of rpc.gssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.rpc.gssd.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Total CPU seconds (user) of rpc.gssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.rpc.gssd.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Number of rpc.gssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rpc.gssd.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Memory usage of rpc.gssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rpc.gssd.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Swap usage of rpc.gssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rpc.gssd.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Number of rpc.gssd threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rpc.gssd.threads

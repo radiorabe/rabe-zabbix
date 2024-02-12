@@ -317,6 +317,24 @@ zabbix_export:
           tags:
             - tag: component
               value: chrony
+        - uuid: 31046634a8c349e798d5a9647531564f
+          name: 'chrony: Ref time (UTC)'
+          type: DEPENDENT
+          key: rabe.chrony.tracking.ref_time
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: unixtime
+          description: 'Ref time (UTC).'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value.split(",")[3]'
+          master_item:
+            key: 'system.run[/usr/bin/chronyc -c tracking]'
+          tags:
+            - tag: component
+              value: chrony
         - uuid: bb49bcde746d4c60923ccf971847ca34
           name: 'chrony: Skew'
           type: DEPENDENT

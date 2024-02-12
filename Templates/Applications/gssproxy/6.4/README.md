@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about gssproxy processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[gssproxy,root,,summary]
@@ -28,7 +31,11 @@ proc.get[gssproxy,root,,summary]
 
 Total CPU seconds (system) of gssproxy processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.gssproxy.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Total CPU seconds (user) of gssproxy processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.gssproxy.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Number of gssproxy processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.gssproxy.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Memory usage of gssproxy processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.gssproxy.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Swap usage of gssproxy processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.gssproxy.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Number of gssproxy threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.gssproxy.threads

@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about auditd processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[auditd,root,,summary]
@@ -28,7 +31,11 @@ proc.get[auditd,root,,summary]
 
 Total CPU seconds (system) of auditd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.auditd.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Total CPU seconds (user) of auditd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.auditd.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Number of auditd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.auditd.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Memory usage of auditd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.auditd.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Swap usage of auditd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.auditd.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Number of auditd threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.auditd.threads

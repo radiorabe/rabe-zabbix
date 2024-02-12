@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about tuned processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[tuned,root,,summary]
@@ -28,7 +31,11 @@ proc.get[tuned,root,,summary]
 
 Total CPU seconds (system) of tuned processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.tuned.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Total CPU seconds (user) of tuned processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.tuned.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Number of tuned processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.tuned.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Memory usage of tuned processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.tuned.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Swap usage of tuned processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.tuned.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Number of tuned threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.tuned.threads

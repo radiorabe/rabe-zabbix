@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about sssd processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[sssd,root,,summary]
@@ -28,7 +31,11 @@ proc.get[sssd,root,,summary]
 
 Total CPU seconds (system) of sssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.sssd.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Total CPU seconds (user) of sssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.sssd.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Number of sssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.sssd.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Memory usage of sssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.sssd.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Swap usage of sssd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.sssd.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Number of sssd threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.sssd.threads

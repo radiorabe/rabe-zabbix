@@ -22,7 +22,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about chrony processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[chronyd,chrony,,summary]
@@ -34,7 +37,10 @@ proc.get[chronyd,chrony,,summary]
 
 Sources doing burst (return to offline).
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.activity.sources_burst_to_offline
@@ -52,7 +58,10 @@ Source item: `system.run[/usr/bin/chronyc -c activity]`
 
 Sources doing burst (return to online).
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.activity.sources_burst_to_online
@@ -70,7 +79,10 @@ Source item: `system.run[/usr/bin/chronyc -c activity]`
 
 Sources offline.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.activity.sources_offline
@@ -88,7 +100,10 @@ Source item: `system.run[/usr/bin/chronyc -c activity]`
 
 Sources online.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.activity.sources_online
@@ -106,7 +121,10 @@ Source item: `system.run[/usr/bin/chronyc -c activity]`
 
 Sources with unknown address.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.activity.sources_with_unknown_address
@@ -124,7 +142,11 @@ Source item: `system.run[/usr/bin/chronyc -c activity]`
 
 Total CPU seconds (system) of chronyd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.chrony.chronyd.cputime_system
@@ -143,7 +165,11 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 
 Total CPU seconds (user) of chronyd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.chrony.chronyd.cputime_user
@@ -162,7 +188,10 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 
 Number of chronyd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.chronyd.processes
@@ -180,7 +209,10 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 
 Memory usage of chronyd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.chronyd.rss
@@ -198,7 +230,10 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 
 Swap usage of chronyd processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.chronyd.swap
@@ -216,7 +251,10 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 
 Number of chronyd threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.chronyd.threads
@@ -234,7 +272,11 @@ Source item: `proc.get[chronyd,chrony,,summary]`
 
 Reference ID.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | TEXT |
+| History | 7d |
 
 ```
 rabe.chrony.tracking.reference_id
@@ -252,7 +294,11 @@ Source item: `system.run[/usr/bin/chronyc -c tracking]`
 
 Reference IP.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | TEXT |
+| History | 7d |
 
 ```
 rabe.chrony.tracking.reference_ip
@@ -264,13 +310,38 @@ Source item: `system.run[/usr/bin/chronyc -c tracking]`
 | JAVASCRIPT | `["return value.split(\",\")[1]"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["1h"]` |
 
+### Item: chrony: Ref time (UTC)
+
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
+
+Ref time (UTC).
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT in unixtime |
+| History | 7d |
+
+```
+rabe.chrony.tracking.ref_time
+```
+Source item: `system.run[/usr/bin/chronyc -c tracking]`
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["return value.split(\",\")[3]"]` |
+
 ### Item: chrony: Skew
 
 ![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)
 
 Skew.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT in ppm |
+| History | 7d |
 
 ```
 rabe.chrony.tracking.skew
@@ -288,7 +359,10 @@ Source item: `system.run[/usr/bin/chronyc -c tracking]`
 
 Stratum.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.chrony.tracking.stratum
@@ -306,7 +380,11 @@ Source item: `system.run[/usr/bin/chronyc -c tracking]`
 
 System time is seconds slow of NTP time
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT in s |
+| History | 7d |
 
 ```
 rabe.chrony.tracking.system_time
@@ -324,7 +402,10 @@ Source item: `system.run[/usr/bin/chronyc -c tracking]`
 
 Results of chronyc -c activity
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 system.run[/usr/bin/chronyc -c activity]
@@ -336,7 +417,10 @@ system.run[/usr/bin/chronyc -c activity]
 
 Results of chronyc -c tracking
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 system.run[/usr/bin/chronyc -c tracking]

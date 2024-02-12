@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about qemu-ga processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[qemu-ga,root,,summary]
@@ -28,7 +31,11 @@ proc.get[qemu-ga,root,,summary]
 
 Total CPU seconds (system) of qemu-ga processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.qemu-ga.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Total CPU seconds (user) of qemu-ga processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.qemu-ga.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Number of qemu-ga processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.qemu-ga.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Memory usage of qemu-ga processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.qemu-ga.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Swap usage of qemu-ga processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.qemu-ga.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Number of qemu-ga threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.qemu-ga.threads

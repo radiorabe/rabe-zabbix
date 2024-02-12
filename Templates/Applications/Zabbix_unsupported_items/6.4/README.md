@@ -18,7 +18,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 The number of unsupported items on this host
 
-Type: INTERNAL
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | INTERNAL |
+| History | 7d |
 
 ```
 zabbix[host,,items_unsupported]

@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about rsyslog processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[rsyslogd,root,,summary]
@@ -28,7 +31,11 @@ proc.get[rsyslogd,root,,summary]
 
 Total CPU seconds (system) of rsyslog processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.rsyslog.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Total CPU seconds (user) of rsyslog processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.rsyslog.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Number of rsyslog processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rsyslog.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Memory usage of rsyslog processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rsyslog.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Swap usage of rsyslog processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rsyslog.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Number of rsyslog threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.rsyslog.threads

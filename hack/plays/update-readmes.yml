@@ -161,7 +161,18 @@
 
           {{ item.description }}
 
-          Type: {{ item.type }}
+          | Item Setting | Value |
+          | ------------ | ----- |
+          | Type | {{ item.type }} |
+          {% if 'value_type' in item %}
+          | Value type | {{ item.value_type }}{{ " in "+item.units if 'units' in item }} |
+          {% endif %}
+          {% if 'history' in item and item.history != '0' %}
+          | History | {{ item.history }} |
+          {% endif %}
+          {% if 'trends' in item and item.trends != '0' %}
+          | Trends | {{ item.trends }} |
+          {% endif %}
 
           ```
           {{ item.key }}

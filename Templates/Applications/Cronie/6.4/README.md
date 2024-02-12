@@ -16,7 +16,10 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about Cronie processes
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 proc.get[crond,root,,summary]
@@ -28,7 +31,11 @@ proc.get[crond,root,,summary]
 
 Total CPU seconds (system) of Cronie processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.Cronie.cputime_system
@@ -47,7 +54,11 @@ Source item: `proc.get[crond,root,,summary]`
 
 Total CPU seconds (user) of Cronie processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT |
+| History | 7d |
 
 ```
 rabe.Cronie.cputime_user
@@ -66,7 +77,10 @@ Source item: `proc.get[crond,root,,summary]`
 
 Number of Cronie processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.Cronie.processes
@@ -84,7 +98,10 @@ Source item: `proc.get[crond,root,,summary]`
 
 Memory usage of Cronie processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.Cronie.rss
@@ -102,7 +119,10 @@ Source item: `proc.get[crond,root,,summary]`
 
 Swap usage of Cronie processes.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.Cronie.swap
@@ -120,7 +140,10 @@ Source item: `proc.get[crond,root,,summary]`
 
 Number of Cronie threads.
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.Cronie.threads

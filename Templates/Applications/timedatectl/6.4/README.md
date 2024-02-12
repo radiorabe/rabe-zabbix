@@ -37,7 +37,10 @@ Default:
 
 NTP service status
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.timedatectl.status.ntp_service
@@ -56,7 +59,10 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Is the RTC in local TZ?
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.timedatectl.status.rtc_in_local_tz
@@ -75,7 +81,10 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Is the system clock synchronized?
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
 
 ```
 rabe.timedatectl.status.system_clock_synchronized
@@ -94,7 +103,11 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Time zone
 
-Type: DEPENDENT
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | TEXT |
+| History | 7d |
 
 ```
 rabe.timedatectl.status.time_zone
@@ -112,7 +125,10 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Get output from timedatectl status.
 
-Type: ZABBIX_ACTIVE
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
 
 ```
 system.run[/usr/bin/timedatectl show]
