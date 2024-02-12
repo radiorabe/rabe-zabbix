@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about certmonger processes
 
+```
+proc.get[certmonger,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[certmonger,root,,summary]
-```
 
 ### Item: certmonger: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[certmonger,root,,summary]
 
 Total CPU seconds (system) of certmonger processes.
 
+```
+rabe.certmonger.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[certmonger,root,,summary]` |
 
-```
-rabe.certmonger.cputime_system
-```
-Source item: `proc.get[certmonger,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Total CPU seconds (user) of certmonger processes.
 
+```
+rabe.certmonger.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[certmonger,root,,summary]` |
 
-```
-rabe.certmonger.cputime_user
-```
-Source item: `proc.get[certmonger,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Number of certmonger processes.
 
+```
+rabe.certmonger.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[certmonger,root,,summary]` |
 
-```
-rabe.certmonger.processes
-```
-Source item: `proc.get[certmonger,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Memory usage of certmonger processes.
 
+```
+rabe.certmonger.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[certmonger,root,,summary]` |
 
-```
-rabe.certmonger.rss
-```
-Source item: `proc.get[certmonger,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Swap usage of certmonger processes.
 
+```
+rabe.certmonger.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[certmonger,root,,summary]` |
 
-```
-rabe.certmonger.swap
-```
-Source item: `proc.get[certmonger,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[certmonger,root,,summary]`
 
 Number of certmonger threads.
 
+```
+rabe.certmonger.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[certmonger,root,,summary]` |
 
-```
-rabe.certmonger.threads
-```
-Source item: `proc.get[certmonger,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

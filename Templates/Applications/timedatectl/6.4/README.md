@@ -37,16 +37,18 @@ Default:
 
 NTP service status
 
+```
+rabe.timedatectl.status.ntp_service
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `system.run[/usr/bin/timedatectl show]` |
 
-```
-rabe.timedatectl.status.ntp_service
-```
-Source item: `system.run[/usr/bin/timedatectl show]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["NTP=(.*)", "\\1"]` |
@@ -59,16 +61,18 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Is the RTC in local TZ?
 
+```
+rabe.timedatectl.status.rtc_in_local_tz
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `system.run[/usr/bin/timedatectl show]` |
 
-```
-rabe.timedatectl.status.rtc_in_local_tz
-```
-Source item: `system.run[/usr/bin/timedatectl show]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["LocalRTC=(.*)", "\\1"]` |
@@ -81,16 +85,18 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Is the system clock synchronized?
 
+```
+rabe.timedatectl.status.system_clock_synchronized
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `system.run[/usr/bin/timedatectl show]` |
 
-```
-rabe.timedatectl.status.system_clock_synchronized
-```
-Source item: `system.run[/usr/bin/timedatectl show]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["NTPSynchronized=(.*)", "\\1"]` |
@@ -103,17 +109,19 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Time zone
 
+```
+rabe.timedatectl.status.time_zone
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | TEXT |
 | History | 7d |
+| Source item | `system.run[/usr/bin/timedatectl show]` |
 
-```
-rabe.timedatectl.status.time_zone
-```
-Source item: `system.run[/usr/bin/timedatectl show]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["Timezone=(.*)", "\\1"]` |
@@ -125,14 +133,15 @@ Source item: `system.run[/usr/bin/timedatectl show]`
 
 Get output from timedatectl status.
 
+```
+system.run[/usr/bin/timedatectl show]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-system.run[/usr/bin/timedatectl show]
-```
 
 ## Triggers
 

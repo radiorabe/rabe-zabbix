@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about gssproxy processes
 
+```
+proc.get[gssproxy,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[gssproxy,root,,summary]
-```
 
 ### Item: gssproxy: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[gssproxy,root,,summary]
 
 Total CPU seconds (system) of gssproxy processes.
 
+```
+rabe.gssproxy.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[gssproxy,root,,summary]` |
 
-```
-rabe.gssproxy.cputime_system
-```
-Source item: `proc.get[gssproxy,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Total CPU seconds (user) of gssproxy processes.
 
+```
+rabe.gssproxy.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[gssproxy,root,,summary]` |
 
-```
-rabe.gssproxy.cputime_user
-```
-Source item: `proc.get[gssproxy,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Number of gssproxy processes.
 
+```
+rabe.gssproxy.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[gssproxy,root,,summary]` |
 
-```
-rabe.gssproxy.processes
-```
-Source item: `proc.get[gssproxy,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Memory usage of gssproxy processes.
 
+```
+rabe.gssproxy.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[gssproxy,root,,summary]` |
 
-```
-rabe.gssproxy.rss
-```
-Source item: `proc.get[gssproxy,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Swap usage of gssproxy processes.
 
+```
+rabe.gssproxy.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[gssproxy,root,,summary]` |
 
-```
-rabe.gssproxy.swap
-```
-Source item: `proc.get[gssproxy,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[gssproxy,root,,summary]`
 
 Number of gssproxy threads.
 
+```
+rabe.gssproxy.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[gssproxy,root,,summary]` |
 
-```
-rabe.gssproxy.threads
-```
-Source item: `proc.get[gssproxy,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

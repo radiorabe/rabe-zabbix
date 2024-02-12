@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about rsyslog processes
 
+```
+proc.get[rsyslogd,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[rsyslogd,root,,summary]
-```
 
 ### Item: rsyslog: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[rsyslogd,root,,summary]
 
 Total CPU seconds (system) of rsyslog processes.
 
+```
+rabe.rsyslog.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[rsyslogd,root,,summary]` |
 
-```
-rabe.rsyslog.cputime_system
-```
-Source item: `proc.get[rsyslogd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Total CPU seconds (user) of rsyslog processes.
 
+```
+rabe.rsyslog.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[rsyslogd,root,,summary]` |
 
-```
-rabe.rsyslog.cputime_user
-```
-Source item: `proc.get[rsyslogd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Number of rsyslog processes.
 
+```
+rabe.rsyslog.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rsyslogd,root,,summary]` |
 
-```
-rabe.rsyslog.processes
-```
-Source item: `proc.get[rsyslogd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Memory usage of rsyslog processes.
 
+```
+rabe.rsyslog.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rsyslogd,root,,summary]` |
 
-```
-rabe.rsyslog.rss
-```
-Source item: `proc.get[rsyslogd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Swap usage of rsyslog processes.
 
+```
+rabe.rsyslog.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rsyslogd,root,,summary]` |
 
-```
-rabe.rsyslog.swap
-```
-Source item: `proc.get[rsyslogd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[rsyslogd,root,,summary]`
 
 Number of rsyslog threads.
 
+```
+rabe.rsyslog.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rsyslogd,root,,summary]` |
 
-```
-rabe.rsyslog.threads
-```
-Source item: `proc.get[rsyslogd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

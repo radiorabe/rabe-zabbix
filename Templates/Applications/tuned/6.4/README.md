@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about tuned processes
 
+```
+proc.get[tuned,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[tuned,root,,summary]
-```
 
 ### Item: tuned: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[tuned,root,,summary]
 
 Total CPU seconds (system) of tuned processes.
 
+```
+rabe.tuned.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[tuned,root,,summary]` |
 
-```
-rabe.tuned.cputime_system
-```
-Source item: `proc.get[tuned,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Total CPU seconds (user) of tuned processes.
 
+```
+rabe.tuned.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[tuned,root,,summary]` |
 
-```
-rabe.tuned.cputime_user
-```
-Source item: `proc.get[tuned,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Number of tuned processes.
 
+```
+rabe.tuned.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[tuned,root,,summary]` |
 
-```
-rabe.tuned.processes
-```
-Source item: `proc.get[tuned,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Memory usage of tuned processes.
 
+```
+rabe.tuned.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[tuned,root,,summary]` |
 
-```
-rabe.tuned.rss
-```
-Source item: `proc.get[tuned,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Swap usage of tuned processes.
 
+```
+rabe.tuned.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[tuned,root,,summary]` |
 
-```
-rabe.tuned.swap
-```
-Source item: `proc.get[tuned,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[tuned,root,,summary]`
 
 Number of tuned threads.
 
+```
+rabe.tuned.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[tuned,root,,summary]` |
 
-```
-rabe.tuned.threads
-```
-Source item: `proc.get[tuned,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

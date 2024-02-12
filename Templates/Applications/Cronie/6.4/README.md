@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about Cronie processes
 
+```
+proc.get[crond,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[crond,root,,summary]
-```
 
 ### Item: Cronie: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[crond,root,,summary]
 
 Total CPU seconds (system) of Cronie processes.
 
+```
+rabe.Cronie.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[crond,root,,summary]` |
 
-```
-rabe.Cronie.cputime_system
-```
-Source item: `proc.get[crond,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[crond,root,,summary]`
 
 Total CPU seconds (user) of Cronie processes.
 
+```
+rabe.Cronie.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[crond,root,,summary]` |
 
-```
-rabe.Cronie.cputime_user
-```
-Source item: `proc.get[crond,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[crond,root,,summary]`
 
 Number of Cronie processes.
 
+```
+rabe.Cronie.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[crond,root,,summary]` |
 
-```
-rabe.Cronie.processes
-```
-Source item: `proc.get[crond,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[crond,root,,summary]`
 
 Memory usage of Cronie processes.
 
+```
+rabe.Cronie.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[crond,root,,summary]` |
 
-```
-rabe.Cronie.rss
-```
-Source item: `proc.get[crond,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[crond,root,,summary]`
 
 Swap usage of Cronie processes.
 
+```
+rabe.Cronie.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[crond,root,,summary]` |
 
-```
-rabe.Cronie.swap
-```
-Source item: `proc.get[crond,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[crond,root,,summary]`
 
 Number of Cronie threads.
 
+```
+rabe.Cronie.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[crond,root,,summary]` |
 
-```
-rabe.Cronie.threads
-```
-Source item: `proc.get[crond,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

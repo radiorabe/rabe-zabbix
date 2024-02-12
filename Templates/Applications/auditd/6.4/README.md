@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about auditd processes
 
+```
+proc.get[auditd,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[auditd,root,,summary]
-```
 
 ### Item: auditd: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[auditd,root,,summary]
 
 Total CPU seconds (system) of auditd processes.
 
+```
+rabe.auditd.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[auditd,root,,summary]` |
 
-```
-rabe.auditd.cputime_system
-```
-Source item: `proc.get[auditd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Total CPU seconds (user) of auditd processes.
 
+```
+rabe.auditd.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[auditd,root,,summary]` |
 
-```
-rabe.auditd.cputime_user
-```
-Source item: `proc.get[auditd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Number of auditd processes.
 
+```
+rabe.auditd.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[auditd,root,,summary]` |
 
-```
-rabe.auditd.processes
-```
-Source item: `proc.get[auditd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Memory usage of auditd processes.
 
+```
+rabe.auditd.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[auditd,root,,summary]` |
 
-```
-rabe.auditd.rss
-```
-Source item: `proc.get[auditd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Swap usage of auditd processes.
 
+```
+rabe.auditd.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[auditd,root,,summary]` |
 
-```
-rabe.auditd.swap
-```
-Source item: `proc.get[auditd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[auditd,root,,summary]`
 
 Number of auditd threads.
 
+```
+rabe.auditd.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[auditd,root,,summary]` |
 
-```
-rabe.auditd.threads
-```
-Source item: `proc.get[auditd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

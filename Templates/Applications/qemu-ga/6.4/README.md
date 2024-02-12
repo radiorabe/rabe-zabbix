@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about qemu-ga processes
 
+```
+proc.get[qemu-ga,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[qemu-ga,root,,summary]
-```
 
 ### Item: qemu-ga: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[qemu-ga,root,,summary]
 
 Total CPU seconds (system) of qemu-ga processes.
 
+```
+rabe.qemu-ga.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[qemu-ga,root,,summary]` |
 
-```
-rabe.qemu-ga.cputime_system
-```
-Source item: `proc.get[qemu-ga,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Total CPU seconds (user) of qemu-ga processes.
 
+```
+rabe.qemu-ga.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[qemu-ga,root,,summary]` |
 
-```
-rabe.qemu-ga.cputime_user
-```
-Source item: `proc.get[qemu-ga,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Number of qemu-ga processes.
 
+```
+rabe.qemu-ga.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[qemu-ga,root,,summary]` |
 
-```
-rabe.qemu-ga.processes
-```
-Source item: `proc.get[qemu-ga,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Memory usage of qemu-ga processes.
 
+```
+rabe.qemu-ga.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[qemu-ga,root,,summary]` |
 
-```
-rabe.qemu-ga.rss
-```
-Source item: `proc.get[qemu-ga,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Swap usage of qemu-ga processes.
 
+```
+rabe.qemu-ga.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[qemu-ga,root,,summary]` |
 
-```
-rabe.qemu-ga.swap
-```
-Source item: `proc.get[qemu-ga,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[qemu-ga,root,,summary]`
 
 Number of qemu-ga threads.
 
+```
+rabe.qemu-ga.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[qemu-ga,root,,summary]` |
 
-```
-rabe.qemu-ga.threads
-```
-Source item: `proc.get[qemu-ga,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

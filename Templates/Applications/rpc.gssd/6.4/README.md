@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about rpc.gssd processes
 
+```
+proc.get[rpc.gssd,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[rpc.gssd,root,,summary]
-```
 
 ### Item: rpc.gssd: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[rpc.gssd,root,,summary]
 
 Total CPU seconds (system) of rpc.gssd processes.
 
+```
+rabe.rpc.gssd.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[rpc.gssd,root,,summary]` |
 
-```
-rabe.rpc.gssd.cputime_system
-```
-Source item: `proc.get[rpc.gssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Total CPU seconds (user) of rpc.gssd processes.
 
+```
+rabe.rpc.gssd.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[rpc.gssd,root,,summary]` |
 
-```
-rabe.rpc.gssd.cputime_user
-```
-Source item: `proc.get[rpc.gssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Number of rpc.gssd processes.
 
+```
+rabe.rpc.gssd.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rpc.gssd,root,,summary]` |
 
-```
-rabe.rpc.gssd.processes
-```
-Source item: `proc.get[rpc.gssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Memory usage of rpc.gssd processes.
 
+```
+rabe.rpc.gssd.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rpc.gssd,root,,summary]` |
 
-```
-rabe.rpc.gssd.rss
-```
-Source item: `proc.get[rpc.gssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Swap usage of rpc.gssd processes.
 
+```
+rabe.rpc.gssd.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rpc.gssd,root,,summary]` |
 
-```
-rabe.rpc.gssd.swap
-```
-Source item: `proc.get[rpc.gssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[rpc.gssd,root,,summary]`
 
 Number of rpc.gssd threads.
 
+```
+rabe.rpc.gssd.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[rpc.gssd,root,,summary]` |
 
-```
-rabe.rpc.gssd.threads
-```
-Source item: `proc.get[rpc.gssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

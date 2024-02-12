@@ -161,6 +161,11 @@
 
           {{ item.description }}
 
+          ```
+          {{ item.key }}
+          ```
+
+          Settings:
           | Item Setting | Value |
           | ------------ | ----- |
           | Type | {{ item.type }} |
@@ -173,13 +178,10 @@
           {% if 'trends' in item and item.trends != '0' %}
           | Trends | {{ item.trends }} |
           {% endif %}
-
-          ```
-          {{ item.key }}
-          ```
           {% if item.type == 'DEPENDENT' %}
-          Source item: `{{ item.master_item.key }}`
+          | Source item | `{{ item.master_item.key }}` |
 
+          Preprocessing steps:
           | Type | Parameters |
           | ---- | ---------- |
           {% for prep in item.preprocessing %}

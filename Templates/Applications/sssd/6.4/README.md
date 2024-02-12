@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about sssd processes
 
+```
+proc.get[sssd,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[sssd,root,,summary]
-```
 
 ### Item: sssd: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[sssd,root,,summary]
 
 Total CPU seconds (system) of sssd processes.
 
+```
+rabe.sssd.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[sssd,root,,summary]` |
 
-```
-rabe.sssd.cputime_system
-```
-Source item: `proc.get[sssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Total CPU seconds (user) of sssd processes.
 
+```
+rabe.sssd.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[sssd,root,,summary]` |
 
-```
-rabe.sssd.cputime_user
-```
-Source item: `proc.get[sssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Number of sssd processes.
 
+```
+rabe.sssd.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[sssd,root,,summary]` |
 
-```
-rabe.sssd.processes
-```
-Source item: `proc.get[sssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Memory usage of sssd processes.
 
+```
+rabe.sssd.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[sssd,root,,summary]` |
 
-```
-rabe.sssd.rss
-```
-Source item: `proc.get[sssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Swap usage of sssd processes.
 
+```
+rabe.sssd.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[sssd,root,,summary]` |
 
-```
-rabe.sssd.swap
-```
-Source item: `proc.get[sssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[sssd,root,,summary]`
 
 Number of sssd threads.
 
+```
+rabe.sssd.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[sssd,root,,summary]` |
 
-```
-rabe.sssd.threads
-```
-Source item: `proc.get[sssd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

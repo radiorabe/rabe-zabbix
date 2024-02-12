@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about systemd-udevd processes
 
+```
+proc.get[systemd-udevd,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[systemd-udevd,root,,summary]
-```
 
 ### Item: systemd-udevd: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[systemd-udevd,root,,summary]
 
 Total CPU seconds (system) of systemd-udevd processes.
 
+```
+rabe.systemd-udevd.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[systemd-udevd,root,,summary]` |
 
-```
-rabe.systemd-udevd.cputime_system
-```
-Source item: `proc.get[systemd-udevd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[systemd-udevd,root,,summary]`
 
 Total CPU seconds (user) of systemd-udevd processes.
 
+```
+rabe.systemd-udevd.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[systemd-udevd,root,,summary]` |
 
-```
-rabe.systemd-udevd.cputime_user
-```
-Source item: `proc.get[systemd-udevd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[systemd-udevd,root,,summary]`
 
 Number of systemd-udevd processes.
 
+```
+rabe.systemd-udevd.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-udevd,root,,summary]` |
 
-```
-rabe.systemd-udevd.processes
-```
-Source item: `proc.get[systemd-udevd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[systemd-udevd,root,,summary]`
 
 Memory usage of systemd-udevd processes.
 
+```
+rabe.systemd-udevd.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-udevd,root,,summary]` |
 
-```
-rabe.systemd-udevd.rss
-```
-Source item: `proc.get[systemd-udevd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[systemd-udevd,root,,summary]`
 
 Swap usage of systemd-udevd processes.
 
+```
+rabe.systemd-udevd.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-udevd,root,,summary]` |
 
-```
-rabe.systemd-udevd.swap
-```
-Source item: `proc.get[systemd-udevd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[systemd-udevd,root,,summary]`
 
 Number of systemd-udevd threads.
 
+```
+rabe.systemd-udevd.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-udevd,root,,summary]` |
 
-```
-rabe.systemd-udevd.threads
-```
-Source item: `proc.get[systemd-udevd,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

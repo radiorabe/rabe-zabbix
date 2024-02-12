@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about systemd-journald processes
 
+```
+proc.get[systemd-journald,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[systemd-journald,root,,summary]
-```
 
 ### Item: systemd-journald: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[systemd-journald,root,,summary]
 
 Total CPU seconds (system) of systemd-journald processes.
 
+```
+rabe.systemd-journald.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[systemd-journald,root,,summary]` |
 
-```
-rabe.systemd-journald.cputime_system
-```
-Source item: `proc.get[systemd-journald,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Total CPU seconds (user) of systemd-journald processes.
 
+```
+rabe.systemd-journald.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[systemd-journald,root,,summary]` |
 
-```
-rabe.systemd-journald.cputime_user
-```
-Source item: `proc.get[systemd-journald,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Number of systemd-journald processes.
 
+```
+rabe.systemd-journald.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-journald,root,,summary]` |
 
-```
-rabe.systemd-journald.processes
-```
-Source item: `proc.get[systemd-journald,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Memory usage of systemd-journald processes.
 
+```
+rabe.systemd-journald.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-journald,root,,summary]` |
 
-```
-rabe.systemd-journald.rss
-```
-Source item: `proc.get[systemd-journald,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Swap usage of systemd-journald processes.
 
+```
+rabe.systemd-journald.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-journald,root,,summary]` |
 
-```
-rabe.systemd-journald.swap
-```
-Source item: `proc.get[systemd-journald,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[systemd-journald,root,,summary]`
 
 Number of systemd-journald threads.
 
+```
+rabe.systemd-journald.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-journald,root,,summary]` |
 
-```
-rabe.systemd-journald.threads
-```
-Source item: `proc.get[systemd-journald,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |

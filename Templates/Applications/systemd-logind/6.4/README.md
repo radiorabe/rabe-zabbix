@@ -16,14 +16,15 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about systemd-logind processes
 
+```
+proc.get[systemd-logind,root,,summary]
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
-
-```
-proc.get[systemd-logind,root,,summary]
-```
 
 ### Item: systemd-logind: CPU seconds (system)
 
@@ -31,17 +32,19 @@ proc.get[systemd-logind,root,,summary]
 
 Total CPU seconds (system) of systemd-logind processes.
 
+```
+rabe.systemd-logind.cputime_system
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[systemd-logind,root,,summary]` |
 
-```
-rabe.systemd-logind.cputime_system
-```
-Source item: `proc.get[systemd-logind,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -54,17 +57,19 @@ Source item: `proc.get[systemd-logind,root,,summary]`
 
 Total CPU seconds (user) of systemd-logind processes.
 
+```
+rabe.systemd-logind.cputime_user
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
 | History | 7d |
+| Source item | `proc.get[systemd-logind,root,,summary]` |
 
-```
-rabe.systemd-logind.cputime_user
-```
-Source item: `proc.get[systemd-logind,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -77,16 +82,18 @@ Source item: `proc.get[systemd-logind,root,,summary]`
 
 Number of systemd-logind processes.
 
+```
+rabe.systemd-logind.processes
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-logind,root,,summary]` |
 
-```
-rabe.systemd-logind.processes
-```
-Source item: `proc.get[systemd-logind,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -98,16 +105,18 @@ Source item: `proc.get[systemd-logind,root,,summary]`
 
 Memory usage of systemd-logind processes.
 
+```
+rabe.systemd-logind.rss
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-logind,root,,summary]` |
 
-```
-rabe.systemd-logind.rss
-```
-Source item: `proc.get[systemd-logind,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -119,16 +128,18 @@ Source item: `proc.get[systemd-logind,root,,summary]`
 
 Swap usage of systemd-logind processes.
 
+```
+rabe.systemd-logind.swap
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-logind,root,,summary]` |
 
-```
-rabe.systemd-logind.swap
-```
-Source item: `proc.get[systemd-logind,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -140,16 +151,18 @@ Source item: `proc.get[systemd-logind,root,,summary]`
 
 Number of systemd-logind threads.
 
+```
+rabe.systemd-logind.threads
+```
+
+Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | History | 7d |
+| Source item | `proc.get[systemd-logind,root,,summary]` |
 
-```
-rabe.systemd-logind.threads
-```
-Source item: `proc.get[systemd-logind,root,,summary]`
-
+Preprocessing steps:
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |
