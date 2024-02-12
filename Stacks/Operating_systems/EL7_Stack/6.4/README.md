@@ -15,6 +15,7 @@ This Zabbix template depends on the following templates.
 * auditd
 * firewalld
 * Linux by Zabbix agent active
+* rsyslog
 * Systemd by Zabbix agent 2
 * tuned
 * Zabbix unsupported items

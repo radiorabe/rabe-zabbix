@@ -10,6 +10,7 @@
       - search: "EL7 Stack"
       - search: "EL8 Stack"
       - search: "EL9 Stack"
+      - search: "rsyslog"
       - search: "timedatectl"
       - search: "tuned"
       - search: "Zabbix unsupported items"

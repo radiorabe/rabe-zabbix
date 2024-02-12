@@ -19,6 +19,7 @@ zabbix_export:
         - name: auditd
         - name: firewalld
         - name: 'Linux by Zabbix agent active'
+        - name: rsyslog
         - name: 'Systemd by Zabbix agent 2'
         - name: tuned
         - name: 'Zabbix unsupported items'

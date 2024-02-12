@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 67bcb0eff7844452b277630a5b03da13
+      template: rsyslog
+      name: rsyslog
+      description: |
+        Monitoring of [rsyslog](https://www.rsyslog.com/).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: fd6bb615efd7419988d3f4280d4806e9
+          name: 'rsyslog: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[rsyslogd,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about rsyslog processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 41be8e5506934eddba86d09b1aaf67d7
+          name: 'rsyslog: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.rsyslog.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of rsyslog processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rsyslogd,root,,summary]'
+          tags:
+            - tag: component
+              value: rsyslog
+        - uuid: 6b777e6889834f59aff3c2eeaf96f560
+          name: 'rsyslog: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.rsyslog.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of rsyslog processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rsyslogd,root,,summary]'
+          tags:
+            - tag: component
+              value: rsyslog
+        - uuid: e4c66dfa4c1a457fac71189e2e9d7339
+          name: 'rsyslog: Number of processes'
+          type: DEPENDENT
+          key: rabe.rsyslog.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of rsyslog processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rsyslogd,root,,summary]'
+          tags:
+            - tag: component
+              value: rsyslog
+          triggers:
+            - uuid: cd0c058237d84b3484cd6c91f78eed38
+              expression: last(/rsyslog/rabe.rsyslog.processes)<1
+              name: 'rsyslog: No running processes'
+              priority: HIGH
+              description: 'No running rsyslog processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: d7111b302ee84409b14cd7850ac2dd87
+          name: 'rsyslog: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.rsyslog.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of rsyslog processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rsyslogd,root,,summary]'
+          tags:
+            - tag: component
+              value: rsyslog
+        - uuid: 890fa1b9113146baac4353cbf2752db6
+          name: 'rsyslog: Swap usage'
+          type: DEPENDENT
+          key: rabe.rsyslog.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of rsyslog processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rsyslogd,root,,summary]'
+          tags:
+            - tag: component
+              value: rsyslog
+        - uuid: 424037a4821c4d36a345db5cf24fd067
+          name: 'rsyslog: Number of threads'
+          type: DEPENDENT
+          key: rabe.rsyslog.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of rsyslog threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rsyslogd,root,,summary]'
+          tags:
+            - tag: component
+              value: rsyslog
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: rsyslog
+      dashboards:
+        - uuid: df75390b93dc45c4a43ef90ec6b1060b
+          name: 'rsyslog: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rsyslog
+                        key: rabe.rsyslog.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rsyslog
+                        key: rabe.rsyslog.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rsyslog
+                        key: rabe.rsyslog.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rsyslog
+                        key: rabe.rsyslog.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
