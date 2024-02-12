@@ -19,6 +19,7 @@ zabbix_export:
         - name: auditd
         - name: chrony
         - name: firewalld
+        - name: gssproxy
         - name: 'Linux by Zabbix agent active'
         - name: rsyslog
         - name: sssd

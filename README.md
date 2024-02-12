@@ -56,7 +56,7 @@ inheritance problems.
 | firewalld |  | [✅](./Templates/Applications/firewalld/6.4) |  |
 | GlusterFS Client | [✅](./Templates/Applications/GlusterFS_Client/3.0) |  |  |
 | GlusterFS Server | [✅](./Templates/Applications/GlusterFS_Server/3.0) |  |  |
-| GssProxy Daemon | [✅](./Templates/Applications/GssProxy_Daemon/3.0) |  |  |
+| gssproxy | [✅](./Templates/Applications/gssproxy/3.0) | [✅](./Templates/Applications/gssproxy/6.4) |  |
 | Icecast | [✅](./Templates/Applications/Icecast/3.0) |  |  |
 | ISC DHCP daemon | [✅](./Templates/Applications/ISC_DHCP_daemon/3.0) |  |  |
 | ISC DHCP Relay Agent | [✅](./Templates/Applications/ISC_DHCP_Relay_Agent/3.0) |  |  |

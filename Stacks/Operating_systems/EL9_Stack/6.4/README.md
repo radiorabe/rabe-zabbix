@@ -15,6 +15,7 @@ This Zabbix template depends on the following templates.
 * auditd
 * chrony
 * firewalld
+* gssproxy
 * Linux by Zabbix agent active
 * rsyslog
 * sssd

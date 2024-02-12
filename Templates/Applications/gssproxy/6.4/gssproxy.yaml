@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 'a571c0d144b14fd4a87a9d9b2aa9fcd6'
+      name: 'Templates/Applications'
+  templates:
+    - uuid: 95c6a57fd45d41efa0a69adbcfe77f7d
+      template: 'gssproxy'
+      name: gssproxy
+      description: |
+        Monitoring of [gssproxy](https://pagure.io/gssproxy).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: 'Templates/Applications'
+      items:
+        - uuid: 564363b341d641eba0f8a5ac10bd0dd6
+          name: 'gssproxy: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[gssproxy,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about gssproxy processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 071714c8ab3a48f5ad3aa4940cc7fdcd
+          name: 'gssproxy: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.gssproxy.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of gssproxy processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[gssproxy,root,,summary]'
+          tags:
+            - tag: component
+              value: gssproxy
+        - uuid: f623e4087c544a57afeba76b316f9691
+          name: 'gssproxy: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.gssproxy.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of gssproxy processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[gssproxy,root,,summary]'
+          tags:
+            - tag: component
+              value: gssproxy
+        - uuid: b4bd342079254211ad2e7963f344bce4
+          name: 'gssproxy: Number of processes'
+          type: DEPENDENT
+          key: rabe.gssproxy.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of gssproxy processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[gssproxy,root,,summary]'
+          tags:
+            - tag: component
+              value: gssproxy
+          triggers:
+            - uuid: 63770c9832ac4b928c936eaeeb4feba2
+              expression: last(/gssproxy/rabe.gssproxy.processes)<1
+              name: 'gssproxy: No running processes'
+              priority: HIGH
+              description: 'No running gssproxy processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: c337e6fdbeb24b429fb1e335a52a7250
+          name: 'gssproxy: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.gssproxy.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of gssproxy processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[gssproxy,root,,summary]'
+          tags:
+            - tag: component
+              value: gssproxy
+        - uuid: 61b026e0800149978bdd2ff1a829a53b
+          name: 'gssproxy: Swap usage'
+          type: DEPENDENT
+          key: rabe.gssproxy.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of gssproxy processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[gssproxy,root,,summary]'
+          tags:
+            - tag: component
+              value: gssproxy
+        - uuid: 0fcb923c94e3464e81f4d1fb19fd46cd
+          name: 'gssproxy: Number of threads'
+          type: DEPENDENT
+          key: rabe.gssproxy.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of gssproxy threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[gssproxy,root,,summary]'
+          tags:
+            - tag: component
+              value: gssproxy
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: gssproxy
+      dashboards:
+        - uuid: 1dd7da0a2faf413895311fb37bc32bad
+          name: 'gssproxy: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: gssproxy
+                        key: rabe.gssproxy.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: gssproxy
+                        key: rabe.gssproxy.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: gssproxy
+                        key: rabe.gssproxy.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: gssproxy
+                        key: rabe.gssproxy.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
