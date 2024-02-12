@@ -55,6 +55,7 @@ inheritance problems.
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
+| certmonger |  | [✅](./Templates/Applications/certmonger/6.4) |  |
 | chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) |  |
 | Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/6.4) |  |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
@@ -73,6 +74,7 @@ inheritance problems.
 | LVM | [✅](./Templates/Applications/LVM/3.0) |  |  |
 | MD-RAID | [✅](./Templates/Applications/MD-RAID/3.0) |  |  |
 | ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
+| qemu-ga |  | [✅](./Templates/Applications/qemu-ga/6.4) |  |
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
 | rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) |  |
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |

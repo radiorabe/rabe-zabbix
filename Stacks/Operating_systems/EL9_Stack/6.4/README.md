@@ -13,7 +13,9 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 This Zabbix template depends on the following templates.
 
 * auditd
+* certmonger
 * chrony
+* Cronie
 * firewalld
 * gssproxy
 * Linux by Zabbix agent active

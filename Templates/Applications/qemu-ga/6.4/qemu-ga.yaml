@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 77a0624363cd4616a13d1902430ae186
+      template: qemu-ga
+      name: QEMU Guest Agent
+      description: |
+        Monitoring of the [QEMU Guest Agent](https://www.qemu.org/docs/master/interop/qemu-ga.html).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 479183626b394584a9faf40cda6e86ff
+          name: 'qemu-ga: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[qemu-ga,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about qemu-ga processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 17bd216dfec5463f8ddbc8237bf25fbc
+          name: 'qemu-ga: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.qemu-ga.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of qemu-ga processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[qemu-ga,root,,summary]'
+          tags:
+            - tag: component
+              value: qemu-ga
+        - uuid: 1def6d220e36452b850cdb00ee088372
+          name: 'qemu-ga: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.qemu-ga.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of qemu-ga processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[qemu-ga,root,,summary]'
+          tags:
+            - tag: component
+              value: qemu-ga
+        - uuid: f1dd7d16f45c4fd289cfa085ae1c88b8
+          name: 'qemu-ga: Number of processes'
+          type: DEPENDENT
+          key: rabe.qemu-ga.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of qemu-ga processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[qemu-ga,root,,summary]'
+          tags:
+            - tag: component
+              value: qemu-ga
+          triggers:
+            - uuid: aa2a46515f98469482296b49600c44c7
+              expression: last(/qemu-ga/rabe.qemu-ga.processes)<1
+              name: 'qemu-ga: No running processes'
+              priority: HIGH
+              description: 'No running qemu-ga processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 49bda86d7fa6491e88b9cace94751f34
+          name: 'qemu-ga: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.qemu-ga.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of qemu-ga processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[qemu-ga,root,,summary]'
+          tags:
+            - tag: component
+              value: qemu-ga
+        - uuid: 850a82a7000d44509b709951fe00ac98
+          name: 'qemu-ga: Swap usage'
+          type: DEPENDENT
+          key: rabe.qemu-ga.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of qemu-ga processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[qemu-ga,root,,summary]'
+          tags:
+            - tag: component
+              value: qemu-ga
+        - uuid: b799e7ba76b2442ba0b296c51f7517a4
+          name: 'qemu-ga: Number of threads'
+          type: DEPENDENT
+          key: rabe.qemu-ga.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of qemu-ga threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[qemu-ga,root,,summary]'
+          tags:
+            - tag: component
+              value: qemu-ga
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: qemu-ga
+      dashboards:
+        - uuid: 910162aa19a04fd9b91f491190ab4c74
+          name: 'qemu-ga: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: qemu-ga
+                        key: rabe.qemu-ga.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: qemu-ga
+                        key: rabe.qemu-ga.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: qemu-ga
+                        key: rabe.qemu-ga.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: qemu-ga
+                        key: rabe.qemu-ga.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'

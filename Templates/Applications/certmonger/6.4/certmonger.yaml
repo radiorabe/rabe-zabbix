@@ -1,0 +1,226 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: f45e9a83754c4a5b83a26ccae9d5c84e
+      template: certmonger
+      name: certmonger
+      description: |
+        Monitoring of [certmonger](https://www.freeipa.org/page/Certmonger).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: af62b409c5d841b080b49e70f982d49d
+          name: 'certmonger: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[certmonger,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about certmonger processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 9aaf184984b0421b899be1cede002aaa
+          name: 'certmonger: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.certmonger.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of certmonger processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[certmonger,root,,summary]'
+          tags:
+            - tag: component
+              value: certmonger
+        - uuid: 80c6bc8876b84dc3b0f6ec3089bd01f9
+          name: 'certmonger: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.certmonger.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of certmonger processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[certmonger,root,,summary]'
+          tags:
+            - tag: component
+              value: certmonger
+        - uuid: b91a0fb53e0243c9a4577908b2109878
+          name: 'certmonger: Number of processes'
+          type: DEPENDENT
+          key: rabe.certmonger.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of certmonger processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[certmonger,root,,summary]'
+          tags:
+            - tag: component
+              value: certmonger
+          triggers:
+            - uuid: 754bfe5a7bd3463da3545a0321d95d3e
+              expression: last(/certmonger/rabe.certmonger.processes)<1
+              name: 'certmonger: No running processes'
+              priority: HIGH
+              description: 'No running certmonger processes.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 3637bbed68ad46a398143b61b7b4f651
+          name: 'certmonger: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.certmonger.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of certmonger processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[certmonger,root,,summary]'
+          tags:
+            - tag: component
+              value: certmonger
+        - uuid: 408749e1be014dbbbaf6b773b26c112f
+          name: 'certmonger: Swap usage'
+          type: DEPENDENT
+          key: rabe.certmonger.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of certmonger processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[certmonger,root,,summary]'
+          tags:
+            - tag: component
+              value: certmonger
+        - uuid: b014d7c31d30428b9b140cf6adbe96aa
+          name: 'certmonger: Number of threads'
+          type: DEPENDENT
+          key: rabe.certmonger.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of certmonger threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[certmonger,root,,summary]'
+          tags:
+            - tag: component
+              value: certmonger
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: certmonger
+      dashboards:
+        - uuid: b2ccf97fb0ed4a04abc386cafae1fc69
+          name: 'certmonger: Overview'
+          pages:
+            - widgets:
+                - type: graph
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: certmonger
+                        key: rabe.certmonger.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: certmonger
+                        key: rabe.certmonger.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: certmonger
+                        key: rabe.certmonger.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: certmonger
+                        key: rabe.certmonger.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
