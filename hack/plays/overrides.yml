@@ -1,0 +1,72 @@
+---
+- name: Get Overrides
+  hosts: [localhost]
+
+  vars:
+    vendor_templates:
+      - search: "Apache by HTTP"
+        upstream: "app/apache_http/template_app_apache_http.yaml"
+      #- search: "Website certificate by Zabbix agent 2"
+      #  upstream: "app/certificate_agent2/template_app_certificate_agent2.yaml"
+      #- search: "Linux by Zabbix agent active"
+      #  upstream: "os/linux_active/template_os_linux_active.yaml"
+      #- search: "Netgear Fastpath by SNMP"
+      #  upstream: "net/netgear_snmp/template_net_netgear_snmp.yaml"
+      #- search: "Systemd by Zabbix agent 2"
+      #  upstream: "app/systemd/template_app_systemd.yaml"
+    ansible_host: 'vm-0040.service.int.rabe.ch'
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: true
+    ansible_zabbix_url_path: ''
+
+  tasks:
+    - name: 'RaBe Zabbix : Set API Key'
+      ansible.builtin.set_fact:
+        ansible_zabbix_auth_key: '{{ zabbix_auth_key | mandatory }}'
+
+    - name: Get vendor template as YAML
+      community.zabbix.zabbix_template_info:
+        template_name: '{{ item.search }}'
+        format: yaml
+        omit_date: no
+      with_items: '{{ vendor_templates }}'
+      register: info
+
+    - ansible.builtin.file:
+        state: directory
+        path: 'Overrides/{{ item.item.search | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}'
+      with_items: '{{ info.results }}'
+
+    - ansible.builtin.copy:
+        dest: 'Overrides/{{ item.item.search | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}/{{ item.item.search | replace(" ", "_") }}.yaml'
+        content: '{{ item.template_yaml }}'
+      with_items: '{{ info.results }}'
+
+    - ansible.utils.fact_diff:
+        before: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/zabbix/zabbix/release/'+(item.template_yaml | from_yaml).zabbix_export.version + '/templates/' + item.item.upstream, split_lines=False) }}"
+        after: '{{ item.template_yaml }}'
+      loop: '{{ info.results }}'
+      register: diff
+
+    - ansible.builtin.copy:
+        dest: 'Overrides/{{ item.item.item.search | replace(" ", "_") }}/{{ (item.item.template_yaml | from_yaml).zabbix_export.version }}/DIFF.md'
+        content: |
+          # Compare Rabe Override with Upstream Template
+
+          Name: {{ item.item.item.search }}
+
+          Original: https://raw.githubusercontent.com/zabbix/zabbix/release/{{ (item.item.template_yaml | from_yaml).zabbix_export.version }}/templates/{{ item.item.item.upstream }}
+
+          ## Diff
+
+          {% if item.diff_text != '' %}
+          ```diff
+          {{ item.diff_text  }}
+          ```
+          {% else %}
+          No diff detected!
+          {% endif %}
+      with_items: '{{ diff.results }}'

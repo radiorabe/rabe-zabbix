@@ -131,6 +131,16 @@ inheritance problems.
 | Supermicro X7DWU | [✅](./Templates/Server_hardware/Supermicro_X7DWU/3.0) |  |  |
 | Threshold Sensors | [✅](./Templates/Server_hardware/Threshold_Sensors/3.0) |  |  |
 
+## Overrides
+
+In some cases we override the Zabbix out-of-the-box templates to
+ensure they fit our use case. We publish the changed templates along
+with a generated diff against its upstream version.
+
+| Name | 6.4 | 7.0 |
+| ---- | --- | --- |
+| Apache by HTTP | [✅](./Overrides/Apache_by_HTTP/6.4) |  |
+
 ## Zabbix Version Support
 
 We primarily support versions of Zabbix we use in production.

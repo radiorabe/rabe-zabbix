@@ -1,6 +1,6 @@
 # Zabbix Template: systemd Stack
 
-![class: stack](https://img.shields.io/badge/class-stack-00c9bf)
+![class: stack](https://img.shields.io/badge/class-stack-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 The [systemd](https://systemd.io) combines all the pieces of
 systemd that ususally run on a system host.

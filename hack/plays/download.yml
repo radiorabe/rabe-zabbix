@@ -1,5 +1,5 @@
 ---
-- name: Play
+- name: Manage RaBe Templates
   hosts: [localhost]
 
   vars:
@@ -32,7 +32,7 @@
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_httpapi_validate_certs: false
+    ansible_httpapi_validate_certs: true
     ansible_zabbix_url_path: ''
 
   tasks:
@@ -40,7 +40,7 @@
       ansible.builtin.set_fact:
         ansible_zabbix_auth_key: '{{ zabbix_auth_key | mandatory }}'
 
-    - name: Get Zabbix template as YAML
+    - name: Get RaBe template as YAML
       community.zabbix.zabbix_template_info:
         template_name: '{{ item.search }}'
         format: yaml
@@ -48,14 +48,12 @@
       with_items: '{{ rabe_zabbix_templates }}'
       register: info
 
-    - name: "mkdir"
-      ansible.builtin.file:
+    - ansible.builtin.file:
         state: directory
         path: '{{ (item.template_yaml | from_yaml).zabbix_export.template_groups[0].name | replace(" ", "_") }}/{{ item.item.search | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}'
       with_items: '{{ info.results }}'
 
-    - name: "Creating file with content"
-      ansible.builtin.copy:
+    - ansible.builtin.copy:
         dest: '{{ (item.template_yaml | from_yaml).zabbix_export.template_groups[0].name | replace(" ", "_") }}/{{ item.item.search | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}/{{ item.item.search | replace(" ", "_") }}.yaml'
         content: '{{ item.template_yaml }}'
       with_items: '{{ info.results }}'

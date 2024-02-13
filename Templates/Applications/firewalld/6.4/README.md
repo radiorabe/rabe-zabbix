@@ -1,6 +1,6 @@
 # Zabbix Template: firewalld
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: firewalld](https://img.shields.io/badge/target-firewalld-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: firewalld](https://img.shields.io/badge/target-firewalld-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Keeps track of [firewalld](https://firewalld.org/).
 
@@ -175,8 +175,10 @@ Preprocessing steps:
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running firewalld processes.
-
-Priority: HIGH
+Settings:
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | HIGH |
 
 ```
 last(/firewalld/rabe.firewalld.processes)<1

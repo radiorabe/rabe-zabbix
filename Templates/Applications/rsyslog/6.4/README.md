@@ -1,6 +1,6 @@
 # Zabbix Template: rsyslog
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: rsyslog](https://img.shields.io/badge/target-rsyslog-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: rsyslog](https://img.shields.io/badge/target-rsyslog-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring of [rsyslog](https://www.rsyslog.com/).
 
@@ -175,8 +175,10 @@ Preprocessing steps:
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running rsyslog processes.
-
-Priority: HIGH
+Settings:
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | HIGH |
 
 ```
 last(/rsyslog/rabe.rsyslog.processes)<1

@@ -19,6 +19,13 @@
         recurse: yes
       register: templates
 
+    - ansible.builtin.find:
+        path: "../../Overrides"
+        file_type: "directory"
+        depth: 2
+        recurse: yes
+      register: overrides
+
     - name: "Generate top-level README.md"
       ansible.builtin.copy:
         dest: '../../README.md'
@@ -75,6 +82,21 @@
           {% endif %}
           {% endfor %}
 
+          ## Overrides
+          {% set flat_overrides = (overrides.files | sort(attribute='path') | map(attribute='path')) %}
+
+          In some cases we override the Zabbix out-of-the-box templates to
+          ensure they fit our use case. We publish the changed templates along
+          with a generated diff against its upstream version.
+
+          | Name | 6.4 | 7.0 |
+          | ---- | --- | --- |
+          {% for override in flat_overrides %}
+          {% if (override.split('/') | length) == 4 %}
+          | {{ override.split('/')[3] | replace("_", " ") }} | {% if override + '/6.4' in flat_overrides %}[✅](./{{ override.split('/')[2:] | join('/') }}/6.4){% endif %} | {% if override + '/7.0' in flat_overrides %}[✅](./{{ override.split('/')[2:] | join('/') }}/7.0){% endif %} |
+          {% endif %}
+          {% endfor %}
+
           ## Zabbix Version Support
 
           We primarily support versions of Zabbix we use in production.
@@ -101,6 +123,7 @@
 
     - ansible.builtin.find:
         paths: 
+          - "../../Overrides"
           - "../../Stacks"
           - "../../Templates"
         patterns:
@@ -118,7 +141,7 @@
           {% set tpl = (lookup('ansible.builtin.file', item) | from_yaml).zabbix_export.templates[0] %}
           # Zabbix Template: {{ tpl.name }}
 
-          {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+          {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}{% if 'vendor' in tpl %}![vendor: {{ tpl.vendor.name }}](https://img.shields.io/badge/vendor-{{ tpl.vendor.name }}-00c9bf)![version: {{ tpl.vendor.version }}](https://img.shields.io/badge/version-{{ tpl.vendor.version | replace("-", "--") }}-00c9bf){% endif %}
 
 
           {{ tpl.description }}
@@ -141,11 +164,11 @@
 
           ### Macro: `{{ macro.macro }}`
 
-          {{ macro.description }}
+          {{ macro.description if 'description' in macro }}
 
           Default:
           ```
-          {{ macro.value }}
+          {{ macro.value if 'value' in macro }}
           ```
           {% endfor %}
           {% endif %}
@@ -159,7 +182,7 @@
           {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
           {{ triggers.append(item.triggers) if 'triggers' in item }}
 
-          {{ item.description }}
+          {{ item.description if 'description' in item }}
 
           ```
           {{ item.key }}
@@ -168,7 +191,9 @@
           Settings:
           | Item Setting | Value |
           | ------------ | ----- |
+          {% if 'type' in item %}
           | Type | {{ item.type }} |
+          {% endif %}
           {% if 'value_type' in item %}
           | Value type | {{ item.value_type }}{{ " in "+item.units if 'units' in item }} |
           {% endif %}
@@ -178,7 +203,7 @@
           {% if 'trends' in item and item.trends != '0' %}
           | Trends | {{ item.trends }} |
           {% endif %}
-          {% if item.type == 'DEPENDENT' %}
+          {% if 'type' in item and item.type == 'DEPENDENT' %}
           | Source item | `{{ item.master_item.key }}` |
 
           Preprocessing steps:
@@ -200,13 +225,27 @@
           {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
 
 
-          {{ trigger.description }}
-
-          Priority: {{ trigger.priority }}
+          {{ trigger.description if 'description' in trigger }}
+          Settings:
+          | Trigger Setting | Values |
+          | --------------- | ------ |
+          | Priority | {{ trigger.priority }} |
+          {% if 'manual_close' in trigger %}
+          | Manual close | {{ trigger.manual_close }} |
+          {% endif %}
 
           ```
           {{ trigger.expression }}
           ```
+          {% endfor %}
+          {% endif %}
+          {% if 'graphs' in tpl %}
+
+          ## Graphs
+
+          The following graphs are included in this template.
+          {% for graph in tpl.graphs %}
+          * {{ graph.name }}
           {% endfor %}
           {% endif %}
           {% if 'dashboards' in tpl %}
@@ -218,6 +257,122 @@
           * {{ dashboard.name }}
           {% endfor %}
           {% endif %}
+          {% if 'discovery_rules' in tpl %}
+
+          # Discovery Rules
+          {% for rule in tpl.discovery_rules %}
+          {% set disco_triggers = [] %}
+
+          ## Discovery Rule: {{ rule.name }}
+
+          {{ rule.description }}
+          ```
+          {{ rule.key }}
+          ```
+          Settings:
+          | Item Setting | Value |
+          | ------------ | ----- |
+          {% if 'type' in rule %}
+          | Type | {{ rule.type }} |
+          {% endif %}
+          {% if 'value_type' in rule %}
+          | Value type | {{ rule.value_type }}{{ " in "+rule.units if 'units' in rule }} |
+          {% endif %}
+          {% if 'history' in rule and rule.history != '0' %}
+          | History | {{ rule.history }} |
+          {% endif %}
+          {% if 'trends' in rule and rule.trends != '0' %}
+          | Trends | {{ rule.trends }} |
+          {% endif %}
+          {% if 'type' in rule and rule.type == 'DEPENDENT' %}
+          | Source item | `{{ rule.master_item.key }}` |
+
+          Preprocessing steps:
+          | Type | Parameters |
+          | ---- | ---------- |
+          {% for prep in rule.preprocessing %}
+          | {{ prep.type }} | `{{ prep.parameters | to_json }}` |
+          {% endfor %}
+          {% endif %}
+          {% if 'item_prototypes' in rule %}
+
+          ### Discovery Rule: {{ rule.name }}: Item Prototypes
+          {% for item in rule.item_prototypes %}
+
+          #### Discovery Rule: {{ rule.name }}: Item Prototype: {{ item.name }}
+
+          {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+          {{ disco_triggers.append(item.trigger_prototypes) if 'trigger_prototypes' in item }}
+
+          {{ item.description if 'description' in item }}
+
+          ```
+          {{ item.key }}
+          ```
+
+          Settings:
+          | Item Setting | Value |
+          | ------------ | ----- |
+          {% if 'type' in item %}
+          | Type | {{ item.type }} |
+          {% endif %}
+          {% if 'value_type' in item %}
+          | Value type | {{ item.value_type }}{{ " in "+item.units if 'units' in item }} |
+          {% endif %}
+          {% if 'history' in item and item.history != '0' %}
+          | History | {{ item.history }} |
+          {% endif %}
+          {% if 'trends' in item and item.trends != '0' %}
+          | Trends | {{ item.trends }} |
+          {% endif %}
+          {% if 'type' in item and item.type == 'DEPENDENT' %}
+          | Source item | `{{ item.master_item.key }}` |
+
+          Preprocessing steps:
+          | Type | Parameters |
+          | ---- | ---------- |
+          {% for prep in item.preprocessing %}
+          | {{ prep.type }} | `{{ prep.parameters | to_json }}` |
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          {% if disco_triggers %}
+
+          ### Discovery Rule: {{ rule.name }}: Discovery Triggers
+          {% for trigger in ( disco_triggers | flatten ) %}
+
+          #### Discovery Rule: {{ rule.name }}: Trigger Prototype: {{ trigger.name }}
+
+          {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+
+
+          {{ trigger.description if 'description' in trigger }}
+          Settings:
+          | Trigger Setting | Values |
+          | --------------- | ------ |
+          | Priority | {{ trigger.priority }} |
+          {% if 'manual_close' in trigger %}
+          | Manual close | {{ trigger.manual_close }} |
+          {% endif %}
+
+          ```
+          {{ trigger.expression }}
+          ```
+          {% endfor %}
+          {% endif %}
+          {% if 'graph_prototypes' in rule %}
+
+          ### Discovery Rule: {{ rule.name }}: Graph Prototypes
+
+          The following graph prototypes are defined by this Template
+          {% for graph in rule.graph_prototypes %}
+          * {{ graph.name }}
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          {% if 'vendor' in tpl and tpl.vendor.name == 'RaBe' %}
 
           ## License
 
@@ -228,4 +383,5 @@
           ## Copyright
 
           Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+          {% endif %}
       loop: "{{ yaml.files | map(attribute='path') }}"

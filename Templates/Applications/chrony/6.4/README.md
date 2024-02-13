@@ -1,6 +1,6 @@
 # Zabbix Template: chrony
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: chrony](https://img.shields.io/badge/target-chrony-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: chrony](https://img.shields.io/badge/target-chrony-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Keeps track of [chrony](https://chrony-project.org/).
 
@@ -470,8 +470,10 @@ Settings:
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running chronyd processes.
-
-Priority: HIGH
+Settings:
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | HIGH |
 
 ```
 last(/chrony/rabe.chrony.chronyd.processes)<1

@@ -1,6 +1,6 @@
 # Zabbix Template: systemd-udevd
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: systemd-udevd](https://img.shields.io/badge/target-systemd-udevd-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: systemd-udevd](https://img.shields.io/badge/target-systemd-udevd-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring of [systemd-udevd](https://www.freedesktop.org/software/systemd/man/latest/systemd-udevd.service.html).
 
@@ -175,8 +175,10 @@ Preprocessing steps:
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running systemd-udevd processes.
-
-Priority: HIGH
+Settings:
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | HIGH |
 
 ```
 last(/systemd-udevd/rabe.systemd-udevd.processes)<1

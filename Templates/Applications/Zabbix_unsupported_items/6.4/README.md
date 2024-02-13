@@ -1,6 +1,6 @@
 # Zabbix Template: Zabbix unsupported items
 
-![class: app](https://img.shields.io/badge/class-app-00c9bf)![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf)
+![class: app](https://img.shields.io/badge/class-app-00c9bf)![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Implementation agnostic monitoring of unsupported items from Zabbix internal.
 
@@ -38,8 +38,10 @@ The host has unsupported items, which might be an indication of a problem with c
 
 A count expression is used to reduce flapping to allow for items to go missing for one reading and then show back up.
 
-
-Priority: WARNING
+Settings:
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | WARNING |
 
 ```
 count(/Zabbix unsupported items/zabbix[host,,items_unsupported],#3,"gt","0")>=1

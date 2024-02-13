@@ -1,6 +1,6 @@
 # Zabbix Template: sssd
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: sssd](https://img.shields.io/badge/target-sssd-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: sssd](https://img.shields.io/badge/target-sssd-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring of [sssd](https://sssd.io).
 
@@ -175,8 +175,10 @@ Preprocessing steps:
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running sssd processes.
-
-Priority: HIGH
+Settings:
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | HIGH |
 
 ```
 last(/sssd/rabe.sssd.processes)<1
