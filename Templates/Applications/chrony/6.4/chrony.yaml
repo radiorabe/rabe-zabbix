@@ -423,6 +423,10 @@ zabbix_export:
           value: software
         - tag: target
           value: chrony
+      macros:
+        - macro: '{$CHRONY.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: 503d0b61ebde46aea00f259664f23252
           name: 'chrony: Overview'

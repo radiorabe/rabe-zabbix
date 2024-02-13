@@ -96,7 +96,7 @@ zabbix_export:
               value: qemu-ga
           triggers:
             - uuid: aa2a46515f98469482296b49600c44c7
-              expression: last(/qemu-ga/rabe.qemu-ga.processes)<1
+              expression: 'last(/qemu-ga/rabe.qemu-ga.processes)<{$QEMUGA.THRESHOLD.MIN_PROC}'
               name: 'qemu-ga: No running processes'
               priority: HIGH
               description: 'No running qemu-ga processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: qemu-ga
+      macros:
+        - macro: '{$QEMUGA.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: 910162aa19a04fd9b91f491190ab4c74
           name: 'qemu-ga: Overview'

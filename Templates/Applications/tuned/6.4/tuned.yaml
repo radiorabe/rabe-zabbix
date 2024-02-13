@@ -96,7 +96,7 @@ zabbix_export:
               value: tuned
           triggers:
             - uuid: cdfbb7c4e736486583ce79b51764f4e5
-              expression: last(/tuned/rabe.tuned.processes)<1
+              expression: 'last(/tuned/rabe.tuned.processes)<{$TUNED.THRESHOLD.MIN_PROC}'
               name: 'tuned: No running processes'
               priority: HIGH
               description: 'No running tuned processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: tuned
+      macros:
+        - macro: '{$TUNED.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: c76c64463c3c4170a40c224c04b3ff4c
           name: 'tuned: Overview'

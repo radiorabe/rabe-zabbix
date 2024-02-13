@@ -8,6 +8,19 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 
+## Macros
+
+The following Zabbix macros are configured via this template.
+
+### Macro: `{$SYSTEMDUDEVD.THRESHOLD.MIN_PROC}`
+
+Minimum amount of processes expected to be running at all times.
+
+Default:
+```
+1
+```
+
 ## Items
 
 ### Item: systemd-udevd: process summary
@@ -181,7 +194,7 @@ Settings:
 | Priority | HIGH |
 
 ```
-last(/systemd-udevd/rabe.systemd-udevd.processes)<1
+last(/systemd-udevd/rabe.systemd-udevd.processes)<{$SYSTEMDUDEVD.THRESHOLD.MIN_PROC}
 ```
 
 ## Dashboards

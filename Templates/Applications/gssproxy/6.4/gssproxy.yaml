@@ -96,7 +96,7 @@ zabbix_export:
               value: gssproxy
           triggers:
             - uuid: 63770c9832ac4b928c936eaeeb4feba2
-              expression: last(/gssproxy/rabe.gssproxy.processes)<1
+              expression: 'last(/gssproxy/rabe.gssproxy.processes)<{$GSSPROXY.THRESHOLD.MIN_PROC}'
               name: 'gssproxy: No running processes'
               priority: HIGH
               description: 'No running gssproxy processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: gssproxy
+      macros:
+        - macro: '{$GSSPROXY.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: 1dd7da0a2faf413895311fb37bc32bad
           name: 'gssproxy: Overview'

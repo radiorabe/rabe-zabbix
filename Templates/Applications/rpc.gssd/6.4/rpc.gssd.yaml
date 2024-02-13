@@ -96,7 +96,7 @@ zabbix_export:
               value: rpc.gssd
           triggers:
             - uuid: 4c40385bebe248cca1353f35a1814493
-              expression: last(/rpc.gssd/rabe.rpc.gssd.processes)<1
+              expression: 'last(/rpc.gssd/rabe.rpc.gssd.processes)<{$RPC.GSSD.THRESHOLD.MIN_PROC}'
               name: 'rpc.gssd: No running processes'
               priority: HIGH
               description: 'No running rpc.gssd processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: rpc.gssd
+      macros:
+        - macro: '{$RPC.GSSD.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: a0304f5c816e4d01acb1b5c39e608e11
           name: 'rpc.gssd: Overview'

@@ -96,7 +96,7 @@ zabbix_export:
               value: rsyslog
           triggers:
             - uuid: cd0c058237d84b3484cd6c91f78eed38
-              expression: last(/rsyslog/rabe.rsyslog.processes)<1
+              expression: 'last(/rsyslog/rabe.rsyslog.processes)<{$RSYSLOG.THRESHOLD.MIN_PROC}'
               name: 'rsyslog: No running processes'
               priority: HIGH
               description: 'No running rsyslog processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: rsyslog
+      macros:
+        - macro: '{$RSYSLOG.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: df75390b93dc45c4a43ef90ec6b1060b
           name: 'rsyslog: Overview'

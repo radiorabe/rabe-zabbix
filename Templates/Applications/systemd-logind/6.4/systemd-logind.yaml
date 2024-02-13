@@ -96,7 +96,7 @@ zabbix_export:
               value: systemd-logind
           triggers:
             - uuid: faff94d6d02e440aae18fdd7b59bd73b
-              expression: last(/systemd-logind/rabe.systemd-logind.processes)<1
+              expression: 'last(/systemd-logind/rabe.systemd-logind.processes)<{$SYSTEMDLOGIND.THRESHOLD.MIN_PROC}'
               name: 'systemd-logind: No running processes'
               priority: HIGH
               description: 'No running systemd-logind processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: systemd-logind
+      macros:
+        - macro: '{$SYSTEMDLOGIND.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: 9fd3c447ca7441b1834af2750b6feda6
           name: 'systemd-logind: Overview'

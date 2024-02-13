@@ -259,11 +259,11 @@
           {% endif %}
           {% if 'discovery_rules' in tpl %}
 
-          # Discovery Rules
+          ## Discovery Rules
           {% for rule in tpl.discovery_rules %}
           {% set disco_triggers = [] %}
 
-          ## Discovery Rule: {{ rule.name }}
+          ### Discovery Rule: {{ rule.name }}
 
           {{ rule.description }}
           ```
@@ -296,10 +296,10 @@
           {% endif %}
           {% if 'item_prototypes' in rule %}
 
-          ### Discovery Rule: {{ rule.name }}: Item Prototypes
+          #### Discovery Rule: {{ rule.name }}: Item Prototypes
           {% for item in rule.item_prototypes %}
 
-          #### Discovery Rule: {{ rule.name }}: Item Prototype: {{ item.name }}
+          ##### Discovery Rule: {{ rule.name }}: Item Prototype: {{ item.name }}
 
           {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
           {{ disco_triggers.append(item.trigger_prototypes) if 'trigger_prototypes' in item }}
@@ -339,10 +339,10 @@
           {% endif %}
           {% if disco_triggers %}
 
-          ### Discovery Rule: {{ rule.name }}: Discovery Triggers
+          #### Discovery Rule: {{ rule.name }}: Discovery Triggers
           {% for trigger in ( disco_triggers | flatten ) %}
 
-          #### Discovery Rule: {{ rule.name }}: Trigger Prototype: {{ trigger.name }}
+          ##### Discovery Rule: {{ rule.name }}: Trigger Prototype: {{ trigger.name }}
 
           {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
 
@@ -363,7 +363,7 @@
           {% endif %}
           {% if 'graph_prototypes' in rule %}
 
-          ### Discovery Rule: {{ rule.name }}: Graph Prototypes
+          #### Discovery Rule: {{ rule.name }}: Graph Prototypes
 
           The following graph prototypes are defined by this Template
           {% for graph in rule.graph_prototypes %}

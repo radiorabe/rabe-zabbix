@@ -96,7 +96,7 @@ zabbix_export:
               value: certmonger
           triggers:
             - uuid: 754bfe5a7bd3463da3545a0321d95d3e
-              expression: last(/certmonger/rabe.certmonger.processes)<1
+              expression: 'last(/certmonger/rabe.certmonger.processes)<{$CERTMONGER.THRESHOLD.MIN_PROC}'
               name: 'certmonger: No running processes'
               priority: HIGH
               description: 'No running certmonger processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: certmonger
+      macros:
+        - macro: '{$CERTMONGER.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: b2ccf97fb0ed4a04abc386cafae1fc69
           name: 'certmonger: Overview'

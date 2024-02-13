@@ -8,6 +8,19 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 
+## Macros
+
+The following Zabbix macros are configured via this template.
+
+### Macro: `{$TUNED.THRESHOLD.MIN_PROC}`
+
+Minimum amount of processes expected to be running at all times.
+
+Default:
+```
+1
+```
+
 ## Items
 
 ### Item: tuned: process summary
@@ -181,7 +194,7 @@ Settings:
 | Priority | HIGH |
 
 ```
-last(/tuned/rabe.tuned.processes)<1
+last(/tuned/rabe.tuned.processes)<{$TUNED.THRESHOLD.MIN_PROC}
 ```
 
 ## Dashboards

@@ -633,9 +633,9 @@ last(/Apache by HTTP/net.tcp.service[http,"{$APACHE.STATUS.HOST}","{$APACHE.STAT
 The following Zabbix dashboards are included in this template.
 * Apache performance
 
-# Discovery Rules
+## Discovery Rules
 
-## Discovery Rule: Event MPM discovery
+### Discovery Rule: Event MPM discovery
 
 The discovery of additional metrics if the event Multi-Processing Module (MPM) is used.
 For more details see [Apache MPM event](https://httpd.apache.org/docs/current/mod/event.html).
@@ -655,9 +655,9 @@ Preprocessing steps:
 | JAVASCRIPT | `["return JSON.stringify(JSON.parse(value).ServerMPM === 'event'\n\t? [{'{#SINGLETON}': ''}] : []);\n"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["3h"]` |
 
-### Discovery Rule: Event MPM discovery: Item Prototypes
+#### Discovery Rule: Event MPM discovery: Item Prototypes
 
-#### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Bytes per request
+##### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Bytes per request
 
 ![component: connection](https://img.shields.io/badge/component-connection-00c9bf)
 
@@ -680,7 +680,7 @@ Preprocessing steps:
 | ---- | ---------- |
 | JSONPATH | `["$.BytesPerReq"]` |
 
-#### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections async closing
+##### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections async closing
 
 ![component: connection](https://img.shields.io/badge/component-connection-00c9bf)
 
@@ -702,7 +702,7 @@ Preprocessing steps:
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsAsyncClosing"]` |
 
-#### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections async keepalive
+##### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections async keepalive
 
 ![component: connection](https://img.shields.io/badge/component-connection-00c9bf)
 
@@ -724,7 +724,7 @@ Preprocessing steps:
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsAsyncKeepAlive"]` |
 
-#### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections async writing
+##### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections async writing
 
 ![component: connection](https://img.shields.io/badge/component-connection-00c9bf)
 
@@ -746,7 +746,7 @@ Preprocessing steps:
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsAsyncWriting"]` |
 
-#### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections total
+##### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Connections total
 
 ![component: connection](https://img.shields.io/badge/component-connection-00c9bf)
 
@@ -768,7 +768,7 @@ Preprocessing steps:
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsTotal"]` |
 
-#### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Number of async processes
+##### Discovery Rule: Event MPM discovery: Item Prototype: Apache: Number of async processes
 
 ![component: system](https://img.shields.io/badge/component-system-00c9bf)
 
@@ -790,7 +790,7 @@ Preprocessing steps:
 | ---- | ---------- |
 | JSONPATH | `["$.Processes"]` |
 
-### Discovery Rule: Event MPM discovery: Graph Prototypes
+#### Discovery Rule: Event MPM discovery: Graph Prototypes
 
 The following graph prototypes are defined by this Template
 * Apache: Current async connections{#SINGLETON}

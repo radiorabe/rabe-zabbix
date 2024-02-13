@@ -96,7 +96,7 @@ zabbix_export:
               value: auditd
           triggers:
             - uuid: e87c0519b4f54aad9d7d71c9f7a86313
-              expression: last(/auditd/rabe.auditd.processes)<1
+              expression: 'last(/auditd/rabe.auditd.processes)<{$AUDITD.THRESHOLD.MIN_PROC}'
               name: 'auditd: No running processes'
               priority: HIGH
               description: 'No running auditd processes.'
@@ -167,6 +167,10 @@ zabbix_export:
           value: software
         - tag: target
           value: auditd
+      macros:
+        - macro: '{$AUDITD.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
         - uuid: 872c608dda554c688ae39c4b33d564cc
           name: 'auditd: Overview'
