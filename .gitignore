@@ -2,3 +2,5 @@
 **/selinux/tmp
 **/selinux/*.pp
 node_modules/
+site/
+venv/

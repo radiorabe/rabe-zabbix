@@ -40,6 +40,7 @@ proc.get[chronyd,chrony,,summary]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
@@ -56,6 +57,7 @@ rabe.chrony.activity.sources_burst_to_offline
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -63,6 +65,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c activity]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[3]"]` |
@@ -79,6 +82,7 @@ rabe.chrony.activity.sources_burst_to_online
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -86,6 +90,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c activity]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[2]"]` |
@@ -102,6 +107,7 @@ rabe.chrony.activity.sources_offline
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -109,6 +115,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c activity]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[1]"]` |
@@ -125,6 +132,7 @@ rabe.chrony.activity.sources_online
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -132,6 +140,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c activity]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[0]"]` |
@@ -148,6 +157,7 @@ rabe.chrony.activity.sources_with_unknown_address
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -155,6 +165,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c activity]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[4]"]` |
@@ -171,6 +182,7 @@ rabe.chrony.chronyd.cputime_system
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -179,6 +191,7 @@ Settings:
 | Source item | `proc.get[chronyd,chrony,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -196,6 +209,7 @@ rabe.chrony.chronyd.cputime_user
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -204,6 +218,7 @@ Settings:
 | Source item | `proc.get[chronyd,chrony,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -221,6 +236,7 @@ rabe.chrony.chronyd.processes
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -228,6 +244,7 @@ Settings:
 | Source item | `proc.get[chronyd,chrony,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -244,6 +261,7 @@ rabe.chrony.chronyd.rss
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -251,6 +269,7 @@ Settings:
 | Source item | `proc.get[chronyd,chrony,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -267,6 +286,7 @@ rabe.chrony.chronyd.swap
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -274,6 +294,7 @@ Settings:
 | Source item | `proc.get[chronyd,chrony,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -290,6 +311,7 @@ rabe.chrony.chronyd.threads
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -297,6 +319,7 @@ Settings:
 | Source item | `proc.get[chronyd,chrony,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |
@@ -313,6 +336,7 @@ rabe.chrony.tracking.reference_id
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -321,6 +345,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c tracking]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[0]"]` |
@@ -337,6 +362,7 @@ rabe.chrony.tracking.reference_ip
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -345,6 +371,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c tracking]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[1]"]` |
@@ -361,6 +388,7 @@ rabe.chrony.tracking.ref_time
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -369,6 +397,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c tracking]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[3]"]` |
@@ -384,6 +413,7 @@ rabe.chrony.tracking.skew
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -392,6 +422,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c tracking]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[9]"]` |
@@ -408,6 +439,7 @@ rabe.chrony.tracking.stratum
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -415,6 +447,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c tracking]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[2]"]` |
@@ -431,6 +464,7 @@ rabe.chrony.tracking.system_time
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -439,6 +473,7 @@ Settings:
 | Source item | `system.run[/usr/bin/chronyc -c tracking]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return value.split(\",\")[4]"]` |
@@ -455,6 +490,7 @@ system.run[/usr/bin/chronyc -c activity]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
@@ -471,6 +507,7 @@ system.run[/usr/bin/chronyc -c tracking]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
@@ -478,12 +515,13 @@ Settings:
 
 ## Triggers
 
-## Trigger: chronyd: No running processes
+### Trigger: chronyd: No running processes
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running chronyd processes.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | HIGH |

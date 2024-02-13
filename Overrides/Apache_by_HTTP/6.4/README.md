@@ -79,6 +79,7 @@ apache.bytes
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -87,6 +88,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[\"Total kBytes\"]"]` |
@@ -105,6 +107,7 @@ apache.bytes.rate
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -113,6 +116,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[\"Total kBytes\"]"]` |
@@ -132,6 +136,7 @@ apache.get_status
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | HTTP_AGENT |
@@ -149,6 +154,7 @@ apache.requests
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -156,6 +162,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[\"Total Accesses\"]"]` |
@@ -173,6 +180,7 @@ apache.requests.rate
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -181,6 +189,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[\"Total Accesses\"]"]` |
@@ -197,6 +206,7 @@ apache.uptime
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -204,6 +214,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.ServerUptimeSeconds"]` |
@@ -219,6 +230,7 @@ apache.version
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -227,6 +239,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.ServerVersion"]` |
@@ -243,6 +256,7 @@ apache.workers.cleanup
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -250,6 +264,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.cleanup"]` |
@@ -265,6 +280,7 @@ apache.workers.closing
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -272,6 +288,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.closing"]` |
@@ -287,6 +304,7 @@ apache.workers.dnslookup
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -294,6 +312,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.dnslookup"]` |
@@ -309,6 +328,7 @@ apache.workers.finishing
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -316,6 +336,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.finishing"]` |
@@ -331,6 +352,7 @@ apache.workers.keepalive
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -338,6 +360,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.keepalive"]` |
@@ -353,6 +376,7 @@ apache.workers.logging
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -360,6 +384,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.logging"]` |
@@ -375,6 +400,7 @@ apache.workers.reading
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -382,6 +408,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.reading"]` |
@@ -397,6 +424,7 @@ apache.workers.sending
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -404,6 +432,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.sending"]` |
@@ -419,6 +448,7 @@ apache.workers.slot
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -426,6 +456,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.slot"]` |
@@ -441,6 +472,7 @@ apache.workers.starting
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -448,6 +480,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.starting"]` |
@@ -463,6 +496,7 @@ apache.workers.waiting
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -470,6 +504,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Workers.waiting"]` |
@@ -485,6 +520,7 @@ apache.workers_total.busy
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -492,6 +528,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.BusyWorkers"]` |
@@ -507,6 +544,7 @@ apache.workers_total.idle
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -514,6 +552,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.IdleWorkers"]` |
@@ -529,6 +568,7 @@ net.tcp.service.perf[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SIMPLE |
@@ -546,6 +586,7 @@ net.tcp.service[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SIMPLE |
@@ -553,12 +594,13 @@ Settings:
 
 ## Triggers
 
-## Trigger: Apache: Failed to fetch status page
+### Trigger: Apache: Failed to fetch status page
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 Zabbix has not received any data for items for the last 30 minutes.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | WARNING |
@@ -568,12 +610,13 @@ Settings:
 nodata(/Apache by HTTP/apache.get_status,30m)=1
 ```
 
-## Trigger: Apache: Host has been restarted
+### Trigger: Apache: Host has been restarted
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
 Uptime is less than 10 minutes.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | INFO |
@@ -583,12 +626,13 @@ Settings:
 last(/Apache by HTTP/apache.uptime)<10m
 ```
 
-## Trigger: Apache: Version has changed
+### Trigger: Apache: Version has changed
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
 Apache version has changed. Acknowledge to close the problem manually.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | INFO |
@@ -598,12 +642,13 @@ Settings:
 last(/Apache by HTTP/apache.version,#1)<>last(/Apache by HTTP/apache.version,#2) and length(last(/Apache by HTTP/apache.version))>0
 ```
 
-## Trigger: Apache: Service response time is too high
+### Trigger: Apache: Service response time is too high
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
 
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | WARNING |
@@ -613,12 +658,13 @@ Settings:
 min(/Apache by HTTP/net.tcp.service.perf[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"],5m)>{$APACHE.RESPONSE_TIME.MAX.WARN}
 ```
 
-## Trigger: Apache: Service is down
+### Trigger: Apache: Service is down
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | AVERAGE |
@@ -644,12 +690,14 @@ For more details see [Apache MPM event](https://httpd.apache.org/docs/current/mo
 apache.mpm.event.discovery
 ```
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JAVASCRIPT | `["return JSON.stringify(JSON.parse(value).ServerMPM === 'event'\n\t? [{'{#SINGLETON}': ''}] : []);\n"]` |
@@ -668,6 +716,7 @@ apache.bytes[per_request{#SINGLETON}]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -676,6 +725,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.BytesPerReq"]` |
@@ -691,6 +741,7 @@ apache.connections[async_closing{#SINGLETON}]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -698,6 +749,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsAsyncClosing"]` |
@@ -713,6 +765,7 @@ apache.connections[async_keep_alive{#SINGLETON}]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -720,6 +773,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsAsyncKeepAlive"]` |
@@ -735,6 +789,7 @@ apache.connections[async_writing{#SINGLETON}]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -742,6 +797,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsAsyncWriting"]` |
@@ -757,6 +813,7 @@ apache.connections[total{#SINGLETON}]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -764,6 +821,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.ConnsTotal"]` |
@@ -779,6 +837,7 @@ apache.process[num{#SINGLETON}]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -786,6 +845,7 @@ Settings:
 | Source item | `apache.get_status` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$.Processes"]` |

@@ -42,6 +42,7 @@ rabe.timedatectl.status.ntp_service
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -49,6 +50,7 @@ Settings:
 | Source item | `system.run[/usr/bin/timedatectl show]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["NTP=(.*)", "\\1"]` |
@@ -66,6 +68,7 @@ rabe.timedatectl.status.rtc_in_local_tz
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -73,6 +76,7 @@ Settings:
 | Source item | `system.run[/usr/bin/timedatectl show]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["LocalRTC=(.*)", "\\1"]` |
@@ -90,6 +94,7 @@ rabe.timedatectl.status.system_clock_synchronized
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -97,6 +102,7 @@ Settings:
 | Source item | `system.run[/usr/bin/timedatectl show]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["NTPSynchronized=(.*)", "\\1"]` |
@@ -114,6 +120,7 @@ rabe.timedatectl.status.time_zone
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -122,6 +129,7 @@ Settings:
 | Source item | `system.run[/usr/bin/timedatectl show]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | REGEX | `["Timezone=(.*)", "\\1"]` |
@@ -138,6 +146,7 @@ system.run[/usr/bin/timedatectl show]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
@@ -145,12 +154,13 @@ Settings:
 
 ## Triggers
 
-## Trigger: timedatectl: NTP not active
+### Trigger: timedatectl: NTP not active
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
 The NTP service is not active, check `timedatectl status` for more info.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | WARNING |
@@ -159,12 +169,13 @@ Settings:
 last(/timedatectl/rabe.timedatectl.status.ntp_service)<>1
 ```
 
-## Trigger: timedatectl: RTC not in local TZ
+### Trigger: timedatectl: RTC not in local TZ
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
 The RTC not in local TZ, check `timedatectl status` for more info.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | INFO |
@@ -173,12 +184,13 @@ Settings:
 last(/timedatectl/rabe.timedatectl.status.rtc_in_local_tz)<>0
 ```
 
-## Trigger: timedatectl: NTP not synchronized
+### Trigger: timedatectl: NTP not synchronized
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
 NTP is not in sync, check `timedatectl status` for more info.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | INFO |
@@ -187,12 +199,13 @@ Settings:
 last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized)<>1
 ```
 
-## Trigger: timedatectl: NTP not synchronized for more than {$TIMEDATECTL_MAX_NO_SYNC_TIME}
+### Trigger: timedatectl: NTP not synchronized for more than {$TIMEDATECTL_MAX_NO_SYNC_TIME}
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 NTP is not in sync, check `timedatectl status` for more info.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | WARNING |

@@ -1,8 +1,6 @@
 # Compare Rabe Override with Upstream Template
 
-Name: Apache by HTTP
-
-Original: https://raw.githubusercontent.com/zabbix/zabbix/release/6.4/templates/app/apache_http/template_app_apache_http.yaml
+Original: [Apache by HTTP](https://raw.githubusercontent.com/zabbix/zabbix/release/6.4/templates/app/apache_http/template_app_apache_http.yaml)
 
 ## Diff
 
@@ -102,6 +100,13 @@ Original: https://raw.githubusercontent.com/zabbix/zabbix/release/6.4/templates/
          - macro: '{$APACHE.STATUS.PATH}'
            value: 'server-status?auto'
            description: 'The URL path.'
+@@ -810,4 +819,4 @@
+           color: F63100
+           item:
+             host: 'Apache by HTTP'
+-            key: apache.workers_total.idle
++            key: apache.workers_total.idle
+\ No newline at end of file
 
 
 ```

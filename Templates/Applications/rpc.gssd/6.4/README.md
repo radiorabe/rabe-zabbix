@@ -34,6 +34,7 @@ proc.get[rpc.gssd,root,,summary]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
@@ -50,6 +51,7 @@ rabe.rpc.gssd.cputime_system
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -58,6 +60,7 @@ Settings:
 | Source item | `proc.get[rpc.gssd,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -75,6 +78,7 @@ rabe.rpc.gssd.cputime_user
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -83,6 +87,7 @@ Settings:
 | Source item | `proc.get[rpc.gssd,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -100,6 +105,7 @@ rabe.rpc.gssd.processes
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -107,6 +113,7 @@ Settings:
 | Source item | `proc.get[rpc.gssd,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -123,6 +130,7 @@ rabe.rpc.gssd.rss
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -130,6 +138,7 @@ Settings:
 | Source item | `proc.get[rpc.gssd,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -146,6 +155,7 @@ rabe.rpc.gssd.swap
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -153,6 +163,7 @@ Settings:
 | Source item | `proc.get[rpc.gssd,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -169,6 +180,7 @@ rabe.rpc.gssd.threads
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -176,6 +188,7 @@ Settings:
 | Source item | `proc.get[rpc.gssd,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |
@@ -183,12 +196,13 @@ Preprocessing steps:
 
 ## Triggers
 
-## Trigger: rpc.gssd: No running processes
+### Trigger: rpc.gssd: No running processes
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running rpc.gssd processes.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | HIGH |

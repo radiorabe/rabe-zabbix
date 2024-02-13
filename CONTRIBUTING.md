@@ -1,6 +1,8 @@
-# rabe-zabbix
+# Contributing to RaBe Zabbix
 
-🚧 Refactor underway! Most of the instructions here are still for 3.0 templates! 🚧
+🚧 Refactor underway! Most of the instructions here are for 3.0 templates! 🚧
+
+## Conventions
 
 ### Template conventions
 * Use active mode for zabbix agent items by default
@@ -70,20 +72,26 @@
 
 ## Developing
 
-### Fetching all Templates using ansbible
-
-Zabbix 6.4+
-
-```bash
-ansible-playbook hack/plays/download.yml -e zabbix_auth_key=<AUTH_KEY>
-```
-
 ### Regenerating READMEs
 
 Zabbix 6.4+
 
 ```bash
-ansible-playbook hack/plays/update-readmes.yml
+ansible-playbook hack/plays/manage.yml
+```
+
+### Fetching Templates using ansible
+
+Zabbix 6.4+
+
+```bash
+ansible-playbook hack/plays/manage.yml -e ansible_zabbix_auth_key=<AUTH_KEY>
+```
+
+If you just want to fetch a single template:
+
+```bash
+ansible-playbook hack/plays/manage.yml -e ansible_zabbix_auth_key=<AUTH_KEY> -e 'rabe_zabbix_templates=[{"template_name":"CHANGEME"}]'
 ```
 
 ### Adding an app template
@@ -129,21 +137,6 @@ mv zbx_export_templates.xml "${appDir}/${xmlName}"
 git add "${appDir}/${xmlName}"
 git commit -m "${appName}: Added ${templateName}"
 ```
-
-#### Fetching an app from the Zabbix server
-Fetching a template into a file from the server is straightforward.
-
-```bash
-./helper/rabe-zabbix --template=${templateName} ${xmlName}
-```
-
-You need to have a working node environment and install any dependencies beforehand.
-
-```bash
-npm install
-```
-
-The helper will prompt for settings should they not be configured. Please see its `--help` for more information.
 
 #### optional usage section override
 ```bash

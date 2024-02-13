@@ -23,6 +23,7 @@ zabbix[host,,items_unsupported]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | INTERNAL |
@@ -30,7 +31,7 @@ Settings:
 
 ## Triggers
 
-## Trigger: Unsupported items detected
+### Trigger: Unsupported items detected
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -39,6 +40,7 @@ The host has unsupported items, which might be an indication of a problem with c
 A count expression is used to reduce flapping to allow for items to go missing for one reading and then show back up.
 
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | WARNING |

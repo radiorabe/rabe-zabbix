@@ -1,0 +1,14 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rabe-zabbix
+  title: Zabbix Templates
+  description: |
+    Zabbix templates available for use in our monitoring infrastructure.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: spec
+  lifecycle: experimental
+  owner: it-reaktion

@@ -34,6 +34,7 @@ proc.get[tuned,root,,summary]
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
@@ -50,6 +51,7 @@ rabe.tuned.cputime_system
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -58,6 +60,7 @@ Settings:
 | Source item | `proc.get[tuned,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_system.first()"]` |
@@ -75,6 +78,7 @@ rabe.tuned.cputime_user
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -83,6 +87,7 @@ Settings:
 | Source item | `proc.get[tuned,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].cputime_user.first()"]` |
@@ -100,6 +105,7 @@ rabe.tuned.processes
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -107,6 +113,7 @@ Settings:
 | Source item | `proc.get[tuned,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].processes.first()"]` |
@@ -123,6 +130,7 @@ rabe.tuned.rss
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -130,6 +138,7 @@ Settings:
 | Source item | `proc.get[tuned,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].rss.first()"]` |
@@ -146,6 +155,7 @@ rabe.tuned.swap
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -153,6 +163,7 @@ Settings:
 | Source item | `proc.get[tuned,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].swap.first()"]` |
@@ -169,6 +180,7 @@ rabe.tuned.threads
 ```
 
 Settings:
+
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
@@ -176,6 +188,7 @@ Settings:
 | Source item | `proc.get[tuned,root,,summary]` |
 
 Preprocessing steps:
+
 | Type | Parameters |
 | ---- | ---------- |
 | JSONPATH | `["$[*].threads.first()"]` |
@@ -183,12 +196,13 @@ Preprocessing steps:
 
 ## Triggers
 
-## Trigger: tuned: No running processes
+### Trigger: tuned: No running processes
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
 No running tuned processes.
 Settings:
+
 | Trigger Setting | Values |
 | --------------- | ------ |
 | Priority | HIGH |
