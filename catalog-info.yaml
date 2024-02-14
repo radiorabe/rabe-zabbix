@@ -30,8 +30,7 @@ spec:
   type: library
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - system:default/rabe-zabbix
+  system: rabe-zabbix
 ---
 # Overrides/Apache_by_HTTP/6.4/Apache_by_HTTP.yaml
 apiVersion: backstage.io/v1alpha1
@@ -60,8 +59,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Operating_systems/EL7_Stack/6.4/EL7_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -81,8 +80,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Operating_systems/EL8_Stack/6.4/EL8_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -102,8 +101,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Operating_systems/EL9_Stack/6.4/EL9_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -123,8 +122,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Applications/systemd_Stack/6.4/systemd_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -145,8 +144,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Servers/EL9_KVM_VM_Stack/6.4/EL9_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -166,8 +165,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Servers/EL7_KVM_VM_Stack/6.4/EL7_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -187,8 +186,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Stacks/Servers/EL8_KVM_VM_Stack/6.4/EL8_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
@@ -208,8 +207,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/auditd/6.4/auditd.yaml
 apiVersion: backstage.io/v1alpha1
@@ -229,8 +228,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/chrony/6.4/chrony.yaml
 apiVersion: backstage.io/v1alpha1
@@ -256,8 +255,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/Cronie/6.4/Cronie.yaml
 apiVersion: backstage.io/v1alpha1
@@ -277,8 +276,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/timedatectl/6.4/timedatectl.yaml
 apiVersion: backstage.io/v1alpha1
@@ -306,8 +305,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/Zabbix_unsupported_items/6.4/Zabbix_unsupported_items.yaml
 apiVersion: backstage.io/v1alpha1
@@ -329,8 +328,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/firewalld/6.4/firewalld.yaml
 apiVersion: backstage.io/v1alpha1
@@ -350,8 +349,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/tuned/6.4/tuned.yaml
 apiVersion: backstage.io/v1alpha1
@@ -371,8 +370,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/rsyslog/6.4/rsyslog.yaml
 apiVersion: backstage.io/v1alpha1
@@ -392,8 +391,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/sssd/6.4/sssd.yaml
 apiVersion: backstage.io/v1alpha1
@@ -413,8 +412,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/gssproxy/6.4/gssproxy.yaml
 apiVersion: backstage.io/v1alpha1
@@ -434,8 +433,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/rpc.gssd/6.4/rpc.gssd.yaml
 apiVersion: backstage.io/v1alpha1
@@ -455,8 +454,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/systemd-logind/6.4/systemd-logind.yaml
 apiVersion: backstage.io/v1alpha1
@@ -476,8 +475,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/systemd-journald/6.4/systemd-journald.yaml
 apiVersion: backstage.io/v1alpha1
@@ -497,8 +496,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/systemd-udevd/6.4/systemd-udevd.yaml
 apiVersion: backstage.io/v1alpha1
@@ -518,8 +517,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/certmonger/6.4/certmonger.yaml
 apiVersion: backstage.io/v1alpha1
@@ -539,8 +538,8 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates
 ---
 # Templates/Applications/qemu-ga/6.4/qemu-ga.yaml
 apiVersion: backstage.io/v1alpha1
@@ -560,5 +559,5 @@ spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
-  partOf:
-    - component:default/rabe-zabbix-templates
+  subcomponentOf:
+    - rabe-zabbix-templates

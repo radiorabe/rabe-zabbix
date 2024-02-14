@@ -307,8 +307,7 @@
                 type: library
                 lifecycle: experimental
                 owner: it-reaktion
-                partOf:
-                  - system:default/rabe-zabbix
+                system: rabe-zabbix
               {% for file in (yaml.files | map(attribute="path")) %}
               {% set template = (lookup("ansible.builtin.file", "../../"+file) | from_yaml).zabbix_export %}
               ---
@@ -326,8 +325,8 @@
                 type: zabbix-template
                 lifecycle: experimental
                 owner: it-reaktion
-                partOf:
-                  - component:default/rabe-zabbix-templates
+                subcomponentOf:
+                  - rabe-zabbix-templates
               {% endfor %}
 
         - name: "RaBe Zabbix Templator : Generate template README.md"
