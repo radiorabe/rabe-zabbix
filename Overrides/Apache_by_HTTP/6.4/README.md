@@ -853,5 +853,7 @@ Preprocessing steps:
 #### Discovery Rule: Event MPM discovery: Graph Prototypes
 
 The following graph prototypes are defined by this Template
+
 * Apache: Current async connections{#SINGLETON}
 * Apache: Current async processes{#SINGLETON}
+
