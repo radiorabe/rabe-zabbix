@@ -325,8 +325,7 @@
                 type: zabbix-template
                 lifecycle: experimental
                 owner: it-reaktion
-                subcomponentOf:
-                  - rabe-zabbix-templates
+                subcomponentOf: rabe-zabbix-templates
               {% endfor %}
 
         - name: "RaBe Zabbix Templator : Generate template README.md"
