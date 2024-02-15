@@ -51,7 +51,7 @@ zabbix_export:
             key: 'proc.get[crond,root,,summary]'
           tags:
             - tag: component
-              value: Cronie
+              value: cronie
         - uuid: 3329d9db09dd42c2b4b79f7bb580b09a
           name: 'Cronie: CPU seconds (user)'
           type: DEPENDENT
@@ -74,7 +74,7 @@ zabbix_export:
             key: 'proc.get[crond,root,,summary]'
           tags:
             - tag: component
-              value: Cronie
+              value: cronie
         - uuid: fc21c63ac8c048ab82558630a5b4f8b1
           name: 'Cronie: Number of processes'
           type: DEPENDENT
@@ -93,7 +93,7 @@ zabbix_export:
             key: 'proc.get[crond,root,,summary]'
           tags:
             - tag: component
-              value: Cronie
+              value: cronie
           triggers:
             - uuid: ef13887e22f34a408992a818b6d68f2f
               expression: 'last(/Cronie/rabe.Cronie.processes)<{$CRONIE.THRESHOLD.MIN_PROC}'
@@ -122,7 +122,7 @@ zabbix_export:
             key: 'proc.get[crond,root,,summary]'
           tags:
             - tag: component
-              value: Cronie
+              value: cronie
         - uuid: 2367b7951dcf43528a91c2ab7358c8b5
           name: 'Cronie: Swap usage'
           type: DEPENDENT
@@ -142,7 +142,7 @@ zabbix_export:
             key: 'proc.get[crond,root,,summary]'
           tags:
             - tag: component
-              value: Cronie
+              value: cronie
         - uuid: 5e6df906741a43eabb30f02f1aae47b8
           name: 'Cronie: Number of threads'
           type: DEPENDENT
@@ -161,12 +161,12 @@ zabbix_export:
             key: 'proc.get[crond,root,,summary]'
           tags:
             - tag: component
-              value: Cronie
+              value: cronie
       tags:
         - tag: class
           value: software
         - tag: target
-          value: Cronie
+          value: cronie
       macros:
         - macro: '{$CRONIE.THRESHOLD.MIN_PROC}'
           value: '1'

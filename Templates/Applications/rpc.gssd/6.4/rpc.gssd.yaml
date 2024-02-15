@@ -51,7 +51,7 @@ zabbix_export:
             key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: rpc.gssd
+              value: rpcgssd
         - uuid: b7977b94dd864c8dade8565e76133d61
           name: 'rpc.gssd: CPU seconds (user)'
           type: DEPENDENT
@@ -74,7 +74,7 @@ zabbix_export:
             key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: rpc.gssd
+              value: rpcgssd
         - uuid: 600747130717406d96d09850419d282f
           name: 'rpc.gssd: Number of processes'
           type: DEPENDENT
@@ -93,7 +93,7 @@ zabbix_export:
             key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: rpc.gssd
+              value: rpcgssd
           triggers:
             - uuid: 4c40385bebe248cca1353f35a1814493
               expression: 'last(/rpc.gssd/rabe.rpc.gssd.processes)<{$RPC.GSSD.THRESHOLD.MIN_PROC}'
@@ -122,7 +122,7 @@ zabbix_export:
             key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: rpc.gssd
+              value: rpcgssd
         - uuid: 49810a108bda4d88951f173cecacf02a
           name: 'rpc.gssd: Swap usage'
           type: DEPENDENT
@@ -142,7 +142,7 @@ zabbix_export:
             key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: rpc.gssd
+              value: rpcgssd
         - uuid: 29c8d2dc65424d68901122945f79ea24
           name: 'rpc.gssd: Number of threads'
           type: DEPENDENT
@@ -161,12 +161,12 @@ zabbix_export:
             key: 'proc.get[rpc.gssd,root,,summary]'
           tags:
             - tag: component
-              value: rpc.gssd
+              value: rpcgssd
       tags:
         - tag: class
           value: software
         - tag: target
-          value: rpc.gssd
+          value: rpcgssd
       macros:
         - macro: '{$RPC.GSSD.THRESHOLD.MIN_PROC}'
           value: '1'

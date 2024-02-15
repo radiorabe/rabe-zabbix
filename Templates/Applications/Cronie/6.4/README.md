@@ -1,6 +1,6 @@
 # Zabbix Template: Cronie
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: Cronie](https://img.shields.io/badge/target-Cronie-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: cronie](https://img.shields.io/badge/target-cronie-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring of [Cronie](https://github.com/cronie-crond/cronie).
 
@@ -29,7 +29,7 @@ Settings:
 
 ### Item: Cronie: CPU seconds (system)
 
-![component: Cronie](https://img.shields.io/badge/component-Cronie-00c9bf)
+![component: cronie](https://img.shields.io/badge/component-cronie-00c9bf)
 
 Total CPU seconds (system) of Cronie processes.
 
@@ -56,7 +56,7 @@ Preprocessing steps:
 
 ### Item: Cronie: CPU seconds (user)
 
-![component: Cronie](https://img.shields.io/badge/component-Cronie-00c9bf)
+![component: cronie](https://img.shields.io/badge/component-cronie-00c9bf)
 
 Total CPU seconds (user) of Cronie processes.
 
@@ -83,7 +83,7 @@ Preprocessing steps:
 
 ### Item: Cronie: Number of processes
 
-![component: Cronie](https://img.shields.io/badge/component-Cronie-00c9bf)
+![component: cronie](https://img.shields.io/badge/component-cronie-00c9bf)
 
 Number of Cronie processes.
 
@@ -108,7 +108,7 @@ Preprocessing steps:
 
 ### Item: Cronie: Memory usage (RSS)
 
-![component: Cronie](https://img.shields.io/badge/component-Cronie-00c9bf)
+![component: cronie](https://img.shields.io/badge/component-cronie-00c9bf)
 
 Memory usage of Cronie processes.
 
@@ -133,7 +133,7 @@ Preprocessing steps:
 
 ### Item: Cronie: Swap usage
 
-![component: Cronie](https://img.shields.io/badge/component-Cronie-00c9bf)
+![component: cronie](https://img.shields.io/badge/component-cronie-00c9bf)
 
 Swap usage of Cronie processes.
 
@@ -158,7 +158,7 @@ Preprocessing steps:
 
 ### Item: Cronie: Number of threads
 
-![component: Cronie](https://img.shields.io/badge/component-Cronie-00c9bf)
+![component: cronie](https://img.shields.io/badge/component-cronie-00c9bf)
 
 Number of Cronie threads.
 

@@ -1,6 +1,6 @@
 # Zabbix Template: rpc.gssd
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: rpc.gssd](https://img.shields.io/badge/target-rpc.gssd-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: rpcgssd](https://img.shields.io/badge/target-rpcgssd-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring of [rpc.gssd](https://linux.die.net/man/8/rpc.gssd).
 
@@ -29,7 +29,7 @@ Settings:
 
 ### Item: rpc.gssd: CPU seconds (system)
 
-![component: rpc.gssd](https://img.shields.io/badge/component-rpc.gssd-00c9bf)
+![component: rpcgssd](https://img.shields.io/badge/component-rpcgssd-00c9bf)
 
 Total CPU seconds (system) of rpc.gssd processes.
 
@@ -56,7 +56,7 @@ Preprocessing steps:
 
 ### Item: rpc.gssd: CPU seconds (user)
 
-![component: rpc.gssd](https://img.shields.io/badge/component-rpc.gssd-00c9bf)
+![component: rpcgssd](https://img.shields.io/badge/component-rpcgssd-00c9bf)
 
 Total CPU seconds (user) of rpc.gssd processes.
 
@@ -83,7 +83,7 @@ Preprocessing steps:
 
 ### Item: rpc.gssd: Number of processes
 
-![component: rpc.gssd](https://img.shields.io/badge/component-rpc.gssd-00c9bf)
+![component: rpcgssd](https://img.shields.io/badge/component-rpcgssd-00c9bf)
 
 Number of rpc.gssd processes.
 
@@ -108,7 +108,7 @@ Preprocessing steps:
 
 ### Item: rpc.gssd: Memory usage (RSS)
 
-![component: rpc.gssd](https://img.shields.io/badge/component-rpc.gssd-00c9bf)
+![component: rpcgssd](https://img.shields.io/badge/component-rpcgssd-00c9bf)
 
 Memory usage of rpc.gssd processes.
 
@@ -133,7 +133,7 @@ Preprocessing steps:
 
 ### Item: rpc.gssd: Swap usage
 
-![component: rpc.gssd](https://img.shields.io/badge/component-rpc.gssd-00c9bf)
+![component: rpcgssd](https://img.shields.io/badge/component-rpcgssd-00c9bf)
 
 Swap usage of rpc.gssd processes.
 
@@ -158,7 +158,7 @@ Preprocessing steps:
 
 ### Item: rpc.gssd: Number of threads
 
-![component: rpc.gssd](https://img.shields.io/badge/component-rpc.gssd-00c9bf)
+![component: rpcgssd](https://img.shields.io/badge/component-rpcgssd-00c9bf)
 
 Number of rpc.gssd threads.
 

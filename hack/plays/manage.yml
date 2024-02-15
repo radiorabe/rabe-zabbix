@@ -341,7 +341,11 @@
                 annotations:
                   backstage.io/techdocs-ref: dir:./{{ file | dirname }}
                   github.com/project-slug: radiorabe/rabe-zabbix
-                tags: {{ template.templates[0].tags | selectattr("tag", "in", ["target", "class"]) | map(attribute="value") | to_yaml -}}
+                links:
+                  - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/{{ file | dirname }}
+                    title: GitHub
+                    icon: github
+                tags: {{ template.templates[0].tags | selectattr("tag", "in", ["target", "class"]) | map(attribute="value") | map("lower") | to_yaml -}}
               spec:
                 type: zabbix-template
                 lifecycle: experimental
