@@ -8,19 +8,6 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 
-## Macros
-
-The following Zabbix macros are configured via this template.
-
-### Macro: `{$SYSTEMDJOURNALD.THRESHOLD.MIN_PROC}`
-
-Minimum amount of processes expected to be running at all times.
-
-Default:
-```
-1
-```
-
 ## Items
 
 ### Item: systemd-journald: process summary
@@ -211,9 +198,23 @@ Settings:
 last(/systemd-journald/rabe.systemd-journald.processes)<{$SYSTEMDJOURNALD.THRESHOLD.MIN_PROC}
 ```
 
+## Macros
+
+The following Zabbix macros are configured via this template.
+
+### Macro: `{$SYSTEMDJOURNALD.THRESHOLD.MIN_PROC}`
+
+Minimum amount of processes expected to be running at all times.
+
+Default:
+```
+1
+```
+
 ## Dashboards
 
 The following Zabbix dashboards are included in this template.
+
 * systemd-journald: Overview
 
 ## License

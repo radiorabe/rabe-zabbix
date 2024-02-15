@@ -16,19 +16,6 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 
-## Macros
-
-The following Zabbix macros are configured via this template.
-
-### Macro: `{$TIMEDATECTL_MAX_NO_SYNC_TIME}`
-
-How long can time be out if sync before we care?
-
-Default:
-```
-60m
-```
-
 ## Items
 
 ### Item: timedatectl: NTP service status
@@ -212,6 +199,19 @@ Settings:
 
 ```
 last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized,{$TIMEDATECTL_MAX_NO_SYNC_TIME})<1
+```
+
+## Macros
+
+The following Zabbix macros are configured via this template.
+
+### Macro: `{$TIMEDATECTL_MAX_NO_SYNC_TIME}`
+
+How long can time be out if sync before we care?
+
+Default:
+```
+60m
 ```
 
 ## License

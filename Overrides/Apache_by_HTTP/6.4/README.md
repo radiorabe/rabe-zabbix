@@ -17,55 +17,6 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 * Added `{$APACHE.STATUS.HOST}` instead of `{HOST.NAME}` for agentless use
 
 
-## Macros
-
-The following Zabbix macros are configured via this template.
-
-### Macro: `{$APACHE.RESPONSE_TIME.MAX.WARN}`
-
-The maximum Apache response time expressed in seconds for a trigger expression.
-
-Default:
-```
-10
-```
-
-### Macro: `{$APACHE.STATUS.HOST}`
-
-Hostname or IP of Apache HTTP server
-
-Default:
-```
-127.0.0.1
-```
-
-### Macro: `{$APACHE.STATUS.PATH}`
-
-The URL path.
-
-Default:
-```
-server-status?auto
-```
-
-### Macro: `{$APACHE.STATUS.PORT}`
-
-The port of the Apache status page.
-
-Default:
-```
-80
-```
-
-### Macro: `{$APACHE.STATUS.SCHEME}`
-
-The request scheme, which may be either HTTP or HTTPS.
-
-Default:
-```
-http
-```
-
 ## Items
 
 ### Item: Apache: Total bytes
@@ -674,11 +625,6 @@ Settings:
 last(/Apache by HTTP/net.tcp.service[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"])=0
 ```
 
-## Dashboards
-
-The following Zabbix dashboards are included in this template.
-* Apache performance
-
 ## Discovery Rules
 
 ### Discovery Rule: Event MPM discovery
@@ -857,3 +803,58 @@ The following graph prototypes are defined by this Template
 * Apache: Current async connections{#SINGLETON}
 * Apache: Current async processes{#SINGLETON}
 
+
+## Macros
+
+The following Zabbix macros are configured via this template.
+
+### Macro: `{$APACHE.RESPONSE_TIME.MAX.WARN}`
+
+The maximum Apache response time expressed in seconds for a trigger expression.
+
+Default:
+```
+10
+```
+
+### Macro: `{$APACHE.STATUS.HOST}`
+
+Hostname or IP of Apache HTTP server
+
+Default:
+```
+127.0.0.1
+```
+
+### Macro: `{$APACHE.STATUS.PATH}`
+
+The URL path.
+
+Default:
+```
+server-status?auto
+```
+
+### Macro: `{$APACHE.STATUS.PORT}`
+
+The port of the Apache status page.
+
+Default:
+```
+80
+```
+
+### Macro: `{$APACHE.STATUS.SCHEME}`
+
+The request scheme, which may be either HTTP or HTTPS.
+
+Default:
+```
+http
+```
+
+## Dashboards
+
+The following Zabbix dashboards are included in this template.
+
+* Apache performance

@@ -23,11 +23,11 @@ theme:
     - content.code.copy
 
 markdown_extensions:
-- pymdownx.highlight:
-    anchor_linenums: true
-- pymdownx.inlinehilite
-- pymdownx.snippets
-- pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 extra:
   social:
@@ -38,11 +38,11 @@ extra_css:
 - css/style.css
 
 plugins:
-- search
-- gen-files:
-    scripts:
-    - docs/gen_ref_pages.py
-- literate-nav
+  - search
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py
+  - literate-nav
 
 nav:
   - README: index.md

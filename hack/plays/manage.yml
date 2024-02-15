@@ -32,6 +32,8 @@
       - template_name: "Apache by HTTP"
         upstream: "app/apache_http/template_app_apache_http.yaml"
     __: # items below are "commented" :)
+      - template_name: "Nginx by HTTP"
+        upstream: "app/nginx_http/template_app_nginx_http.yaml"
       - template_name: "Website certificate by Zabbix agent 2"
         upstream: "app/certificate_agent2/template_app_certificate_agent2.yaml"
       - template_name: "Linux by Zabbix agent active"
@@ -108,13 +110,14 @@
       block:
         - name: 'RaBe Zabbix Templator : Generate diff'
           ansible.utils.fact_diff:
-            before: '{{ lookup("ansible.builtin.url", __url_prefix + target_version + "/templates/" + item.upstream, split_lines=False) }}'
-            after: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/" + ( item.template_name | replace(" ", "_") ) + ".yaml") }}'
+            before: '{{ lookup("ansible.builtin.url", __url_prefix + target_version + "/templates/" + item.upstream, split_lines=False) | trim }}'
+            after: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/" + ( item.template_name | replace(" ", "_") ) + ".yaml") | trim }}'
           loop: '{{ upstream_templates }}'
+          changed_when: false
           register: diff
 
         - name: 'RaBe Zabbix Templator : Write DIFF.md'
-          loop: '{{ diff.results }}'
+          loop: '{{ diff.results | rejectattr("diff_text", "equalto", "") }}'
           loop_control:
             loop_var: result
           ansible.builtin.copy:
@@ -126,13 +129,27 @@
 
               ## Diff
 
-              {% if result.diff_text != '' %}
               ```diff
               {{ result.diff_text  }}
               ```
-              {% else %}
-              No diff detected!
-              {% endif %}
+
+        - name: 'RaBe Zabbix Templator : Remove result with missing diff'
+          loop: '{{ diff.results | selectattr("diff_text", "equalto", "") }}'
+          loop_control:
+            loop_var: result
+          ansible.builtin.file:
+            state: absent
+            path: 'Overrides/{{ result.item.template_name | replace(" ", "_") }}/{{ target_version }}/'
+
+        - name: 'RaBe Zabbix Templator : Assert non-empty diff'
+          loop: '{{ diff.results }}'
+          loop_control:
+            loop_var: result
+          ansible.builtin.assert:
+            quiet: true
+            that:
+              - result.diff_text != ""
+            fail_msg: 'The template "{{ result.item.template_name }}" does not contain a diff, please remove it'
 
     - name: 'RaBe Zabbix Templator : Top-Level README.md file'
       block:
@@ -266,6 +283,8 @@
               - "Templates/"
             patterns:
               - "*.yaml"
+            excludes:
+              - "mkdocs.yaml"
             file_type: "file"
             depth: 5
             recurse: yes
@@ -320,6 +339,7 @@
                 description: |
                   {{ template.templates[0].description | indent(width=4, first=False) }}
                 annotations:
+                  backstage.io/techdocs-ref: dir:./{{ file | dirname }}
                   github.com/project-slug: radiorabe/rabe-zabbix
               spec:
                 type: zabbix-template
@@ -327,6 +347,48 @@
                 owner: it-reaktion
                 subcomponentOf: rabe-zabbix-templates
               {% endfor %}
+
+        - name: "RaBe Zabbix Templator : Generate template mkdocs.yaml"
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.copy:
+            dest: '{{ item | dirname }}/mkdocs.yaml'
+            content: |
+              {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
+              site_name: Zabbix Template: {{ tpl.name }}
+              repo_url: https://github.com/radiorabe/rabe-zabbix
+              repo_name: radiorabe/rabe-zabbix
+              markdown_extensions:
+                - pymdownx.highlight:
+                    anchor_linenums: true
+                - pymdownx.inlinehilite
+                - pymdownx.snippets
+                - pymdownx.superfences
+              plugins:
+                - search
+                - gen-files:
+                    scripts:
+                      - docs/gen_ref_pages.py
+                - literate-nav
+              nav:
+                - README: index.md
+
+        - name: 'RaBe Zabbix Templator : Create Template docs directory'
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.file:
+            state: directory
+            dest: '{{ item | dirname }}/docs'
+
+        - name: "RaBe Zabbix Templator : Generate template gen_ref_pages.py"
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.copy:
+            dest: '{{ item | dirname }}/docs/gen_ref_pages.py'
+            content: |
+              from pathlib import Path
+
+              import mkdocs_gen_files
+
+              with mkdocs_gen_files.open("index.md", "w", encoding="utf-8") as index:
+                  index.writelines(Path("README.md").open("r").read())
 
         - name: "RaBe Zabbix Templator : Generate template README.md"
           loop: "{{ yaml.files | map(attribute='path') }}"
@@ -349,23 +411,6 @@
 
               {% for dep in tpl.templates %}
               * {{ dep.name }}
-              {% endfor %}
-              {% endif %}
-              {% if 'macros' in tpl %}
-
-              ## Macros
-
-              The following Zabbix macros are configured via this template.
-              {% for macro in tpl.macros %}
-
-              ### Macro: `{{ macro.macro }}`
-
-              {{ macro.description if 'description' in macro }}
-
-              Default:
-              ```
-              {{ macro.value if 'value' in macro }}
-              ```
               {% endfor %}
               {% endif %}
               {% if 'items' in tpl %}
@@ -445,15 +490,6 @@
               The following graphs are included in this template.
               {% for graph in tpl.graphs %}
               * {{ graph.name }}
-              {% endfor %}
-              {% endif %}
-              {% if 'dashboards' in tpl %}
-
-              ## Dashboards
-
-              The following Zabbix dashboards are included in this template.
-              {% for dashboard in tpl.dashboards %}
-              * {{ dashboard.name }}
               {% endfor %}
               {% endif %}
               {% if 'discovery_rules' in tpl %}
@@ -576,6 +612,33 @@
               {% endfor %}
 
               {% endif %}
+              {% endfor %}
+              {% endif %}
+              {% if 'macros' in tpl %}
+
+              ## Macros
+
+              The following Zabbix macros are configured via this template.
+              {% for macro in tpl.macros %}
+
+              ### Macro: `{{ macro.macro }}`
+
+              {{ macro.description if 'description' in macro }}
+
+              Default:
+              ```
+              {{ macro.value if 'value' in macro }}
+              ```
+              {% endfor %}
+              {% endif %}
+              {% if 'dashboards' in tpl %}
+
+              ## Dashboards
+
+              The following Zabbix dashboards are included in this template.
+
+              {% for dashboard in tpl.dashboards %}
+              * {{ dashboard.name }}
               {% endfor %}
               {% endif %}
               {% if 'vendor' in tpl and tpl.vendor.name == 'RaBe' %}

@@ -8,19 +8,6 @@ This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
 
-## Macros
-
-The following Zabbix macros are configured via this template.
-
-### Macro: `{$QEMUGA.THRESHOLD.MIN_PROC}`
-
-Minimum amount of processes expected to be running at all times.
-
-Default:
-```
-1
-```
-
 ## Items
 
 ### Item: qemu-ga: process summary
@@ -211,9 +198,23 @@ Settings:
 last(/qemu-ga/rabe.qemu-ga.processes)<{$QEMUGA.THRESHOLD.MIN_PROC}
 ```
 
+## Macros
+
+The following Zabbix macros are configured via this template.
+
+### Macro: `{$QEMUGA.THRESHOLD.MIN_PROC}`
+
+Minimum amount of processes expected to be running at all times.
+
+Default:
+```
+1
+```
+
 ## Dashboards
 
 The following Zabbix dashboards are included in this template.
+
 * qemu-ga: Overview
 
 ## License
