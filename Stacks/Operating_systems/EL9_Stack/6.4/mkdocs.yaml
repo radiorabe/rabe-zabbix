@@ -1,4 +1,4 @@
-site_name: Zabbix Template: EL9 Stack
+site_name: "Zabbix Template: EL9 Stack"
 repo_url: https://github.com/radiorabe/rabe-zabbix
 repo_name: radiorabe/rabe-zabbix
 markdown_extensions:

@@ -1,4 +1,4 @@
-site_name: Zabbix Template: rpc.gssd
+site_name: "Zabbix Template: rpc.gssd"
 repo_url: https://github.com/radiorabe/rabe-zabbix
 repo_name: radiorabe/rabe-zabbix
 markdown_extensions:

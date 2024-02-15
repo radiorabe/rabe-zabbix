@@ -1,4 +1,4 @@
-site_name: Zabbix Template: EL7 KVM VM Stack
+site_name: "Zabbix Template: EL7 KVM VM Stack"
 repo_url: https://github.com/radiorabe/rabe-zabbix
 repo_name: radiorabe/rabe-zabbix
 markdown_extensions:

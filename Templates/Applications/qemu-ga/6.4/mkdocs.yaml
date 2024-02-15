@@ -1,4 +1,4 @@
-site_name: Zabbix Template: QEMU Guest Agent
+site_name: "Zabbix Template: QEMU Guest Agent"
 repo_url: https://github.com/radiorabe/rabe-zabbix
 repo_name: radiorabe/rabe-zabbix
 markdown_extensions:

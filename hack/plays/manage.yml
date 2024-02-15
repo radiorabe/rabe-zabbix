@@ -341,10 +341,12 @@
                 annotations:
                   backstage.io/techdocs-ref: dir:./{{ file | dirname }}
                   github.com/project-slug: radiorabe/rabe-zabbix
+                tags: {{ template.templates[0].tags | selectattr("tag", "in", ["target", "class"]) | map(attribute="value") | to_yaml -}}
               spec:
                 type: zabbix-template
                 lifecycle: experimental
                 owner: it-reaktion
+                system: rabe-zabbix
                 subcomponentOf: rabe-zabbix-templates
               {% endfor %}
 
@@ -354,7 +356,7 @@
             dest: '{{ item | dirname }}/mkdocs.yaml'
             content: |
               {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
-              site_name: Zabbix Template: {{ tpl.name }}
+              site_name: "Zabbix Template: {{ tpl.name }}"
               repo_url: https://github.com/radiorabe/rabe-zabbix
               repo_name: radiorabe/rabe-zabbix
               markdown_extensions:

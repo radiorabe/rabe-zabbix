@@ -56,10 +56,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Overrides/Apache_by_HTTP/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, apache]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Operating_systems/EL7_Stack/6.4/EL7_Stack.yaml
@@ -77,10 +79,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL7_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Operating_systems/EL8_Stack/6.4/EL8_Stack.yaml
@@ -98,10 +102,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL8_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Operating_systems/EL9_Stack/6.4/EL9_Stack.yaml
@@ -119,10 +125,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL9_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Applications/systemd_Stack/6.4/systemd_Stack.yaml
@@ -141,10 +149,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Applications/systemd_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Servers/EL9_KVM_VM_Stack/6.4/EL9_KVM_VM_Stack.yaml
@@ -162,10 +172,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Servers/EL9_KVM_VM_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Servers/EL7_KVM_VM_Stack/6.4/EL7_KVM_VM_Stack.yaml
@@ -183,10 +195,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Servers/EL7_KVM_VM_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Stacks/Servers/EL8_KVM_VM_Stack/6.4/EL8_KVM_VM_Stack.yaml
@@ -204,10 +218,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Stacks/Servers/EL8_KVM_VM_Stack/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [stack]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/auditd/6.4/auditd.yaml
@@ -225,10 +241,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/auditd/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, auditd]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/chrony/6.4/chrony.yaml
@@ -252,10 +270,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/chrony/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, chrony]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/Cronie/6.4/Cronie.yaml
@@ -273,10 +293,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/Cronie/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, Cronie]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/timedatectl/6.4/timedatectl.yaml
@@ -302,10 +324,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/timedatectl/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, timedatectl]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/Zabbix_unsupported_items/6.4/Zabbix_unsupported_items.yaml
@@ -325,10 +349,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/Zabbix_unsupported_items/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [app, zabbix]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/firewalld/6.4/firewalld.yaml
@@ -346,10 +372,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/firewalld/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, firewalld]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/tuned/6.4/tuned.yaml
@@ -367,10 +395,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/tuned/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, tuned]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/rsyslog/6.4/rsyslog.yaml
@@ -388,10 +418,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/rsyslog/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, rsyslog]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/sssd/6.4/sssd.yaml
@@ -409,10 +441,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/sssd/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, sssd]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/gssproxy/6.4/gssproxy.yaml
@@ -430,10 +464,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/gssproxy/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, gssproxy]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/rpc.gssd/6.4/rpc.gssd.yaml
@@ -451,10 +487,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/rpc.gssd/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, rpc.gssd]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/systemd-logind/6.4/systemd-logind.yaml
@@ -472,10 +510,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-logind/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, systemd-logind]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/systemd-journald/6.4/systemd-journald.yaml
@@ -493,10 +533,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-journald/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, systemd-journald]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/systemd-udevd/6.4/systemd-udevd.yaml
@@ -514,10 +556,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-udevd/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, systemd-udevd]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/certmonger/6.4/certmonger.yaml
@@ -535,10 +579,12 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/certmonger/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, certmonger]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
 # Templates/Applications/qemu-ga/6.4/qemu-ga.yaml
@@ -556,8 +602,10 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/qemu-ga/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
+  tags: [software, qemu-ga]
 spec:
   type: zabbix-template
   lifecycle: experimental
   owner: it-reaktion
+  system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
