@@ -4,17 +4,20 @@ on:
   pull_request:
 
 jobs:
-  - uses: actions/checkout@v4
-    with:
-      fetch-depth: 0
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  - name: Setup Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: '3.x'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-  - run: pip install ansible
+      - run: pip install ansible
 
-  - run: ansible-playbook hack/plays/manage.yml
+      - run: ansible-playbook hack/plays/manage.yml
 
-  - run: git diff --exit-code
+      - run: git diff --exit-code
