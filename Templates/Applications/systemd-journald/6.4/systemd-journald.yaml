@@ -244,7 +244,7 @@ zabbix_export:
           delay: '0'
           history: 7d
           value_type: FLOAT
-          units: s
+          units: uptime
           description: 'Number of seconds since unit entered the active state.'
           preprocessing:
             - type: JAVASCRIPT
@@ -391,6 +391,9 @@ zabbix_export:
                     - type: INTEGER
                       name: show
                       value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
                 - type: graph
                   x: '12'
                   'y': '4'
@@ -452,13 +455,13 @@ zabbix_export:
                       value: FF0000
                     - type: STRING
                       name: thresholds.threshold.0
-                      value: '0'
+                      value: '6'
                     - type: STRING
                       name: thresholds.threshold.1
-                      value: '1'
+                      value: '7'
                     - type: STRING
                       name: thresholds.threshold.2
-                      value: '2'
+                      value: '8'
                 - type: item
                   x: '14'
                   'y': '2'

@@ -270,7 +270,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
-| Value type | FLOAT in s |
+| Value type | FLOAT in uptime |
 | History | 7d |
 | Source item | `systemd.unit.get["gssproxy.service"]` |
 
