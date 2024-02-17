@@ -73,6 +73,15 @@ Original: [Nginx by HTTP](https://raw.githubusercontent.com/zabbix/zabbix/releas
                tags:
                  - tag: scope
                    value: performance
+@@ -236,7 +243,7 @@
+             `Waiting` - the current number of idle client connections waiting for a request.
+             
+             See also [Module ngx_http_stub_status_module](https://nginx.org/en/docs/http/ngx_http_stub_status_module.html).
+-          url: '{$NGINX.STUB_STATUS.SCHEME}://{HOST.CONN}:{$NGINX.STUB_STATUS.PORT}/{$NGINX.STUB_STATUS.PATH}'
++          url: '{$NGINX.STUB_STATUS.SCHEME}://{$NGINX.STUB_STATUS.HOST}:{$NGINX.STUB_STATUS.PORT}/{$NGINX.STUB_STATUS.PATH}'
+           retrieve_mode: BOTH
+           tags:
+             - tag: component
 @@ -255,7 +262,7 @@
                manual_close: 'YES'
                dependencies:
