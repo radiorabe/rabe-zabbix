@@ -152,6 +152,13 @@ We primarily support versions of Zabbix we use in production.
 | 6.4 | ✅ | for LTS preparation work until 7.0 is available |
 | 7.0 | ✅ | once released |
 
+## OS Version Support
+
+Our Zabbix 3.0 template mainly template EL7 installations based on CentOS 7.
+The 6.4+ templates aim to support both EL7 as well as EL9, with EL7 on
+a best effort case (e.g. we don't workaround the lack of `timedatectl show`
+on old distros, their timedatectl stays unmonitored).
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for our contributor documentation.
