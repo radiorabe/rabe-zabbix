@@ -332,7 +332,7 @@
                 lifecycle: experimental
                 owner: it-reaktion
                 system: rabe-zabbix
-              {% for file in (yaml.files | map(attribute="path")) %}
+              {% for file in (yaml.files | map(attribute="path") | sort ) %}
               {% set template = (lookup("ansible.builtin.file", "../../"+file) | from_yaml).zabbix_export %}
               ---
               # {{ file }}

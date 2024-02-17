@@ -104,6 +104,57 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4/Apache_with_TLS_by_HTTP_Stack.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Apache_with_TLS_by_HTTP_Stack
+  title: "Zabbix Template: Apache with TLS by HTTP Stack"
+  description: |
+    Monitor Apache by HTTP and do a Zabbix agent2 based certificate check.
+  annotations:
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4
+      title: GitHub
+      icon: github
+  tags: [stack]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Stacks/Applications/systemd_Stack/6.4/systemd_Stack.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-systemd_Stack
+  title: "Zabbix Template: systemd Stack"
+  description: |
+    The [systemd](https://systemd.io) combines all the pieces of
+    systemd that ususally run on a system host.
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/systemd_Stack/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/systemd_Stack/6.4
+      title: GitHub
+      icon: github
+  tags: [stack]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Stacks/Operating_systems/EL7_Stack/6.4/EL7_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -185,84 +236,6 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Applications/systemd_Stack/6.4/systemd_Stack.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-systemd_Stack
-  title: "Zabbix Template: systemd Stack"
-  description: |
-    The [systemd](https://systemd.io) combines all the pieces of
-    systemd that ususally run on a system host.
-
-    This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix).
-
-  annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Applications/systemd_Stack/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/systemd_Stack/6.4
-      title: GitHub
-      icon: github
-  tags: [stack]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
-# Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4/Apache_with_TLS_by_HTTP_Stack.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-Apache_with_TLS_by_HTTP_Stack
-  title: "Zabbix Template: Apache with TLS by HTTP Stack"
-  description: |
-    Monitor Apache by HTTP and do a Zabbix agent2 based certificate check.
-  annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4
-      title: GitHub
-      icon: github
-  tags: [stack]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
-# Stacks/Servers/EL9_KVM_VM_Stack/6.4/EL9_KVM_VM_Stack.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-EL9_KVM_VM_Stack
-  title: "Zabbix Template: EL9 KVM VM Stack"
-  description: |
-    Base stack template for EL9 based virtual machines.
-
-    This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix).
-
-  annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL9_KVM_VM_Stack/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL9_KVM_VM_Stack/6.4
-      title: GitHub
-      icon: github
-  tags: [stack]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
 # Stacks/Servers/EL7_KVM_VM_Stack/6.4/EL7_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -317,6 +290,33 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Stacks/Servers/EL9_KVM_VM_Stack/6.4/EL9_KVM_VM_Stack.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-EL9_KVM_VM_Stack
+  title: "Zabbix Template: EL9 KVM VM Stack"
+  description: |
+    Base stack template for EL9 based virtual machines.
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL9_KVM_VM_Stack/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL9_KVM_VM_Stack/6.4
+      title: GitHub
+      icon: github
+  tags: [stack]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Templates/Applications/auditd/6.4/auditd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -337,6 +337,33 @@ metadata:
       title: GitHub
       icon: github
   tags: [software, auditd]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Templates/Applications/certmonger/6.4/certmonger.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-certmonger
+  title: "Zabbix Template: certmonger"
+  description: |
+    Monitoring of [certmonger](https://www.freeipa.org/page/Certmonger).
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/certmonger/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/certmonger/6.4
+      title: GitHub
+      icon: github
+  tags: [software, certmonger]
 spec:
   type: zabbix-template
   lifecycle: experimental
@@ -404,70 +431,6 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/timedatectl/6.4/timedatectl.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-timedatectl
-  title: "Zabbix Template: timedatectl"
-  description: |
-    Keeps track of the time and date subsystem by running timedatectl status.
-
-    Needs the following configuration:
-    ```
-    AllowKey=system.run[/usr/bin/timedatectl show]
-    ```
-
-    See [here](https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html)
-    for more information about timedatectl.
-
-    This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix).
-
-  annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/timedatectl/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/timedatectl/6.4
-      title: GitHub
-      icon: github
-  tags: [software, timedatectl]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
-# Templates/Applications/Zabbix_unsupported_items/6.4/Zabbix_unsupported_items.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-Zabbix_unsupported_items
-  title: "Zabbix Template: Zabbix unsupported items"
-  description: |
-    Implementation agnostic monitoring of unsupported items from Zabbix internal.
-
-    Used as a mix-in to most low-level stack templates.
-
-    This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix).
-
-  annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/Zabbix_unsupported_items/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Zabbix_unsupported_items/6.4
-      title: GitHub
-      icon: github
-  tags: [app, zabbix]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
 # Templates/Applications/firewalld/6.4/firewalld.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -495,26 +458,80 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/tuned/6.4/tuned.yaml
+# Templates/Applications/gssproxy/6.4/gssproxy.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: zabbix-template-tuned
-  title: "Zabbix Template: tuned"
+  name: zabbix-template-gssproxy
+  title: "Zabbix Template: gssproxy"
   description: |
-    Monitoring of [tuned](https://tuned-project.org/).
+    Monitoring of [gssproxy](https://pagure.io/gssproxy).
 
     This template is part of [RaBe's Zabbix template and helpers
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/tuned/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/gssproxy/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/tuned/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/gssproxy/6.4
       title: GitHub
       icon: github
-  tags: [software, tuned]
+  tags: [software, gssproxy]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Templates/Applications/qemu-ga/6.4/qemu-ga.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-qemu-ga
+  title: "Zabbix Template: QEMU Guest Agent"
+  description: |
+    Monitoring of the [QEMU Guest Agent](https://www.qemu.org/docs/master/interop/qemu-ga.html).
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/qemu-ga/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/qemu-ga/6.4
+      title: GitHub
+      icon: github
+  tags: [software, qemu-ga]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Templates/Applications/rpc.gssd/6.4/rpc.gssd.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-rpc.gssd
+  title: "Zabbix Template: rpc.gssd"
+  description: |
+    Monitoring of [rpc.gssd](https://linux.die.net/man/8/rpc.gssd).
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/rpc.gssd/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/rpc.gssd/6.4
+      title: GitHub
+      icon: github
+  tags: [software, rpcgssd]
 spec:
   type: zabbix-template
   lifecycle: experimental
@@ -576,53 +593,26 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/gssproxy/6.4/gssproxy.yaml
+# Templates/Applications/systemd-journald/6.4/systemd-journald.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: zabbix-template-gssproxy
-  title: "Zabbix Template: gssproxy"
+  name: zabbix-template-systemd-journald
+  title: "Zabbix Template: systemd-journald"
   description: |
-    Monitoring of [gssproxy](https://pagure.io/gssproxy).
+    Monitoring of [systemd-journald](https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html).
 
     This template is part of [RaBe's Zabbix template and helpers
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/gssproxy/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-journald/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/gssproxy/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-journald/6.4
       title: GitHub
       icon: github
-  tags: [software, gssproxy]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
-# Templates/Applications/rpc.gssd/6.4/rpc.gssd.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-rpc.gssd
-  title: "Zabbix Template: rpc.gssd"
-  description: |
-    Monitoring of [rpc.gssd](https://linux.die.net/man/8/rpc.gssd).
-
-    This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix).
-
-  annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/rpc.gssd/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/rpc.gssd/6.4
-      title: GitHub
-      icon: github
-  tags: [software, rpcgssd]
+  tags: [software, systemd-journald]
 spec:
   type: zabbix-template
   lifecycle: experimental
@@ -657,33 +647,6 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/systemd-journald/6.4/systemd-journald.yaml
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: zabbix-template-systemd-journald
-  title: "Zabbix Template: systemd-journald"
-  description: |
-    Monitoring of [systemd-journald](https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html).
-
-    This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix).
-
-  annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-journald/6.4
-    github.com/project-slug: radiorabe/rabe-zabbix
-  links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-journald/6.4
-      title: GitHub
-      icon: github
-  tags: [software, systemd-journald]
-spec:
-  type: zabbix-template
-  lifecycle: experimental
-  owner: it-reaktion
-  system: rabe-zabbix
-  subcomponentOf: rabe-zabbix-templates
----
 # Templates/Applications/systemd-udevd/6.4/systemd-udevd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -711,26 +674,34 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/certmonger/6.4/certmonger.yaml
+# Templates/Applications/timedatectl/6.4/timedatectl.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: zabbix-template-certmonger
-  title: "Zabbix Template: certmonger"
+  name: zabbix-template-timedatectl
+  title: "Zabbix Template: timedatectl"
   description: |
-    Monitoring of [certmonger](https://www.freeipa.org/page/Certmonger).
+    Keeps track of the time and date subsystem by running timedatectl status.
+
+    Needs the following configuration:
+    ```
+    AllowKey=system.run[/usr/bin/timedatectl show]
+    ```
+
+    See [here](https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html)
+    for more information about timedatectl.
 
     This template is part of [RaBe's Zabbix template and helpers
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/certmonger/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/timedatectl/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/certmonger/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/timedatectl/6.4
       title: GitHub
       icon: github
-  tags: [software, certmonger]
+  tags: [software, timedatectl]
 spec:
   type: zabbix-template
   lifecycle: experimental
@@ -738,26 +709,55 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/qemu-ga/6.4/qemu-ga.yaml
+# Templates/Applications/tuned/6.4/tuned.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: zabbix-template-qemu-ga
-  title: "Zabbix Template: QEMU Guest Agent"
+  name: zabbix-template-tuned
+  title: "Zabbix Template: tuned"
   description: |
-    Monitoring of the [QEMU Guest Agent](https://www.qemu.org/docs/master/interop/qemu-ga.html).
+    Monitoring of [tuned](https://tuned-project.org/).
 
     This template is part of [RaBe's Zabbix template and helpers
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/qemu-ga/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/tuned/6.4
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/qemu-ga/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/tuned/6.4
       title: GitHub
       icon: github
-  tags: [software, qemu-ga]
+  tags: [software, tuned]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Templates/Applications/Zabbix_unsupported_items/6.4/Zabbix_unsupported_items.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Zabbix_unsupported_items
+  title: "Zabbix Template: Zabbix unsupported items"
+  description: |
+    Implementation agnostic monitoring of unsupported items from Zabbix internal.
+
+    Used as a mix-in to most low-level stack templates.
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/Zabbix_unsupported_items/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Zabbix_unsupported_items/6.4
+      title: GitHub
+      icon: github
+  tags: [app, zabbix]
 spec:
   type: zabbix-template
   lifecycle: experimental
