@@ -344,6 +344,33 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Templates/Applications/candlepin-rhsmcertd/6.4/candlepin-rhsmcertd.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-candlepin-rhsmcertd
+  title: "Zabbix Template: candlepin-rhsmcertd"
+  description: |
+    Monitoring of [candlepin-rhsmcertd](https://github.com/candlepin/subscription-manager/blob/main/src/daemons/rhsmcertd.c).
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/candlepin-rhsmcertd/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/candlepin-rhsmcertd/6.4
+      title: GitHub
+      icon: github
+  tags: [software, candlepin-rhsmcertd]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Templates/Applications/certmonger/6.4/certmonger.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component

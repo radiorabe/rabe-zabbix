@@ -7,6 +7,7 @@
     rabe_zabbix_templates:
       - template_name: "Apache with TLS by HTTP Stack"
       - template_name: "auditd"
+      - template_name: "candlepin-rhsmcertd"
       - template_name: "certmonger"
       - template_name: "chrony"
       - template_name: "Cronie"

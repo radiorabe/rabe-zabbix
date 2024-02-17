@@ -17,6 +17,7 @@ zabbix_export:
         version: '6.4'
       templates:
         - name: auditd
+        - name: candlepin-rhsmcertd
         - name: certmonger
         - name: chrony
         - name: Cronie

@@ -62,6 +62,7 @@ inheritance problems.
 | auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) |  |
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
+| candlepin-rhsmcertd |  | [✅](./Templates/Applications/candlepin-rhsmcertd/6.4) |  |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
 | certmonger |  | [✅](./Templates/Applications/certmonger/6.4) |  |
 | chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) |  |
