@@ -1,12 +1,11 @@
 # Zabbix Template: auditd
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: auditd](https://img.shields.io/badge/target-auditd-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: auditd](https://img.shields.io/badge/target-auditd-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Keeps track of [auditd](https://people.redhat.com/sgrubb/audit/).
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
 
 ## Items
 
@@ -16,7 +15,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about auditd processes
 
-```
+```console
 proc.get[auditd,root,,summary]
 ```
 
@@ -33,7 +32,7 @@ Settings:
 
 Total CPU seconds (system) of auditd processes.
 
-```
+```console
 rabe.auditd.cputime_system
 ```
 
@@ -60,7 +59,7 @@ Preprocessing steps:
 
 Total CPU seconds (user) of auditd processes.
 
-```
+```console
 rabe.auditd.cputime_user
 ```
 
@@ -87,7 +86,7 @@ Preprocessing steps:
 
 Number of auditd processes.
 
-```
+```console
 rabe.auditd.processes
 ```
 
@@ -112,7 +111,7 @@ Preprocessing steps:
 
 Memory usage of auditd processes.
 
-```
+```console
 rabe.auditd.rss
 ```
 
@@ -137,7 +136,7 @@ Preprocessing steps:
 
 Swap usage of auditd processes.
 
-```
+```console
 rabe.auditd.swap
 ```
 
@@ -162,7 +161,7 @@ Preprocessing steps:
 
 Number of auditd threads.
 
-```
+```console
 rabe.auditd.threads
 ```
 
@@ -194,7 +193,7 @@ Settings:
 | --------------- | ------ |
 | Priority | HIGH |
 
-```
+```console
 last(/auditd/rabe.auditd.processes)<{$AUDITD.THRESHOLD.MIN_PROC}
 ```
 
@@ -207,7 +206,8 @@ The following Zabbix macros are configured via this template.
 Minimum amount of processes expected to be running at all times.
 
 Default:
-```
+
+```console
 1
 ```
 

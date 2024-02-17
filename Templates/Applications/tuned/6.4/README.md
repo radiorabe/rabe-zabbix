@@ -1,12 +1,11 @@
 # Zabbix Template: tuned
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: tuned](https://img.shields.io/badge/target-tuned-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: tuned](https://img.shields.io/badge/target-tuned-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring of [tuned](https://tuned-project.org/).
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
 
 ## Items
 
@@ -16,7 +15,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about tuned processes
 
-```
+```console
 proc.get[tuned,root,,summary]
 ```
 
@@ -33,7 +32,7 @@ Settings:
 
 Total CPU seconds (system) of tuned processes.
 
-```
+```console
 rabe.tuned.cputime_system
 ```
 
@@ -60,7 +59,7 @@ Preprocessing steps:
 
 Total CPU seconds (user) of tuned processes.
 
-```
+```console
 rabe.tuned.cputime_user
 ```
 
@@ -87,7 +86,7 @@ Preprocessing steps:
 
 Number of tuned processes.
 
-```
+```console
 rabe.tuned.processes
 ```
 
@@ -112,7 +111,7 @@ Preprocessing steps:
 
 Memory usage of tuned processes.
 
-```
+```console
 rabe.tuned.rss
 ```
 
@@ -137,7 +136,7 @@ Preprocessing steps:
 
 Swap usage of tuned processes.
 
-```
+```console
 rabe.tuned.swap
 ```
 
@@ -162,7 +161,7 @@ Preprocessing steps:
 
 Number of tuned threads.
 
-```
+```console
 rabe.tuned.threads
 ```
 
@@ -194,7 +193,7 @@ Settings:
 | --------------- | ------ |
 | Priority | HIGH |
 
-```
+```console
 last(/tuned/rabe.tuned.processes)<{$TUNED.THRESHOLD.MIN_PROC}
 ```
 
@@ -207,7 +206,8 @@ The following Zabbix macros are configured via this template.
 Minimum amount of processes expected to be running at all times.
 
 Default:
-```
+
+```console
 1
 ```
 

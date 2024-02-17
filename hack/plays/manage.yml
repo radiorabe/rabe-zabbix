@@ -5,6 +5,7 @@
   vars:
     target_version: '6.4'
     rabe_zabbix_templates:
+      - template_name: "Apache with TLS by HTTP Stack"
       - template_name: "auditd"
       - template_name: "certmonger"
       - template_name: "chrony"
@@ -31,9 +32,9 @@
     upstream_templates:
       - template_name: "Apache by HTTP"
         upstream: "app/apache_http/template_app_apache_http.yaml"
-    __: # items below are "commented" :)
       - template_name: "Nginx by HTTP"
         upstream: "app/nginx_http/template_app_nginx_http.yaml"
+    __: # items below are "commented" :)
       - template_name: "Website certificate by Zabbix agent 2"
         upstream: "app/certificate_agent2/template_app_certificate_agent2.yaml"
       - template_name: "Linux by Zabbix agent active"
@@ -196,14 +197,13 @@
               re-used if there is more than one host with the same role.
 
               As an example, a host which servers a MediaWiki instance, will get the
-              stack template <code>MediaWiki Stack</code> assigned. The stack template
-              might include the operating system template <code>EL9 Stack</code>, the
-              application templates <code>Apache by HTTP</code>, <code>PHP-FPM by HTTP</code>
-              and <code>MariaDB by agent 2</code>.
+              stack template `MediaWiki Stack` assigned. The stack template
+              might include the operating system template `EL9 Stack`, the
+              application templates `Apache by HTTP`, `PHP-FPM by HTTP`
+              and `MariaDB by agent 2`.
 
               This ensures great modularity, reusability and avoids unecessary
               inheritance problems.
-
               {% set flat_stacks = (stacks.files | sort(attribute='path') | map(attribute='path')) %}
               {% for stack in flat_stacks %}
               {% if (stack.split('/') | length) == 2 %}
@@ -262,11 +262,16 @@
               
               See [CONTRIBUTING.md](./CONTRIBUTING.md) for our contributor documentation.
 
+              ## Previous Versions
+
+              If you are looking for the documentation and tooling of the Zabbix 3.0 only
+              version of this repo, you may find them in [5d2dfb7](https://github.com/radiorabe/rabe-zabbix/tree/5d2dfb7d91cf84cb4b314f2a3c2b6dd69224cf20).
+
               ## License
               
-              This template collection is free software: you can redistribute it and/or modify it under
-              the terms of the GNU Affero General Public License as published by the Free
-              Software Foundation, version 3 of the License.
+              This template collection is free software: you can redistribute it and/or
+              modify it under the terms of the GNU Affero General Public License as
+              published by the Free Software Foundation, version 3 of the License.
 
               ## Copyright
               
@@ -405,10 +410,10 @@
               {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
               # Zabbix Template: {{ tpl.name }}
 
-              {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}{% if 'vendor' in tpl %}![vendor: {{ tpl.vendor.name }}](https://img.shields.io/badge/vendor-{{ tpl.vendor.name }}-00c9bf)![version: {{ tpl.vendor.version }}](https://img.shields.io/badge/version-{{ tpl.vendor.version | replace("-", "--") }}-00c9bf){% endif %}
+              {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}{% if 'vendor' in tpl %} ![vendor: {{ tpl.vendor.name }}](https://img.shields.io/badge/vendor-{{ tpl.vendor.name }}-00c9bf) ![version: {{ tpl.vendor.version }}](https://img.shields.io/badge/version-{{ tpl.vendor.version | replace("-", "--") }}-00c9bf){% endif %}
 
 
-              {{ tpl.description }}
+              {{ tpl.description | trim }}
               {% if 'templates' in tpl %}
 
               ## Linked Templates
@@ -426,12 +431,12 @@
 
               ### Item: {{ item.name }}
 
-              {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+              {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
               {{ triggers.append(item.triggers) if 'triggers' in item }}
 
-              {{ item.description if 'description' in item }}
+              {{ (item.description | trim) if 'description' in item }}
 
-              ```
+              ```console
               {{ item.key }}
               ```
 
@@ -471,7 +476,7 @@
 
               ### Trigger: {{ trigger.name }}
 
-              {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+              {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
 
 
               {{ trigger.description if 'description' in trigger }}
@@ -484,7 +489,7 @@
               | Manual close | {{ trigger.manual_close }} |
               {% endif %}
 
-              ```
+              ```console
               {{ trigger.expression }}
               ```
               {% endfor %}
@@ -507,9 +512,11 @@
               ### Discovery Rule: {{ rule.name }}
 
               {{ rule.description }}
-              ```
+
+              ```console
               {{ rule.key }}
               ```
+
               Settings:
 
               | Item Setting | Value |
@@ -544,12 +551,12 @@
 
               ##### Discovery Rule: {{ rule.name }}: Item Prototype: {{ item.name }}
 
-              {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+              {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
               {{ disco_triggers.append(item.trigger_prototypes) if 'trigger_prototypes' in item }}
 
               {{ item.description if 'description' in item }}
 
-              ```
+              ```console
               {{ item.key }}
               ```
 
@@ -589,7 +596,7 @@
 
               ##### Discovery Rule: {{ rule.name }}: Trigger Prototype: {{ trigger.name }}
 
-              {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% endfor %}
+              {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
 
 
               {{ trigger.description if 'description' in trigger }}
@@ -602,7 +609,7 @@
               | Manual close | {{ trigger.manual_close }} |
               {% endif %}
 
-              ```
+              ```console
               {{ trigger.expression }}
               ```
               {% endfor %}
@@ -632,7 +639,8 @@
               {{ macro.description if 'description' in macro }}
 
               Default:
-              ```
+
+              ```console
               {{ macro.value if 'value' in macro }}
               ```
               {% endfor %}

@@ -13,19 +13,19 @@ to its role. The stack exactly defines the setup of this host and will be
 re-used if there is more than one host with the same role.
 
 As an example, a host which servers a MediaWiki instance, will get the
-stack template <code>MediaWiki Stack</code> assigned. The stack template
-might include the operating system template <code>EL9 Stack</code>, the
-application templates <code>Apache by HTTP</code>, <code>PHP-FPM by HTTP</code>
-and <code>MariaDB by agent 2</code>.
+stack template `MediaWiki Stack` assigned. The stack template
+might include the operating system template `EL9 Stack`, the
+application templates `Apache by HTTP`, `PHP-FPM by HTTP`
+and `MariaDB by agent 2`.
 
 This ensures great modularity, reusability and avoids unecessary
 inheritance problems.
-
 
 ### Stacks: Applications
 
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
+| Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4) |  |
 | systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) |  |
 
 ### Stacks: Network devices
@@ -140,6 +140,7 @@ with a generated diff against its upstream version.
 | Name | 6.4 | 7.0 |
 | ---- | --- | --- |
 | Apache by HTTP | [✅](./Overrides/Apache_by_HTTP/6.4) |  |
+| Nginx by HTTP | [✅](./Overrides/Nginx_by_HTTP/6.4) |  |
 
 ## Zabbix Version Support
 
@@ -155,11 +156,16 @@ We primarily support versions of Zabbix we use in production.
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for our contributor documentation.
 
+## Previous Versions
+
+If you are looking for the documentation and tooling of the Zabbix 3.0 only
+version of this repo, you may find them in [5d2dfb7](https://github.com/radiorabe/rabe-zabbix/tree/5d2dfb7d91cf84cb4b314f2a3c2b6dd69224cf20).
+
 ## License
 
-This template collection is free software: you can redistribute it and/or modify it under
-the terms of the GNU Affero General Public License as published by the Free
-Software Foundation, version 3 of the License.
+This template collection is free software: you can redistribute it and/or
+modify it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, version 3 of the License.
 
 ## Copyright
 

@@ -1,6 +1,6 @@
 # Zabbix Template: Apache by HTTP
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: apache](https://img.shields.io/badge/target-apache-00c9bf)![vendor: Zabbix](https://img.shields.io/badge/vendor-Zabbix-00c9bf)![version: 6.4-0](https://img.shields.io/badge/version-6.4--0-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: apache](https://img.shields.io/badge/target-apache-00c9bf) ![vendor: Zabbix](https://img.shields.io/badge/vendor-Zabbix-00c9bf) ![version: 6.4-0](https://img.shields.io/badge/version-6.4--0-00c9bf)
 
 Get metrics from mod_status module using HTTP agent.
 https://httpd.apache.org/docs/current/mod/mod_status.html
@@ -16,7 +16,6 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 * Added `{$APACHE.STATUS.HOST}` instead of `{HOST.NAME}` for agentless use
 
-
 ## Items
 
 ### Item: Apache: Total bytes
@@ -25,7 +24,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 The total bytes served.
 
-```
+```console
 apache.bytes
 ```
 
@@ -52,8 +51,7 @@ Preprocessing steps:
 It is calculated as a rate of change for total bytes statistics.
 `BytesPerSec` is not used, as it counts the average since the last Apache server start.
 
-
-```
+```console
 apache.bytes.rate
 ```
 
@@ -81,8 +79,7 @@ Preprocessing steps:
 Getting data from a machine-readable version of the Apache status page.
 For more information see Apache Module [mod_status](https://httpd.apache.org/docs/current/mod/mod_status.html).
 
-
-```
+```console
 apache.get_status
 ```
 
@@ -100,7 +97,7 @@ Settings:
 
 The total number of the Apache server accesses.
 
-```
+```console
 apache.requests
 ```
 
@@ -125,8 +122,7 @@ Preprocessing steps:
 It is calculated as a rate of change for the "Total requests" statistics.
 `ReqPerSec` is not used, as it counts the average since the last Apache server start.
 
-
-```
+```console
 apache.requests.rate
 ```
 
@@ -152,7 +148,7 @@ Preprocessing steps:
 
 The service uptime expressed in seconds.
 
-```
+```console
 apache.uptime
 ```
 
@@ -176,7 +172,7 @@ Preprocessing steps:
 
 The Apache service version.
 
-```
+```console
 apache.version
 ```
 
@@ -202,7 +198,7 @@ Preprocessing steps:
 
 The number of workers in cleanup state.
 
-```
+```console
 apache.workers.cleanup
 ```
 
@@ -226,7 +222,7 @@ Preprocessing steps:
 
 The number of workers in closing state.
 
-```
+```console
 apache.workers.closing
 ```
 
@@ -250,7 +246,7 @@ Preprocessing steps:
 
 The number of workers in `dnslookup` state.
 
-```
+```console
 apache.workers.dnslookup
 ```
 
@@ -274,7 +270,7 @@ Preprocessing steps:
 
 The number of workers in finishing state.
 
-```
+```console
 apache.workers.finishing
 ```
 
@@ -298,7 +294,7 @@ Preprocessing steps:
 
 The number of workers in `keepalive` state.
 
-```
+```console
 apache.workers.keepalive
 ```
 
@@ -322,7 +318,7 @@ Preprocessing steps:
 
 The number of workers in logging state.
 
-```
+```console
 apache.workers.logging
 ```
 
@@ -346,7 +342,7 @@ Preprocessing steps:
 
 The number of workers in reading state.
 
-```
+```console
 apache.workers.reading
 ```
 
@@ -370,7 +366,7 @@ Preprocessing steps:
 
 The number of workers in sending state.
 
-```
+```console
 apache.workers.sending
 ```
 
@@ -394,7 +390,7 @@ Preprocessing steps:
 
 The number of slots with no current process.
 
-```
+```console
 apache.workers.slot
 ```
 
@@ -418,7 +414,7 @@ Preprocessing steps:
 
 The number of workers in starting state.
 
-```
+```console
 apache.workers.starting
 ```
 
@@ -442,7 +438,7 @@ Preprocessing steps:
 
 The number of workers in waiting state.
 
-```
+```console
 apache.workers.waiting
 ```
 
@@ -466,7 +462,7 @@ Preprocessing steps:
 
 The total number of busy worker threads/processes.
 
-```
+```console
 apache.workers_total.busy
 ```
 
@@ -490,7 +486,7 @@ Preprocessing steps:
 
 The total number of idle worker threads/processes.
 
-```
+```console
 apache.workers_total.idle
 ```
 
@@ -510,11 +506,11 @@ Preprocessing steps:
 
 ### Item: Apache: Service response time
 
-![component: application](https://img.shields.io/badge/component-application-00c9bf)![component: health](https://img.shields.io/badge/component-health-00c9bf)
+![component: application](https://img.shields.io/badge/component-application-00c9bf) ![component: health](https://img.shields.io/badge/component-health-00c9bf)
 
 
 
-```
+```console
 net.tcp.service.perf[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"]
 ```
 
@@ -528,11 +524,11 @@ Settings:
 
 ### Item: Apache: Service ping
 
-![component: application](https://img.shields.io/badge/component-application-00c9bf)![component: health](https://img.shields.io/badge/component-health-00c9bf)
+![component: application](https://img.shields.io/badge/component-application-00c9bf) ![component: health](https://img.shields.io/badge/component-health-00c9bf)
 
 
 
-```
+```console
 net.tcp.service[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"]
 ```
 
@@ -557,7 +553,7 @@ Settings:
 | Priority | WARNING |
 | Manual close | YES |
 
-```
+```console
 nodata(/Apache by HTTP/apache.get_status,30m)=1
 ```
 
@@ -573,7 +569,7 @@ Settings:
 | Priority | INFO |
 | Manual close | YES |
 
-```
+```console
 last(/Apache by HTTP/apache.uptime)<10m
 ```
 
@@ -589,7 +585,7 @@ Settings:
 | Priority | INFO |
 | Manual close | YES |
 
-```
+```console
 last(/Apache by HTTP/apache.version,#1)<>last(/Apache by HTTP/apache.version,#2) and length(last(/Apache by HTTP/apache.version))>0
 ```
 
@@ -605,7 +601,7 @@ Settings:
 | Priority | WARNING |
 | Manual close | YES |
 
-```
+```console
 min(/Apache by HTTP/net.tcp.service.perf[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"],5m)>{$APACHE.RESPONSE_TIME.MAX.WARN}
 ```
 
@@ -621,7 +617,7 @@ Settings:
 | Priority | AVERAGE |
 | Manual close | YES |
 
-```
+```console
 last(/Apache by HTTP/net.tcp.service[http,"{$APACHE.STATUS.HOST}","{$APACHE.STATUS.PORT}"])=0
 ```
 
@@ -632,9 +628,11 @@ last(/Apache by HTTP/net.tcp.service[http,"{$APACHE.STATUS.HOST}","{$APACHE.STAT
 The discovery of additional metrics if the event Multi-Processing Module (MPM) is used.
 For more details see [Apache MPM event](https://httpd.apache.org/docs/current/mod/event.html).
 
-```
+
+```console
 apache.mpm.event.discovery
 ```
+
 Settings:
 
 | Item Setting | Value |
@@ -657,7 +655,7 @@ Preprocessing steps:
 
 The average number of client requests per second.
 
-```
+```console
 apache.bytes[per_request{#SINGLETON}]
 ```
 
@@ -682,7 +680,7 @@ Preprocessing steps:
 
 The number of asynchronous connections in closing state (applicable only to the event MPM).
 
-```
+```console
 apache.connections[async_closing{#SINGLETON}]
 ```
 
@@ -706,7 +704,7 @@ Preprocessing steps:
 
 The number of asynchronous connections in keepalive state (applicable only to the event MPM).
 
-```
+```console
 apache.connections[async_keep_alive{#SINGLETON}]
 ```
 
@@ -730,7 +728,7 @@ Preprocessing steps:
 
 The number of asynchronous connections in writing state (applicable only to the event MPM).
 
-```
+```console
 apache.connections[async_writing{#SINGLETON}]
 ```
 
@@ -754,7 +752,7 @@ Preprocessing steps:
 
 The number of total connections.
 
-```
+```console
 apache.connections[total{#SINGLETON}]
 ```
 
@@ -778,7 +776,7 @@ Preprocessing steps:
 
 The number of asynchronous processes.
 
-```
+```console
 apache.process[num{#SINGLETON}]
 ```
 
@@ -813,7 +811,8 @@ The following Zabbix macros are configured via this template.
 The maximum Apache response time expressed in seconds for a trigger expression.
 
 Default:
-```
+
+```console
 10
 ```
 
@@ -822,7 +821,8 @@ Default:
 Hostname or IP of Apache HTTP server
 
 Default:
-```
+
+```console
 127.0.0.1
 ```
 
@@ -831,7 +831,8 @@ Default:
 The URL path.
 
 Default:
-```
+
+```console
 server-status?auto
 ```
 
@@ -840,7 +841,8 @@ server-status?auto
 The port of the Apache status page.
 
 Default:
-```
+
+```console
 80
 ```
 
@@ -849,7 +851,8 @@ Default:
 The request scheme, which may be either HTTP or HTTPS.
 
 Default:
-```
+
+```console
 http
 ```
 

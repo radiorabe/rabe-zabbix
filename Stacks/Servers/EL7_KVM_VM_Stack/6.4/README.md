@@ -1,12 +1,11 @@
 # Zabbix Template: EL7 KVM VM Stack
 
-![class: stack](https://img.shields.io/badge/class-stack-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: stack](https://img.shields.io/badge/class-stack-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Base stack template for EL7 based virtual machines.
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
-
 
 ## Linked Templates
 

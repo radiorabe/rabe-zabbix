@@ -1,18 +1,15 @@
-# Zabbix Template: EL8 KVM VM Stack
+# Zabbix Template: Apache with TLS by HTTP Stack
 
 ![class: stack](https://img.shields.io/badge/class-stack-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
-Base stack template for EL8 based virtual machines.
-
-This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix).
+Monitor Apache by HTTP and do a Zabbix agent2 based certificate check.
 
 ## Linked Templates
 
 This Zabbix template depends on the following templates.
 
-* EL8 Stack
-* qemu-ga
+* Apache by HTTP
+* Website certificate by Zabbix agent 2
 
 ## License
 

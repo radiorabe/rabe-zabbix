@@ -1,6 +1,6 @@
 # Zabbix Template: timedatectl
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: timedatectl](https://img.shields.io/badge/target-timedatectl-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: timedatectl](https://img.shields.io/badge/target-timedatectl-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Keeps track of the time and date subsystem by running timedatectl status.
 
@@ -15,7 +15,6 @@ for more information about timedatectl.
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-
 ## Items
 
 ### Item: timedatectl: NTP service status
@@ -24,7 +23,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 NTP service status
 
-```
+```console
 rabe.timedatectl.status.ntp_service
 ```
 
@@ -50,7 +49,7 @@ Preprocessing steps:
 
 Is the RTC in local TZ?
 
-```
+```console
 rabe.timedatectl.status.rtc_in_local_tz
 ```
 
@@ -76,7 +75,7 @@ Preprocessing steps:
 
 Is the system clock synchronized?
 
-```
+```console
 rabe.timedatectl.status.system_clock_synchronized
 ```
 
@@ -102,7 +101,7 @@ Preprocessing steps:
 
 Time zone
 
-```
+```console
 rabe.timedatectl.status.time_zone
 ```
 
@@ -128,7 +127,7 @@ Preprocessing steps:
 
 Get output from timedatectl status.
 
-```
+```console
 system.run[/usr/bin/timedatectl show]
 ```
 
@@ -152,7 +151,7 @@ Settings:
 | --------------- | ------ |
 | Priority | WARNING |
 
-```
+```console
 last(/timedatectl/rabe.timedatectl.status.ntp_service)<>1
 ```
 
@@ -167,13 +166,13 @@ Settings:
 | --------------- | ------ |
 | Priority | INFO |
 
-```
+```console
 last(/timedatectl/rabe.timedatectl.status.rtc_in_local_tz)<>0
 ```
 
 ### Trigger: timedatectl: NTP not synchronized
 
-![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
+![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
 NTP is not in sync, check `timedatectl status` for more info.
 Settings:
@@ -182,7 +181,7 @@ Settings:
 | --------------- | ------ |
 | Priority | INFO |
 
-```
+```console
 last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized)<>1
 ```
 
@@ -197,7 +196,7 @@ Settings:
 | --------------- | ------ |
 | Priority | WARNING |
 
-```
+```console
 last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized,{$TIMEDATECTL_MAX_NO_SYNC_TIME})<1
 ```
 
@@ -210,7 +209,8 @@ The following Zabbix macros are configured via this template.
 How long can time be out if sync before we care?
 
 Default:
-```
+
+```console
 60m
 ```
 

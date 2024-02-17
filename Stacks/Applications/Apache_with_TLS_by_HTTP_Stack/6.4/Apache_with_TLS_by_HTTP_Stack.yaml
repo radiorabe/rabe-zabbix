@@ -1,0 +1,21 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 372bbb3675214fcf9ca8f57f2bc2ec77
+      name: Stacks/Applications
+  templates:
+    - uuid: 2446533622e04f2fae25827a3ada0a9a
+      template: 'Apache with TLS by HTTP Stack'
+      name: 'Apache with TLS by HTTP Stack'
+      description: 'Monitor Apache by HTTP and do a Zabbix agent2 based certificate check.'
+      vendor:
+        name: RaBe
+        version: '6.4'
+      templates:
+        - name: 'Apache by HTTP'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Stacks/Applications
+      tags:
+        - tag: class
+          value: stack

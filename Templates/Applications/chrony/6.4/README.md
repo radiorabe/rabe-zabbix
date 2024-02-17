@@ -1,6 +1,6 @@
 # Zabbix Template: chrony
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: chrony](https://img.shields.io/badge/target-chrony-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: chrony](https://img.shields.io/badge/target-chrony-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Keeps track of [chrony](https://chrony-project.org/).
 
@@ -13,7 +13,6 @@ AllowKey=system.run[/usr/bin/chronyc -c tracking]
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-
 ## Items
 
 ### Item: chrony: chronyd process
@@ -22,7 +21,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 
 Get info about chrony processes
 
-```
+```console
 proc.get[chronyd,chrony,,summary]
 ```
 
@@ -39,7 +38,7 @@ Settings:
 
 Sources doing burst (return to offline).
 
-```
+```console
 rabe.chrony.activity.sources_burst_to_offline
 ```
 
@@ -64,7 +63,7 @@ Preprocessing steps:
 
 Sources doing burst (return to online).
 
-```
+```console
 rabe.chrony.activity.sources_burst_to_online
 ```
 
@@ -89,7 +88,7 @@ Preprocessing steps:
 
 Sources offline.
 
-```
+```console
 rabe.chrony.activity.sources_offline
 ```
 
@@ -114,7 +113,7 @@ Preprocessing steps:
 
 Sources online.
 
-```
+```console
 rabe.chrony.activity.sources_online
 ```
 
@@ -139,7 +138,7 @@ Preprocessing steps:
 
 Sources with unknown address.
 
-```
+```console
 rabe.chrony.activity.sources_with_unknown_address
 ```
 
@@ -160,11 +159,11 @@ Preprocessing steps:
 
 ### Item: chronyd: CPU seconds (system)
 
-![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf) ![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
 
 Total CPU seconds (system) of chronyd processes.
 
-```
+```console
 rabe.chrony.chronyd.cputime_system
 ```
 
@@ -187,11 +186,11 @@ Preprocessing steps:
 
 ### Item: chronyd: CPU seconds (user)
 
-![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf) ![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
 
 Total CPU seconds (user) of chronyd processes.
 
-```
+```console
 rabe.chrony.chronyd.cputime_user
 ```
 
@@ -214,11 +213,11 @@ Preprocessing steps:
 
 ### Item: chronyd: Number of processes
 
-![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf) ![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
 
 Number of chronyd processes.
 
-```
+```console
 rabe.chrony.chronyd.processes
 ```
 
@@ -239,11 +238,11 @@ Preprocessing steps:
 
 ### Item: chronyd: Memory usage (RSS)
 
-![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf) ![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
 
 Memory usage of chronyd processes.
 
-```
+```console
 rabe.chrony.chronyd.rss
 ```
 
@@ -264,11 +263,11 @@ Preprocessing steps:
 
 ### Item: chronyd: Swap usage
 
-![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf) ![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
 
 Swap usage of chronyd processes.
 
-```
+```console
 rabe.chrony.chronyd.swap
 ```
 
@@ -289,11 +288,11 @@ Preprocessing steps:
 
 ### Item: chronyd: Number of threads
 
-![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf)![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
+![component: chrony](https://img.shields.io/badge/component-chrony-00c9bf) ![component: chronyd](https://img.shields.io/badge/component-chronyd-00c9bf)
 
 Number of chronyd threads.
 
-```
+```console
 rabe.chrony.chronyd.threads
 ```
 
@@ -318,7 +317,7 @@ Preprocessing steps:
 
 Reference ID.
 
-```
+```console
 rabe.chrony.tracking.reference_id
 ```
 
@@ -344,7 +343,7 @@ Preprocessing steps:
 
 Reference IP.
 
-```
+```console
 rabe.chrony.tracking.reference_ip
 ```
 
@@ -370,7 +369,7 @@ Preprocessing steps:
 
 Ref time (UTC).
 
-```
+```console
 rabe.chrony.tracking.ref_time
 ```
 
@@ -395,7 +394,7 @@ Preprocessing steps:
 
 Skew.
 
-```
+```console
 rabe.chrony.tracking.skew
 ```
 
@@ -421,7 +420,7 @@ Preprocessing steps:
 
 Stratum.
 
-```
+```console
 rabe.chrony.tracking.stratum
 ```
 
@@ -446,7 +445,7 @@ Preprocessing steps:
 
 System time is seconds slow of NTP time
 
-```
+```console
 rabe.chrony.tracking.system_time
 ```
 
@@ -472,7 +471,7 @@ Preprocessing steps:
 
 Results of chronyc -c activity
 
-```
+```console
 system.run[/usr/bin/chronyc -c activity]
 ```
 
@@ -489,7 +488,7 @@ Settings:
 
 Results of chronyc -c tracking
 
-```
+```console
 system.run[/usr/bin/chronyc -c tracking]
 ```
 
@@ -513,7 +512,7 @@ Settings:
 | --------------- | ------ |
 | Priority | HIGH |
 
-```
+```console
 last(/chrony/rabe.chrony.chronyd.processes)<1
 ```
 
@@ -526,7 +525,8 @@ The following Zabbix macros are configured via this template.
 Minimum amount of processes expected to be running at all times.
 
 Default:
-```
+
+```console
 1
 ```
 

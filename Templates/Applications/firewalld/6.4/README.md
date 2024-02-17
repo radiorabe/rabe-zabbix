@@ -1,12 +1,11 @@
 # Zabbix Template: firewalld
 
-![class: software](https://img.shields.io/badge/class-software-00c9bf)![target: firewalld](https://img.shields.io/badge/target-firewalld-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: firewalld](https://img.shields.io/badge/target-firewalld-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Keeps track of [firewalld](https://firewalld.org/).
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix)
-
 
 ## Items
 
@@ -16,7 +15,7 @@ collection](https://github.com/radiorabe/rabe-zabbix)
 
 Get info about firewalld processes
 
-```
+```console
 proc.get[firewalld,root,,summary]
 ```
 
@@ -33,7 +32,7 @@ Settings:
 
 Total CPU seconds (system) of firewalld processes.
 
-```
+```console
 rabe.firewalld.cputime_system
 ```
 
@@ -60,7 +59,7 @@ Preprocessing steps:
 
 Total CPU seconds (user) of firewalld processes.
 
-```
+```console
 rabe.firewalld.cputime_user
 ```
 
@@ -87,7 +86,7 @@ Preprocessing steps:
 
 Number of firewalld processes.
 
-```
+```console
 rabe.firewalld.processes
 ```
 
@@ -112,7 +111,7 @@ Preprocessing steps:
 
 Memory usage of firewalld processes.
 
-```
+```console
 rabe.firewalld.rss
 ```
 
@@ -137,7 +136,7 @@ Preprocessing steps:
 
 Swap usage of firewalld processes.
 
-```
+```console
 rabe.firewalld.swap
 ```
 
@@ -162,7 +161,7 @@ Preprocessing steps:
 
 Number of firewalld threads.
 
-```
+```console
 rabe.firewalld.threads
 ```
 
@@ -194,7 +193,7 @@ Settings:
 | --------------- | ------ |
 | Priority | HIGH |
 
-```
+```console
 last(/firewalld/rabe.firewalld.processes)<{$FIREWALLD.THRESHOLD.MIN_PROC}
 ```
 
@@ -207,7 +206,8 @@ The following Zabbix macros are configured via this template.
 Minimum amount of processes expected to be running at all times.
 
 Default:
-```
+
+```console
 1
 ```
 

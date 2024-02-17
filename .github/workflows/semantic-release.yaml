@@ -1,0 +1,13 @@
+name: Run semantic-release
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+
+jobs:
+  semantic-release:
+    uses: radiorabe/actions/.github/workflows/semantic-release.yaml@v0.20.5
+    secrets:
+      RABE_ITREAKTION_GITHUB_TOKEN: ${{ secrets.RABE_ITREAKTION_GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 # Zabbix Template: Zabbix unsupported items
 
-![class: app](https://img.shields.io/badge/class-app-00c9bf)![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf)![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf)![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: app](https://img.shields.io/badge/class-app-00c9bf) ![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Implementation agnostic monitoring of unsupported items from Zabbix internal.
 
@@ -9,16 +9,15 @@ Used as a mix-in to most low-level stack templates.
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
 
-
 ## Items
 
 ### Item: Unsupported items
 
-![component: zabbix](https://img.shields.io/badge/component-zabbix-00c9bf)![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf)
+![component: zabbix](https://img.shields.io/badge/component-zabbix-00c9bf) ![target: zabbix](https://img.shields.io/badge/target-zabbix-00c9bf)
 
 The number of unsupported items on this host
 
-```
+```console
 zabbix[host,,items_unsupported]
 ```
 
@@ -45,7 +44,7 @@ Settings:
 | --------------- | ------ |
 | Priority | WARNING |
 
-```
+```console
 count(/Zabbix unsupported items/zabbix[host,,items_unsupported],#3,"gt","0")>=1
 ```
 
