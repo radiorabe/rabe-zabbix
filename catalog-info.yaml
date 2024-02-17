@@ -324,7 +324,7 @@ metadata:
   name: zabbix-template-auditd
   title: "Zabbix Template: auditd"
   description: |
-    Keeps track of [auditd](https://people.redhat.com/sgrubb/audit/).
+    Monitoring of [auditd](https://people.redhat.com/sgrubb/audit/).
 
     This template is part of [RaBe's Zabbix template and helpers
     collection](https://github.com/radiorabe/rabe-zabbix).
@@ -438,10 +438,10 @@ metadata:
   name: zabbix-template-firewalld
   title: "Zabbix Template: firewalld"
   description: |
-    Keeps track of [firewalld](https://firewalld.org/).
+    Monitoring of [firewalld](https://firewalld.org/).
 
     This template is part of [RaBe's Zabbix template and helpers
-    collection](https://github.com/radiorabe/rabe-zabbix)
+    collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
     backstage.io/techdocs-ref: dir:./Templates/Applications/firewalld/6.4

@@ -2,10 +2,10 @@
 
 ![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: firewalld](https://img.shields.io/badge/target-firewalld-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
-Keeps track of [firewalld](https://firewalld.org/).
+Monitoring of [firewalld](https://firewalld.org/).
 
 This template is part of [RaBe's Zabbix template and helpers
-collection](https://github.com/radiorabe/rabe-zabbix)
+collection](https://github.com/radiorabe/rabe-zabbix).
 
 ## Items
 
@@ -25,6 +25,31 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
+
+### Item: firewalld: Unit active state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".
+
+```console
+rabe.firewalld.active_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["firewalld.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.ActiveState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
 
 ### Item: firewalld: CPU seconds (system)
 
@@ -79,6 +104,31 @@ Preprocessing steps:
 | JSONPATH | `["$[*].cputime_user.first()"]` |
 | SIMPLE_CHANGE | `[""]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: firewalld: Service load state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".
+
+```console
+rabe.firewalld.load_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["firewalld.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.LoadState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
 
 ### Item: firewalld: Number of processes
 
@@ -180,7 +230,90 @@ Preprocessing steps:
 | JSONPATH | `["$[*].threads.first()"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
+### Item: firewalld: Unit file state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".
+
+```console
+rabe.firewalld.unitfile_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["firewalld.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.UnitFileState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
+
+### Item: firewalld: Uptime
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+Number of seconds since unit entered the active state.
+
+```console
+rabe.firewalld.uptime
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT in s |
+| History | 7d |
+| Source item | `systemd.unit.get["firewalld.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["data = JSON.parse(value);\nif (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {\n      return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;\n}\nreturn null;\n"]` |
+
+### Item: firewalld: unit info
+
+![component: raw](https://img.shields.io/badge/component-raw-00c9bf) ![component: unit](https://img.shields.io/badge/component-unit-00c9bf)
+
+Get unit info from systemd
+
+```console
+systemd.unit.get["firewalld.service"]
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
+
 ## Triggers
+
+### Trigger: firewalld: Service is not running
+
+![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
+
+
+Settings:
+
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | WARNING |
+| Manual close | YES |
+
+```console
+last(/firewalld/rabe.firewalld.active_state)<>1
+```
 
 ### Trigger: firewalld: No running processes
 
@@ -195,6 +328,22 @@ Settings:
 
 ```console
 last(/firewalld/rabe.firewalld.processes)<{$FIREWALLD.THRESHOLD.MIN_PROC}
+```
+
+### Trigger: firewalld: has been restarted
+
+![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
+
+
+Settings:
+
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | INFO |
+| Manual close | YES |
+
+```console
+last(/firewalld/rabe.firewalld.uptime)<=10m
 ```
 
 ## Macros

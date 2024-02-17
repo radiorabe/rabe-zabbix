@@ -2,7 +2,7 @@
 
 ![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: auditd](https://img.shields.io/badge/target-auditd-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
-Keeps track of [auditd](https://people.redhat.com/sgrubb/audit/).
+Monitoring of [auditd](https://people.redhat.com/sgrubb/audit/).
 
 This template is part of [RaBe's Zabbix template and helpers
 collection](https://github.com/radiorabe/rabe-zabbix).
@@ -25,6 +25,31 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
+
+### Item: auditd: Unit active state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".
+
+```console
+rabe.auditd.active_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["auditd.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.ActiveState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
 
 ### Item: auditd: CPU seconds (system)
 
@@ -79,6 +104,31 @@ Preprocessing steps:
 | JSONPATH | `["$[*].cputime_user.first()"]` |
 | SIMPLE_CHANGE | `[""]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: auditd: Service load state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".
+
+```console
+rabe.auditd.load_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["auditd.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.LoadState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
 
 ### Item: auditd: Number of processes
 
@@ -180,7 +230,90 @@ Preprocessing steps:
 | JSONPATH | `["$[*].threads.first()"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
+### Item: auditd: Unit file state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".
+
+```console
+rabe.auditd.unitfile_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["auditd.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.UnitFileState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
+
+### Item: auditd: Uptime
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+Number of seconds since unit entered the active state.
+
+```console
+rabe.auditd.uptime
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT in s |
+| History | 7d |
+| Source item | `systemd.unit.get["auditd.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["data = JSON.parse(value);\nif (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {\n      return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;\n}\nreturn null;\n"]` |
+
+### Item: auditd: unit info
+
+![component: raw](https://img.shields.io/badge/component-raw-00c9bf) ![component: unit](https://img.shields.io/badge/component-unit-00c9bf)
+
+Get unit info from systemd
+
+```console
+systemd.unit.get["auditd.service"]
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
+
 ## Triggers
+
+### Trigger: auditd: Service is not running
+
+![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
+
+
+Settings:
+
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | WARNING |
+| Manual close | YES |
+
+```console
+last(/auditd/rabe.auditd.active_state)<>1
+```
 
 ### Trigger: auditd: No running processes
 
@@ -195,6 +328,22 @@ Settings:
 
 ```console
 last(/auditd/rabe.auditd.processes)<{$AUDITD.THRESHOLD.MIN_PROC}
+```
+
+### Trigger: auditd: has been restarted
+
+![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
+
+
+Settings:
+
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | INFO |
+| Manual close | YES |
+
+```console
+last(/auditd/rabe.auditd.uptime)<=10m
 ```
 
 ## Macros

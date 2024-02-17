@@ -26,6 +26,31 @@ Settings:
 | Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
 
+### Item: tuned: Unit active state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".
+
+```console
+rabe.tuned.active_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["tuned.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.ActiveState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
+
 ### Item: tuned: CPU seconds (system)
 
 ![component: tuned](https://img.shields.io/badge/component-tuned-00c9bf)
@@ -79,6 +104,31 @@ Preprocessing steps:
 | JSONPATH | `["$[*].cputime_user.first()"]` |
 | SIMPLE_CHANGE | `[""]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
+
+### Item: tuned: Service load state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".
+
+```console
+rabe.tuned.load_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["tuned.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.LoadState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
 
 ### Item: tuned: Number of processes
 
@@ -180,7 +230,90 @@ Preprocessing steps:
 | JSONPATH | `["$[*].threads.first()"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["5m"]` |
 
+### Item: tuned: Unit file state
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".
+
+```console
+rabe.tuned.unitfile_state
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| History | 7d |
+| Source item | `systemd.unit.get["tuned.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JSONPATH | `["$.UnitFileState.state"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
+
+### Item: tuned: Uptime
+
+![component: service](https://img.shields.io/badge/component-service-00c9bf)
+
+Number of seconds since unit entered the active state.
+
+```console
+rabe.tuned.uptime
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | FLOAT in s |
+| History | 7d |
+| Source item | `systemd.unit.get["tuned.service"]` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| JAVASCRIPT | `["data = JSON.parse(value);\nif (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {\n      return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;\n}\nreturn null;\n"]` |
+
+### Item: tuned: unit info
+
+![component: raw](https://img.shields.io/badge/component-raw-00c9bf) ![component: unit](https://img.shields.io/badge/component-unit-00c9bf)
+
+Get unit info from systemd
+
+```console
+systemd.unit.get["tuned.service"]
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
+| Value type | TEXT |
+
 ## Triggers
+
+### Trigger: tuned: Service is not running
+
+![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
+
+
+Settings:
+
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | WARNING |
+| Manual close | YES |
+
+```console
+last(/tuned/rabe.tuned.active_state)<>1
+```
 
 ### Trigger: tuned: No running processes
 
@@ -195,6 +328,22 @@ Settings:
 
 ```console
 last(/tuned/rabe.tuned.processes)<{$TUNED.THRESHOLD.MIN_PROC}
+```
+
+### Trigger: tuned: has been restarted
+
+![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
+
+
+Settings:
+
+| Trigger Setting | Values |
+| --------------- | ------ |
+| Priority | INFO |
+| Manual close | YES |
+
+```console
+last(/tuned/rabe.tuned.uptime)<=10m
 ```
 
 ## Macros

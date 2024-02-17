@@ -29,6 +29,36 @@ zabbix_export:
           tags:
             - tag: component
               value: raw
+        - uuid: 25a88fbd637b460eb5b4c387c35481ce
+          name: 'rpc.gssd: Unit active state'
+          type: DEPENDENT
+          key: rabe.rpc.gssd.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["rpc-gssd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 95f68a5df31047c4a2d677cb130288af
+              expression: last(/rpc.gssd/rabe.rpc.gssd.active_state)<>1
+              name: 'rpc.gssd: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
         - uuid: 2cd32fd6e6b64ed5aa3a0edc391bf436
           name: 'rpc.gssd: CPU seconds (system)'
           type: DEPENDENT
@@ -75,6 +105,27 @@ zabbix_export:
           tags:
             - tag: component
               value: rpcgssd
+        - uuid: 013b833e86bf4626835be2d058f5284f
+          name: 'rpc.gssd: Service load state'
+          type: DEPENDENT
+          key: rabe.rpc.gssd.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["rpc-gssd.service"]'
+          tags:
+            - tag: component
+              value: service
         - uuid: 600747130717406d96d09850419d282f
           name: 'rpc.gssd: Number of processes'
           type: DEPENDENT
@@ -100,6 +151,9 @@ zabbix_export:
               name: 'rpc.gssd: No running processes'
               priority: HIGH
               description: 'No running rpc.gssd processes.'
+              dependencies:
+                - name: 'rpc.gssd: Service is not running'
+                  expression: last(/rpc.gssd/rabe.rpc.gssd.active_state)<>1
               tags:
                 - tag: scope
                   value: availability
@@ -162,6 +216,72 @@ zabbix_export:
           tags:
             - tag: component
               value: rpcgssd
+        - uuid: 1e1d8a5d4fb341388789d2e62175370b
+          name: 'rpc.gssd: Unit file state'
+          type: DEPENDENT
+          key: rabe.rpc.gssd.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["rpc-gssd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: cdf83090d37a4ab4995d460956885916
+          name: 'rpc.gssd: Uptime'
+          type: DEPENDENT
+          key: rabe.rpc.gssd.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: s
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["rpc-gssd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 37b70a412ae7483d91db35a192a12f0e
+              expression: last(/rpc.gssd/rabe.rpc.gssd.uptime)<=10m
+              name: 'rpc.gssd: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: df8f87350ceb4880b6ae8b95ce2dd420
+          name: 'rpc.gssd: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["rpc-gssd.service"]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
       tags:
         - tag: class
           value: software
@@ -176,7 +296,54 @@ zabbix_export:
           name: 'rpc.gssd: Overview'
           pages:
             - widgets:
+                - type: item
+                  width: '8'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
                 - type: graph
+                  'y': '4'
                   width: '12'
                   height: '5'
                   fields:
@@ -189,7 +356,7 @@ zabbix_export:
                       name: source_type
                       value: '1'
                 - type: graph
-                  'y': '5'
+                  'y': '9'
                   width: '12'
                   height: '5'
                   fields:
@@ -201,8 +368,32 @@ zabbix_export:
                     - type: INTEGER
                       name: source_type
                       value: '1'
+                - type: item
+                  x: '8'
+                  width: '6'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
                 - type: graph
                   x: '12'
+                  'y': '4'
                   width: '12'
                   height: '5'
                   fields:
@@ -216,7 +407,7 @@ zabbix_export:
                       value: '1'
                 - type: graph
                   x: '12'
-                  'y': '5'
+                  'y': '9'
                   width: '12'
                   height: '5'
                   fields:
@@ -228,3 +419,174 @@ zabbix_export:
                     - type: INTEGER
                       name: source_type
                       value: '1'
+                - type: item
+                  x: '14'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '14'
+                  'y': '2'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '20'
+                  width: '4'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: rpc.gssd
+                        key: rabe.rpc.gssd.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+      valuemaps:
+        - uuid: 3e75b70aa1a4490097f155444d90540d
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: fdba5e0122994f50b9d3f5765a9c715f
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: d3f9d5b008de4827a92f3d4dda9c5e5b
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked
