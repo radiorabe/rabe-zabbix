@@ -12,6 +12,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 This Zabbix template depends on the following templates.
 
 * auditd
+* candlepin-rhsmcertd
 * certmonger
 * Cronie
 * firewalld

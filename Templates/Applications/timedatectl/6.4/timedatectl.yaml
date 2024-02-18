@@ -125,6 +125,9 @@ zabbix_export:
               name: 'timedatectl: NTP not synchronized'
               priority: INFO
               description: 'NTP is not in sync, check `timedatectl status` for more info.'
+              dependencies:
+                - name: 'timedatectl: NTP not synchronized for more than {$TIMEDATECTL_MAX_NO_SYNC_TIME}'
+                  expression: 'last(/timedatectl/rabe.timedatectl.status.system_clock_synchronized,{$TIMEDATECTL_MAX_NO_SYNC_TIME})<1'
               tags:
                 - tag: scope
                   value: availability

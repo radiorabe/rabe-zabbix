@@ -19,9 +19,12 @@
       - template_name: "EL9 Stack"
       - template_name: "firewalld"
       - template_name: "gssproxy"
+      - template_name: "Nginx with TLS by HTTP Stack"
       - template_name: "qemu-ga"
       - template_name: "rsyslog"
       - template_name: "rpc.gssd"
+      - template_name: "Songticker"
+      - template_name: "Songticker Stack"
       - template_name: "sssd"
       - template_name: "systemd-journald"
       - template_name: "systemd-logind"
@@ -268,7 +271,7 @@
 
               ## Contributing
               
-              See [CONTRIBUTING.md](./CONTRIBUTING.md) for our contributor documentation.
+              See [CONTRIBUTING.md](./CONTRIBUTING.md) if you want to contribute fixes or templates.
 
               ## Previous Versions
 

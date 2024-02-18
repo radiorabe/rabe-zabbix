@@ -1,8 +1,16 @@
-# Contributing to RaBe Zabbix
+# Contributing to the RaBe Zabbix Templates
 
-🚧 Refactor underway! Most of the instructions here are for 3.0 templates! 🚧
+Hi and thanks for wanting to contribute to the RaBe Zabbix templates.
+
+* Please [create an issue](https://github.com/radiorabe/rabe-zabbix/issues) if you found a bug
+* [Start a discussion](https://github.com/radiorabe/rabe-zabbix/discussions) if you need general help
+* Or check out the conventions and documentation in this file to add templates
+
+Keep in mind that this repository is the source of truth for our Zabbix installation, hence we tend to be cautious when merging changes as to now have them impact our Zabbix installation.
 
 ## Conventions
+
+🚧 Refactor underway! These conventions were written with Zabbix 3.0 in mind. 🚧
 
 ### Template conventions
 

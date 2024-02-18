@@ -127,6 +127,52 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4/Nginx_with_TLS_by_HTTP_Stack.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Nginx_with_TLS_by_HTTP_Stack
+  title: "Zabbix Template: Nginx with TLS by HTTP Stack"
+  description: |
+    Monitor Nginx by HTTP and do a Zabbix agent2 based certificate check.
+  annotations:
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4
+      title: GitHub
+      icon: github
+  tags: [stack]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Stacks/Applications/Songticker_Stack/6.4/Songticker_Stack.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Songticker_Stack
+  title: "Zabbix Template: Songticker Stack"
+  description: |
+    Monitoring for our Songticker
+  annotations:
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/Songticker_Stack/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Songticker_Stack/6.4
+      title: GitHub
+      icon: github
+  tags: [stack]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Stacks/Applications/systemd_Stack/6.4/systemd_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -586,6 +632,29 @@ metadata:
       title: GitHub
       icon: github
   tags: [software, rsyslog]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
+# Templates/Applications/Songticker/6.4/Songticker.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Songticker
+  title: "Zabbix Template: Songticker"
+  description: |
+    Check if the songticker is getting regular updates
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/Songticker/6.4
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Songticker/6.4
+      title: GitHub
+      icon: github
+  tags: [software, songticker]
 spec:
   type: zabbix-template
   lifecycle: experimental

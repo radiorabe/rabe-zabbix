@@ -26,6 +26,8 @@ inheritance problems.
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
 | Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4) |  |
+| Nginx with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4) |  |
+| Songticker Stack |  | [✅](./Stacks/Applications/Songticker_Stack/6.4) |  |
 | systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) |  |
 
 ### Stacks: Network devices
@@ -87,6 +89,7 @@ inheritance problems.
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
 | rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) |  |
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |
+| Songticker |  | [✅](./Templates/Applications/Songticker/6.4) |  |
 | sssd |  | [✅](./Templates/Applications/sssd/6.4) |  |
 | systemd-journald |  | [✅](./Templates/Applications/systemd-journald/6.4) |  |
 | systemd-logind |  | [✅](./Templates/Applications/systemd-logind/6.4) |  |
@@ -162,7 +165,7 @@ on old distros, their timedatectl stays unmonitored).
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for our contributor documentation.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) if you want to contribute fixes or templates.
 
 ## Previous Versions
 
