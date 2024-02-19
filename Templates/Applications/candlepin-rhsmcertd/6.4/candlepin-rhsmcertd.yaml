@@ -1,0 +1,595 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: a94da67f2f9d42a5b2daa4f25effa56e
+      template: candlepin-rhsmcertd
+      name: candlepin-rhsmcertd
+      description: |
+        Monitoring of [candlepin-rhsmcertd](https://github.com/candlepin/subscription-manager/blob/main/src/daemons/rhsmcertd.c).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 6293b90697374a2aa898f1c4078b32a7
+          name: 'candlepin-rhsmcertd: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[rhsmcertd,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about candlepin-rhsmcertd processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: ed309ddc6e86458d8106370124154871
+          name: 'candlepin-rhsmcertd: Unit active state'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["rhsmcertd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 6c9112436d4e47c0ab598d5919e20a40
+              expression: last(/candlepin-rhsmcertd/rabe.candlepin-rhsmcertd.active_state)<>1
+              name: 'candlepin-rhsmcertd: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: b16abb57e2a74b2f9dd2718ff751a033
+          name: 'candlepin-rhsmcertd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of candlepin-rhsmcertd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rhsmcertd,root,,summary]'
+          tags:
+            - tag: component
+              value: candlepin-rhsmcertd
+        - uuid: b51053e289ac4dc98759e189cdadb640
+          name: 'candlepin-rhsmcertd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of candlepin-rhsmcertd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rhsmcertd,root,,summary]'
+          tags:
+            - tag: component
+              value: candlepin-rhsmcertd
+        - uuid: 5fc7415bc7ab40be811a724f1b8ade77
+          name: 'candlepin-rhsmcertd: Service load state'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["rhsmcertd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 213663b17a314a9a8773abc1e7174a98
+          name: 'candlepin-rhsmcertd: Number of processes'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of candlepin-rhsmcertd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rhsmcertd,root,,summary]'
+          tags:
+            - tag: component
+              value: candlepin-rhsmcertd
+          triggers:
+            - uuid: 66350d13cecf42458a11032e556e8ed0
+              expression: 'last(/candlepin-rhsmcertd/rabe.candlepin-rhsmcertd.processes)<{$CANDLEPINRHSMCERTD.THRESHOLD.MIN_PROC}'
+              name: 'candlepin-rhsmcertd: No running processes'
+              priority: HIGH
+              description: 'No running candlepin-rhsmcertd processes.'
+              dependencies:
+                - name: 'candlepin-rhsmcertd: Service is not running'
+                  expression: last(/candlepin-rhsmcertd/rabe.candlepin-rhsmcertd.active_state)<>1
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 6dd8934faa20481c89b5fc695fa74477
+          name: 'candlepin-rhsmcertd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of candlepin-rhsmcertd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rhsmcertd,root,,summary]'
+          tags:
+            - tag: component
+              value: candlepin-rhsmcertd
+        - uuid: 2321af48d75a4467ac066a615bc3fc71
+          name: 'candlepin-rhsmcertd: Swap usage'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of candlepin-rhsmcertd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rhsmcertd,root,,summary]'
+          tags:
+            - tag: component
+              value: candlepin-rhsmcertd
+        - uuid: c95c23d2ad9d4dc2ab49d6ea295317b9
+          name: 'candlepin-rhsmcertd: Number of threads'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of candlepin-rhsmcertd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[rhsmcertd,root,,summary]'
+          tags:
+            - tag: component
+              value: candlepin-rhsmcertd
+        - uuid: f56871bf80d0488d9d453419c8a19121
+          name: 'candlepin-rhsmcertd: Unit file state'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["rhsmcertd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 2a10fbe27e274c05914a18702d8c52bb
+          name: 'candlepin-rhsmcertd: Uptime'
+          type: DEPENDENT
+          key: rabe.candlepin-rhsmcertd.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: uptime
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["rhsmcertd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 061481c49fcd44b68fe03db822cf7b94
+              expression: last(/candlepin-rhsmcertd/rabe.candlepin-rhsmcertd.uptime)<=10m
+              name: 'candlepin-rhsmcertd: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 7c7d45696d4b4ffbab8b3b9e0f4845f8
+          name: 'candlepin-rhsmcertd: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["rhsmcertd.service"]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: candlepin-rhsmcertd
+      macros:
+        - macro: '{$CANDLEPINRHSMCERTD.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
+      dashboards:
+        - uuid: 16873a85cc3048cc9fc63cf9d379cf2d
+          name: 'candlepin-rhsmcertd: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '8'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
+                - type: graph
+                  'y': '4'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '9'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '8'
+                  width: '6'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
+                - type: graph
+                  x: '12'
+                  'y': '4'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '9'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '14'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '14'
+                  'y': '2'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '20'
+                  width: '4'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: candlepin-rhsmcertd
+                        key: rabe.candlepin-rhsmcertd.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+      valuemaps:
+        - uuid: 66001957246547a191dc26a467ae1b2e
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: 49039e691c834b498b503dc8311fea26
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: c5c2c1e12e2c4562953ec17087da697b
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked

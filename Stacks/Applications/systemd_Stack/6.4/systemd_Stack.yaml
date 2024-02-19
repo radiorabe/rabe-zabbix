@@ -1,0 +1,27 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 372bbb3675214fcf9ca8f57f2bc2ec77
+      name: Stacks/Applications
+  templates:
+    - uuid: 77615056d84f4c289aa65a0610216f9e
+      template: 'systemd Stack'
+      name: 'systemd Stack'
+      description: |
+        The [systemd](https://systemd.io) combines all the pieces of
+        systemd that ususally run on a system host.
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      templates:
+        - name: systemd-journald
+        - name: systemd-logind
+        - name: systemd-udevd
+      groups:
+        - name: Stacks/Applications
+      tags:
+        - tag: class
+          value: stack

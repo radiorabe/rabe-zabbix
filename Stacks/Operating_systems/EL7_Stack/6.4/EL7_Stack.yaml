@@ -1,0 +1,40 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: e3797825aba640d9811af437183dab65
+      name: 'Stacks/Operating systems'
+  templates:
+    - uuid: 6894a14a44694510997ee950755a479a
+      template: 'EL7 Stack'
+      name: 'EL7 Stack'
+      description: |
+        Base stack template for CentOS 7 based systems.
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      templates:
+        - name: auditd
+        - name: candlepin-rhsmcertd
+        - name: certmonger
+        - name: Cronie
+        - name: firewalld
+        - name: gssproxy
+        - name: 'Linux by Zabbix agent active'
+        - name: rpc.gssd
+        - name: rsyslog
+        - name: sssd
+        - name: 'systemd Stack'
+        - name: tuned
+        - name: 'Zabbix unsupported items'
+      groups:
+        - name: 'Stacks/Operating systems'
+      tags:
+        - tag: class
+          value: stack
+      macros:
+        - macro: '{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}'
+          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|abrt-vmcore\.service|dmraid-activation\.service|abrt-xorg\.service|rhel-configure\.service|systemd-readahead-collect\.service|rhel-autorelabel\.service|irqbalance\.service|rhel-loadmodules\.service|systemd-readahead-replay\.service|rhel-autorelabel-mark\.service|timedatex\.service)$
+          description: 'Filter of systemd service units by name'

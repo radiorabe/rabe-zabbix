@@ -1,0 +1,595 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 0093431a499f44038cc53fb8add37607
+      template: tuned
+      name: tuned
+      description: |
+        Monitoring of [tuned](https://tuned-project.org/).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: e0742602ab444139bcafa095b2b89e24
+          name: 'tuned: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[tuned,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about tuned processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: c7b6f51bbe514e4c925b4bc598903079
+          name: 'tuned: Unit active state'
+          type: DEPENDENT
+          key: rabe.tuned.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["tuned.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: f3e38b42afb345d08de7d82d399714c9
+              expression: last(/tuned/rabe.tuned.active_state)<>1
+              name: 'tuned: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 6ca6b762c1784a02ae25870f3e4e5f3e
+          name: 'tuned: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.tuned.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of tuned processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[tuned,root,,summary]'
+          tags:
+            - tag: component
+              value: tuned
+        - uuid: 9efc7e6794754e3b9015b3b7fa97c0ad
+          name: 'tuned: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.tuned.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of tuned processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[tuned,root,,summary]'
+          tags:
+            - tag: component
+              value: tuned
+        - uuid: 2605f3fa64e64dcaa43047b5eb3c9d7c
+          name: 'tuned: Service load state'
+          type: DEPENDENT
+          key: rabe.tuned.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["tuned.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 8913fbd5c5ca456d9724bdb315dbf99f
+          name: 'tuned: Number of processes'
+          type: DEPENDENT
+          key: rabe.tuned.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of tuned processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[tuned,root,,summary]'
+          tags:
+            - tag: component
+              value: tuned
+          triggers:
+            - uuid: cdfbb7c4e736486583ce79b51764f4e5
+              expression: 'last(/tuned/rabe.tuned.processes)<{$TUNED.THRESHOLD.MIN_PROC}'
+              name: 'tuned: No running processes'
+              priority: HIGH
+              description: 'No running tuned processes.'
+              dependencies:
+                - name: 'tuned: Service is not running'
+                  expression: last(/tuned/rabe.tuned.active_state)<>1
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 15f6e52e00514036ad1f70083f69130e
+          name: 'tuned: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.tuned.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of tuned processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[tuned,root,,summary]'
+          tags:
+            - tag: component
+              value: tuned
+        - uuid: 289ff0de70cf4872aa01e22e90894834
+          name: 'tuned: Swap usage'
+          type: DEPENDENT
+          key: rabe.tuned.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of tuned processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[tuned,root,,summary]'
+          tags:
+            - tag: component
+              value: tuned
+        - uuid: 535cb5ec169d49d4a6f34eb57cbf2102
+          name: 'tuned: Number of threads'
+          type: DEPENDENT
+          key: rabe.tuned.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of tuned threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[tuned,root,,summary]'
+          tags:
+            - tag: component
+              value: tuned
+        - uuid: c6fca3398244461dabd4eeeaa99120fe
+          name: 'tuned: Unit file state'
+          type: DEPENDENT
+          key: rabe.tuned.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["tuned.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 9b4ebb5f0c5a4edc8176a05c2239f2ef
+          name: 'tuned: Uptime'
+          type: DEPENDENT
+          key: rabe.tuned.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: uptime
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["tuned.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 44fd0ebf6c2c4d66b5b96c72db51ca99
+              expression: last(/tuned/rabe.tuned.uptime)<=10m
+              name: 'tuned: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 3ce7ade3df2f4fb7b9922f414a153316
+          name: 'tuned: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["tuned.service"]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: tuned
+      macros:
+        - macro: '{$TUNED.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
+      dashboards:
+        - uuid: c76c64463c3c4170a40c224c04b3ff4c
+          name: 'tuned: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '8'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
+                - type: graph
+                  'y': '4'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '9'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '8'
+                  width: '6'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
+                - type: graph
+                  x: '12'
+                  'y': '4'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '9'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '14'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '14'
+                  'y': '2'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '20'
+                  width: '4'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: tuned
+                        key: rabe.tuned.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+      valuemaps:
+        - uuid: 84485564643f47f7bb35597bd50dcf07
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: 030bee1984a74b61a67b87955ce06429
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: f3b540edc2224576890ef87e8dd7fbb5
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked

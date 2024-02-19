@@ -1,0 +1,42 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: e3797825aba640d9811af437183dab65
+      name: 'Stacks/Operating systems'
+  templates:
+    - uuid: 457a175a097c4d0199dbf18c4b6a1d51
+      template: 'EL8 Stack'
+      name: 'EL8 Stack'
+      description: |
+        Base stack template for CentOS 8 Stream based systems.
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      templates:
+        - name: auditd
+        - name: candlepin-rhsmcertd
+        - name: certmonger
+        - name: chrony
+        - name: Cronie
+        - name: firewalld
+        - name: gssproxy
+        - name: 'Linux by Zabbix agent active'
+        - name: rpc.gssd
+        - name: rsyslog
+        - name: sssd
+        - name: 'systemd Stack'
+        - name: timedatectl
+        - name: tuned
+        - name: 'Zabbix unsupported items'
+      groups:
+        - name: 'Stacks/Operating systems'
+      tags:
+        - tag: class
+          value: stack
+      macros:
+        - macro: '{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}'
+          value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service|loadmodules\.service|timedatex\.service)$
+          description: 'Filter of systemd service units by name'

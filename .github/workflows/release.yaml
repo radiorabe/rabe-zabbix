@@ -1,0 +1,11 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  pull_request:
+
+jobs:
+  release-container:
+    uses: radiorabe/actions/.github/workflows/release-mkdocs.yaml@v0.20.5

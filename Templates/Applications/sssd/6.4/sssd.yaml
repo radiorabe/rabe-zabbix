@@ -1,0 +1,595 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 16b1c17264c0460d92c29aa6b8adb8d1
+      template: sssd
+      name: sssd
+      description: |
+        Monitoring of [sssd](https://sssd.io).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '6.4'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: f794b260ca324da69dd3b551a94d617d
+          name: 'sssd: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[sssd,root,,summary]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get info about sssd processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: dd211793eab148abba1d130b47e8bf02
+          name: 'sssd: Unit active state'
+          type: DEPENDENT
+          key: rabe.sssd.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["sssd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 2b195da3505041d2b9167c89ca754576
+              expression: last(/sssd/rabe.sssd.active_state)<>1
+              name: 'sssd: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 42a91aec255a4c42bae147c8588bd660
+          name: 'sssd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.sssd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 95cb13a3d1cf4aae85429a3b3d29a01f
+          name: 'sssd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.sssd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 630537b42c5c40049a0ae2859e03b723
+          name: 'sssd: Service load state'
+          type: DEPENDENT
+          key: rabe.sssd.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["sssd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 65ba0f18eac0408cae1afee4f4b53046
+          name: 'sssd: Number of processes'
+          type: DEPENDENT
+          key: rabe.sssd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+          triggers:
+            - uuid: c47f07f0cd5b437082c2293f17812b6b
+              expression: 'last(/sssd/rabe.sssd.processes)<{$SSSD.THRESHOLD.MIN_PROC}'
+              name: 'sssd: No running processes'
+              priority: HIGH
+              description: 'No running sssd processes.'
+              dependencies:
+                - name: 'sssd: Service is not running'
+                  expression: last(/sssd/rabe.sssd.active_state)<>1
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 4b7f1921c57f4b0c8c0f970e3674c4b7
+          name: 'sssd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.sssd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 7c7eaf25cf29483db288a7a06b832944
+          name: 'sssd: Swap usage'
+          type: DEPENDENT
+          key: rabe.sssd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of sssd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: b55d87f2113b4a28a53ac8dd5aeeefa7
+          name: 'sssd: Number of threads'
+          type: DEPENDENT
+          key: rabe.sssd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of sssd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[sssd,root,,summary]'
+          tags:
+            - tag: component
+              value: sssd
+        - uuid: 47cfb060a88c45728d2aa5a8f903e961
+          name: 'sssd: Unit file state'
+          type: DEPENDENT
+          key: rabe.sssd.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["sssd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: a2f3779174da4f03891e01eae14c9264
+          name: 'sssd: Uptime'
+          type: DEPENDENT
+          key: rabe.sssd.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: uptime
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["sssd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: cc585bbbe101460b923cea1b4a803cbc
+              expression: last(/sssd/rabe.sssd.uptime)<=10m
+              name: 'sssd: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 95e635d0590843b68bd927e513f15619
+          name: 'sssd: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["sssd.service"]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: sssd
+      macros:
+        - macro: '{$SSSD.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
+      dashboards:
+        - uuid: b7b75193454546dc98336f500ae4ff49
+          name: 'sssd: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '8'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
+                - type: graph
+                  'y': '4'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.cputime_user
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '9'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.rss
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '8'
+                  width: '6'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
+                - type: graph
+                  x: '12'
+                  'y': '4'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.cputime_system
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  'y': '9'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.swap
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '14'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '14'
+                  'y': '2'
+                  width: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.color.2
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.threshold.2
+                      value: '2'
+                - type: item
+                  x: '20'
+                  width: '4'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: adv_conf
+                      value: '1'
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: sssd
+                        key: rabe.sssd.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.color.0
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.color.1
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.threshold.0
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.threshold.1
+                      value: '1'
+      valuemaps:
+        - uuid: 63dc6ca94ce84eff8a7352fd2d414382
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: c479dbf0f1a64a209559d041ba5f25e3
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: 4df42b6777264d218b97878c10dadbdd
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked

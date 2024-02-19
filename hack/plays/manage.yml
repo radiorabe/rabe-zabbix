@@ -1,0 +1,686 @@
+---
+- name: 'RaBe Zabbix Templator'
+  hosts: [localhost]
+
+  vars:
+    target_version: '6.4'
+    rabe_zabbix_templates:
+      - template_name: "Apache with TLS by HTTP Stack"
+      - template_name: "auditd"
+      - template_name: "candlepin-rhsmcertd"
+      - template_name: "certmonger"
+      - template_name: "chrony"
+      - template_name: "Cronie"
+      - template_name: "EL7 KVM VM Stack"
+      - template_name: "EL7 Stack"
+      - template_name: "EL8 KVM VM Stack"
+      - template_name: "EL8 Stack"
+      - template_name: "EL9 KVM VM Stack"
+      - template_name: "EL9 Stack"
+      - template_name: "firewalld"
+      - template_name: "gssproxy"
+      - template_name: "Nginx with TLS by HTTP Stack"
+      - template_name: "qemu-ga"
+      - template_name: "rsyslog"
+      - template_name: "rpc.gssd"
+      - template_name: "Songticker"
+      - template_name: "Songticker Stack"
+      - template_name: "sssd"
+      - template_name: "systemd-journald"
+      - template_name: "systemd-logind"
+      - template_name: "systemd-udevd"
+      - template_name: "systemd Stack"
+      - template_name: "timedatectl"
+      - template_name: "tuned"
+      - template_name: "Zabbix unsupported items"
+    upstream_templates:
+      - template_name: "Apache by HTTP"
+        upstream: "app/apache_http/template_app_apache_http.yaml"
+      - template_name: "Nginx by HTTP"
+        upstream: "app/nginx_http/template_app_nginx_http.yaml"
+    __: # items below are "commented" :)
+      - template_name: "Website certificate by Zabbix agent 2"
+        upstream: "app/certificate_agent2/template_app_certificate_agent2.yaml"
+      - template_name: "Linux by Zabbix agent active"
+        upstream: "os/linux_active/template_os_linux_active.yaml"
+      - template_name: "Netgear Fastpath by SNMP"
+        upstream: "net/netgear_snmp/template_net_netgear_snmp.yaml"
+      - template_name: "Systemd by Zabbix agent 2"
+        upstream: "app/systemd/template_app_systemd.yaml"
+
+    ansible_host: 'vm-0040.service.int.rabe.ch'
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: true
+    ansible_zabbix_url_path: ''
+    ansible_zabbix_auth_key: ''
+
+    __url_prefix: "https://raw.githubusercontent.com/zabbix/zabbix/release/"
+
+  tasks:
+    - name: 'RaBe Zabbix Templator : Get RaBe Zabbix Templates from Zabbix'
+      when: ansible_zabbix_auth_key != ''
+      block:
+        - name: 'RaBe Zabbix Templator : Fetch RaBe Templates'
+          community.zabbix.zabbix_template_info:
+            template_name: '{{ request.template_name }}'
+            format: yaml
+            omit_date: no
+          loop: '{{ rabe_zabbix_templates }}'
+          loop_control:
+            loop_var: request
+          register: templates
+
+        - name: 'RaBe Zabbix Templator : Create Template Directory'
+          ansible.builtin.file:
+            state: directory
+            path: '{{ (item.template_yaml | from_yaml).zabbix_export.template_groups[0].name | replace(" ", "_") }}/{{ item.request.template_name | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}'
+          loop: '{{ templates.results | rejectattr("upstream", "defined") }}'
+
+        - name: 'RaBe Zabbix Templator : Write Template'
+          ansible.builtin.copy:
+            dest: '{{ (item.template_yaml | from_yaml).zabbix_export.template_groups[0].name | replace(" ", "_") }}/{{ item.request.template_name | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}/{{ item.request.template_name | replace(" ", "_") }}.yaml'
+            content: '{{ item.template_yaml }}'
+          loop: '{{ templates.results | rejectattr("upstream", "defined") }}'
+
+
+    - name: 'RaBe Zabbix Templator : Get Upsteam Zabbix Templates from Zabbix'
+      when: ansible_zabbix_auth_key != ''
+      block:
+        - name: 'RaBe Zabbix Templator : Fetch Upstream Templates'
+          community.zabbix.zabbix_template_info:
+            template_name: '{{ request.template_name }}'
+            format: yaml
+            omit_date: no
+          loop: '{{ upstream_templates }}'
+          loop_control:
+            loop_var: request
+          register: templates
+
+        - name: 'RaBe Zabbix Templator : Create Template Directory'
+          ansible.builtin.file:
+            state: directory
+            path: 'Overrides/{{ item.request.template_name | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}'
+          with_items: '{{ templates.results }}'
+
+        - name: 'RaBe Zabbix Templator : Write Template'
+          ansible.builtin.copy:
+            dest: 'Overrides/{{ item.request.template_name | replace(" ", "_") }}/{{ (item.template_yaml | from_yaml).zabbix_export.version }}/{{ item.request.template_name | replace(" ", "_") }}.yaml'
+            content: '{{ item.template_yaml }}'
+          with_items: '{{ templates.results }}'
+
+    - name: 'RaBe Zabbix Templator : Render DIFF.md for Upsteam Zabbix Templates'
+      block:
+        - name: 'RaBe Zabbix Templator : Generate diff'
+          ansible.utils.fact_diff:
+            before: '{{ lookup("ansible.builtin.url", __url_prefix + target_version + "/templates/" + item.upstream, split_lines=False) | trim }}'
+            after: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/" + ( item.template_name | replace(" ", "_") ) + ".yaml") | trim }}'
+          loop: '{{ upstream_templates }}'
+          changed_when: false
+          register: diff
+
+        - name: 'RaBe Zabbix Templator : Write DIFF.md'
+          loop: '{{ diff.results | rejectattr("diff_text", "equalto", "") }}'
+          loop_control:
+            loop_var: result
+          ansible.builtin.copy:
+            dest: 'Overrides/{{ result.item.template_name | replace(" ", "_") }}/{{ target_version }}/DIFF.md'
+            content: |
+              # Compare Rabe Override with Upstream Template
+
+              Original: [{{ result.item.template_name }}]({{ __url_prefix + target_version }}/templates/{{ result.item.upstream }})
+
+              ## Diff
+
+              ```diff
+              {{ result.diff_text  }}
+              ```
+
+        - name: 'RaBe Zabbix Templator : Remove result with missing diff'
+          loop: '{{ diff.results | selectattr("diff_text", "equalto", "") }}'
+          loop_control:
+            loop_var: result
+          ansible.builtin.file:
+            state: absent
+            path: 'Overrides/{{ result.item.template_name | replace(" ", "_") }}/{{ target_version }}/'
+
+        - name: 'RaBe Zabbix Templator : Assert non-empty diff'
+          loop: '{{ diff.results }}'
+          loop_control:
+            loop_var: result
+          ansible.builtin.assert:
+            quiet: true
+            that:
+              - result.diff_text != ""
+            fail_msg: 'The template "{{ result.item.template_name }}" does not contain a diff, please remove it'
+
+    - name: 'RaBe Zabbix Templator : Top-Level README.md file'
+      block:
+        - name: 'RaBe Zabbix Templator : Find Stacks'
+          ansible.builtin.find:
+            path: "Stacks"
+            file_type: "directory"
+            depth: 3
+            recurse: yes
+          register: stacks
+
+        - name: 'RaBe Zabbix Templator : Find Templates'
+          ansible.builtin.find:
+            path: "Templates"
+            file_type: "directory"
+            depth: 3
+            recurse: yes
+          register: templates
+
+        - name: 'RaBe Zabbix Templator : Find Overrides'
+          ansible.builtin.find:
+            path: "Overrides"
+            file_type: "directory"
+            depth: 2
+            recurse: yes
+          register: overrides
+
+        - name: "RaBe Zabbix Templator : Generate top-level README.md"
+          ansible.builtin.copy:
+            dest: 'README.md'
+            content: |
+              # rabe-zabbix
+
+              Collection of various [Zabbix](http://www.zabbix.com/) templates and
+              helper scripts created or used by [Radio Bern RaBe](http://rabe.ch/).
+
+              See below for an overview of our templates. We group our templates
+              similar to how Zabbix-out-of-the-box templates are grouped.
+
+              ## Stacks
+
+              Every host within Zabbix gets a specific stack template assigned according
+              to its role. The stack exactly defines the setup of this host and will be
+              re-used if there is more than one host with the same role.
+
+              As an example, a host which servers a MediaWiki instance, will get the
+              stack template `MediaWiki Stack` assigned. The stack template
+              might include the operating system template `EL9 Stack`, the
+              application templates `Apache by HTTP`, `PHP-FPM by HTTP`
+              and `MariaDB by agent 2`.
+
+              This ensures great modularity, reusability and avoids unecessary
+              inheritance problems.
+              {% set flat_stacks = (stacks.files | sort(attribute='path') | map(attribute='path')) %}
+              {% for stack in flat_stacks %}
+              {% if (stack.split('/') | length) == 2 %}
+
+              ### {{ stack.split('/')[0:2] | join(": ") | replace("_", " ") }}
+              
+              | Name | 3.0 | 6.4 | 7.0 |
+              | ---- | --- | --- | --- |
+              {% endif %}
+              {% if (stack.split('/') | length) == 3 %}
+              | {{ stack.split('/')[2].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/6.4){% endif %} | {% if stack + '/7.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/7.0){% endif %} |
+              {% endif %}
+              {% endfor %}
+
+              ## Templates
+              {% set flat_templates = (templates.files | sort(attribute='path') | map(attribute='path')) %}
+              {% for template in flat_templates %}
+              {% if (template.split('/') | length) == 2 %}
+
+              ### {{ template.split('/')[0:2] | join(": ") | replace("_", " ") }}
+              
+              | Name | 3.0 | 6.4 | 7.0 |
+              | ---- | --- | --- | --- |
+              {% endif %}
+              {% if (template.split('/') | length) == 3 %}
+              | {{ template.split('/')[2].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/6.4){% endif %} | {% if template + '/7.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/7.0){% endif %} |
+              {% endif %}
+              {% endfor %}
+
+              ## Overrides
+              {% set flat_overrides = (overrides.files | sort(attribute='path') | map(attribute='path')) %}
+
+              In some cases we override the Zabbix out-of-the-box templates to
+              ensure they fit our use case. We publish the changed templates along
+              with a generated diff against its upstream version.
+
+              | Name | 6.4 | 7.0 |
+              | ---- | --- | --- |
+              {% for override in flat_overrides %}
+              {% if (override.split('/') | length) == 3 %}
+              | {{ override.split('/')[1] | replace("_", " ") }} | {% if '6.4' in override %}[✅](./{{ override }}){% endif %} | {% if '7.0' in override %}[✅](./{{ override }}){% endif %} |
+              {% endif %}
+              {% endfor %}
+
+              ## Zabbix Version Support
+
+              We primarily support versions of Zabbix we use in production.
+
+              | Version | Supported | Description |
+              | ------- | --------- | ----------- |
+              | 3.0 | ✅ | legacy RaBe environment |
+              | 6.4 | ✅ | for LTS preparation work until 7.0 is available |
+              | 7.0 | ✅ | once released |
+
+              ## OS Version Support
+
+              Our Zabbix 3.0 template mainly template EL7 installations based on CentOS 7.
+              The 6.4+ templates aim to support both EL7 as well as EL9, with EL7 on
+              a best effort case (e.g. we don't workaround the lack of `timedatectl show`
+              on old distros, their timedatectl stays unmonitored).
+
+              ## Contributing
+              
+              See [CONTRIBUTING.md](./CONTRIBUTING.md) if you want to contribute fixes or templates.
+
+              ## Previous Versions
+
+              If you are looking for the documentation and tooling of the Zabbix 3.0 only
+              version of this repo, you may find them in [5d2dfb7](https://github.com/radiorabe/rabe-zabbix/tree/5d2dfb7d91cf84cb4b314f2a3c2b6dd69224cf20).
+
+              ## License
+              
+              This template collection is free software: you can redistribute it and/or
+              modify it under the terms of the GNU Affero General Public License as
+              published by the Free Software Foundation, version 3 of the License.
+
+              The contents of the `Overrides/` folder are released under the GNU
+              General Public License (GPL) version 2. You can redistribute it and/or
+              modify it under the terms of the GNU GPL as published by the Free
+              Software Foundation; either version 2 of the License, or (at your
+              option) any later version.
+
+              ## Copyright
+              
+              Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+
+
+    - name: 'RaBe Zabbix Templator : Template README.md files'
+      block:
+        - name: "RaBe Zabbix Templator : Find Stacks, Templates, and Overrides"
+          ansible.builtin.find:
+            paths:
+              - "Overrides/"
+              - "Stacks/"
+              - "Templates/"
+            patterns:
+              - "*.yaml"
+            excludes:
+              - "mkdocs.yaml"
+            file_type: "file"
+            depth: 5
+            recurse: yes
+          register: yaml
+
+        - name: "RaBe Zabbix Templator : Generate top-level catalog-info.yaml"
+          ansible.builtin.copy:
+            dest: 'catalog-info.yaml'
+            content: |
+              ---
+              # hack/plays/manage.yml
+              apiVersion: backstage.io/v1alpha1
+              kind: System
+              metadata:
+                name: rabe-zabbix
+                title: RaBe Zabbix
+                description: |
+                  Zabbix is the main monitoring system at RaBe.
+                annotations:
+                  github.com/project-slug: radiorabe/rabe-zabbix
+                links:
+                  - url: https://monitoring.service.int.rabe.ch
+                    title: Zabbix Web
+              spec:
+                owner: it-reaktion
+              ---
+              # hack/plays/manage.yml
+              apiVersion: backstage.io/v1alpha1
+              kind: Component
+              metadata:
+                name: rabe-zabbix-templates
+                title: RaBe Zabbix Templates
+                description: |
+                  Zabbix templates available for use in our Zabbix instance.
+                annotations:
+                  backstage.io/techdocs-ref: dir:.
+                  github.com/project-slug: radiorabe/rabe-zabbix
+              spec:
+                type: library
+                lifecycle: experimental
+                owner: it-reaktion
+                system: rabe-zabbix
+              {% for file in (yaml.files | map(attribute="path") | sort ) %}
+              {% set template = (lookup("ansible.builtin.file", "../../"+file) | from_yaml).zabbix_export %}
+              ---
+              # {{ file }}
+              apiVersion: backstage.io/v1alpha1
+              kind: Component
+              metadata:
+                name: zabbix-template-{{ file.split('/')[-3] }}
+                title: "Zabbix Template: {{ template.templates[0].name }}"
+                description: |
+                  {{ template.templates[0].description | indent(width=4, first=False) }}
+                annotations:
+                  backstage.io/techdocs-ref: dir:./{{ file | dirname }}
+                  github.com/project-slug: radiorabe/rabe-zabbix
+                links:
+                  - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/{{ file | dirname }}
+                    title: GitHub
+                    icon: github
+                tags: {{ template.templates[0].tags | selectattr("tag", "in", ["target", "class"]) | map(attribute="value") | map("lower") | to_yaml -}}
+              spec:
+                type: zabbix-template
+                lifecycle: experimental
+                owner: it-reaktion
+                system: rabe-zabbix
+                subcomponentOf: rabe-zabbix-templates
+              {% endfor %}
+
+        - name: "RaBe Zabbix Templator : Generate template mkdocs.yaml"
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.copy:
+            dest: '{{ item | dirname }}/mkdocs.yaml'
+            content: |
+              {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
+              site_name: "Zabbix Template: {{ tpl.name }}"
+              repo_url: https://github.com/radiorabe/rabe-zabbix
+              repo_name: radiorabe/rabe-zabbix
+              markdown_extensions:
+                - pymdownx.highlight:
+                    anchor_linenums: true
+                - pymdownx.inlinehilite
+                - pymdownx.snippets
+                - pymdownx.superfences
+              plugins:
+                - search
+                - gen-files:
+                    scripts:
+                      - docs/gen_ref_pages.py
+                - literate-nav
+              nav:
+                - README: index.md
+
+        - name: 'RaBe Zabbix Templator : Create Template docs directory'
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.file:
+            state: directory
+            dest: '{{ item | dirname }}/docs'
+
+        - name: "RaBe Zabbix Templator : Generate template gen_ref_pages.py"
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.copy:
+            dest: '{{ item | dirname }}/docs/gen_ref_pages.py'
+            content: |
+              from pathlib import Path
+
+              import mkdocs_gen_files
+
+              with mkdocs_gen_files.open("index.md", "w", encoding="utf-8") as index:
+                  index.writelines(Path("README.md").open("r").read())
+
+        - name: "RaBe Zabbix Templator : Generate template README.md"
+          loop: "{{ yaml.files | map(attribute='path') }}"
+          ansible.builtin.copy:
+            dest: '{{ item | dirname }}/README.md'
+            content: |
+              {% set triggers = [] %}
+              {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
+              # Zabbix Template: {{ tpl.name }}
+
+              {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}{% if 'vendor' in tpl %} ![vendor: {{ tpl.vendor.name }}](https://img.shields.io/badge/vendor-{{ tpl.vendor.name }}-00c9bf) ![version: {{ tpl.vendor.version }}](https://img.shields.io/badge/version-{{ tpl.vendor.version | replace("-", "--") }}-00c9bf){% endif %}
+
+
+              {{ tpl.description | trim }}
+              {% if 'templates' in tpl %}
+
+              ## Linked Templates
+
+              This Zabbix template depends on the following templates.
+
+              {% for dep in tpl.templates %}
+              * {{ dep.name }}
+              {% endfor %}
+              {% endif %}
+              {% if 'items' in tpl %}
+
+              ## Items
+              {% for item in tpl['items'] %}
+
+              ### Item: {{ item.name }}
+
+              {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
+              {{ triggers.append(item.triggers) if 'triggers' in item }}
+
+              {{ (item.description | trim) if 'description' in item }}
+
+              ```console
+              {{ item.key }}
+              ```
+
+              Settings:
+
+              | Item Setting | Value |
+              | ------------ | ----- |
+              {% if 'type' in item %}
+              | Type | {{ item.type }} |
+              {% endif %}
+              {% if 'value_type' in item %}
+              | Value type | {{ item.value_type }}{{ " in "+item.units if 'units' in item }} |
+              {% endif %}
+              {% if 'history' in item and item.history != '0' %}
+              | History | {{ item.history }} |
+              {% endif %}
+              {% if 'trends' in item and item.trends != '0' %}
+              | Trends | {{ item.trends }} |
+              {% endif %}
+              {% if 'type' in item and item.type == 'DEPENDENT' %}
+              | Source item | `{{ item.master_item.key }}` |
+
+              Preprocessing steps:
+
+              | Type | Parameters |
+              | ---- | ---------- |
+              {% for prep in item.preprocessing %}
+              | {{ prep.type }} | `{{ prep.parameters | to_json }}` |
+              {% endfor %}
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              {% if triggers %}
+
+              ## Triggers
+              {% for trigger in ( triggers | flatten ) %}
+
+              ### Trigger: {{ trigger.name }}
+
+              {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
+
+
+              {{ trigger.description if 'description' in trigger }}
+              Settings:
+
+              | Trigger Setting | Values |
+              | --------------- | ------ |
+              | Priority | {{ trigger.priority }} |
+              {% if 'manual_close' in trigger %}
+              | Manual close | {{ trigger.manual_close }} |
+              {% endif %}
+
+              ```console
+              {{ trigger.expression }}
+              ```
+              {% endfor %}
+              {% endif %}
+              {% if 'graphs' in tpl %}
+
+              ## Graphs
+
+              The following graphs are included in this template.
+              {% for graph in tpl.graphs %}
+              * {{ graph.name }}
+              {% endfor %}
+              {% endif %}
+              {% if 'discovery_rules' in tpl %}
+
+              ## Discovery Rules
+              {% for rule in tpl.discovery_rules %}
+              {% set disco_triggers = [] %}
+
+              ### Discovery Rule: {{ rule.name }}
+
+              {{ rule.description }}
+
+              ```console
+              {{ rule.key }}
+              ```
+
+              Settings:
+
+              | Item Setting | Value |
+              | ------------ | ----- |
+              {% if 'type' in rule %}
+              | Type | {{ rule.type }} |
+              {% endif %}
+              {% if 'value_type' in rule %}
+              | Value type | {{ rule.value_type }}{{ " in "+rule.units if 'units' in rule }} |
+              {% endif %}
+              {% if 'history' in rule and rule.history != '0' %}
+              | History | {{ rule.history }} |
+              {% endif %}
+              {% if 'trends' in rule and rule.trends != '0' %}
+              | Trends | {{ rule.trends }} |
+              {% endif %}
+              {% if 'type' in rule and rule.type == 'DEPENDENT' %}
+              | Source item | `{{ rule.master_item.key }}` |
+
+              Preprocessing steps:
+
+              | Type | Parameters |
+              | ---- | ---------- |
+              {% for prep in rule.preprocessing %}
+              | {{ prep.type }} | `{{ prep.parameters | to_json }}` |
+              {% endfor %}
+              {% endif %}
+              {% if 'item_prototypes' in rule %}
+
+              #### Discovery Rule: {{ rule.name }}: Item Prototypes
+              {% for item in rule.item_prototypes %}
+
+              ##### Discovery Rule: {{ rule.name }}: Item Prototype: {{ item.name }}
+
+              {% for tag in item.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
+              {{ disco_triggers.append(item.trigger_prototypes) if 'trigger_prototypes' in item }}
+
+              {{ item.description if 'description' in item }}
+
+              ```console
+              {{ item.key }}
+              ```
+
+              Settings:
+
+              | Item Setting | Value |
+              | ------------ | ----- |
+              {% if 'type' in item %}
+              | Type | {{ item.type }} |
+              {% endif %}
+              {% if 'value_type' in item %}
+              | Value type | {{ item.value_type }}{{ " in "+item.units if 'units' in item }} |
+              {% endif %}
+              {% if 'history' in item and item.history != '0' %}
+              | History | {{ item.history }} |
+              {% endif %}
+              {% if 'trends' in item and item.trends != '0' %}
+              | Trends | {{ item.trends }} |
+              {% endif %}
+              {% if 'type' in item and item.type == 'DEPENDENT' %}
+              | Source item | `{{ item.master_item.key }}` |
+
+              Preprocessing steps:
+
+              | Type | Parameters |
+              | ---- | ---------- |
+              {% for prep in item.preprocessing %}
+              | {{ prep.type }} | `{{ prep.parameters | to_json }}` |
+              {% endfor %}
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              {% if disco_triggers %}
+
+              #### Discovery Rule: {{ rule.name }}: Discovery Triggers
+              {% for trigger in ( disco_triggers | flatten ) %}
+
+              ##### Discovery Rule: {{ rule.name }}: Trigger Prototype: {{ trigger.name }}
+
+              {% for tag in trigger.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}
+
+
+              {{ trigger.description if 'description' in trigger }}
+              Settings:
+
+              | Trigger Setting | Values |
+              | --------------- | ------ |
+              | Priority | {{ trigger.priority }} |
+              {% if 'manual_close' in trigger %}
+              | Manual close | {{ trigger.manual_close }} |
+              {% endif %}
+
+              ```console
+              {{ trigger.expression }}
+              ```
+              {% endfor %}
+              {% endif %}
+              {% if 'graph_prototypes' in rule %}
+
+              #### Discovery Rule: {{ rule.name }}: Graph Prototypes
+
+              The following graph prototypes are defined by this Template
+
+              {% for graph in rule.graph_prototypes %}
+              * {{ graph.name }}
+              {% endfor %}
+
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              {% if 'macros' in tpl %}
+
+              ## Macros
+
+              The following Zabbix macros are configured via this template.
+              {% for macro in tpl.macros %}
+
+              ### Macro: `{{ macro.macro }}`
+
+              {{ macro.description if 'description' in macro }}
+
+              Default:
+
+              ```console
+              {{ macro.value if 'value' in macro }}
+              ```
+              {% endfor %}
+              {% endif %}
+              {% if 'dashboards' in tpl %}
+
+              ## Dashboards
+
+              The following Zabbix dashboards are included in this template.
+
+              {% for dashboard in tpl.dashboards %}
+              * {{ dashboard.name }}
+              {% endfor %}
+              {% endif %}
+              {% if 'vendor' in tpl and tpl.vendor.name == 'RaBe' %}
+
+              ## License
+
+              This template is free software: you can redistribute it and/or modify it under
+              the terms of the GNU Affero General Public License as published by the Free
+              Software Foundation, version 3 of the License.
+
+              ## Copyright
+
+              Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+              {% endif %}

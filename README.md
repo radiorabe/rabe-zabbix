@@ -1,541 +1,189 @@
 # rabe-zabbix
-Collection of various [Zabbix](http://www.zabbix.com/) templates and helper scripts created or used by [Radio Bern RaBe](http://rabe.ch/).
-
-## Zabbix Templates
-The Zabbix templates are located within the [templates](templates) subfolder and are further subdived into the following categories:
-* [Operating system (os)](os): All operating system specific templates
-  * Naming convention: <code>Template_OS_\<OPERATING-SYSTEM-NAME\>_active</code>
-  * Example: <code>Template_OS_Linux_active</code>
-* [Application (app)](app): All application specifc templates
-  * Naming convention: <code>Template_App_\[\<OPERATING-SYSTEM-NAME\]_\<APPLICATION-NAME\>_active</code>
-  * Example: <code>Template_App_Linux_Postfix_active</code>
-* [IPMI (ipmi)](ipmi): All IPMI based templates
-  * Naming convention: <code>Template_IPMI_\<NAME\></code>
-  * Example: <code>Template_IPMI_Threshold_Sensors</code>
-* [SNMP (snmp)](snmp): All SNMP based templates
-  * Naming convention: <code>Template_SNMP\<SNMP-VERSION\>_\<NAME\></code>
-  * Example: <code>Template_SNMPv2_Interfaces_HC</code>
-* [Stack (stack)](stack): Stack templates define a single system (or role) and might inherit further stack templates, or exactly one operating system template as well as multiple application or SNMP templates.
- * Naming convention: <code>Template_Stack_\<STACK-NAME\>_active</code>
- * Example: <code>Template_Stack_MediaWiki_active</code>
-
-### Stack templates explained
-Every host within Zabbix gets a specifc stack template assigned according to its role. The stack exactly defines the setup of this host and will be re-used if there is more than one host with the same role.
- 
-As an example, a host which servers a MediaWiki instance, will get the stack template <code>Template_Stack_MediaWiki_active</code> assigned. The stack template might include the operating system template <code>Template_OS_Linux_active</code>, the application templates <code>Template_App_Linux_Apache_HTTPD_active</code>, <code>Template_App_Linux_PHP-FPM_active</code> and <code>Template_App_Linux_MariaDB_active</code>.
- 
-This ensures great modularity, reusability and avoids unecessary inheritance problems.
- 
-### Further template conventions
-* Use active mode for zabbix agent items by default
-* Use an update interval of 300 seconds (5 minutes) by default
-* Create at least one unique application per app, ipmi and snmp template
-* Use macros whenever possible and feasible, prefix them with a unique per template prefix
-
-### App specific conventions
-
-* Apps may contain configuration snippets in a `userparameters/` subdir.
-* SELinux policy modules for an app are in the `selinux/` subdir. They are prefixed with "rabezbx" to help differentiate them from system policy.
-
-### IPMI specific conventions
-* Name server or motherboard templates according to `IPMI <VENDOR>
-  <PRODUCT-NAME>`, for example `Template IPMI Supermicro SSG-6048R-E1CR24N`
-* Try to build up a server or motherboard template from existing (or newly
-  created) standalone sensor templates (which can be reused for the same sensor
-  and reading type).
-* Standalone sensor templates which contain sensor-specific discrete IPMI
-  sensors (event/reading type code 6Fh)
-   * Template naming according to `IPMI <SENSOR-NAME> Sensors`, for example
-     `IPMI Power Supply Sensors`
-   * Item key naming according to
-     `ipmi.discrete-sensor[<SENSOR-TYPE>,<SENSOR-NAME>]`, for example
-     `ipmi.discrete-sensor[power-supply,{#IPMI_SENSOR_NAME}]`
-   * Create triggers according to the sensor's specific event/reading type code
-     and offsets (see [Table 42-3, Sensor Type
-     Codes](http://www.intel.com/content/dam/www/public/us/en/documents/product-briefs/second-gen-interface-spec-v2.pdf))
-     with the help of the Zabbix [band()
-     function](https://www.zabbix.com/documentation/3.0/manual/appendix/triggers/functions)
-* Standalone sensor templates which contain generic discrete IPMI sensors
-  (event/reading type code 02h - 0Ch)
-   * Template naming according to `IPMI <SENSOR-NAME> Generic Sensors`, for
-     example `IPMI Module Board Generic Sensors`
-   * Item key naming according to
-     `ipmi.discrete-generic-sensor[<SENSOR-TYPE>,<SENSOR-NAME>]`, for example
-     `ipmi.discrete-generic-sensor[module-board,{#IPMI_SENSOR_NAME}]`
-   * Create triggers according to the sensor's generic event/reading type code
-     and offsets (see [Table 42-2, Generic Event/Reading Type
-     Codes](http://www.intel.com/content/dam/www/public/us/en/documents/product-briefs/second-gen-interface-spec-v2.pdf))
-     with the help of the Zabbix [band()
-     function](https://www.zabbix.com/documentation/3.0/manual/appendix/triggers/functions)
-* Use the provided `ipmi-sensor-discovery.sh` external check script for
-  low-level auto-discovery of multiple sensors.
-* FreeIPMI's [interpret sensor
-  configuration](http://git.savannah.gnu.org/cgit/freeipmi.git/tree/etc/freeipmi_interpret_sensor.conf)
-  might be helpful for mapping sensor states to Zabbix trigger severities.
-* There should be no more need for threshold based sensor templates
-  (event/reading type code 01h), as they are already handled by the `IPMI
-  Threshold Sensors` template.
-
-### SNMP specific conventions
-* Name SNMP templates according to `Template SNMPv<SNMP-VERSION> <NAME>`, for example
-  `Template SNMPv2 Bridge`
-* Try to reflect the MIBs name within `<NAME>` whenever feasible
-* Use the textual form of MIB OIDs within your SNMP items.
-  As an example, use `BRIDGE-MIB::dot1dBaseNumPorts.0` instead of
-  `.1.3.6.1.2.1.17.1.2.0`
-* Include instructions on how to obtain and install the required MIBs for your
-  template.
-* Name items according to `rabe.snmp.<NAME>.<OID-NAME>` to avoid clashes with
-  other templates.
-  Example: `rabe.snmp.bridge.dot1dBaseNumPorts`
-* Name low-level discovery rule keys with `rabe.snmp.<NAME>.<OBJECT>.discovery`
-  Example: `rabe.snmp-bridge.ports.discovery`
-* Create value mappings according to the OID's syntax definition from the MIB.
-
-## Developing
-
-### Adding an app template
-
-```bash
-appName="" # app name
-appURL=""  # URL to the upstream project/software
-
-lowercaseName="${appName,,}"
-uppercaseName="${appName^^}"
 
-shortName="${lowercaseName//-/}"
-
-templateName="Template App ${appName} active"
-xmlName="${templateName// /_}.xml"
-
-appDir="app/${appName// /_}"
-
-gitBranchName="feature/app-${lowercaseName// /-}"
-
-
-git checkout -b "${gitBranchName}"
-mkdir -p "${appDir}/doc"
-
-# Generate a minimal documentation
-cat > "${appDir}/doc/README.head.md" << EOF
-Monitoring of [${appName}]($appURL).
-EOF
-
-# Extend the documentation as necessary
-vi "${appDir}/doc/README.head.md"
-
-# Commit the documentation
-git add "${appDir}/doc/README.head.md"
-git commit -m "${appName}: Added documentation"
-
-
-# Export the Zabbix template and move it to the final destination
-# see fetching below if you want help exporting
-mv zbx_export_templates.xml "${appDir}/${xmlName}"
-
-# Commit the Zabbix template
-git add "${appDir}/${xmlName}"
-git commit -m "${appName}: Added ${templateName}"
-```
-
-#### Fetching an app from the Zabbix server
-Fetching a template into a file from the server is straightforward.
-
-```bash
-./helper/rabe-zabbix --template=${templateName} ${xmlName}
-```
-
-You need to have a working node environment and install any dependencies beforehand.
-
-```bash
-npm install
-```
-
-The helper will prompt for settings should they not be configured. Please see its `--help` for more information.
-
-#### optional usage section override
-```bash
-cat > "${appDir}/doc/README.Usage.md" << EOF
-## Usage
-1. Import the
-   [\`${xmlName}\`](${xmlName})
-   into your Zabbix server (click on the \`Raw\` button to download).
-2. Add the template to your host (or stack template)
-3. Check if new data arrives
-EOF
-
-vi "${appDir}/doc/README.Usage.md"
-
-git add "${appDir}/doc/README.Usage.md"
-git commit -m "${appName}: Added usage section"
-```
-
-
-#### optional selinux policy
-```bash
-$avcViolation="" # multiple lines from /var/log/audit/audit.log
-
-moduleName="rabezbx${shortName// /}"
-
-mkdir "${appDir}/selinux"
-
-echo ${avcViolation} | audit2allow -m ${moduleName} > \
-  "${appDir}/selinux/${moduleName}.te"
-
-cat > "${appDir}/doc/README.SELinux.md" <<EOD
-## SELinux Policy
-
-The [${moduleName}](selinux/${moduleName}.te) policy does <dox>.
-EOD
-
-
-# Commit the SELinux policy and documentation
-git add "${appDir}/selinux/${moduleName}.te"
-git add "${appDir}/doc/README.SELinux.md"
-git commit -e -m "${appName}: Added SELinux module and documentation"
-```
-
-#### optional userparameters
-```bash
-mkdir "${appDir}/userparameters"
-
-userParameterName="rabe.${lowercaseName// /-}"
-
-cat > "${appDir}/userparameters/${userParameterName}.conf" <<EOD
-#
-# dox here
-#
-UserParameter=${userParameterName}.<key>,<script>
-EOD
-
-cat > "${appDir}/doc/README.UserParameters.md" <<EOD
-## UserParameters
-
-| Key | Description |
-| --- | ----------- |
-| \`${userParameterName}.<key>\` | <dox> |
-EOD
-
-
-# Commit the userparameters and documentation
-git add "${appDir}/userparameters/${userParameterName}.conf"
-git add "${appDir}/doc/README.UserParameters.md"
-git commit -e -m "${appName}: Added user parameters and docs."
-```
-
-#### optional scripts
-```bash
-mkdir "${appDir}/scripts"
-
-scriptName="rabe-${lowercaseName// /-}.sh"
-
-touch "${appDir}/scripts/${scriptName}"
-
-cat > "${appDir}/doc/README.scripts.md" <<EOD
-## Scripts
-
-* [${scriptName}](./scripts/${scriptName}) for ${userParameterName}.<key> UserParameter
-
-<dox below listing if needed>
-EOD
-
-# Commit the scripts and documentation
-git add "${appDir}/scripts/*"
-git add "${appDir}/doc/README.scripts.md"
-git commit -e -m "${appName}: Added scripts and docs."
-```
-
-#### optional Sudo security policies
-```bash
-mkdir "${appDir}/sudoers.d"
-
-sudoersFileName="rabezbx-${lowercaseName// /_}"
-sudoersCmndAliasPrefix="RABEZBX_${uppercaseName//[ -]/_}"
-
-cat > "${appDir}/sudoers.d/${sudoersFileName}" << EOF
-##
-## Defaults specification for the zabbix user
-##
-Defaults:zabbix !requiretty
-
-##
-## Command alias specifications for ${appName}
-##
-Cmnd_Alias ${sudoersCmndAliasPrefix}_MYCMD = /sbin/mycmd -a -b -c
-Cmnd_Alias ${sudoersCmndAliasPrefix}_MYOTHERCMD = /sbin/myothercmd
-
-##
-## User privilege specifications for the zabbix user
-##
-zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYCMD
-zabbix ALL=NOPASSWD: ${sudoersCmndAliasPrefix}_MYOTHERCMD
-EOF
-
-
-# Commit the sudo configuration snippet
-git add "${appDir}/sudoers.d/${sudoersFileName}"
-git commit -e -m "${appName}: Added sudoers config."
-```
-
-Adapt the `MYCMD` and `MYOTHERMCD` command aliases accordingly.
-
-#### Generate the template documentation and push
-As a final step you have to generate the template configuration and push to
-GitHub afterwards.
-```bash
-# Generate the template documentation
-make update-app-doc
-git add "${appDir}/README.md"
-git commit -m "${appName}: Added generated documentation"
-
-# Push and create a PR on GitHub afterwards
-git push --set-upstream origin "${gitBranchName}"
-```
-
-### Adding an OS template
-
-```bash
-osName="" # Operating system name
-
-lowercaseName="${osName,,}"
-gitBranchName="feature/os-${lowercaseName// /-}"
-
-git checkout -b "${gitBranchName}"
-
-templateName="Template OS ${osName}"
-xmlName="${templateName// /_}.xml"
-
-osDir="os/${osName// /_}"
-
-
-mkdir -p "${osDir}/doc"
-touch "${osDir}/doc/README.head.md"
-
-# Write the documentation for your template
-vi "${osDir}/doc/README.head.md"
-
-git add "${osDir}/doc/README.head.md"
-git commit -m "${osName}: Added documentation"
-
-
-# Export the Zabbix template and move it to the final destination
-mv zbx_export_templates.xml "${osDir}/${xmlName}"
-
-git add "${osDir}/${xmlName}"
-git commit -m "${osName}: Added ${templateName}"
-
-
-# Generate the template documentation
-make update-os-doc
-git add "${osDir}/README.md"
-git commit -m "${osName}: Added generated documentation"
-
-
-# Push and create a PR on GitHub afterwards
-git push --set-upstream origin "${gitBranchName}"
-```
-
-#### optional usage section override
-```bash
-cat > "${osDir}/doc/README.Usage.md" << EOF
-## Usage
-EOF
-
-vi "${osDir}/doc/README.Usage.md"
-
-git add "${osDir}/doc/README.Usage.md"
-git commit -m "${osName}: Added usage section"
-```
-
-
-### Adding an IPMI template
-
-```bash
-ipmiName="" # IPMI sensor, board or server name
-
-lowercaseName="${ipmiName,,}"
-
-templateName="Template IPMI ${ipmiName}"
-xmlName="${templateName// /_}.xml"
-
-ipmiDir="ipmi/${ipmiName// /_}"
-
-mkdir -p "${ipmiDir}/doc"
-touch "${ipmiDir}/doc/README.head.md"
-
-mv zbx_export_templates.xml "${ipmiDir}/${xmlName}"
-```
-
-#### optional usage section override
-```bash
-cat > "${ipmiDir}/doc/README.Usage.md" << EOF
-## Usage
-EOF
-
-vi "${ipmiDir}/doc/README.Usage.md"
-
-git add "${ipmiDir}/doc/README.Usage.md"
-git commit -m "${ipmiName}: Added usage section"
-```
-
-
-#### optional scripts
-```bash
-scriptName="ipmi-${lowercaseName// /-}"
-
-mkdir -p "${ipmiDir}/scripts"
-
-touch "${ipmiDir}/scripts/${scriptName}.sh"
-
-cat > "${ipmiDir}/doc/README.scripts.md" <<EOD
-## Scripts
-
-* [${scriptName}.sh](./scripts/${scriptName}.sh) <short description>
-
-<dox below listing if needed>
-EOD
-```
-
-### Adding an SNMP template
-
-```bash
-snmpName=""       # Name, usually related to the MIB or device
-snmpVersion="2"   # SNMP version, 1, 2 or 3.
-snmpDeviceURL=""  # URL to the device (if any)
-snmpMibURL=""     # URL to the MIB (if any)
-
-lowercaseName="${snmpName,,}"
-
-templateName="Template SNMPv${snmpVersion} ${snmpName}"
-xmlName="${templateName// /_}.xml"
-
-snmpDir="snmp/SNMPv${snmpVersion}_${snmpName// /_}"
-
-gitBranchName="feature/snmp-${lowercaseName// /-}"
-
-git checkout -b "${gitBranchName}"
-mkdir -p "${snmpDir}/doc"
-touch "${snmpDir}/doc/README.head.md"
-
-
-# Generate a minimal documentation
-cat > "${snmpDir}/doc/README.head.md" << EOF
-<DEVICE-SPECIFIC-EXAMPLE>
-Monitoring of [${snmpName}](${snmpDeviceURL})
-devices via SNMPv${snmpVersion}
-</DEVICE-SPECIFIC-EXAMPLE
-
-<MIB-SPECIFIC-EXAMPLE>
-Monitors <EXAMPLE> parameters exposed by the
-[\`<EXAMPLE-MIB>\`](${snmpMibURL}) via SNMPv${snmpVersion}
-</MIB-SPECIFIC-EXAMPLE>
-EOF
-
-cat > "${snmpDir}/doc/README.Usage.md" << EOF
-## Usage
-1. Download the [<EXAMPLE-MIB>](${snmpMibURL})
-2. Place the MIB file(s) into your default MIB directory on the Zabbix server
-   and/or proxy (usually \`/usr/local/share/snmp/mibs\`) and make sure that the
-   Zabbix server and/or proxy loads them (see [Using and loading
-   MIBs](http://www.net-snmp.org/wiki/index.php/TUT:Using_and_loading_MIBS)).
-3. Import the
-   [\`${xmlName}\`](${xmlName})
-   into your Zabbix server (click on the \`Raw\` button to download).
-4. Add an SNMP interface configuration to your host
-5. Set the \`{$SNMP_COMMUNITY}\` macro to your desired community if you don't
-   use \`public\`
-6. Add the template to your host (or stack template)
-7. Check if new data arrives
-
-## Notes
-### snmpwalk command
-The following \`snmpwalk\` command might be helpful for debugging:
-\`\`\`bash
-# Include and adapt me for SNMP version 1 or 2c
-snmpwalk -v <1|2c> -c public <HOST> <EXAMPLE-MIB::OID>
-
-# Include and adapt me for SNMP version 3
-snmpwalk -v 3 -l <noAuthNo‐Priv|authNoPriv|authPriv> \\
-         [-a <MD5|SHA> -A <AUTH-PASSPHRASE> \\
-         [-x <DES|AES> -X <PRIV-PASSPHRASE>]] \\
-         <HOST> <EXAMPLE-MIB::OID>
-\`\`\`
-EOF
-
-# Adapt and extend the documentation as necessary
-vi "${snmpDir}/doc/README.head.md"
-vi "${snmpDir}/doc/README.Usage.md"
-
-# Commit the documentation
-git add "${snmpDir}/doc/README.head.md"
-git add "${snmpDir}/doc/README.Usage.md"
-git commit -m "${snmpName}: Added documentation"
-
-
-# Export the Zabbix template and move it to its final destination
-mv zbx_export_templates.xml "${snmpDir}/${xmlName}"
-
-# Commit the Zabbix template
-git add "${snmpDir}/${xmlName}"
-git commit -m "${snmpName}: Added ${templateName}"
-
-
-# Generate the template documentation
-make update-snmp-doc
-git add "${snmpDir}/README.md"
-git commit -m "${snmpName}: Added generated documentation"
-
-# Push and create a PR on GitHub afterwards
-git push --set-upstream origin "${gitBranchName}"
-```
-
-Note, that you can also use the provided [template fetching
-helper](#fetching-an-app-from-the-zabbix-server) script for downloading the
-template from your Zabbix server.
-
-## Debugging
-
-The following commands might be helpful for general debugging:
-* Test a specific Zabbix agent item  
-  `su -c 'zabbix_agentd -t <ITEM-KEY>' -s /bin/bash zabbix`
-* Restart the Zabbix agent  
-  `systemctl restart zabbix-agent`
-* Restart the Zabbix server  
-  `systemctl restart zabbix-server`
-
-The following logs might contain helpful hints:
-* Zabbix Agent related messages  
-  `/var/log/zabbix/zabbix_agentd.log`
-* Zabbix Server related messages  
-  `/var/log/zabbix/zabbix_server.log`
-* sudo related messages  
-  `journalctl -r /usr/bin/sudo`
-* SELinux related messages  
-  `/var/log/audit/audit.log`
-
-## RPM Packages
-
-The rabe-zabbix templates come with an RPM package that helps install SELinux policies and UserParameter configs. We provide a pre-built version
-through the [openSUSE Build Server](https://build.opensuse.org/). They are available as part of the [home:radiorabe:zabbix Subproject](https://build.opensuse.org/project/show/home:radiorabe:zabbix). You can install them as follows.
-
-```bash
-curl -o /etc/yum.repos.d/home:radiorabe:zabbix.repo \
-     http://download.opensuse.org/repositories/home:/radiorabe:/zabbix/CentOS_7/home:radiorabe:zabbix.repo
-
-yum install rabe-zabbix
-```
-
-## Releasing
-
-* Bump the version in the Specfile and add a new commit to master with the version bump
-* Tag this commit with the same version you used in the Specfile
-* Push master and the tag to github
-* The openSUSE Build Service should get triggered and build a new package automagically
+Collection of various [Zabbix](http://www.zabbix.com/) templates and
+helper scripts created or used by [Radio Bern RaBe](http://rabe.ch/).
+
+See below for an overview of our templates. We group our templates
+similar to how Zabbix-out-of-the-box templates are grouped.
+
+## Stacks
+
+Every host within Zabbix gets a specific stack template assigned according
+to its role. The stack exactly defines the setup of this host and will be
+re-used if there is more than one host with the same role.
+
+As an example, a host which servers a MediaWiki instance, will get the
+stack template `MediaWiki Stack` assigned. The stack template
+might include the operating system template `EL9 Stack`, the
+application templates `Apache by HTTP`, `PHP-FPM by HTTP`
+and `MariaDB by agent 2`.
+
+This ensures great modularity, reusability and avoids unecessary
+inheritance problems.
+
+### Stacks: Applications
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4) |  |
+| Nginx with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4) |  |
+| Songticker Stack |  | [✅](./Stacks/Applications/Songticker_Stack/6.4) |  |
+| systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) |  |
+
+### Stacks: Network devices
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| Netgear GS108Tv2 SNMPv2 | [✅](./Stacks/Network_devices/Netgear_GS108Tv2_SNMPv2/3.0) |  |  |
+| Netgear M5300 Series SNMPv2 | [✅](./Stacks/Network_devices/Netgear_M5300_Series_SNMPv2/3.0) |  |  |
+
+### Stacks: Operating systems
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| EL7 Stack |  | [✅](./Stacks/Operating_systems/EL7_Stack/6.4) |  |
+| EL8 Stack |  | [✅](./Stacks/Operating_systems/EL8_Stack/6.4) |  |
+| EL9 Stack |  | [✅](./Stacks/Operating_systems/EL9_Stack/6.4) |  |
+
+### Stacks: Servers
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| EL7 KVM VM Stack |  | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/6.4) |  |
+| EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/6.4) |  |
+| EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/6.4) |  |
+
+## Templates
+
+### Templates: Applications
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| Alarm Pinger | [✅](./Templates/Applications/Alarm_Pinger/3.0) |  |  |
+| Apache HTTP Server | [✅](./Templates/Applications/Apache_HTTP_Server/3.0) |  |  |
+| auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) |  |
+| Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
+| BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
+| candlepin-rhsmcertd |  | [✅](./Templates/Applications/candlepin-rhsmcertd/6.4) |  |
+| CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
+| certmonger |  | [✅](./Templates/Applications/certmonger/6.4) |  |
+| chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) |  |
+| Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/6.4) |  |
+| Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
+| dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |
+| firewalld |  | [✅](./Templates/Applications/firewalld/6.4) |  |
+| GlusterFS Client | [✅](./Templates/Applications/GlusterFS_Client/3.0) |  |  |
+| GlusterFS Server | [✅](./Templates/Applications/GlusterFS_Server/3.0) |  |  |
+| gssproxy | [✅](./Templates/Applications/gssproxy/3.0) | [✅](./Templates/Applications/gssproxy/6.4) |  |
+| Icecast | [✅](./Templates/Applications/Icecast/3.0) |  |  |
+| ISC DHCP daemon | [✅](./Templates/Applications/ISC_DHCP_daemon/3.0) |  |  |
+| ISC DHCP Relay Agent | [✅](./Templates/Applications/ISC_DHCP_Relay_Agent/3.0) |  |  |
+| JACK Audio Connection Kit sound server | [✅](./Templates/Applications/JACK_Audio_Connection_Kit_sound_server/3.0) |  |  |
+| Journalbeat | [✅](./Templates/Applications/Journalbeat/3.0) |  |  |
+| libvirtd | [✅](./Templates/Applications/libvirtd/3.0) |  |  |
+| lighttpd | [✅](./Templates/Applications/lighttpd/3.0) |  |  |
+| LVM | [✅](./Templates/Applications/LVM/3.0) |  |  |
+| MD-RAID | [✅](./Templates/Applications/MD-RAID/3.0) |  |  |
+| ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
+| qemu-ga |  | [✅](./Templates/Applications/qemu-ga/6.4) |  |
+| Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
+| rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) |  |
+| rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |
+| Songticker |  | [✅](./Templates/Applications/Songticker/6.4) |  |
+| sssd |  | [✅](./Templates/Applications/sssd/6.4) |  |
+| systemd-journald |  | [✅](./Templates/Applications/systemd-journald/6.4) |  |
+| systemd-logind |  | [✅](./Templates/Applications/systemd-logind/6.4) |  |
+| systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/6.4) |  |
+| timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) |  |
+| tuned |  | [✅](./Templates/Applications/tuned/6.4) |  |
+| zabbix-agent | [✅](./Templates/Applications/zabbix-agent/3.0) |  |  |
+| Zabbix unsupported items |  | [✅](./Templates/Applications/Zabbix_unsupported_items/6.4) |  |
+
+### Templates: Network devices
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| SNMPv2 AVT AE1 DABPlus Go | [✅](./Templates/Network_devices/SNMPv2_AVT_AE1_DABPlus_Go/3.0) |  |  |
+| SNMPv2 Generic | [✅](./Templates/Network_devices/SNMPv2_Generic/3.0) |  |  |
+| SNMPv2 Interfaces HC | [✅](./Templates/Network_devices/SNMPv2_Interfaces_HC/3.0) |  |  |
+| SNMPv2 Livewire | [✅](./Templates/Network_devices/SNMPv2_Livewire/3.0) |  |  |
+| SNMPv2 Netgear Box Services | [✅](./Templates/Network_devices/SNMPv2_Netgear_Box_Services/3.0) |  |  |
+| SNMPv2 Netgear Inventory | [✅](./Templates/Network_devices/SNMPv2_Netgear_Inventory/3.0) |  |  |
+| SNMPv2 Netgear SNTP client | [✅](./Templates/Network_devices/SNMPv2_Netgear_SNTP_client/3.0) |  |  |
+| SNMPv2 Netgear Switching | [✅](./Templates/Network_devices/SNMPv2_Netgear_Switching/3.0) |  |  |
+| SNMPv2 UBNT-UniFi-MIB | [✅](./Templates/Network_devices/SNMPv2_UBNT-UniFi-MIB/3.0) |  |  |
+| SNMPv2 UCD-SNMP-MIB load average | [✅](./Templates/Network_devices/SNMPv2_UCD-SNMP-MIB_load_average/3.0) |  |  |
+| SNMPv2 UCD-SNMP-MIB memory | [✅](./Templates/Network_devices/SNMPv2_UCD-SNMP-MIB_memory/3.0) |  |  |
+
+### Templates: Operating systems
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| FreeBSD | [✅](./Templates/Operating_systems/FreeBSD/3.0) |  |  |
+| Linux | [✅](./Templates/Operating_systems/Linux/3.0) |  |  |
+
+### Templates: Server hardware
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| Drive Slot Sensors | [✅](./Templates/Server_hardware/Drive_Slot_Sensors/3.0) |  |  |
+| Module Board Generic Sensors | [✅](./Templates/Server_hardware/Module_Board_Generic_Sensors/3.0) |  |  |
+| Power Supply Generic Sensors | [✅](./Templates/Server_hardware/Power_Supply_Generic_Sensors/3.0) |  |  |
+| Power Supply Sensors | [✅](./Templates/Server_hardware/Power_Supply_Sensors/3.0) |  |  |
+| Sensor Discovery | [✅](./Templates/Server_hardware/Sensor_Discovery/3.0) |  |  |
+| Supermicro SSG-6048R-E1CR24N | [✅](./Templates/Server_hardware/Supermicro_SSG-6048R-E1CR24N/3.0) |  |  |
+| Supermicro X7DWU | [✅](./Templates/Server_hardware/Supermicro_X7DWU/3.0) |  |  |
+| Threshold Sensors | [✅](./Templates/Server_hardware/Threshold_Sensors/3.0) |  |  |
+
+## Overrides
+
+In some cases we override the Zabbix out-of-the-box templates to
+ensure they fit our use case. We publish the changed templates along
+with a generated diff against its upstream version.
+
+| Name | 6.4 | 7.0 |
+| ---- | --- | --- |
+| Apache by HTTP | [✅](./Overrides/Apache_by_HTTP/6.4) |  |
+| Nginx by HTTP | [✅](./Overrides/Nginx_by_HTTP/6.4) |  |
+
+## Zabbix Version Support
+
+We primarily support versions of Zabbix we use in production.
+
+| Version | Supported | Description |
+| ------- | --------- | ----------- |
+| 3.0 | ✅ | legacy RaBe environment |
+| 6.4 | ✅ | for LTS preparation work until 7.0 is available |
+| 7.0 | ✅ | once released |
+
+## OS Version Support
+
+Our Zabbix 3.0 template mainly template EL7 installations based on CentOS 7.
+The 6.4+ templates aim to support both EL7 as well as EL9, with EL7 on
+a best effort case (e.g. we don't workaround the lack of `timedatectl show`
+on old distros, their timedatectl stays unmonitored).
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) if you want to contribute fixes or templates.
+
+## Previous Versions
+
+If you are looking for the documentation and tooling of the Zabbix 3.0 only
+version of this repo, you may find them in [5d2dfb7](https://github.com/radiorabe/rabe-zabbix/tree/5d2dfb7d91cf84cb4b314f2a3c2b6dd69224cf20).
 
 ## License
-This template collection is free software: you can redistribute it and/or modify it under
-the terms of the GNU Affero General Public License as published by the Free
-Software Foundation, version 3 of the License.
+
+This template collection is free software: you can redistribute it and/or
+modify it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, version 3 of the License.
+
+The contents of the `Overrides/` folder are released under the GNU
+General Public License (GPL) version 2. You can redistribute it and/or
+modify it under the terms of the GNU GPL as published by the Free
+Software Foundation; either version 2 of the License, or (at your
+option) any later version.
 
 ## Copyright
-Copyright (c) 2017 - 2019 [Radio Bern RaBe](http://www.rabe.ch)
+
+Copyright (c) 2017 - 2024 [Radio Bern RaBe](http://www.rabe.ch)
