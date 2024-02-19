@@ -19,3 +19,7 @@ zabbix_export:
       tags:
         - tag: class
           value: stack
+        - tag: system
+          value: songticker
+        - tag: type
+          value: service

@@ -1,6 +1,6 @@
 # Zabbix Template: Songticker Stack
 
-![class: stack](https://img.shields.io/badge/class-stack-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
+![class: stack](https://img.shields.io/badge/class-stack-00c9bf) ![system: songticker](https://img.shields.io/badge/system-songticker-00c9bf) ![type: service](https://img.shields.io/badge/type-service-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 6.4](https://img.shields.io/badge/version-6.4-00c9bf)
 
 Monitoring for our Songticker
 

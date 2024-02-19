@@ -284,6 +284,12 @@
               modify it under the terms of the GNU Affero General Public License as
               published by the Free Software Foundation, version 3 of the License.
 
+              The contents of the `Overrides/` folder are released under the GNU
+              General Public License (GPL) version 2. You can redistribute it and/or
+              modify it under the terms of the GNU GPL as published by the Free
+              Software Foundation; either version 2 of the License, or (at your
+              option) any later version.
+
               ## Copyright
               
               Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
