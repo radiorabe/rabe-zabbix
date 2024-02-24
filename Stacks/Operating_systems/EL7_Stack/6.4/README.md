@@ -14,6 +14,7 @@ This Zabbix template depends on the following templates.
 * auditd
 * candlepin-rhsmcertd
 * certmonger
+* chrony
 * Cronie
 * firewalld
 * gssproxy

@@ -19,6 +19,7 @@ zabbix_export:
         - name: auditd
         - name: candlepin-rhsmcertd
         - name: certmonger
+        - name: chrony
         - name: Cronie
         - name: firewalld
         - name: gssproxy
