@@ -59,7 +59,6 @@ inheritance problems.
 
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
-| Alarm Pinger | [✅](./Templates/Applications/Alarm_Pinger/3.0) |  |  |
 | Apache HTTP Server | [✅](./Templates/Applications/Apache_HTTP_Server/3.0) |  |  |
 | auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) |  |
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
