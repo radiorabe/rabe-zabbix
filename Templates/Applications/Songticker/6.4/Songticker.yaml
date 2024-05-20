@@ -91,6 +91,48 @@ zabbix_export:
           tags:
             - tag: component
               value: songticker
+        - uuid: a503e836d6f6428d83d0a1cf35b98551
+          name: 'Songticker: Current Artist'
+          type: DEPENDENT
+          key: rabe.songticker.track_artist
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          description: 'Currently running artist.'
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''track'']/*[name()=''artist'']/text()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
+        - uuid: 4b158ace141648a7a1d2b5308ab6f4ec
+          name: 'Songticker: Current Title'
+          type: DEPENDENT
+          key: rabe.songticker.track_title
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          description: 'Currently running track.'
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''track'']/*[name()=''title'']/text()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
         - uuid: 17572c4eaaf64ccdae11785ada8f85b0
           name: 'Songticker XML reponse'
           type: HTTP_AGENT
