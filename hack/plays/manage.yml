@@ -36,9 +36,11 @@
     upstream_templates:
       - template_name: "Apache by HTTP"
         upstream: "app/apache_http/template_app_apache_http.yaml"
+    __: # items below are "commented" :)
       - template_name: "Nginx by HTTP"
         upstream: "app/nginx_http/template_app_nginx_http.yaml"
-    __: # items below are "commented" :)
+      - template_name: "RabbitMQ cluster by HTTP"
+        upstream: "app/rabbitmq_http/template_app_rabbitmq_http.yaml"
       - template_name: "Website certificate by Zabbix agent 2"
         upstream: "app/certificate_agent2/template_app_certificate_agent2.yaml"
       - template_name: "Linux by Zabbix agent active"
