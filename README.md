@@ -141,10 +141,7 @@ In some cases we override the Zabbix out-of-the-box templates to
 ensure they fit our use case. We publish the changed templates along
 with a generated diff against its upstream version.
 
-| Name | 6.4 | 7.0 |
-| ---- | --- | --- |
-| Apache by HTTP | [✅](./Overrides/Apache_by_HTTP/6.4) |  |
-| Nginx by HTTP | [✅](./Overrides/Nginx_by_HTTP/6.4) |  |
+Currently, there are no such changes!
 
 ## Zabbix Version Support
 

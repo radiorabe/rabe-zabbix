@@ -33,10 +33,10 @@
       - template_name: "timedatectl"
       - template_name: "tuned"
       - template_name: "Zabbix unsupported items"
-    upstream_templates:
+    upstream_templates: [] # nothing needed, currently
+    __: # items below are "commented" :)
       - template_name: "Apache by HTTP"
         upstream: "app/apache_http/template_app_apache_http.yaml"
-    __: # items below are "commented" :)
       - template_name: "Nginx by HTTP"
         upstream: "app/nginx_http/template_app_nginx_http.yaml"
       - template_name: "RabbitMQ cluster by HTTP"
@@ -246,6 +246,7 @@
               ensure they fit our use case. We publish the changed templates along
               with a generated diff against its upstream version.
 
+              {% if flat_overrides %}
               | Name | 6.4 | 7.0 |
               | ---- | --- | --- |
               {% for override in flat_overrides %}
@@ -253,6 +254,9 @@
               | {{ override.split('/')[1] | replace("_", " ") }} | {% if '6.4' in override %}[✅](./{{ override }}){% endif %} | {% if '7.0' in override %}[✅](./{{ override }}){% endif %} |
               {% endif %}
               {% endfor %}
+              {% else %}
+              Currently, there are no such changes!
+              {% endif %}
 
               ## Zabbix Version Support
 
