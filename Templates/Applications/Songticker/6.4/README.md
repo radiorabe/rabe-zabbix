@@ -84,6 +84,58 @@ Preprocessing steps:
 | XMLPATH | `["/*[name()='ticker']/*[name()='show']/*[name()='name']/text()"]` |
 | DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
 
+### Item: Songticker: Current Artist
+
+![component: songticker](https://img.shields.io/badge/component-songticker-00c9bf)
+
+Currently running artist.
+
+```console
+rabe.songticker.track_artist
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | TEXT |
+| History | 7d |
+| Source item | `rabe.songticker.xml` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| XMLPATH | `["/*[name()='ticker']/*[name()='track']/*[name()='artist']/text()"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
+
+### Item: Songticker: Current Title
+
+![component: songticker](https://img.shields.io/badge/component-songticker-00c9bf)
+
+Currently running track.
+
+```console
+rabe.songticker.track_title
+```
+
+Settings:
+
+| Item Setting | Value |
+| ------------ | ----- |
+| Type | DEPENDENT |
+| Value type | TEXT |
+| History | 7d |
+| Source item | `rabe.songticker.xml` |
+
+Preprocessing steps:
+
+| Type | Parameters |
+| ---- | ---------- |
+| XMLPATH | `["/*[name()='ticker']/*[name()='track']/*[name()='title']/text()"]` |
+| DISCARD_UNCHANGED_HEARTBEAT | `["30m"]` |
+
 ### Item: Songticker XML reponse
 
 ![component: raw](https://img.shields.io/badge/component-raw-00c9bf)
