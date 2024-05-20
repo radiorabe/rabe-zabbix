@@ -3885,6 +3885,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#item-songticker-current-artist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item: Songticker: Current Artist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-songticker-current-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item: Songticker: Current Title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#item-songticker-xml-reponse" class="md-nav__link">
     <span class="md-ellipsis">
       Item: Songticker XML reponse
@@ -8890,6 +8908,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#item-songticker-current-artist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item: Songticker: Current Artist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-songticker-current-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item: Songticker: Current Title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#item-songticker-xml-reponse" class="md-nav__link">
     <span class="md-ellipsis">
       Item: Songticker XML reponse
@@ -9149,9 +9185,111 @@
 </tr>
 </tbody>
 </table>
+<h3 id="item-songticker-current-artist">Item: Songticker: Current Artist</h3>
+<p><img alt="component: songticker" src="https://img.shields.io/badge/component-songticker-00c9bf" /></p>
+<p>Currently running artist.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">rabe.songticker.track_artist</span>
+</code></pre></div>
+<p>Settings:</p>
+<table>
+<thead>
+<tr>
+<th>Item Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>DEPENDENT</td>
+</tr>
+<tr>
+<td>Value type</td>
+<td>TEXT</td>
+</tr>
+<tr>
+<td>History</td>
+<td>7d</td>
+</tr>
+<tr>
+<td>Source item</td>
+<td><code>rabe.songticker.xml</code></td>
+</tr>
+</tbody>
+</table>
+<p>Preprocessing steps:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XMLPATH</td>
+<td><code>["/*[name()='ticker']/*[name()='track']/*[name()='artist']/text()"]</code></td>
+</tr>
+<tr>
+<td>DISCARD_UNCHANGED_HEARTBEAT</td>
+<td><code>["30m"]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="item-songticker-current-title">Item: Songticker: Current Title</h3>
+<p><img alt="component: songticker" src="https://img.shields.io/badge/component-songticker-00c9bf" /></p>
+<p>Currently running track.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">rabe.songticker.track_title</span>
+</code></pre></div>
+<p>Settings:</p>
+<table>
+<thead>
+<tr>
+<th>Item Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>DEPENDENT</td>
+</tr>
+<tr>
+<td>Value type</td>
+<td>TEXT</td>
+</tr>
+<tr>
+<td>History</td>
+<td>7d</td>
+</tr>
+<tr>
+<td>Source item</td>
+<td><code>rabe.songticker.xml</code></td>
+</tr>
+</tbody>
+</table>
+<p>Preprocessing steps:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XMLPATH</td>
+<td><code>["/*[name()='ticker']/*[name()='track']/*[name()='title']/text()"]</code></td>
+</tr>
+<tr>
+<td>DISCARD_UNCHANGED_HEARTBEAT</td>
+<td><code>["30m"]</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="item-songticker-xml-reponse">Item: Songticker XML reponse</h3>
 <p><img alt="component: raw" src="https://img.shields.io/badge/component-raw-00c9bf" /></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">rabe.songticker.xml</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">rabe.songticker.xml</span>
 </code></pre></div>
 <p>Settings:</p>
 <table>
@@ -9191,14 +9329,14 @@ Settings:</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">last(/Songticker/rabe.songticker.show_endtime)-time()&lt;0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">last(/Songticker/rabe.songticker.show_endtime)-time()&lt;0</span>
 </code></pre></div>
 <h2 id="macros">Macros</h2>
 <p>The following Zabbix macros are configured via this template.</p>
 <h3 id="macro-songtickerxmlendpoint">Macro: <code>{$SONGTICKER.XML.ENDPOINT}</code></h3>
 <p>Location of the generated XML file for Songticker</p>
 <p>Default:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">https://songticker.rabe.ch/songticker/0.9.3/current.xml</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">https://songticker.rabe.ch/songticker/0.9.3/current.xml</span>
 </code></pre></div>
 <h2 id="dashboards">Dashboards</h2>
 <p>The following Zabbix dashboards are included in this template.</p>
