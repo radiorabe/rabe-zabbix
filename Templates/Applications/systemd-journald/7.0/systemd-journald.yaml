@@ -1,0 +1,592 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: c0d178b0ba524448b7bf7b5644009d37
+      template: systemd-journald
+      name: systemd-journald
+      description: |
+        Monitoring of [systemd-journald](https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 363fe7de80bd462aa3d37146674de67c
+          name: 'systemd-journald: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[systemd-journald,root,,summary]'
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Get info about systemd-journald processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 2494ccda55a045e894dcf33ee28ba00a
+          name: 'systemd-journald: Unit active state'
+          type: DEPENDENT
+          key: rabe.systemd-journald.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["systemd-journald.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 8912efe4d5334ec099cceed708e0aba8
+              expression: last(/systemd-journald/rabe.systemd-journald.active_state)<>1
+              name: 'systemd-journald: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: c7931c7ada3747f39a4982111ad85344
+          name: 'systemd-journald: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.systemd-journald.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: 945b74e98c744651a681109fe71ff16b
+          name: 'systemd-journald: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.systemd-journald.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: 86823152e33a48b3b3ec9ca2dd06c094
+          name: 'systemd-journald: Service load state'
+          type: DEPENDENT
+          key: rabe.systemd-journald.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["systemd-journald.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 7545d90e87ab4f8396591f0d1d0498b6
+          name: 'systemd-journald: Number of processes'
+          type: DEPENDENT
+          key: rabe.systemd-journald.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+          triggers:
+            - uuid: 2e718d635eee47f8987d572b690dd20a
+              expression: 'last(/systemd-journald/rabe.systemd-journald.processes)<{$SYSTEMDJOURNALD.THRESHOLD.MIN_PROC}'
+              name: 'systemd-journald: No running processes'
+              priority: HIGH
+              description: 'No running systemd-journald processes.'
+              dependencies:
+                - name: 'systemd-journald: Service is not running'
+                  expression: last(/systemd-journald/rabe.systemd-journald.active_state)<>1
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: ee555340f7544fb0b0ba742826baf5ab
+          name: 'systemd-journald: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.systemd-journald.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: c11f4d417aa74fb8be1f4d5501eaf3f1
+          name: 'systemd-journald: Swap usage'
+          type: DEPENDENT
+          key: rabe.systemd-journald.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of systemd-journald processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: fe6b759f836041878266787446195030
+          name: 'systemd-journald: Number of threads'
+          type: DEPENDENT
+          key: rabe.systemd-journald.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-journald threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-journald,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-journald
+        - uuid: ea0bbb0d1309474fb9eb6ddcd255e7b2
+          name: 'systemd-journald: Unit file state'
+          type: DEPENDENT
+          key: rabe.systemd-journald.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["systemd-journald.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 7f0e73f84b974f58a666dbdd82aa2e91
+          name: 'systemd-journald: Uptime'
+          type: DEPENDENT
+          key: rabe.systemd-journald.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: uptime
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["systemd-journald.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: 20c0d0a59aee4471b591984a4de1b6fa
+              expression: last(/systemd-journald/rabe.systemd-journald.uptime)<=10m
+              name: 'systemd-journald: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: aa7a1a7f8ca2493c82057f5963a936a2
+          name: 'systemd-journald: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["systemd-journald.service"]'
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: systemd-journald
+      macros:
+        - macro: '{$SYSTEMDJOURNALD.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
+      dashboards:
+        - uuid: e7954e35bcb845b39fd8fb0b4a5b9654
+          name: 'systemd-journald: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '24'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
+                - type: graph
+                  'y': '4'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.cputime_user
+                    - type: STRING
+                      name: reference
+                      value: AABKN
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '9'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.rss
+                    - type: STRING
+                      name: reference
+                      value: AABKO
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '24'
+                  width: '18'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
+                - type: graph
+                  x: '36'
+                  'y': '4'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.cputime_system
+                    - type: STRING
+                      name: reference
+                      value: AABKP
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '36'
+                  'y': '9'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.swap
+                    - type: STRING
+                      name: reference
+                      value: AABKQ
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '42'
+                  width: '12'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '6'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '7'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '8'
+                - type: item
+                  x: '42'
+                  'y': '2'
+                  width: '12'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '2'
+                - type: item
+                  x: '60'
+                  width: '12'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-journald
+                        key: rabe.systemd-journald.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+      valuemaps:
+        - uuid: a1a9b9d4abd44617b2c935ab7a996e4c
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: 76365f9e226341c990150d110e6d92db
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: 46f704bbfdec4e3c872b6db247caecb2
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked

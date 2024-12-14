@@ -1,0 +1,592 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 68c64cee88374d66840dc22b430809d1
+      template: systemd-udevd
+      name: systemd-udevd
+      description: |
+        Monitoring of [systemd-udevd](https://www.freedesktop.org/software/systemd/man/latest/systemd-udevd.service.html).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: e84cdf8391e84b0bb54750115c7575f6
+          name: 'systemd-udevd: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[systemd-udevd,root,,summary]'
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Get info about systemd-udevd processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 169078f3661f44049ecfe145d31cfd72
+          name: 'systemd-udevd: Unit active state'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["systemd-udevd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: cc3834ce8310433298ed3c3ee0ad7711
+              expression: last(/systemd-udevd/rabe.systemd-udevd.active_state)<>1
+              name: 'systemd-udevd: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 865669d5334043fbbea0cbb8ebb76ff8
+          name: 'systemd-udevd: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: f1764724074e4af6b847345962f89bb9
+          name: 'systemd-udevd: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 1cb71c9a92744506b2cc41c1255edeac
+          name: 'systemd-udevd: Service load state'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["systemd-udevd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: ed587c3a2b304a169b26b5a5ef6d1685
+          name: 'systemd-udevd: Number of processes'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+          triggers:
+            - uuid: e05fd53525de4f05a5abf0406704bb95
+              expression: 'last(/systemd-udevd/rabe.systemd-udevd.processes)<{$SYSTEMDUDEVD.THRESHOLD.MIN_PROC}'
+              name: 'systemd-udevd: No running processes'
+              priority: HIGH
+              description: 'No running systemd-udevd processes.'
+              dependencies:
+                - name: 'systemd-udevd: Service is not running'
+                  expression: last(/systemd-udevd/rabe.systemd-udevd.active_state)<>1
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 962006696ce140938b981b211f6805a5
+          name: 'systemd-udevd: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 10a6f83b779840adbe4c961108171faa
+          name: 'systemd-udevd: Swap usage'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of systemd-udevd processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: decff16e2eac4cd58d4adc84f5423871
+          name: 'systemd-udevd: Number of threads'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of systemd-udevd threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[systemd-udevd,root,,summary]'
+          tags:
+            - tag: component
+              value: systemd-udevd
+        - uuid: 07e8cd833db64556b87d55282cbe5edc
+          name: 'systemd-udevd: Unit file state'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["systemd-udevd.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: f4a17e829ec3416182649d7ddeb51e1f
+          name: 'systemd-udevd: Uptime'
+          type: DEPENDENT
+          key: rabe.systemd-udevd.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: uptime
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["systemd-udevd.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: a37f38acac464b43b196b641dfba5ffd
+              expression: last(/systemd-udevd/rabe.systemd-udevd.uptime)<=10m
+              name: 'systemd-udevd: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: b708a6fbee704fdc93f8a68fe2148928
+          name: 'systemd-udevd: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["systemd-udevd.service"]'
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: systemd-udevd
+      macros:
+        - macro: '{$SYSTEMDUDEVD.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
+      dashboards:
+        - uuid: aaa56c2502e344e49062c6d1d21ae124
+          name: 'systemd-udevd: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '24'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
+                - type: graph
+                  'y': '4'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.cputime_user
+                    - type: STRING
+                      name: reference
+                      value: AABKV
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '9'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.rss
+                    - type: STRING
+                      name: reference
+                      value: AABKW
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '24'
+                  width: '18'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
+                - type: graph
+                  x: '36'
+                  'y': '4'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.cputime_system
+                    - type: STRING
+                      name: reference
+                      value: AABKX
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '36'
+                  'y': '9'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.swap
+                    - type: STRING
+                      name: reference
+                      value: AABKY
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '42'
+                  width: '12'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '6'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '7'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '8'
+                - type: item
+                  x: '42'
+                  'y': '2'
+                  width: '12'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '2'
+                - type: item
+                  x: '60'
+                  width: '12'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: systemd-udevd
+                        key: rabe.systemd-udevd.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+      valuemaps:
+        - uuid: 9598ed70a3af401fbf0e9fb6a2d7f851
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: 64c4a8a82f514fc6b32eb23f7a1171cb
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: eb7cce35ded54ebdae38113b45db455b
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked

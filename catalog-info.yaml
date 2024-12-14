@@ -32,7 +32,7 @@ spec:
   owner: it-reaktion
   system: rabe-zabbix
 ---
-# Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4/Apache_with_TLS_by_HTTP_Stack.yaml
+# Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/7.0/Apache_with_TLS_by_HTTP_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -41,10 +41,10 @@ metadata:
   description: |
     Monitor Apache by HTTP and do a Zabbix agent2 based certificate check.
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -55,7 +55,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4/Nginx_with_TLS_by_HTTP_Stack.yaml
+# Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/7.0/Nginx_with_TLS_by_HTTP_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -64,10 +64,10 @@ metadata:
   description: |
     Monitor Nginx by HTTP and do a Zabbix agent2 based certificate check.
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -78,7 +78,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Applications/Songticker_Stack/6.4/Songticker_Stack.yaml
+# Stacks/Applications/Songticker_Stack/7.0/Songticker_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -87,10 +87,10 @@ metadata:
   description: |
     Monitoring for our Songticker
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Applications/Songticker_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/Songticker_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Songticker_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/Songticker_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -101,7 +101,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Applications/systemd_Stack/6.4/systemd_Stack.yaml
+# Stacks/Applications/systemd_Stack/7.0/systemd_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -115,10 +115,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Applications/systemd_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Applications/systemd_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/systemd_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Applications/systemd_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -129,7 +129,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Operating_systems/EL7_Stack/6.4/EL7_Stack.yaml
+# Stacks/Operating_systems/EL7_Stack/7.0/EL7_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -142,10 +142,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL7_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL7_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Operating_systems/EL7_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Operating_systems/EL7_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -156,7 +156,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Operating_systems/EL8_Stack/6.4/EL8_Stack.yaml
+# Stacks/Operating_systems/EL8_Stack/7.0/EL8_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -169,10 +169,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL8_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL8_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Operating_systems/EL8_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Operating_systems/EL8_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -183,7 +183,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Operating_systems/EL9_Stack/6.4/EL9_Stack.yaml
+# Stacks/Operating_systems/EL9_Stack/7.0/EL9_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -196,10 +196,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL9_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Operating_systems/EL9_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Operating_systems/EL9_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Operating_systems/EL9_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -210,7 +210,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Servers/EL7_KVM_VM_Stack/6.4/EL7_KVM_VM_Stack.yaml
+# Stacks/Servers/EL7_KVM_VM_Stack/7.0/EL7_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -223,10 +223,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL7_KVM_VM_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL7_KVM_VM_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL7_KVM_VM_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL7_KVM_VM_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -237,7 +237,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Servers/EL8_KVM_VM_Stack/6.4/EL8_KVM_VM_Stack.yaml
+# Stacks/Servers/EL8_KVM_VM_Stack/7.0/EL8_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -250,10 +250,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL8_KVM_VM_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL8_KVM_VM_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL8_KVM_VM_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL8_KVM_VM_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -264,7 +264,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Stacks/Servers/EL9_KVM_VM_Stack/6.4/EL9_KVM_VM_Stack.yaml
+# Stacks/Servers/EL9_KVM_VM_Stack/7.0/EL9_KVM_VM_Stack.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -277,10 +277,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL9_KVM_VM_Stack/6.4
+    backstage.io/techdocs-ref: dir:./Stacks/Servers/EL9_KVM_VM_Stack/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL9_KVM_VM_Stack/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Servers/EL9_KVM_VM_Stack/7.0
       title: GitHub
       icon: github
   tags: [stack]
@@ -291,7 +291,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/auditd/6.4/auditd.yaml
+# Templates/Applications/auditd/7.0/auditd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -304,10 +304,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/auditd/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/auditd/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/auditd/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/auditd/7.0
       title: GitHub
       icon: github
   tags: [software, auditd]
@@ -318,7 +318,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/candlepin-rhsmcertd/6.4/candlepin-rhsmcertd.yaml
+# Templates/Applications/candlepin-rhsmcertd/7.0/candlepin-rhsmcertd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -331,10 +331,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/candlepin-rhsmcertd/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/candlepin-rhsmcertd/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/candlepin-rhsmcertd/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/candlepin-rhsmcertd/7.0
       title: GitHub
       icon: github
   tags: [software, candlepin-rhsmcertd]
@@ -345,7 +345,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/certmonger/6.4/certmonger.yaml
+# Templates/Applications/certmonger/7.0/certmonger.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -358,10 +358,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/certmonger/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/certmonger/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/certmonger/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/certmonger/7.0
       title: GitHub
       icon: github
   tags: [software, certmonger]
@@ -372,7 +372,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/chrony/6.4/chrony.yaml
+# Templates/Applications/chrony/7.0/chrony.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -391,10 +391,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/chrony/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/chrony/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/chrony/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/chrony/7.0
       title: GitHub
       icon: github
   tags: [software, chrony]
@@ -405,7 +405,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/Cronie/6.4/Cronie.yaml
+# Templates/Applications/Cronie/7.0/Cronie.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -418,10 +418,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/Cronie/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/Cronie/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Cronie/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Cronie/7.0
       title: GitHub
       icon: github
   tags: [software, cronie]
@@ -432,7 +432,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/firewalld/6.4/firewalld.yaml
+# Templates/Applications/firewalld/7.0/firewalld.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -445,10 +445,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/firewalld/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/firewalld/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/firewalld/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/firewalld/7.0
       title: GitHub
       icon: github
   tags: [software, firewalld]
@@ -459,7 +459,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/gssproxy/6.4/gssproxy.yaml
+# Templates/Applications/gssproxy/7.0/gssproxy.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -472,10 +472,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/gssproxy/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/gssproxy/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/gssproxy/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/gssproxy/7.0
       title: GitHub
       icon: github
   tags: [software, gssproxy]
@@ -486,7 +486,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/qemu-ga/6.4/qemu-ga.yaml
+# Templates/Applications/qemu-ga/7.0/qemu-ga.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -499,10 +499,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/qemu-ga/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/qemu-ga/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/qemu-ga/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/qemu-ga/7.0
       title: GitHub
       icon: github
   tags: [software, qemu-ga]
@@ -513,7 +513,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/rpc.gssd/6.4/rpc.gssd.yaml
+# Templates/Applications/rpc.gssd/7.0/rpc.gssd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -526,10 +526,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/rpc.gssd/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/rpc.gssd/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/rpc.gssd/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/rpc.gssd/7.0
       title: GitHub
       icon: github
   tags: [software, rpcgssd]
@@ -540,7 +540,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/rsyslog/6.4/rsyslog.yaml
+# Templates/Applications/rsyslog/7.0/rsyslog.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -553,10 +553,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/rsyslog/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/rsyslog/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/rsyslog/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/rsyslog/7.0
       title: GitHub
       icon: github
   tags: [software, rsyslog]
@@ -567,7 +567,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/Songticker/6.4/Songticker.yaml
+# Templates/Applications/Songticker/7.0/Songticker.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -576,10 +576,10 @@ metadata:
   description: |
     Check if the songticker is getting regular updates
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/Songticker/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/Songticker/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Songticker/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Songticker/7.0
       title: GitHub
       icon: github
   tags: [software, songticker]
@@ -590,7 +590,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/sssd/6.4/sssd.yaml
+# Templates/Applications/sssd/7.0/sssd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -603,10 +603,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/sssd/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/sssd/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/sssd/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/sssd/7.0
       title: GitHub
       icon: github
   tags: [software, sssd]
@@ -617,7 +617,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/systemd-journald/6.4/systemd-journald.yaml
+# Templates/Applications/systemd-journald/7.0/systemd-journald.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -630,10 +630,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-journald/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-journald/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-journald/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-journald/7.0
       title: GitHub
       icon: github
   tags: [software, systemd-journald]
@@ -644,7 +644,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/systemd-logind/6.4/systemd-logind.yaml
+# Templates/Applications/systemd-logind/7.0/systemd-logind.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -657,10 +657,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-logind/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-logind/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-logind/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-logind/7.0
       title: GitHub
       icon: github
   tags: [software, systemd-logind]
@@ -671,7 +671,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/systemd-udevd/6.4/systemd-udevd.yaml
+# Templates/Applications/systemd-udevd/7.0/systemd-udevd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -684,10 +684,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-udevd/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/systemd-udevd/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-udevd/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/systemd-udevd/7.0
       title: GitHub
       icon: github
   tags: [software, systemd-udevd]
@@ -698,7 +698,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/timedatectl/6.4/timedatectl.yaml
+# Templates/Applications/timedatectl/7.0/timedatectl.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -719,10 +719,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/timedatectl/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/timedatectl/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/timedatectl/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/timedatectl/7.0
       title: GitHub
       icon: github
   tags: [software, timedatectl]
@@ -733,7 +733,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/tuned/6.4/tuned.yaml
+# Templates/Applications/tuned/7.0/tuned.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -746,10 +746,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/tuned/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/tuned/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/tuned/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/tuned/7.0
       title: GitHub
       icon: github
   tags: [software, tuned]
@@ -760,7 +760,7 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
-# Templates/Applications/Zabbix_unsupported_items/6.4/Zabbix_unsupported_items.yaml
+# Templates/Applications/Zabbix_unsupported_items/7.0/Zabbix_unsupported_items.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -775,10 +775,10 @@ metadata:
     collection](https://github.com/radiorabe/rabe-zabbix).
 
   annotations:
-    backstage.io/techdocs-ref: dir:./Templates/Applications/Zabbix_unsupported_items/6.4
+    backstage.io/techdocs-ref: dir:./Templates/Applications/Zabbix_unsupported_items/7.0
     github.com/project-slug: radiorabe/rabe-zabbix
   links:
-    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Zabbix_unsupported_items/6.4
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Zabbix_unsupported_items/7.0
       title: GitHub
       icon: github
   tags: [app, zabbix]

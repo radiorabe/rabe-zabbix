@@ -25,10 +25,10 @@ inheritance problems.
 
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
-| Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4) |  |
-| Nginx with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4) |  |
-| Songticker Stack |  | [✅](./Stacks/Applications/Songticker_Stack/6.4) |  |
-| systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) |  |
+| Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4) | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/7.0) |
+| Nginx with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4) | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/7.0) |
+| Songticker Stack |  | [✅](./Stacks/Applications/Songticker_Stack/6.4) | [✅](./Stacks/Applications/Songticker_Stack/7.0) |
+| systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) | [✅](./Stacks/Applications/systemd_Stack/7.0) |
 
 ### Stacks: Network devices
 
@@ -41,17 +41,17 @@ inheritance problems.
 
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
-| EL7 Stack |  | [✅](./Stacks/Operating_systems/EL7_Stack/6.4) |  |
-| EL8 Stack |  | [✅](./Stacks/Operating_systems/EL8_Stack/6.4) |  |
-| EL9 Stack |  | [✅](./Stacks/Operating_systems/EL9_Stack/6.4) |  |
+| EL7 Stack |  | [✅](./Stacks/Operating_systems/EL7_Stack/6.4) | [✅](./Stacks/Operating_systems/EL7_Stack/7.0) |
+| EL8 Stack |  | [✅](./Stacks/Operating_systems/EL8_Stack/6.4) | [✅](./Stacks/Operating_systems/EL8_Stack/7.0) |
+| EL9 Stack |  | [✅](./Stacks/Operating_systems/EL9_Stack/6.4) | [✅](./Stacks/Operating_systems/EL9_Stack/7.0) |
 
 ### Stacks: Servers
 
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
-| EL7 KVM VM Stack |  | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/6.4) |  |
-| EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/6.4) |  |
-| EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/6.4) |  |
+| EL7 KVM VM Stack |  | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/7.0) |
+| EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/7.0) |
+| EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/7.0) |
 
 ## Templates
 
@@ -60,20 +60,20 @@ inheritance problems.
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
 | Apache HTTP Server | [✅](./Templates/Applications/Apache_HTTP_Server/3.0) |  |  |
-| auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) |  |
+| auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) | [✅](./Templates/Applications/auditd/7.0) |
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
-| candlepin-rhsmcertd |  | [✅](./Templates/Applications/candlepin-rhsmcertd/6.4) |  |
+| candlepin-rhsmcertd |  | [✅](./Templates/Applications/candlepin-rhsmcertd/6.4) | [✅](./Templates/Applications/candlepin-rhsmcertd/7.0) |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
-| certmonger |  | [✅](./Templates/Applications/certmonger/6.4) |  |
-| chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) |  |
-| Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/6.4) |  |
+| certmonger |  | [✅](./Templates/Applications/certmonger/6.4) | [✅](./Templates/Applications/certmonger/7.0) |
+| chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) | [✅](./Templates/Applications/chrony/7.0) |
+| Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/6.4) | [✅](./Templates/Applications/Cronie/7.0) |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
 | dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |
-| firewalld |  | [✅](./Templates/Applications/firewalld/6.4) |  |
+| firewalld |  | [✅](./Templates/Applications/firewalld/6.4) | [✅](./Templates/Applications/firewalld/7.0) |
 | GlusterFS Client | [✅](./Templates/Applications/GlusterFS_Client/3.0) |  |  |
 | GlusterFS Server | [✅](./Templates/Applications/GlusterFS_Server/3.0) |  |  |
-| gssproxy | [✅](./Templates/Applications/gssproxy/3.0) | [✅](./Templates/Applications/gssproxy/6.4) |  |
+| gssproxy | [✅](./Templates/Applications/gssproxy/3.0) | [✅](./Templates/Applications/gssproxy/6.4) | [✅](./Templates/Applications/gssproxy/7.0) |
 | Icecast | [✅](./Templates/Applications/Icecast/3.0) |  |  |
 | ISC DHCP daemon | [✅](./Templates/Applications/ISC_DHCP_daemon/3.0) |  |  |
 | ISC DHCP Relay Agent | [✅](./Templates/Applications/ISC_DHCP_Relay_Agent/3.0) |  |  |
@@ -84,19 +84,19 @@ inheritance problems.
 | LVM | [✅](./Templates/Applications/LVM/3.0) |  |  |
 | MD-RAID | [✅](./Templates/Applications/MD-RAID/3.0) |  |  |
 | ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
-| qemu-ga |  | [✅](./Templates/Applications/qemu-ga/6.4) |  |
+| qemu-ga |  | [✅](./Templates/Applications/qemu-ga/6.4) | [✅](./Templates/Applications/qemu-ga/7.0) |
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
-| rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) |  |
-| rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) |  |
-| Songticker |  | [✅](./Templates/Applications/Songticker/6.4) |  |
-| sssd |  | [✅](./Templates/Applications/sssd/6.4) |  |
-| systemd-journald |  | [✅](./Templates/Applications/systemd-journald/6.4) |  |
-| systemd-logind |  | [✅](./Templates/Applications/systemd-logind/6.4) |  |
-| systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/6.4) |  |
-| timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) |  |
-| tuned |  | [✅](./Templates/Applications/tuned/6.4) |  |
+| rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) | [✅](./Templates/Applications/rpc.gssd/7.0) |
+| rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) | [✅](./Templates/Applications/rsyslog/7.0) |
+| Songticker |  | [✅](./Templates/Applications/Songticker/6.4) | [✅](./Templates/Applications/Songticker/7.0) |
+| sssd |  | [✅](./Templates/Applications/sssd/6.4) | [✅](./Templates/Applications/sssd/7.0) |
+| systemd-journald |  | [✅](./Templates/Applications/systemd-journald/6.4) | [✅](./Templates/Applications/systemd-journald/7.0) |
+| systemd-logind |  | [✅](./Templates/Applications/systemd-logind/6.4) | [✅](./Templates/Applications/systemd-logind/7.0) |
+| systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/6.4) | [✅](./Templates/Applications/systemd-udevd/7.0) |
+| timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) | [✅](./Templates/Applications/timedatectl/7.0) |
+| tuned |  | [✅](./Templates/Applications/tuned/6.4) | [✅](./Templates/Applications/tuned/7.0) |
 | zabbix-agent | [✅](./Templates/Applications/zabbix-agent/3.0) |  |  |
-| Zabbix unsupported items |  | [✅](./Templates/Applications/Zabbix_unsupported_items/6.4) |  |
+| Zabbix unsupported items |  | [✅](./Templates/Applications/Zabbix_unsupported_items/6.4) | [✅](./Templates/Applications/Zabbix_unsupported_items/7.0) |
 
 ### Templates: Network devices
 
@@ -149,8 +149,8 @@ We primarily support versions of Zabbix we use in production.
 | Version | Supported | Description |
 | ------- | --------- | ----------- |
 | 3.0 | ✅ | legacy RaBe environment |
-| 6.4 | ✅ | for LTS preparation work until 7.0 is available |
-| 7.0 | ✅ | once released |
+| 6.4 | ✅ | unsupported since 2024-12 |
+| 7.0 | ✅ | stable LTS |
 
 ## OS Version Support
 

@@ -3,7 +3,7 @@
   hosts: [localhost]
 
   vars:
-    target_version: '6.4'
+    target_version: '7.0'
     rabe_zabbix_templates:
       - template_name: "Apache with TLS by HTTP Stack"
       - template_name: "auditd"
@@ -265,8 +265,8 @@
               | Version | Supported | Description |
               | ------- | --------- | ----------- |
               | 3.0 | ✅ | legacy RaBe environment |
-              | 6.4 | ✅ | for LTS preparation work until 7.0 is available |
-              | 7.0 | ✅ | once released |
+              | 6.4 | ✅ | unsupported since 2024-12 |
+              | 7.0 | ✅ | stable LTS |
 
               ## OS Version Support
 
@@ -356,6 +356,7 @@
                 owner: it-reaktion
                 system: rabe-zabbix
               {% for file in (yaml.files | map(attribute="path") | sort ) %}
+              {% if '7.0' in file %}
               {% set template = (lookup("ansible.builtin.file", "../../"+file) | from_yaml).zabbix_export %}
               ---
               # {{ file }}
@@ -380,10 +381,12 @@
                 owner: it-reaktion
                 system: rabe-zabbix
                 subcomponentOf: rabe-zabbix-templates
+              {% endif %}
               {% endfor %}
 
         - name: "RaBe Zabbix Templator : Generate template mkdocs.yaml"
           loop: "{{ yaml.files | map(attribute='path') }}"
+          when: '"7.0" in item'
           ansible.builtin.copy:
             dest: '{{ item | dirname }}/mkdocs.yaml'
             content: |
@@ -408,12 +411,14 @@
 
         - name: 'RaBe Zabbix Templator : Create Template docs directory'
           loop: "{{ yaml.files | map(attribute='path') }}"
+          when: '"7.0" in item'
           ansible.builtin.file:
             state: directory
             dest: '{{ item | dirname }}/docs'
 
         - name: "RaBe Zabbix Templator : Generate template gen_ref_pages.py"
           loop: "{{ yaml.files | map(attribute='path') }}"
+          when: '"7.0" in item'
           ansible.builtin.copy:
             dest: '{{ item | dirname }}/docs/gen_ref_pages.py'
             content: |

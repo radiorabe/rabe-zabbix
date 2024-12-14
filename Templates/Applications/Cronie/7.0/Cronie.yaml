@@ -1,0 +1,592 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 68118ee2b30546478c4a6caf3cc257d8
+      template: Cronie
+      name: Cronie
+      description: |
+        Monitoring of [Cronie](https://github.com/cronie-crond/cronie).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: bfc5695c8f9a42369b6f20f8ca8f9198
+          name: 'Cronie: process summary'
+          type: ZABBIX_ACTIVE
+          key: 'proc.get[crond,root,,summary]'
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Get info about Cronie processes'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: c7503e4685954459b1f5cdd4689dac8f
+          name: 'Cronie: Unit active state'
+          type: DEPENDENT
+          key: rabe.Cronie.active_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the unit is currently active or not. The following states are currently defined: "active", "reloading", "inactive", "failed", "activating", and "deactivating".'
+          valuemap:
+            name: 'Unit Active State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ActiveState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["crond.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: fe48013762a544c2af6fa8f85ebde1ba
+              expression: last(/Cronie/rabe.Cronie.active_state)<>1
+              name: 'Cronie: Service is not running'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 24d9fbaae29343c3ad35960410ef8f24
+          name: 'Cronie: CPU seconds (system)'
+          type: DEPENDENT
+          key: rabe.Cronie.cputime_system
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (system) of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_system.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: cronie
+        - uuid: 3329d9db09dd42c2b4b79f7bb580b09a
+          name: 'Cronie: CPU seconds (user)'
+          type: DEPENDENT
+          key: rabe.Cronie.cputime_user
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          description: 'Total CPU seconds (user) of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].cputime_user.first()'
+            - type: SIMPLE_CHANGE
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: cronie
+        - uuid: 5bf43cd9eaa9460799dafcc827501a70
+          name: 'Cronie: Service load state'
+          type: DEPENDENT
+          key: rabe.Cronie.load_state
+          delay: '0'
+          history: 7d
+          description: 'State value that reflects whether the configuration file of this unit has been loaded. The following states are currently defined: "loaded", "error", and "masked".'
+          valuemap:
+            name: 'Unit Load State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoadState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["crond.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: fc21c63ac8c048ab82558630a5b4f8b1
+          name: 'Cronie: Number of processes'
+          type: DEPENDENT
+          key: rabe.Cronie.processes
+          delay: '0'
+          history: 7d
+          description: 'Number of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].processes.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: cronie
+          triggers:
+            - uuid: ef13887e22f34a408992a818b6d68f2f
+              expression: 'last(/Cronie/rabe.Cronie.processes)<{$CRONIE.THRESHOLD.MIN_PROC}'
+              name: 'Cronie: No running processes'
+              priority: HIGH
+              description: 'No running Cronie processes.'
+              dependencies:
+                - name: 'Cronie: Service is not running'
+                  expression: last(/Cronie/rabe.Cronie.active_state)<>1
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 32752c9c060e4f0fa7f3c1726a38758c
+          name: 'Cronie: Memory usage (RSS)'
+          type: DEPENDENT
+          key: rabe.Cronie.rss
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Memory usage of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].rss.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: cronie
+        - uuid: 2367b7951dcf43528a91c2ab7358c8b5
+          name: 'Cronie: Swap usage'
+          type: DEPENDENT
+          key: rabe.Cronie.swap
+          delay: '0'
+          history: 7d
+          units: B
+          description: 'Swap usage of Cronie processes.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].swap.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: cronie
+        - uuid: 5e6df906741a43eabb30f02f1aae47b8
+          name: 'Cronie: Number of threads'
+          type: DEPENDENT
+          key: rabe.Cronie.threads
+          delay: '0'
+          history: 7d
+          description: 'Number of Cronie threads.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[*].threads.first()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: 'proc.get[crond,root,,summary]'
+          tags:
+            - tag: component
+              value: cronie
+        - uuid: fe480f6fa660404790b6c9d53d296e30
+          name: 'Cronie: Unit file state'
+          type: DEPENDENT
+          key: rabe.Cronie.unitfile_state
+          delay: '0'
+          history: 7d
+          description: 'Encodes the install state of the unit file of FragmentPath. It currently knows the following states: "enabled", "enabled-runtime", "linked", "linked-runtime", "masked", "masked-runtime", "static", "disabled", and "invalid".'
+          valuemap:
+            name: 'Unit File State'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.UnitFileState.state
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: 'systemd.unit.get["crond.service"]'
+          tags:
+            - tag: component
+              value: service
+        - uuid: 211faa71c5174273b4f837dc863658d8
+          name: 'Cronie: Uptime'
+          type: DEPENDENT
+          key: rabe.Cronie.uptime
+          delay: '0'
+          history: 7d
+          value_type: FLOAT
+          units: uptime
+          description: 'Number of seconds since unit entered the active state.'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  data = JSON.parse(value);
+                  if (data.ActiveEnterTimestamp > data.ActiveExitTimestamp) {
+                        return Math.floor(Date.now() / 1000) - Number(data.ActiveEnterTimestamp) / 1000000;
+                  }
+                  return null;
+          master_item:
+            key: 'systemd.unit.get["crond.service"]'
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: e06c778c8b29464f973074b13dfcbdbc
+              expression: last(/Cronie/rabe.Cronie.uptime)<=10m
+              name: 'Cronie: has been restarted'
+              priority: INFO
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 3132cd6ccf3d45fc8cc38f5f17233155
+          name: 'Cronie: unit info'
+          type: ZABBIX_ACTIVE
+          key: 'systemd.unit.get["crond.service"]'
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Get unit info from systemd'
+          tags:
+            - tag: component
+              value: raw
+            - tag: component
+              value: unit
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: cronie
+      macros:
+        - macro: '{$CRONIE.THRESHOLD.MIN_PROC}'
+          value: '1'
+          description: 'Minimum amount of processes expected to be running at all times.'
+      dashboards:
+        - uuid: eb463a5714e746519592b864a1095030
+          name: 'Cronie: Overview'
+          pages:
+            - widgets:
+                - type: item
+                  width: '24'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'active state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.active_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '3'
+                    - type: INTEGER
+                      name: units_bold
+                      value: '0'
+                    - type: INTEGER
+                      name: units_show
+                      value: '0'
+                - type: graph
+                  'y': '4'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.cputime_user
+                    - type: STRING
+                      name: reference
+                      value: AABJD
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  'y': '9'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.rss
+                    - type: STRING
+                      name: reference
+                      value: AABJE
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '24'
+                  width: '18'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: uptime
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: value_size
+                      value: '15'
+                - type: graph
+                  x: '36'
+                  'y': '4'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.cputime_system
+                    - type: STRING
+                      name: reference
+                      value: AABJF
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: graph
+                  x: '36'
+                  'y': '9'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.swap
+                    - type: STRING
+                      name: reference
+                      value: AABJG
+                    - type: INTEGER
+                      name: source_type
+                      value: '1'
+                - type: item
+                  x: '42'
+                  width: '12'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'unit file state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.unitfile_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '2'
+                - type: item
+                  x: '42'
+                  'y': '2'
+                  width: '12'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'service load state'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.load_state
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+                    - type: STRING
+                      name: thresholds.2.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.2.threshold
+                      value: '2'
+                - type: item
+                  x: '60'
+                  width: '12'
+                  height: '4'
+                  hide_header: 'YES'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: STRING
+                      name: description
+                      value: processes
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Cronie
+                        key: rabe.Cronie.processes
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: STRING
+                      name: thresholds.0.color
+                      value: FF0000
+                    - type: STRING
+                      name: thresholds.0.threshold
+                      value: '0'
+                    - type: STRING
+                      name: thresholds.1.color
+                      value: 4CAF50
+                    - type: STRING
+                      name: thresholds.1.threshold
+                      value: '1'
+      valuemaps:
+        - uuid: ab28be4710f144c5b2929bc8da84c3d5
+          name: 'Unit Active State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: active
+            - value: '2'
+              newvalue: reloading
+            - value: '3'
+              newvalue: inactive
+            - value: '4'
+              newvalue: failed
+            - value: '5'
+              newvalue: activating
+            - value: '6'
+              newvalue: deactivating
+        - uuid: 2940787c3b14479294d01cb03f69fb03
+          name: 'Unit File State'
+          mappings:
+            - value: o
+              newvalue: unknown
+            - value: '1'
+              newvalue: enabled
+            - value: '2'
+              newvalue: enabled-runtime
+            - value: '3'
+              newvalue: linked
+            - value: '4'
+              newvalue: linked-runtime
+            - value: '5'
+              newvalue: masked
+            - value: '6'
+              newvalue: masked-runtime
+            - value: '7'
+              newvalue: static
+            - value: '8'
+              newvalue: disabled
+            - value: '9'
+              newvalue: runtime
+        - uuid: c4a7eadfe0304c25a3e5993295245e36
+          name: 'Unit Load State'
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: loaded
+            - value: '2'
+              newvalue: error
+            - value: '3'
+              newvalue: masked

@@ -117,7 +117,7 @@ Add the following in `<Template_Group>/<Name>/<Version>/<Name>.yaml` right after
 ```yaml
       vendor:
         name: RaBe
-        version: '6.4'
+        version: '7.0'
 ```
 
 Switch branch and look at the generated README.md before you commit it:
