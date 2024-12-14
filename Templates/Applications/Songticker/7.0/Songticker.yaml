@@ -1,0 +1,235 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: d1403f0294d5459ba004f08def23e608
+      template: Songticker
+      name: Songticker
+      description: 'Check if the songticker is getting regular updates'
+      vendor:
+        name: RaBe
+        version: '7.0'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: c84c0cb280db435484c9217b22208309
+          name: 'Songticker: Last update'
+          type: DEPENDENT
+          key: rabe.songticker.date
+          delay: '0'
+          history: 7d
+          trends: '0'
+          units: unixtime
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''date'']/text()'
+            - type: JAVASCRIPT
+              parameters:
+                - 'return Date.parse(value)/1000'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
+        - uuid: 1664b855379f4b6ea7764e9fd05a1a89
+          name: 'Songticker: Show end'
+          type: DEPENDENT
+          key: rabe.songticker.show_endtime
+          delay: '0'
+          history: 7d
+          trends: '0'
+          units: unixtime
+          description: 'When the current show ends.'
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''show'']/*[name()=''endTime'']/text()'
+            - type: JAVASCRIPT
+              parameters:
+                - 'return Date.parse(value)/1000'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
+          triggers:
+            - uuid: 52350d3ee2a14e1381809367122da29d
+              expression: last(/Songticker/rabe.songticker.show_endtime)-time()<0
+              name: 'Songticker: Show ends in the past'
+              priority: WARNING
+              description: 'No next show was started in songticker. This could mean that songticker itself is down somehow, or there could be an issue in our metadata that needs investigating.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: 9469eb2fc7e3445f92053a99c8219958
+          name: 'Songticker: Show name'
+          type: DEPENDENT
+          key: rabe.songticker.show_name
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          description: 'Name of the currently running show.'
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''show'']/*[name()=''name'']/text()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
+        - uuid: a503e836d6f6428d83d0a1cf35b98551
+          name: 'Songticker: Current Artist'
+          type: DEPENDENT
+          key: rabe.songticker.track_artist
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          description: 'Currently running artist.'
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''track'']/*[name()=''artist'']/text()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
+        - uuid: 4b158ace141648a7a1d2b5308ab6f4ec
+          name: 'Songticker: Current Title'
+          type: DEPENDENT
+          key: rabe.songticker.track_title
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          description: 'Currently running track.'
+          preprocessing:
+            - type: XMLPATH
+              parameters:
+                - '/*[name()=''ticker'']/*[name()=''track'']/*[name()=''title'']/text()'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 30m
+          master_item:
+            key: rabe.songticker.xml
+          tags:
+            - tag: component
+              value: songticker
+        - uuid: 17572c4eaaf64ccdae11785ada8f85b0
+          name: 'Songticker XML reponse'
+          type: HTTP_AGENT
+          key: rabe.songticker.xml
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          timeout: 3s
+          url: '{$SONGTICKER.XML.ENDPOINT}'
+          tags:
+            - tag: component
+              value: raw
+      tags:
+        - tag: class
+          value: software
+        - tag: target
+          value: songticker
+      macros:
+        - macro: '{$SONGTICKER.XML.ENDPOINT}'
+          value: 'https://songticker.rabe.ch/songticker/0.9.3/current.xml'
+          description: 'Location of the generated XML file for Songticker'
+      dashboards:
+        - uuid: 48bd9ac035544391bbc984804645171a
+          name: 'Songticker: Overview'
+          pages:
+            - widgets:
+                - type: clock
+                  width: '9'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: clock_type
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                - type: item
+                  'y': '3'
+                  width: '36'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'last update'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Songticker
+                        key: rabe.songticker.date
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                - type: item
+                  x: '9'
+                  width: '63'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'current show'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Songticker
+                        key: rabe.songticker.show_name
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                - type: item
+                  x: '36'
+                  'y': '3'
+                  width: '36'
+                  height: '3'
+                  hide_header: 'YES'
+                  fields:
+                    - type: STRING
+                      name: description
+                      value: 'show end time'
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: Songticker
+                        key: rabe.songticker.show_endtime
+                    - type: INTEGER
+                      name: show
+                      value: '1'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
