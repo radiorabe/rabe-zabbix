@@ -1,0 +1,26 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: b27969ed1a7d41819c1c25a98d7521dc
+      name: Stacks/Systems
+  templates:
+    - uuid: d85c812b96c24d61a5f69d360e1e538c
+      template: 'APC Smart-UPS 3000 Stack'
+      name: 'APC Smart-UPS 3000 Stack'
+      description: |
+        Stack for APC UPS 3000 LXM devices.
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      templates:
+        - name: 'APC Smart-UPS 3000 XLM by SNMP'
+        - name: 'ICMP Ping'
+        - name: 'Zabbix unsupported items'
+      groups:
+        - name: Stacks/Systems
+      tags:
+        - tag: class
+          value: stack

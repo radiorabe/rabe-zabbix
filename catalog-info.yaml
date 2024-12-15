@@ -291,6 +291,33 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Stacks/Systems/APC_Smart-UPS_3000_Stack/7.0/APC_Smart-UPS_3000_Stack.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-APC_Smart-UPS_3000_Stack
+  title: "Zabbix Template: APC Smart-UPS 3000 Stack"
+  description: |
+    Stack for APC UPS 3000 LXM devices.
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Stacks/Systems/APC_Smart-UPS_3000_Stack/7.0
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Stacks/Systems/APC_Smart-UPS_3000_Stack/7.0
+      title: GitHub
+      icon: github
+  tags: [stack]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Templates/Applications/auditd/7.0/auditd.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component

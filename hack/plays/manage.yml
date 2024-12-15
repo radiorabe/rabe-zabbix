@@ -5,6 +5,7 @@
   vars:
     target_version: '7.0'
     rabe_zabbix_templates:
+      - template_name: "APC Smart-UPS 3000 Stack"
       - template_name: "Apache with TLS by HTTP Stack"
       - template_name: "auditd"
       - template_name: "candlepin-rhsmcertd"

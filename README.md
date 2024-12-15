@@ -53,6 +53,12 @@ inheritance problems.
 | EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/7.0) |
 | EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/7.0) |
 
+### Stacks: Systems
+
+| Name | 3.0 | 6.4 | 7.0 |
+| ---- | --- | --- | --- |
+| APC Smart-UPS 3000 Stack |  |  | [✅](./Stacks/Systems/APC_Smart-UPS_3000_Stack/7.0) |
+
 ## Templates
 
 ### Templates: Applications
