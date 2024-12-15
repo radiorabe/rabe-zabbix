@@ -5,8 +5,8 @@
   vars:
     target_version: '7.0'
     rabe_zabbix_templates:
-      - template_name: "APC Smart-UPS 3000 Stack"
       - template_name: "Apache with TLS by HTTP Stack"
+      - template_name: "APC Smart-UPS 3000 Stack"
       - template_name: "auditd"
       - template_name: "candlepin-rhsmcertd"
       - template_name: "certmonger"
@@ -20,6 +20,7 @@
       - template_name: "EL9 Stack"
       - template_name: "firewalld"
       - template_name: "gssproxy"
+      - template_name: "Netgear GS by SNMP"
       - template_name: "Nginx with TLS by HTTP Stack"
       - template_name: "qemu-ga"
       - template_name: "rsyslog"

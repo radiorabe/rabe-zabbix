@@ -108,6 +108,7 @@ inheritance problems.
 
 | Name | 3.0 | 6.4 | 7.0 |
 | ---- | --- | --- | --- |
+| Netgear GS by SNMP |  |  | [✅](./Templates/Network_devices/Netgear_GS_by_SNMP/7.0) |
 | SNMPv2 AVT AE1 DABPlus Go | [✅](./Templates/Network_devices/SNMPv2_AVT_AE1_DABPlus_Go/3.0) |  |  |
 | SNMPv2 Generic | [✅](./Templates/Network_devices/SNMPv2_Generic/3.0) |  |  |
 | SNMPv2 Interfaces HC | [✅](./Templates/Network_devices/SNMPv2_Interfaces_HC/3.0) |  |  |
