@@ -1,0 +1,66 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 36bff6c29af64692839d077febfc7079
+      name: 'Templates/Network devices'
+  templates:
+    - uuid: f7287d068a7d4691867a0cb9f13d0c28
+      template: 'Netgear GS by SNMP'
+      name: 'Netgear GS by SNMP'
+      description: |
+        Grabs additional data that is currently not available from the Zabbix-out-of-the-box template.
+        
+        Deactivates cpu0's triggers since they are not too meaningful out of the box.
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      templates:
+        - name: 'Netgear Fastpath by SNMP'
+        - name: 'Zabbix unsupported items'
+      groups:
+        - name: 'Templates/Network devices'
+      items:
+        - uuid: 9e2e8706b8e4496e80d15bc420401b97
+          name: 'GS Hardware serial number'
+          type: SNMP_AGENT
+          # the upstream template uses the oid 1.3.6.1.4.1.4526.10.1.1.1.4.0
+          # the following line is the main reason to add a GS template on top
+          snmp_oid: 1.3.6.1.4.1.4526.11.1.1.1.4.0
+          key: rabe.system.hw.serialnumber
+          delay: 1h
+          history: 7d
+          value_type: CHAR
+          trends: '0'
+          description: |
+            MIB: FASTPATH-SWITCHING-MIB
+            Serial number of the switch
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: system
+          triggers:
+            - uuid: 9b30371ec844436ab1456ba571ca74d0
+              expression: 'last(/Netgear GS by SNMP/rabe.system.hw.serialnumber,#1)<>last(/Netgear GS by SNMP/rabe.system.hw.serialnumber,#2) and length(last(/Netgear GS by SNMP/rabe.system.hw.serialnumber))>0'
+              name: 'GS Device has been replaced'
+              event_name: 'GS Device has been replaced (new serial number received)'
+              priority: INFO
+              description: 'Device serial number has changed. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+      tags:
+        - tag: class
+          value: network
+        - tag: target
+          value: netgear
+      macros:
+        - macro: '{$IFCONTROL:"cpu"}'
+          value: '0'
+          description: 'Ignore state for cpu interface'

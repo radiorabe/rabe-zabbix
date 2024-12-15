@@ -815,3 +815,32 @@ spec:
   owner: it-reaktion
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
+---
+# Templates/Network_devices/Netgear_GS_by_SNMP/7.0/Netgear_GS_by_SNMP.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Netgear_GS_by_SNMP
+  title: "Zabbix Template: Netgear GS by SNMP"
+  description: |
+    Grabs additional data that is currently not available from the Zabbix-out-of-the-box template.
+
+    Deactivates cpu0's triggers since they are not too meaningful out of the box.
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Network_devices/Netgear_GS_by_SNMP/7.0
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Network_devices/Netgear_GS_by_SNMP/7.0
+      title: GitHub
+      icon: github
+  tags: [network, netgear]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
