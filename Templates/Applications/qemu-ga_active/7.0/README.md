@@ -1,4 +1,4 @@
-# Zabbix Template: QEMU Guest Agent
+# Zabbix Template: QEMU Guest Agent (active)
 
 ![class: software](https://img.shields.io/badge/class-software-00c9bf) ![target: qemu-ga](https://img.shields.io/badge/target-qemu-ga-00c9bf) ![vendor: RaBe](https://img.shields.io/badge/vendor-RaBe-00c9bf) ![version: 7.0](https://img.shields.io/badge/version-7.0-00c9bf)
 
@@ -23,6 +23,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
 
 ### Item: qemu-ga: Unit active state
@@ -293,6 +294,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| Type | ZABBIX_ACTIVE |
 | Value type | TEXT |
 
 ## Triggers
@@ -310,7 +312,7 @@ Settings:
 | Manual close | YES |
 
 ```console
-last(/qemu-ga/rabe.qemu-ga.active_state)<>1
+last(/qemu-ga active/rabe.qemu-ga.active_state)<>1
 ```
 
 ### Trigger: qemu-ga: No running processes
@@ -325,7 +327,7 @@ Settings:
 | Priority | HIGH |
 
 ```console
-last(/qemu-ga/rabe.qemu-ga.processes)<{$QEMUGA.THRESHOLD.MIN_PROC}
+last(/qemu-ga active/rabe.qemu-ga.processes)<{$QEMUGA.THRESHOLD.MIN_PROC}
 ```
 
 ### Trigger: qemu-ga: has been restarted
@@ -341,7 +343,7 @@ Settings:
 | Manual close | YES |
 
 ```console
-last(/qemu-ga/rabe.qemu-ga.uptime)<=10m
+last(/qemu-ga active/rabe.qemu-ga.uptime)<=10m
 ```
 
 ## Macros
