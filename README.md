@@ -90,7 +90,8 @@ inheritance problems.
 | LVM | [✅](./Templates/Applications/LVM/3.0) |  |  |
 | MD-RAID | [✅](./Templates/Applications/MD-RAID/3.0) |  |  |
 | ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
-| qemu-ga |  | [✅](./Templates/Applications/qemu-ga/6.4) | [✅](./Templates/Applications/qemu-ga/7.0) |
+| qemu-ga |  |  | [✅](./Templates/Applications/qemu-ga/7.0) |
+| qemu-ga active |  | [✅](./Templates/Applications/qemu-ga_active/6.4) | [✅](./Templates/Applications/qemu-ga_active/7.0) |
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
 | rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) | [✅](./Templates/Applications/rpc.gssd/7.0) |
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) | [✅](./Templates/Applications/rsyslog/7.0) |

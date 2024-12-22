@@ -12,7 +12,7 @@ collection](https://github.com/radiorabe/rabe-zabbix).
 This Zabbix template depends on the following templates.
 
 * EL9 Stack
-* qemu-ga
+* qemu-ga active
 
 ## License
 

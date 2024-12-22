@@ -4,9 +4,9 @@ zabbix_export:
     - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
       name: Templates/Applications
   templates:
-    - uuid: b16432d2badd4f24b26678a57acbbe1c
-      template: qemu-ga
-      name: 'QEMU Guest Agent'
+    - uuid: 77a0624363cd4616a13d1902430ae186
+      template: 'qemu-ga active'
+      name: 'QEMU Guest Agent (active)'
       description: |
         Monitoring of the [QEMU Guest Agent](https://www.qemu.org/docs/master/interop/qemu-ga.html).
         
@@ -18,8 +18,9 @@ zabbix_export:
       groups:
         - name: Templates/Applications
       items:
-        - uuid: aedc0d5ca3104b62ba424e19efffcee7
+        - uuid: 479183626b394584a9faf40cda6e86ff
           name: 'qemu-ga: process summary'
+          type: ZABBIX_ACTIVE
           key: 'proc.get[qemu-ga,root,,summary]'
           history: '0'
           value_type: TEXT
@@ -28,7 +29,7 @@ zabbix_export:
           tags:
             - tag: component
               value: raw
-        - uuid: 02c6ae87961d4129a9c2aad521c8cb87
+        - uuid: 490c3dc19ef844dda08fc71378a65de2
           name: 'qemu-ga: Unit active state'
           type: DEPENDENT
           key: rabe.qemu-ga.active_state
@@ -50,15 +51,15 @@ zabbix_export:
             - tag: component
               value: service
           triggers:
-            - uuid: c44acf018d5e486ea9143836c599071d
-              expression: last(/qemu-ga/rabe.qemu-ga.active_state)<>1
+            - uuid: 35f0bcdb66a14d9da957bf89f86a5bcd
+              expression: 'last(/qemu-ga active/rabe.qemu-ga.active_state)<>1'
               name: 'qemu-ga: Service is not running'
               priority: WARNING
               manual_close: 'YES'
               tags:
                 - tag: scope
                   value: availability
-        - uuid: e917382db512495c827653ec85ff1ac9
+        - uuid: 17bd216dfec5463f8ddbc8237bf25fbc
           name: 'qemu-ga: CPU seconds (system)'
           type: DEPENDENT
           key: rabe.qemu-ga.cputime_system
@@ -81,7 +82,7 @@ zabbix_export:
           tags:
             - tag: component
               value: qemu-ga
-        - uuid: 9145fc9350a544beb96bef9ea69db12d
+        - uuid: 1def6d220e36452b850cdb00ee088372
           name: 'qemu-ga: CPU seconds (user)'
           type: DEPENDENT
           key: rabe.qemu-ga.cputime_user
@@ -104,7 +105,7 @@ zabbix_export:
           tags:
             - tag: component
               value: qemu-ga
-        - uuid: 214a2560c2974083aca15a65ce485084
+        - uuid: 983e40d9d5f04fd483681421cedae2fe
           name: 'qemu-ga: Service load state'
           type: DEPENDENT
           key: rabe.qemu-ga.load_state
@@ -125,7 +126,7 @@ zabbix_export:
           tags:
             - tag: component
               value: service
-        - uuid: ef40f252740b45c49b6a4e59f03e3b43
+        - uuid: f1dd7d16f45c4fd289cfa085ae1c88b8
           name: 'qemu-ga: Number of processes'
           type: DEPENDENT
           key: rabe.qemu-ga.processes
@@ -145,18 +146,18 @@ zabbix_export:
             - tag: component
               value: qemu-ga
           triggers:
-            - uuid: 3a1e7916e4084c3c89eb2c29559e7beb
-              expression: 'last(/qemu-ga/rabe.qemu-ga.processes)<{$QEMUGA.THRESHOLD.MIN_PROC}'
+            - uuid: aa2a46515f98469482296b49600c44c7
+              expression: 'last(/qemu-ga active/rabe.qemu-ga.processes)<{$QEMUGA.THRESHOLD.MIN_PROC}'
               name: 'qemu-ga: No running processes'
               priority: HIGH
               description: 'No running qemu-ga processes.'
               dependencies:
                 - name: 'qemu-ga: Service is not running'
-                  expression: last(/qemu-ga/rabe.qemu-ga.active_state)<>1
+                  expression: 'last(/qemu-ga active/rabe.qemu-ga.active_state)<>1'
               tags:
                 - tag: scope
                   value: availability
-        - uuid: 2584d752ee864ed3a40ba982d8ac6e51
+        - uuid: 49bda86d7fa6491e88b9cace94751f34
           name: 'qemu-ga: Memory usage (RSS)'
           type: DEPENDENT
           key: rabe.qemu-ga.rss
@@ -176,7 +177,7 @@ zabbix_export:
           tags:
             - tag: component
               value: qemu-ga
-        - uuid: 91a93eddfafd497eb2cf2f0a61468852
+        - uuid: 850a82a7000d44509b709951fe00ac98
           name: 'qemu-ga: Swap usage'
           type: DEPENDENT
           key: rabe.qemu-ga.swap
@@ -196,7 +197,7 @@ zabbix_export:
           tags:
             - tag: component
               value: qemu-ga
-        - uuid: 5691720c2fd94dd0a478e2033393a758
+        - uuid: b799e7ba76b2442ba0b296c51f7517a4
           name: 'qemu-ga: Number of threads'
           type: DEPENDENT
           key: rabe.qemu-ga.threads
@@ -215,7 +216,7 @@ zabbix_export:
           tags:
             - tag: component
               value: qemu-ga
-        - uuid: b6584b0b372c42e58934ed952669134e
+        - uuid: dc3d8fd54e7b44d4951f276f1703496d
           name: 'qemu-ga: Unit file state'
           type: DEPENDENT
           key: rabe.qemu-ga.unitfile_state
@@ -236,7 +237,7 @@ zabbix_export:
           tags:
             - tag: component
               value: service
-        - uuid: b9be103c032341e9b6d19553e38bf5c9
+        - uuid: b44b4dda6f254b19879ce854b29f5f12
           name: 'qemu-ga: Uptime'
           type: DEPENDENT
           key: rabe.qemu-ga.uptime
@@ -260,16 +261,17 @@ zabbix_export:
             - tag: component
               value: service
           triggers:
-            - uuid: fabb1704509c4b1fb044c94f769e3daf
-              expression: last(/qemu-ga/rabe.qemu-ga.uptime)<=10m
+            - uuid: d2e99905e5e04957a2953ef7f71081f7
+              expression: 'last(/qemu-ga active/rabe.qemu-ga.uptime)<=10m'
               name: 'qemu-ga: has been restarted'
               priority: INFO
               manual_close: 'YES'
               tags:
                 - tag: scope
                   value: notice
-        - uuid: b2da699dab1e410ab15b4b37ea0056ad
+        - uuid: 609efd8900794691a7ace4002d1c78ae
           name: 'qemu-ga: unit info'
+          type: ZABBIX_ACTIVE
           key: 'systemd.unit.get["qemu-guest-agent.service"]'
           history: '0'
           value_type: TEXT
@@ -290,7 +292,7 @@ zabbix_export:
           value: '1'
           description: 'Minimum amount of processes expected to be running at all times.'
       dashboards:
-        - uuid: 3bf1bab51c964662a6a53feeafe89485
+        - uuid: 910162aa19a04fd9b91f491190ab4c74
           name: 'qemu-ga: Overview'
           pages:
             - widgets:
@@ -305,7 +307,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.active_state
                     - type: INTEGER
                       name: show
@@ -345,7 +347,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.cputime_user
                     - type: STRING
                       name: reference
@@ -361,7 +363,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.rss
                     - type: STRING
                       name: reference
@@ -381,7 +383,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.uptime
                     - type: INTEGER
                       name: show
@@ -401,7 +403,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.cputime_system
                     - type: STRING
                       name: reference
@@ -418,7 +420,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.swap
                     - type: STRING
                       name: reference
@@ -437,7 +439,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.unitfile_state
                     - type: INTEGER
                       name: show
@@ -475,7 +477,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.load_state
                     - type: INTEGER
                       name: show
@@ -516,7 +518,7 @@ zabbix_export:
                     - type: ITEM
                       name: itemid
                       value:
-                        host: qemu-ga
+                        host: 'qemu-ga active'
                         key: rabe.qemu-ga.processes
                     - type: INTEGER
                       name: show
@@ -537,7 +539,7 @@ zabbix_export:
                       name: thresholds.1.threshold
                       value: '1'
       valuemaps:
-        - uuid: e00dfbb2a2cb4b6d8aeb5b4bee8f41ad
+        - uuid: 3379206daed14761a2104f5bda46651f
           name: 'Unit Active State'
           mappings:
             - value: '0'
@@ -554,7 +556,7 @@ zabbix_export:
               newvalue: activating
             - value: '6'
               newvalue: deactivating
-        - uuid: f64252bbca9f44dba3f30660e4c9d202
+        - uuid: ed6125e7aadc47b1bd6c5a5133fcb676
           name: 'Unit File State'
           mappings:
             - value: o
@@ -577,7 +579,7 @@ zabbix_export:
               newvalue: disabled
             - value: '9'
               newvalue: runtime
-        - uuid: f80fe8fe8e164d398cf129c0af560529
+        - uuid: 35810908d92e41b2b760d0c38c887ceb
           name: 'Unit Load State'
           mappings:
             - value: '0'

@@ -17,7 +17,7 @@ zabbix_export:
         version: '7.0'
       templates:
         - name: 'EL9 Stack'
-        - name: qemu-ga
+        - name: 'qemu-ga active'
       groups:
         - name: Stacks/Servers
       tags:

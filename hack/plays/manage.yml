@@ -23,6 +23,7 @@
       - template_name: "Netgear GS by SNMP"
       - template_name: "Nginx with TLS by HTTP Stack"
       - template_name: "qemu-ga"
+      - template_name: "qemu-ga active"
       - template_name: "rsyslog"
       - template_name: "rpc.gssd"
       - template_name: "Songticker"
