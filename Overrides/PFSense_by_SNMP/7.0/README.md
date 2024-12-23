@@ -492,6 +492,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv4 packets blocked
 
@@ -510,6 +511,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv6 traffic blocked
 
@@ -528,6 +530,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv6 packets blocked
 
@@ -546,6 +549,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound packets discarded
 
@@ -568,6 +572,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound packets with errors
 
@@ -586,6 +591,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv4 traffic passed
 
@@ -604,6 +610,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv4 packets passed
 
@@ -622,6 +629,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv6 traffic passed
 
@@ -640,6 +648,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Inbound IPv6 packets passed
 
@@ -658,6 +667,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Bits received
 
@@ -676,6 +686,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv4 traffic blocked
 
@@ -694,6 +705,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv4 packets blocked
 
@@ -712,6 +724,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv6 traffic blocked
 
@@ -730,6 +743,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv6 packets blocked
 
@@ -748,6 +762,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound packets discarded
 
@@ -770,6 +785,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound packets with errors
 
@@ -788,6 +804,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv4 traffic passed
 
@@ -806,6 +823,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv4 packets passed
 
@@ -824,6 +842,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv6 traffic passed
 
@@ -842,6 +861,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Outbound IPv6 packets passed
 
@@ -860,6 +880,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Bits sent
 
@@ -878,6 +899,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Rules references count
 
@@ -896,6 +918,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Speed
 
@@ -914,6 +937,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Operational status
 
@@ -938,6 +962,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface [{#IFNAME}({#IFALIAS})]: Interface type
 
@@ -958,6 +983,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | SNMP_AGENT |
+| History | 7d |
 
 #### Discovery Rule: Network interfaces discovery: Discovery Triggers
 

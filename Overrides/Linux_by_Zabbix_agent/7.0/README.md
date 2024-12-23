@@ -957,6 +957,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Inbound packets with errors
 
@@ -972,6 +973,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Bits received
 
@@ -987,6 +989,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Outbound packets discarded
 
@@ -1002,6 +1005,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Outbound packets with errors
 
@@ -1017,6 +1021,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Bits sent
 
@@ -1032,6 +1037,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Operational status
 
@@ -1047,6 +1053,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Speed
 
@@ -1066,6 +1073,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 ##### Discovery Rule: Network interface discovery: Item Prototype: Interface {#IFNAME}: Interface type
 
@@ -1084,6 +1092,7 @@ Settings:
 
 | Item Setting | Value |
 | ------------ | ----- |
+| History | 7d |
 
 #### Discovery Rule: Network interface discovery: Discovery Triggers
 
@@ -1147,6 +1156,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
+| History | 7d |
 | Source item | `vfs.file.contents[/sys/block/{#DEVNAME}/stat]` |
 
 Preprocessing steps:
@@ -1173,6 +1183,7 @@ Settings:
 | ------------ | ----- |
 | Type | CALCULATED |
 | Value type | FLOAT in !ms |
+| History | 7d |
 
 ##### Discovery Rule: Block devices discovery: Item Prototype: {#DEVNAME}: Disk read rate
 
@@ -1190,6 +1201,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT in !r/s |
+| History | 7d |
 | Source item | `vfs.file.contents[/sys/block/{#DEVNAME}/stat]` |
 
 Preprocessing steps:
@@ -1215,6 +1227,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
+| History | 7d |
 | Source item | `vfs.file.contents[/sys/block/{#DEVNAME}/stat]` |
 
 Preprocessing steps:
@@ -1241,6 +1254,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT in % |
+| History | 7d |
 | Source item | `vfs.file.contents[/sys/block/{#DEVNAME}/stat]` |
 
 Preprocessing steps:
@@ -1267,6 +1281,7 @@ Settings:
 | ------------ | ----- |
 | Type | CALCULATED |
 | Value type | FLOAT in !ms |
+| History | 7d |
 
 ##### Discovery Rule: Block devices discovery: Item Prototype: {#DEVNAME}: Disk write rate
 
@@ -1284,6 +1299,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT in !w/s |
+| History | 7d |
 | Source item | `vfs.file.contents[/sys/block/{#DEVNAME}/stat]` |
 
 Preprocessing steps:
@@ -1309,6 +1325,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT |
+| History | 7d |
 | Source item | `vfs.file.contents[/sys/block/{#DEVNAME}/stat]` |
 
 Preprocessing steps:
@@ -1384,6 +1401,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT in % |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1407,6 +1425,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1431,6 +1450,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT in % |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1454,6 +1474,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1477,6 +1498,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1525,6 +1547,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:

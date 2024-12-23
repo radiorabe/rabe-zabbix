@@ -152,6 +152,7 @@ with a generated diff against its upstream version.
 | ---- | --- | --- |
 | Linux by Zabbix agent |  | [✅](./Overrides/Linux_by_Zabbix_agent/7.0) |
 | PFSense by SNMP |  | [✅](./Overrides/PFSense_by_SNMP/7.0) |
+| Windows by Zabbix agent active |  | [✅](./Overrides/Windows_by_Zabbix_agent_active/7.0) |
 
 ## Zabbix Version Support
 

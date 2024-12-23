@@ -41,6 +41,8 @@
         upstream: "os/linux/template_os_linux.yaml"
       - template_name: "PFSense by SNMP"
         upstream: "app/pfsense_snmp/template_app_pfsense_snmp.yaml"
+      - template_name: "Windows by Zabbix agent active"
+        upstream: "os/windows_agent_active/template_os_windows_agent_active.yaml"
     __: # items below are "commented" :)
       - template_name: "Apache by HTTP"
         upstream: "app/apache_http/template_app_apache_http.yaml"
