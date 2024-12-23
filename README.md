@@ -148,7 +148,10 @@ In some cases we override the Zabbix out-of-the-box templates to
 ensure they fit our use case. We publish the changed templates along
 with a generated diff against its upstream version.
 
-Currently, there are no such changes!
+| Name | 6.4 | 7.0 |
+| ---- | --- | --- |
+| Linux by Zabbix agent |  | [✅](./Overrides/Linux_by_Zabbix_agent/7.0) |
+| PFSense by SNMP |  | [✅](./Overrides/PFSense_by_SNMP/7.0) |
 
 ## Zabbix Version Support
 
