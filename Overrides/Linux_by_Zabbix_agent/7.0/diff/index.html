@@ -11027,6 +11027,134 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Windows by Zabbix agent active
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Windows by Zabbix agent active
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    7.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            7.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Windows_by_Zabbix_agent_active/7.0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zabbix Template: Windows by Zabbix agent active
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Windows_by_Zabbix_agent_active/7.0/diff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compare Rabe Override with Upstream Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -11424,6 +11552,190 @@
 <a id="__codelineno-0-335" name="__codelineno-0-335" href="#__codelineno-0-335"></a><span class="w"> </span>          description: &#39;Used for monitoring the availability status of the agent.&#39;
 <a id="__codelineno-0-336" name="__codelineno-0-336" href="#__codelineno-0-336"></a><span class="w"> </span>          valuemap:
 <a id="__codelineno-0-337" name="__codelineno-0-337" href="#__codelineno-0-337"></a><span class="w"> </span>            name: zabbix.host.available
+<a id="__codelineno-0-338" name="__codelineno-0-338" href="#__codelineno-0-338"></a><span class="gu">@@ -641,6 +683,7 @@</span>
+<a id="__codelineno-0-339" name="__codelineno-0-339" href="#__codelineno-0-339"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Inbound packets discarded&#39;
+<a id="__codelineno-0-340" name="__codelineno-0-340" href="#__codelineno-0-340"></a><span class="w"> </span>              key: &#39;net.if.in[&quot;{#IFNAME}&quot;,dropped]&#39;
+<a id="__codelineno-0-341" name="__codelineno-0-341" href="#__codelineno-0-341"></a><span class="w"> </span>              delay: 3m
+<a id="__codelineno-0-342" name="__codelineno-0-342" href="#__codelineno-0-342"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-343" name="__codelineno-0-343" href="#__codelineno-0-343"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-344" name="__codelineno-0-344" href="#__codelineno-0-344"></a><span class="w"> </span>                - type: CHANGE_PER_SECOND
+<a id="__codelineno-0-345" name="__codelineno-0-345" href="#__codelineno-0-345"></a><span class="w"> </span>                  parameters:
+<a id="__codelineno-0-346" name="__codelineno-0-346" href="#__codelineno-0-346"></a><span class="gu">@@ -654,6 +697,7 @@</span>
+<a id="__codelineno-0-347" name="__codelineno-0-347" href="#__codelineno-0-347"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Inbound packets with errors&#39;
+<a id="__codelineno-0-348" name="__codelineno-0-348" href="#__codelineno-0-348"></a><span class="w"> </span>              key: &#39;net.if.in[&quot;{#IFNAME}&quot;,errors]&#39;
+<a id="__codelineno-0-349" name="__codelineno-0-349" href="#__codelineno-0-349"></a><span class="w"> </span>              delay: 3m
+<a id="__codelineno-0-350" name="__codelineno-0-350" href="#__codelineno-0-350"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-351" name="__codelineno-0-351" href="#__codelineno-0-351"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-352" name="__codelineno-0-352" href="#__codelineno-0-352"></a><span class="w"> </span>                - type: CHANGE_PER_SECOND
+<a id="__codelineno-0-353" name="__codelineno-0-353" href="#__codelineno-0-353"></a><span class="w"> </span>                  parameters:
+<a id="__codelineno-0-354" name="__codelineno-0-354" href="#__codelineno-0-354"></a><span class="gu">@@ -667,6 +711,7 @@</span>
+<a id="__codelineno-0-355" name="__codelineno-0-355" href="#__codelineno-0-355"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Bits received&#39;
+<a id="__codelineno-0-356" name="__codelineno-0-356" href="#__codelineno-0-356"></a><span class="w"> </span>              key: &#39;net.if.in[&quot;{#IFNAME}&quot;]&#39;
+<a id="__codelineno-0-357" name="__codelineno-0-357" href="#__codelineno-0-357"></a><span class="w"> </span>              delay: 3m
+<a id="__codelineno-0-358" name="__codelineno-0-358" href="#__codelineno-0-358"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-359" name="__codelineno-0-359" href="#__codelineno-0-359"></a><span class="w"> </span>              units: bps
+<a id="__codelineno-0-360" name="__codelineno-0-360" href="#__codelineno-0-360"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-361" name="__codelineno-0-361" href="#__codelineno-0-361"></a><span class="w"> </span>                - type: CHANGE_PER_SECOND
+<a id="__codelineno-0-362" name="__codelineno-0-362" href="#__codelineno-0-362"></a><span class="gu">@@ -684,6 +729,7 @@</span>
+<a id="__codelineno-0-363" name="__codelineno-0-363" href="#__codelineno-0-363"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Outbound packets discarded&#39;
+<a id="__codelineno-0-364" name="__codelineno-0-364" href="#__codelineno-0-364"></a><span class="w"> </span>              key: &#39;net.if.out[&quot;{#IFNAME}&quot;,dropped]&#39;
+<a id="__codelineno-0-365" name="__codelineno-0-365" href="#__codelineno-0-365"></a><span class="w"> </span>              delay: 3m
+<a id="__codelineno-0-366" name="__codelineno-0-366" href="#__codelineno-0-366"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-367" name="__codelineno-0-367" href="#__codelineno-0-367"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-368" name="__codelineno-0-368" href="#__codelineno-0-368"></a><span class="w"> </span>                - type: CHANGE_PER_SECOND
+<a id="__codelineno-0-369" name="__codelineno-0-369" href="#__codelineno-0-369"></a><span class="w"> </span>                  parameters:
+<a id="__codelineno-0-370" name="__codelineno-0-370" href="#__codelineno-0-370"></a><span class="gu">@@ -697,6 +743,7 @@</span>
+<a id="__codelineno-0-371" name="__codelineno-0-371" href="#__codelineno-0-371"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Outbound packets with errors&#39;
+<a id="__codelineno-0-372" name="__codelineno-0-372" href="#__codelineno-0-372"></a><span class="w"> </span>              key: &#39;net.if.out[&quot;{#IFNAME}&quot;,errors]&#39;
+<a id="__codelineno-0-373" name="__codelineno-0-373" href="#__codelineno-0-373"></a><span class="w"> </span>              delay: 3m
+<a id="__codelineno-0-374" name="__codelineno-0-374" href="#__codelineno-0-374"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-375" name="__codelineno-0-375" href="#__codelineno-0-375"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-376" name="__codelineno-0-376" href="#__codelineno-0-376"></a><span class="w"> </span>                - type: CHANGE_PER_SECOND
+<a id="__codelineno-0-377" name="__codelineno-0-377" href="#__codelineno-0-377"></a><span class="w"> </span>                  parameters:
+<a id="__codelineno-0-378" name="__codelineno-0-378" href="#__codelineno-0-378"></a><span class="gu">@@ -710,6 +757,7 @@</span>
+<a id="__codelineno-0-379" name="__codelineno-0-379" href="#__codelineno-0-379"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Bits sent&#39;
+<a id="__codelineno-0-380" name="__codelineno-0-380" href="#__codelineno-0-380"></a><span class="w"> </span>              key: &#39;net.if.out[&quot;{#IFNAME}&quot;]&#39;
+<a id="__codelineno-0-381" name="__codelineno-0-381" href="#__codelineno-0-381"></a><span class="w"> </span>              delay: 3m
+<a id="__codelineno-0-382" name="__codelineno-0-382" href="#__codelineno-0-382"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-383" name="__codelineno-0-383" href="#__codelineno-0-383"></a><span class="w"> </span>              units: bps
+<a id="__codelineno-0-384" name="__codelineno-0-384" href="#__codelineno-0-384"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-385" name="__codelineno-0-385" href="#__codelineno-0-385"></a><span class="w"> </span>                - type: CHANGE_PER_SECOND
+<a id="__codelineno-0-386" name="__codelineno-0-386" href="#__codelineno-0-386"></a><span class="gu">@@ -726,6 +774,7 @@</span>
+<a id="__codelineno-0-387" name="__codelineno-0-387" href="#__codelineno-0-387"></a><span class="w"> </span>            - uuid: 3efd24ad36b04eb995cfeab82721c2fe
+<a id="__codelineno-0-388" name="__codelineno-0-388" href="#__codelineno-0-388"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Operational status&#39;
+<a id="__codelineno-0-389" name="__codelineno-0-389" href="#__codelineno-0-389"></a><span class="w"> </span>              key: &#39;vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;]&#39;
+<a id="__codelineno-0-390" name="__codelineno-0-390" href="#__codelineno-0-390"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-391" name="__codelineno-0-391" href="#__codelineno-0-391"></a><span class="w"> </span>              trends: &#39;0&#39;
+<a id="__codelineno-0-392" name="__codelineno-0-392" href="#__codelineno-0-392"></a><span class="w"> </span>              description: &#39;Reference: https://www.kernel.org/doc/Documentation/networking/operstates.txt&#39;
+<a id="__codelineno-0-393" name="__codelineno-0-393" href="#__codelineno-0-393"></a><span class="w"> </span>              valuemap:
+<a id="__codelineno-0-394" name="__codelineno-0-394" href="#__codelineno-0-394"></a><span class="gu">@@ -788,6 +837,7 @@</span>
+<a id="__codelineno-0-395" name="__codelineno-0-395" href="#__codelineno-0-395"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Speed&#39;
+<a id="__codelineno-0-396" name="__codelineno-0-396" href="#__codelineno-0-396"></a><span class="w"> </span>              key: &#39;vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/speed&quot;]&#39;
+<a id="__codelineno-0-397" name="__codelineno-0-397" href="#__codelineno-0-397"></a><span class="w"> </span>              delay: 5m
+<a id="__codelineno-0-398" name="__codelineno-0-398" href="#__codelineno-0-398"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-399" name="__codelineno-0-399" href="#__codelineno-0-399"></a><span class="w"> </span>              trends: &#39;0&#39;
+<a id="__codelineno-0-400" name="__codelineno-0-400" href="#__codelineno-0-400"></a><span class="w"> </span>              units: bps
+<a id="__codelineno-0-401" name="__codelineno-0-401" href="#__codelineno-0-401"></a><span class="w"> </span>              description: |
+<a id="__codelineno-0-402" name="__codelineno-0-402" href="#__codelineno-0-402"></a><span class="gu">@@ -811,6 +861,7 @@</span>
+<a id="__codelineno-0-403" name="__codelineno-0-403" href="#__codelineno-0-403"></a><span class="w"> </span>              name: &#39;Interface {#IFNAME}: Interface type&#39;
+<a id="__codelineno-0-404" name="__codelineno-0-404" href="#__codelineno-0-404"></a><span class="w"> </span>              key: &#39;vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/type&quot;]&#39;
+<a id="__codelineno-0-405" name="__codelineno-0-405" href="#__codelineno-0-405"></a><span class="w"> </span>              delay: 1h
+<a id="__codelineno-0-406" name="__codelineno-0-406" href="#__codelineno-0-406"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-407" name="__codelineno-0-407" href="#__codelineno-0-407"></a><span class="w"> </span>              trends: &#39;0&#39;
+<a id="__codelineno-0-408" name="__codelineno-0-408" href="#__codelineno-0-408"></a><span class="w"> </span>              description: |
+<a id="__codelineno-0-409" name="__codelineno-0-409" href="#__codelineno-0-409"></a><span class="w"> </span>                It indicates the interface protocol type as a decimal value.
+<a id="__codelineno-0-410" name="__codelineno-0-410" href="#__codelineno-0-410"></a><span class="gu">@@ -958,6 +1009,7 @@</span>
+<a id="__codelineno-0-411" name="__codelineno-0-411" href="#__codelineno-0-411"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-412" name="__codelineno-0-412" href="#__codelineno-0-412"></a><span class="w"> </span>              key: &#39;vfs.dev.queue_size[{#DEVNAME}]&#39;
+<a id="__codelineno-0-413" name="__codelineno-0-413" href="#__codelineno-0-413"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-414" name="__codelineno-0-414" href="#__codelineno-0-414"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-415" name="__codelineno-0-415" href="#__codelineno-0-415"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-416" name="__codelineno-0-416" href="#__codelineno-0-416"></a><span class="w"> </span>              description: &#39;The current average disk queue; the number of requests outstanding on the disk while the performance data is being collected.&#39;
+<a id="__codelineno-0-417" name="__codelineno-0-417" href="#__codelineno-0-417"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-418" name="__codelineno-0-418" href="#__codelineno-0-418"></a><span class="gu">@@ -981,6 +1033,7 @@</span>
+<a id="__codelineno-0-419" name="__codelineno-0-419" href="#__codelineno-0-419"></a><span class="w"> </span>              name: &#39;{#DEVNAME}: Disk read request avg waiting time (r_await)&#39;
+<a id="__codelineno-0-420" name="__codelineno-0-420" href="#__codelineno-0-420"></a><span class="w"> </span>              type: CALCULATED
+<a id="__codelineno-0-421" name="__codelineno-0-421" href="#__codelineno-0-421"></a><span class="w"> </span>              key: &#39;vfs.dev.read.await[{#DEVNAME}]&#39;
+<a id="__codelineno-0-422" name="__codelineno-0-422" href="#__codelineno-0-422"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-423" name="__codelineno-0-423" href="#__codelineno-0-423"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-424" name="__codelineno-0-424" href="#__codelineno-0-424"></a><span class="w"> </span>              units: &#39;!ms&#39;
+<a id="__codelineno-0-425" name="__codelineno-0-425" href="#__codelineno-0-425"></a><span class="w"> </span>              params: &#39;(last(//vfs.dev.read.time.rate[{#DEVNAME}])/(last(//vfs.dev.read.rate[{#DEVNAME}])+(last(//vfs.dev.read.rate[{#DEVNAME}])=0)))*1000*(last(//vfs.dev.read.rate[{#DEVNAME}]) &gt; 0)&#39;
+<a id="__codelineno-0-426" name="__codelineno-0-426" href="#__codelineno-0-426"></a><span class="gu">@@ -995,6 +1048,7 @@</span>
+<a id="__codelineno-0-427" name="__codelineno-0-427" href="#__codelineno-0-427"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-428" name="__codelineno-0-428" href="#__codelineno-0-428"></a><span class="w"> </span>              key: &#39;vfs.dev.read.rate[{#DEVNAME}]&#39;
+<a id="__codelineno-0-429" name="__codelineno-0-429" href="#__codelineno-0-429"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-430" name="__codelineno-0-430" href="#__codelineno-0-430"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-431" name="__codelineno-0-431" href="#__codelineno-0-431"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-432" name="__codelineno-0-432" href="#__codelineno-0-432"></a><span class="w"> </span>              units: &#39;!r/s&#39;
+<a id="__codelineno-0-433" name="__codelineno-0-433" href="#__codelineno-0-433"></a><span class="w"> </span>              description: &#39;r/s (read operations per second) - the number (after merges) of read requests completed per second for the device.&#39;
+<a id="__codelineno-0-434" name="__codelineno-0-434" href="#__codelineno-0-434"></a><span class="gu">@@ -1017,6 +1071,7 @@</span>
+<a id="__codelineno-0-435" name="__codelineno-0-435" href="#__codelineno-0-435"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-436" name="__codelineno-0-436" href="#__codelineno-0-436"></a><span class="w"> </span>              key: &#39;vfs.dev.read.time.rate[{#DEVNAME}]&#39;
+<a id="__codelineno-0-437" name="__codelineno-0-437" href="#__codelineno-0-437"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-438" name="__codelineno-0-438" href="#__codelineno-0-438"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-439" name="__codelineno-0-439" href="#__codelineno-0-439"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-440" name="__codelineno-0-440" href="#__codelineno-0-440"></a><span class="w"> </span>              description: &#39;The rate of total read time counter; used in `r_await` calculation.&#39;
+<a id="__codelineno-0-441" name="__codelineno-0-441" href="#__codelineno-0-441"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-442" name="__codelineno-0-442" href="#__codelineno-0-442"></a><span class="gu">@@ -1041,6 +1096,7 @@</span>
+<a id="__codelineno-0-443" name="__codelineno-0-443" href="#__codelineno-0-443"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-444" name="__codelineno-0-444" href="#__codelineno-0-444"></a><span class="w"> </span>              key: &#39;vfs.dev.util[{#DEVNAME}]&#39;
+<a id="__codelineno-0-445" name="__codelineno-0-445" href="#__codelineno-0-445"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-446" name="__codelineno-0-446" href="#__codelineno-0-446"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-447" name="__codelineno-0-447" href="#__codelineno-0-447"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-448" name="__codelineno-0-448" href="#__codelineno-0-448"></a><span class="w"> </span>              units: &#39;%&#39;
+<a id="__codelineno-0-449" name="__codelineno-0-449" href="#__codelineno-0-449"></a><span class="w"> </span>              description: &#39;The percentage of elapsed time during which the selected disk drive was busy while servicing read or write requests.&#39;
+<a id="__codelineno-0-450" name="__codelineno-0-450" href="#__codelineno-0-450"></a><span class="gu">@@ -1065,6 +1121,7 @@</span>
+<a id="__codelineno-0-451" name="__codelineno-0-451" href="#__codelineno-0-451"></a><span class="w"> </span>              name: &#39;{#DEVNAME}: Disk write request avg waiting time (w_await)&#39;
+<a id="__codelineno-0-452" name="__codelineno-0-452" href="#__codelineno-0-452"></a><span class="w"> </span>              type: CALCULATED
+<a id="__codelineno-0-453" name="__codelineno-0-453" href="#__codelineno-0-453"></a><span class="w"> </span>              key: &#39;vfs.dev.write.await[{#DEVNAME}]&#39;
+<a id="__codelineno-0-454" name="__codelineno-0-454" href="#__codelineno-0-454"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-455" name="__codelineno-0-455" href="#__codelineno-0-455"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-456" name="__codelineno-0-456" href="#__codelineno-0-456"></a><span class="w"> </span>              units: &#39;!ms&#39;
+<a id="__codelineno-0-457" name="__codelineno-0-457" href="#__codelineno-0-457"></a><span class="w"> </span>              params: &#39;(last(//vfs.dev.write.time.rate[{#DEVNAME}])/(last(//vfs.dev.write.rate[{#DEVNAME}])+(last(//vfs.dev.write.rate[{#DEVNAME}])=0)))*1000*(last(//vfs.dev.write.rate[{#DEVNAME}]) &gt; 0)&#39;
+<a id="__codelineno-0-458" name="__codelineno-0-458" href="#__codelineno-0-458"></a><span class="gu">@@ -1079,6 +1136,7 @@</span>
+<a id="__codelineno-0-459" name="__codelineno-0-459" href="#__codelineno-0-459"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-460" name="__codelineno-0-460" href="#__codelineno-0-460"></a><span class="w"> </span>              key: &#39;vfs.dev.write.rate[{#DEVNAME}]&#39;
+<a id="__codelineno-0-461" name="__codelineno-0-461" href="#__codelineno-0-461"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-462" name="__codelineno-0-462" href="#__codelineno-0-462"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-463" name="__codelineno-0-463" href="#__codelineno-0-463"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-464" name="__codelineno-0-464" href="#__codelineno-0-464"></a><span class="w"> </span>              units: &#39;!w/s&#39;
+<a id="__codelineno-0-465" name="__codelineno-0-465" href="#__codelineno-0-465"></a><span class="w"> </span>              description: &#39;w/s (write operations per second) - the number (after merges) of write requests completed per second for the device.&#39;
+<a id="__codelineno-0-466" name="__codelineno-0-466" href="#__codelineno-0-466"></a><span class="gu">@@ -1101,6 +1159,7 @@</span>
+<a id="__codelineno-0-467" name="__codelineno-0-467" href="#__codelineno-0-467"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-468" name="__codelineno-0-468" href="#__codelineno-0-468"></a><span class="w"> </span>              key: &#39;vfs.dev.write.time.rate[{#DEVNAME}]&#39;
+<a id="__codelineno-0-469" name="__codelineno-0-469" href="#__codelineno-0-469"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-470" name="__codelineno-0-470" href="#__codelineno-0-470"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-471" name="__codelineno-0-471" href="#__codelineno-0-471"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-472" name="__codelineno-0-472" href="#__codelineno-0-472"></a><span class="w"> </span>              description: &#39;The rate of total write time counter; used in `w_await` calculation.&#39;
+<a id="__codelineno-0-473" name="__codelineno-0-473" href="#__codelineno-0-473"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-474" name="__codelineno-0-474" href="#__codelineno-0-474"></a><span class="gu">@@ -1215,6 +1274,7 @@</span>
+<a id="__codelineno-0-475" name="__codelineno-0-475" href="#__codelineno-0-475"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-476" name="__codelineno-0-476" href="#__codelineno-0-476"></a><span class="w"> </span>              key: &#39;vfs.fs.dependent.inode[{#FSNAME},pfree]&#39;
+<a id="__codelineno-0-477" name="__codelineno-0-477" href="#__codelineno-0-477"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-478" name="__codelineno-0-478" href="#__codelineno-0-478"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-479" name="__codelineno-0-479" href="#__codelineno-0-479"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-480" name="__codelineno-0-480" href="#__codelineno-0-480"></a><span class="w"> </span>              units: &#39;%&#39;
+<a id="__codelineno-0-481" name="__codelineno-0-481" href="#__codelineno-0-481"></a><span class="w"> </span>              description: &#39;Free metadata space expressed in %.&#39;
+<a id="__codelineno-0-482" name="__codelineno-0-482" href="#__codelineno-0-482"></a><span class="gu">@@ -1264,6 +1324,7 @@</span>
+<a id="__codelineno-0-483" name="__codelineno-0-483" href="#__codelineno-0-483"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-484" name="__codelineno-0-484" href="#__codelineno-0-484"></a><span class="w"> </span>              key: &#39;vfs.fs.dependent.size[{#FSNAME},free]&#39;
+<a id="__codelineno-0-485" name="__codelineno-0-485" href="#__codelineno-0-485"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-486" name="__codelineno-0-486" href="#__codelineno-0-486"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-487" name="__codelineno-0-487" href="#__codelineno-0-487"></a><span class="w"> </span>              units: B
+<a id="__codelineno-0-488" name="__codelineno-0-488" href="#__codelineno-0-488"></a><span class="w"> </span>              description: &#39;Available storage space expressed in bytes.&#39;
+<a id="__codelineno-0-489" name="__codelineno-0-489" href="#__codelineno-0-489"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-490" name="__codelineno-0-490" href="#__codelineno-0-490"></a><span class="gu">@@ -1284,6 +1345,7 @@</span>
+<a id="__codelineno-0-491" name="__codelineno-0-491" href="#__codelineno-0-491"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-492" name="__codelineno-0-492" href="#__codelineno-0-492"></a><span class="w"> </span>              key: &#39;vfs.fs.dependent.size[{#FSNAME},pused]&#39;
+<a id="__codelineno-0-493" name="__codelineno-0-493" href="#__codelineno-0-493"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-494" name="__codelineno-0-494" href="#__codelineno-0-494"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-495" name="__codelineno-0-495" href="#__codelineno-0-495"></a><span class="w"> </span>              value_type: FLOAT
+<a id="__codelineno-0-496" name="__codelineno-0-496" href="#__codelineno-0-496"></a><span class="w"> </span>              units: &#39;%&#39;
+<a id="__codelineno-0-497" name="__codelineno-0-497" href="#__codelineno-0-497"></a><span class="w"> </span>              description: &#39;Calculated as the percentage of currently used space compared to the maximum available space.&#39;
+<a id="__codelineno-0-498" name="__codelineno-0-498" href="#__codelineno-0-498"></a><span class="gu">@@ -1341,6 +1403,7 @@</span>
+<a id="__codelineno-0-499" name="__codelineno-0-499" href="#__codelineno-0-499"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-500" name="__codelineno-0-500" href="#__codelineno-0-500"></a><span class="w"> </span>              key: &#39;vfs.fs.dependent.size[{#FSNAME},total]&#39;
+<a id="__codelineno-0-501" name="__codelineno-0-501" href="#__codelineno-0-501"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-502" name="__codelineno-0-502" href="#__codelineno-0-502"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-503" name="__codelineno-0-503" href="#__codelineno-0-503"></a><span class="w"> </span>              units: B
+<a id="__codelineno-0-504" name="__codelineno-0-504" href="#__codelineno-0-504"></a><span class="w"> </span>              description: &#39;Total space expressed in bytes.&#39;
+<a id="__codelineno-0-505" name="__codelineno-0-505" href="#__codelineno-0-505"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-506" name="__codelineno-0-506" href="#__codelineno-0-506"></a><span class="gu">@@ -1361,6 +1424,7 @@</span>
+<a id="__codelineno-0-507" name="__codelineno-0-507" href="#__codelineno-0-507"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-508" name="__codelineno-0-508" href="#__codelineno-0-508"></a><span class="w"> </span>              key: &#39;vfs.fs.dependent.size[{#FSNAME},used]&#39;
+<a id="__codelineno-0-509" name="__codelineno-0-509" href="#__codelineno-0-509"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-510" name="__codelineno-0-510" href="#__codelineno-0-510"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-511" name="__codelineno-0-511" href="#__codelineno-0-511"></a><span class="w"> </span>              units: B
+<a id="__codelineno-0-512" name="__codelineno-0-512" href="#__codelineno-0-512"></a><span class="w"> </span>              description: &#39;Used storage expressed in bytes.&#39;
+<a id="__codelineno-0-513" name="__codelineno-0-513" href="#__codelineno-0-513"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-514" name="__codelineno-0-514" href="#__codelineno-0-514"></a><span class="gu">@@ -1405,6 +1469,7 @@</span>
+<a id="__codelineno-0-515" name="__codelineno-0-515" href="#__codelineno-0-515"></a><span class="w"> </span>              type: DEPENDENT
+<a id="__codelineno-0-516" name="__codelineno-0-516" href="#__codelineno-0-516"></a><span class="w"> </span>              key: &#39;vfs.fs.dependent[{#FSNAME},readonly]&#39;
+<a id="__codelineno-0-517" name="__codelineno-0-517" href="#__codelineno-0-517"></a><span class="w"> </span>              delay: &#39;0&#39;
+<a id="__codelineno-0-518" name="__codelineno-0-518" href="#__codelineno-0-518"></a><span class="gi">+              history: 7d</span>
+<a id="__codelineno-0-519" name="__codelineno-0-519" href="#__codelineno-0-519"></a><span class="w"> </span>              description: &#39;The filesystem is mounted as read-only. It is available only for Zabbix agents 6.4 and higher.&#39;
+<a id="__codelineno-0-520" name="__codelineno-0-520" href="#__codelineno-0-520"></a><span class="w"> </span>              preprocessing:
+<a id="__codelineno-0-521" name="__codelineno-0-521" href="#__codelineno-0-521"></a><span class="w"> </span>                - type: JSONPATH
 </code></pre></div>
 
 
