@@ -161,8 +161,9 @@ We primarily support versions of Zabbix we use in production.
 | Version | Supported | Description |
 | ------- | --------- | ----------- |
 | 3.0 | ✅ | legacy RaBe environment |
-| 6.4 | ✅ | unsupported since 2024-12 |
+| 6.4 | | unsupported since 2024-12 |
 | 7.0 | ✅ | stable LTS |
+| 8.0 | | upcoming LTS |
 
 ## OS Version Support
 
