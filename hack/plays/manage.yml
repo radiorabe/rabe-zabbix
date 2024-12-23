@@ -36,7 +36,11 @@
       - template_name: "timedatectl"
       - template_name: "tuned"
       - template_name: "Zabbix unsupported items"
-    upstream_templates: [] # nothing needed, currently
+    upstream_templates:
+      - template_name: "Linux by Zabbix agent"
+        upstream: "os/linux/template_os_linux.yaml"
+      - template_name: "PFSense by SNMP"
+        upstream: "app/pfsense_snmp/template_app_pfsense_snmp.yaml"
     __: # items below are "commented" :)
       - template_name: "Apache by HTTP"
         upstream: "app/apache_http/template_app_apache_http.yaml"
@@ -444,7 +448,7 @@
               {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}{% if 'vendor' in tpl %} ![vendor: {{ tpl.vendor.name }}](https://img.shields.io/badge/vendor-{{ tpl.vendor.name }}-00c9bf) ![version: {{ tpl.vendor.version }}](https://img.shields.io/badge/version-{{ tpl.vendor.version | replace("-", "--") }}-00c9bf){% endif %}
 
 
-              {{ tpl.description | trim }}
+              {{ (tpl.description | trim) if 'description' in tpl }}
               {% if 'templates' in tpl %}
 
               ## Linked Templates
@@ -542,7 +546,7 @@
 
               ### Discovery Rule: {{ rule.name }}
 
-              {{ rule.description }}
+              {{ (rule.description) if 'description' in rule }}
 
               ```console
               {{ rule.key }}
