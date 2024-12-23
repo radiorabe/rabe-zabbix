@@ -342,6 +342,190 @@ Original: [Linux by Zabbix agent](https://raw.githubusercontent.com/zabbix/zabbi
            description: 'Used for monitoring the availability status of the agent.'
            valuemap:
              name: zabbix.host.available
+@@ -641,6 +683,7 @@
+               name: 'Interface {#IFNAME}: Inbound packets discarded'
+               key: 'net.if.in["{#IFNAME}",dropped]'
+               delay: 3m
++              history: 7d
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+                   parameters:
+@@ -654,6 +697,7 @@
+               name: 'Interface {#IFNAME}: Inbound packets with errors'
+               key: 'net.if.in["{#IFNAME}",errors]'
+               delay: 3m
++              history: 7d
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+                   parameters:
+@@ -667,6 +711,7 @@
+               name: 'Interface {#IFNAME}: Bits received'
+               key: 'net.if.in["{#IFNAME}"]'
+               delay: 3m
++              history: 7d
+               units: bps
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+@@ -684,6 +729,7 @@
+               name: 'Interface {#IFNAME}: Outbound packets discarded'
+               key: 'net.if.out["{#IFNAME}",dropped]'
+               delay: 3m
++              history: 7d
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+                   parameters:
+@@ -697,6 +743,7 @@
+               name: 'Interface {#IFNAME}: Outbound packets with errors'
+               key: 'net.if.out["{#IFNAME}",errors]'
+               delay: 3m
++              history: 7d
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+                   parameters:
+@@ -710,6 +757,7 @@
+               name: 'Interface {#IFNAME}: Bits sent'
+               key: 'net.if.out["{#IFNAME}"]'
+               delay: 3m
++              history: 7d
+               units: bps
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+@@ -726,6 +774,7 @@
+             - uuid: 3efd24ad36b04eb995cfeab82721c2fe
+               name: 'Interface {#IFNAME}: Operational status'
+               key: 'vfs.file.contents["/sys/class/net/{#IFNAME}/operstate"]'
++              history: 7d
+               trends: '0'
+               description: 'Reference: https://www.kernel.org/doc/Documentation/networking/operstates.txt'
+               valuemap:
+@@ -788,6 +837,7 @@
+               name: 'Interface {#IFNAME}: Speed'
+               key: 'vfs.file.contents["/sys/class/net/{#IFNAME}/speed"]'
+               delay: 5m
++              history: 7d
+               trends: '0'
+               units: bps
+               description: |
+@@ -811,6 +861,7 @@
+               name: 'Interface {#IFNAME}: Interface type'
+               key: 'vfs.file.contents["/sys/class/net/{#IFNAME}/type"]'
+               delay: 1h
++              history: 7d
+               trends: '0'
+               description: |
+                 It indicates the interface protocol type as a decimal value.
+@@ -958,6 +1009,7 @@
+               type: DEPENDENT
+               key: 'vfs.dev.queue_size[{#DEVNAME}]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               description: 'The current average disk queue; the number of requests outstanding on the disk while the performance data is being collected.'
+               preprocessing:
+@@ -981,6 +1033,7 @@
+               name: '{#DEVNAME}: Disk read request avg waiting time (r_await)'
+               type: CALCULATED
+               key: 'vfs.dev.read.await[{#DEVNAME}]'
++              history: 7d
+               value_type: FLOAT
+               units: '!ms'
+               params: '(last(//vfs.dev.read.time.rate[{#DEVNAME}])/(last(//vfs.dev.read.rate[{#DEVNAME}])+(last(//vfs.dev.read.rate[{#DEVNAME}])=0)))*1000*(last(//vfs.dev.read.rate[{#DEVNAME}]) > 0)'
+@@ -995,6 +1048,7 @@
+               type: DEPENDENT
+               key: 'vfs.dev.read.rate[{#DEVNAME}]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               units: '!r/s'
+               description: 'r/s (read operations per second) - the number (after merges) of read requests completed per second for the device.'
+@@ -1017,6 +1071,7 @@
+               type: DEPENDENT
+               key: 'vfs.dev.read.time.rate[{#DEVNAME}]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               description: 'The rate of total read time counter; used in `r_await` calculation.'
+               preprocessing:
+@@ -1041,6 +1096,7 @@
+               type: DEPENDENT
+               key: 'vfs.dev.util[{#DEVNAME}]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               units: '%'
+               description: 'The percentage of elapsed time during which the selected disk drive was busy while servicing read or write requests.'
+@@ -1065,6 +1121,7 @@
+               name: '{#DEVNAME}: Disk write request avg waiting time (w_await)'
+               type: CALCULATED
+               key: 'vfs.dev.write.await[{#DEVNAME}]'
++              history: 7d
+               value_type: FLOAT
+               units: '!ms'
+               params: '(last(//vfs.dev.write.time.rate[{#DEVNAME}])/(last(//vfs.dev.write.rate[{#DEVNAME}])+(last(//vfs.dev.write.rate[{#DEVNAME}])=0)))*1000*(last(//vfs.dev.write.rate[{#DEVNAME}]) > 0)'
+@@ -1079,6 +1136,7 @@
+               type: DEPENDENT
+               key: 'vfs.dev.write.rate[{#DEVNAME}]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               units: '!w/s'
+               description: 'w/s (write operations per second) - the number (after merges) of write requests completed per second for the device.'
+@@ -1101,6 +1159,7 @@
+               type: DEPENDENT
+               key: 'vfs.dev.write.time.rate[{#DEVNAME}]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               description: 'The rate of total write time counter; used in `w_await` calculation.'
+               preprocessing:
+@@ -1215,6 +1274,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.inode[{#FSNAME},pfree]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               units: '%'
+               description: 'Free metadata space expressed in %.'
+@@ -1264,6 +1324,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},free]'
+               delay: '0'
++              history: 7d
+               units: B
+               description: 'Available storage space expressed in bytes.'
+               preprocessing:
+@@ -1284,6 +1345,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},pused]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               units: '%'
+               description: 'Calculated as the percentage of currently used space compared to the maximum available space.'
+@@ -1341,6 +1403,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},total]'
+               delay: '0'
++              history: 7d
+               units: B
+               description: 'Total space expressed in bytes.'
+               preprocessing:
+@@ -1361,6 +1424,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},used]'
+               delay: '0'
++              history: 7d
+               units: B
+               description: 'Used storage expressed in bytes.'
+               preprocessing:
+@@ -1405,6 +1469,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent[{#FSNAME},readonly]'
+               delay: '0'
++              history: 7d
+               description: 'The filesystem is mounted as read-only. It is available only for Zabbix agents 6.4 and higher.'
+               preprocessing:
+                 - type: JSONPATH
 
 
 ```
