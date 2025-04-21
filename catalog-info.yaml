@@ -14,6 +14,7 @@ metadata:
       title: Zabbix Web
 spec:
   owner: it-reaktion
+  domain: it
 ---
 # hack/plays/manage.yml
 apiVersion: backstage.io/v1alpha1
