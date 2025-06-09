@@ -8,6 +8,6 @@ on:
 
 jobs:
   semantic-release:
-    uses: radiorabe/actions/.github/workflows/semantic-release.yaml@v0.30.4
+    uses: radiorabe/actions/.github/workflows/semantic-release.yaml@v0.31.0
     secrets:
       RABE_ITREAKTION_GITHUB_TOKEN: ${{ secrets.RABE_ITREAKTION_GITHUB_TOKEN }}
