@@ -1,6 +1,6 @@
 # Compare Rabe Override with Upstream Template
 
-Original: [Linux by Zabbix agent](https://raw.githubusercontent.com/zabbix/zabbix/release/7.0/templates/os/linux/template_os_linux.yaml)
+Original: [Linux by Zabbix agent](https://raw.githubusercontent.com/zabbix/zabbix/refs/heads/release/7.0/templates/os/linux/template_os_linux.yaml)
 
 ## Diff
 

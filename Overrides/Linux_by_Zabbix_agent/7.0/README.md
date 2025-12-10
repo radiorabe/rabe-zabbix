@@ -1,6 +1,6 @@
 # Zabbix Template: Linux by Zabbix agent
 
-![class: os](https://img.shields.io/badge/class-os-00c9bf) ![target: linux](https://img.shields.io/badge/target-linux-00c9bf) ![vendor: Zabbix](https://img.shields.io/badge/vendor-Zabbix-00c9bf) ![version: 7.0-1](https://img.shields.io/badge/version-7.0--1-00c9bf)
+![class: os](https://img.shields.io/badge/class-os-00c9bf) ![target: linux](https://img.shields.io/badge/target-linux-00c9bf) ![vendor: Zabbix](https://img.shields.io/badge/vendor-Zabbix-00c9bf) ![version: 7.0-3](https://img.shields.io/badge/version-7.0--3-00c9bf)
 
 This is an official Linux template. It requires Zabbix agent 7.0 or newer.
 
@@ -754,7 +754,7 @@ Settings:
 
 ## Triggers
 
-### Trigger: Configured max number of open filedescriptors is too low
+### Trigger: Linux: Configured max number of open filedescriptors is too low
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -769,7 +769,7 @@ Settings:
 last(/Linux by Zabbix agent/kernel.maxfiles)<{$KERNEL.MAXFILES.MIN}
 ```
 
-### Trigger: Configured max number of processes is too low
+### Trigger: Linux: Configured max number of processes is too low
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -784,7 +784,7 @@ Settings:
 last(/Linux by Zabbix agent/kernel.maxproc)<{$KERNEL.MAXPROC.MIN}
 ```
 
-### Trigger: High CPU utilization
+### Trigger: Linux: High CPU utilization
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -799,7 +799,7 @@ Settings:
 min(/Linux by Zabbix agent/system.cpu.util,5m)>{$CPU.UTIL.CRIT}
 ```
 
-### Trigger: System name has changed
+### Trigger: Linux: System name has changed
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf) ![scope: security](https://img.shields.io/badge/scope-security-00c9bf)
 
@@ -815,7 +815,7 @@ Settings:
 change(/Linux by Zabbix agent/system.hostname) and length(last(/Linux by Zabbix agent/system.hostname))>0
 ```
 
-### Trigger: System time is out of sync
+### Trigger: Linux: System time is out of sync
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -831,7 +831,7 @@ Settings:
 fuzzytime(/Linux by Zabbix agent/system.localtime,{$SYSTEM.FUZZYTIME.MAX})=0
 ```
 
-### Trigger: Operating system description has changed
+### Trigger: Linux: Operating system description has changed
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -847,7 +847,7 @@ Settings:
 change(/Linux by Zabbix agent/system.sw.os) and length(last(/Linux by Zabbix agent/system.sw.os))>0
 ```
 
-### Trigger: Number of installed packages has been changed
+### Trigger: Linux: Number of installed packages has been changed
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -863,7 +863,7 @@ Settings:
 change(/Linux by Zabbix agent/system.sw.packages.get)<>0
 ```
 
-### Trigger: {HOST.NAME} has been restarted
+### Trigger: Linux: {HOST.NAME} has been restarted
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -879,7 +879,7 @@ Settings:
 last(/Linux by Zabbix agent/system.uptime)<10m
 ```
 
-### Trigger: /etc/passwd has been changed
+### Trigger: Linux: /etc/passwd has been changed
 
 ![scope: security](https://img.shields.io/badge/scope-security-00c9bf)
 
@@ -895,7 +895,7 @@ Settings:
 last(/Linux by Zabbix agent/vfs.file.cksum[/etc/passwd,sha256],#1)<>last(/Linux by Zabbix agent/vfs.file.cksum[/etc/passwd,sha256],#2)
 ```
 
-### Trigger: High memory utilization
+### Trigger: Linux: High memory utilization
 
 ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf) ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -910,7 +910,7 @@ Settings:
 min(/Linux by Zabbix agent/vm.memory.utilization,5m)>{$MEMORY.UTIL.MAX}
 ```
 
-### Trigger: Zabbix agent is not available
+### Trigger: Linux: Zabbix agent is not available
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
@@ -1096,7 +1096,7 @@ Settings:
 
 #### Discovery Rule: Network interface discovery: Discovery Triggers
 
-##### Discovery Rule: Network interface discovery: Trigger Prototype: Interface {#IFNAME}: Link down
+##### Discovery Rule: Network interface discovery: Trigger Prototype: Linux: Interface {#IFNAME}: Link down
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
@@ -1559,7 +1559,7 @@ Preprocessing steps:
 
 #### Discovery Rule: Mounted filesystem discovery: Discovery Triggers
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSNAME}]: Running out of free inodes
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Linux: FS [{#FSNAME}]: Running out of free inodes
 
 ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf) ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -1574,7 +1574,7 @@ Settings:
 min(/Linux by Zabbix agent/vfs.fs.dependent.inode[{#FSNAME},pfree],5m)<{$VFS.FS.INODE.PFREE.MIN.CRIT:"{#FSNAME}"}
 ```
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSNAME}]: Running out of free inodes
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Linux: FS [{#FSNAME}]: Running out of free inodes
 
 ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf) ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -1589,7 +1589,7 @@ Settings:
 min(/Linux by Zabbix agent/vfs.fs.dependent.inode[{#FSNAME},pfree],5m)<{$VFS.FS.INODE.PFREE.MIN.WARN:"{#FSNAME}"}
 ```
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSNAME}]: Space is critically low
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Linux: FS [{#FSNAME}]: Space is critically low
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf)
 
@@ -1608,7 +1608,7 @@ Settings:
 min(/Linux by Zabbix agent/vfs.fs.dependent.size[{#FSNAME},pused],5m)>{$VFS.FS.PUSED.MAX.CRIT:"{#FSNAME}"}
 ```
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSNAME}]: Space is low
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Linux: FS [{#FSNAME}]: Space is low
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf)
 
@@ -1627,7 +1627,7 @@ Settings:
 min(/Linux by Zabbix agent/vfs.fs.dependent.size[{#FSNAME},pused],5m)>{$VFS.FS.PUSED.MAX.WARN:"{#FSNAME}"}
 ```
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSNAME}]: Filesystem has become read-only
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Linux: FS [{#FSNAME}]: Filesystem has become read-only
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
