@@ -1,6 +1,6 @@
 # Compare Rabe Override with Upstream Template
 
-Original: [Windows by Zabbix agent active](https://raw.githubusercontent.com/zabbix/zabbix/release/7.0/templates/os/windows_agent_active/template_os_windows_agent_active.yaml)
+Original: [Windows by Zabbix agent active](https://raw.githubusercontent.com/zabbix/zabbix/refs/heads/release/7.0/templates/os/windows_agent_active/template_os_windows_agent_active.yaml)
 
 ## Diff
 
@@ -263,22 +263,182 @@ Original: [Windows by Zabbix agent active](https://raw.githubusercontent.com/zab
            description: |
              Availability of active checks on the host. The value of this item corresponds to availability icons in the host list.
              Possible values:
-@@ -1782,6 +1814,15 @@
-               newvalue: available
-             - value: '2'
-               newvalue: 'not available'
-+        - uuid: 9c0c0eb0ed7e495b9d4d487df7af0acd
-+          name: zabbix.host.available
-+          mappings:
-+            - value: '0'
-+              newvalue: 'not available'
-+            - value: '1'
-+              newvalue: available
-+            - value: '2'
-+              newvalue: unknown
-         - uuid: 0b50ea7e6695421da023ece0a23bed10
-           name: 'Zabbix agent ping status'
-           mappings:
+@@ -578,6 +610,7 @@
+               type: ZABBIX_ACTIVE
+               key: 'net.if.in["{#IFGUID}",dropped]'
+               delay: 3m
++              history: 7d
+               description: 'The number of incoming packets dropped on the network interface.'
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+@@ -595,6 +628,7 @@
+               type: ZABBIX_ACTIVE
+               key: 'net.if.in["{#IFGUID}",errors]'
+               delay: 3m
++              history: 7d
+               description: 'The number of incoming packets with errors on the network interface.'
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+@@ -612,6 +646,7 @@
+               type: ZABBIX_ACTIVE
+               key: 'net.if.in["{#IFGUID}"]'
+               delay: 3m
++              history: 7d
+               units: bps
+               description: 'Incoming traffic on the network interface.'
+               preprocessing:
+@@ -633,6 +668,7 @@
+               type: ZABBIX_ACTIVE
+               key: 'net.if.out["{#IFGUID}",dropped]'
+               delay: 3m
++              history: 7d
+               description: 'The number of outgoing packets dropped on the network interface.'
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+@@ -650,6 +686,7 @@
+               type: ZABBIX_ACTIVE
+               key: 'net.if.out["{#IFGUID}",errors]'
+               delay: 3m
++              history: 7d
+               description: 'The number of outgoing packets with errors on the network interface.'
+               preprocessing:
+                 - type: CHANGE_PER_SECOND
+@@ -667,6 +704,7 @@
+               type: ZABBIX_ACTIVE
+               key: 'net.if.out["{#IFGUID}"]'
+               delay: 3m
++              history: 7d
+               units: bps
+               description: 'Outgoing traffic on the network interface.'
+               preprocessing:
+@@ -688,6 +726,7 @@
+               type: DEPENDENT
+               key: 'net.if.speed["{#IFGUID}"]'
+               delay: '0'
++              history: 7d
+               trends: '0'
+               units: bps
+               description: 'Estimated bandwidth of the network interface if any.'
+@@ -717,6 +756,7 @@
+               type: DEPENDENT
+               key: 'net.if.status["{#IFGUID}"]'
+               delay: '0'
++              history: 7d
+               trends: '0'
+               description: 'The operational status of the network interface.'
+               valuemap:
+@@ -762,6 +802,7 @@
+               type: DEPENDENT
+               key: 'net.if.type["{#IFGUID}"]'
+               delay: '0'
++              history: 7d
+               trends: '0'
+               description: 'The type of the network interface.'
+               valuemap:
+@@ -920,6 +961,7 @@
+               name: '{#DEVNAME}: Disk utilization by idle time'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\% Idle Time",60]'
++              history: 7d
+               value_type: FLOAT
+               units: '%'
+               description: 'This item is the percentage of elapsed time that the selected disk drive was busy servicing read or writes requests based on idle time.'
+@@ -952,6 +994,7 @@
+               name: '{#DEVNAME}: Average disk read queue length'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Avg. Disk Read Queue Length",60]'
++              history: 7d
+               value_type: FLOAT
+               description: 'Average disk read queue, the number of requests outstanding on the disk at the time the performance data is collected.'
+               tags:
+@@ -963,6 +1006,7 @@
+               name: '{#DEVNAME}: Disk read request avg waiting time'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Avg. Disk sec/Read",60]'
++              history: 7d
+               value_type: FLOAT
+               units: s
+               description: 'The average time for read requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.'
+@@ -986,6 +1030,7 @@
+               name: '{#DEVNAME}: Disk write request avg waiting time'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Avg. Disk sec/Write",60]'
++              history: 7d
+               value_type: FLOAT
+               units: s
+               description: 'The average time for write requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.'
+@@ -1009,6 +1054,7 @@
+               name: '{#DEVNAME}: Average disk write queue length'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Avg. Disk Write Queue Length",60]'
++              history: 7d
+               value_type: FLOAT
+               description: 'Average disk write queue, the number of requests outstanding on the disk at the time the performance data is collected.'
+               tags:
+@@ -1020,6 +1066,7 @@
+               name: '{#DEVNAME}: Disk average queue size (avgqu-sz)'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Current Disk Queue Length",60]'
++              history: 7d
+               value_type: FLOAT
+               description: 'The current average disk queue; the number of requests outstanding on the disk while the performance data is being collected.'
+               tags:
+@@ -1031,6 +1078,7 @@
+               name: '{#DEVNAME}: Disk read rate'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Disk Reads/sec",60]'
++              history: 7d
+               value_type: FLOAT
+               units: '!r/s'
+               description: 'Rate of read operations on the disk.'
+@@ -1043,6 +1091,7 @@
+               name: '{#DEVNAME}: Disk write rate'
+               type: ZABBIX_ACTIVE
+               key: 'perf_counter_en["\PhysicalDisk({#DEVNAME})\Disk Writes/sec",60]'
++              history: 7d
+               value_type: FLOAT
+               units: '!w/s'
+               description: 'Rate of write operations on the disk.'
+@@ -1137,6 +1186,7 @@
+               name: 'State of service "{#SERVICE.NAME}" ({#SERVICE.DISPLAYNAME})'
+               type: ZABBIX_ACTIVE
+               key: 'service.info["{#SERVICE.NAME}",state]'
++              history: 7d
+               valuemap:
+                 name: 'Windows service state'
+               tags:
+@@ -1192,6 +1242,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},free]'
+               delay: '0'
++              history: 7d
+               units: B
+               description: 'Available storage space expressed in bytes.'
+               preprocessing:
+@@ -1212,6 +1263,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},pused]'
+               delay: '0'
++              history: 7d
+               value_type: FLOAT
+               units: '%'
+               description: 'Calculated as the percentage of currently used space compared to the maximum available space.'
+@@ -1269,6 +1321,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},total]'
+               delay: '0'
++              history: 7d
+               units: B
+               description: 'Total space expressed in bytes.'
+               preprocessing:
+@@ -1289,6 +1342,7 @@
+               type: DEPENDENT
+               key: 'vfs.fs.dependent.size[{#FSNAME},used]'
+               delay: '0'
++              history: 7d
+               units: B
+               description: 'Used storage expressed in bytes.'
+               preprocessing:
 
 
 ```

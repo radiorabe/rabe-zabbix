@@ -1,6 +1,6 @@
 # Zabbix Template: Windows by Zabbix agent active
 
-![class: os](https://img.shields.io/badge/class-os-00c9bf) ![target: windows](https://img.shields.io/badge/target-windows-00c9bf) ![vendor: Zabbix](https://img.shields.io/badge/vendor-Zabbix-00c9bf) ![version: 7.0-0](https://img.shields.io/badge/version-7.0--0-00c9bf)
+![class: os](https://img.shields.io/badge/class-os-00c9bf) ![target: windows](https://img.shields.io/badge/target-windows-00c9bf) ![vendor: Zabbix](https://img.shields.io/badge/vendor-Zabbix-00c9bf) ![version: 7.0-2](https://img.shields.io/badge/version-7.0--2-00c9bf)
 
 This is an official Windows template. It requires Zabbix agent 7.0 or newer.
 
@@ -624,7 +624,7 @@ Settings:
 
 ## Triggers
 
-### Trigger: Zabbix agent is not available
+### Trigger: Windows: Zabbix agent is not available
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
@@ -640,7 +640,7 @@ Settings:
 nodata(/Windows by Zabbix agent active/agent.ping,{$AGENT.NODATA_TIMEOUT})=1
 ```
 
-### Trigger: Number of free system page table entries is too low
+### Trigger: Windows: Number of free system page table entries is too low
 
 ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf)
 
@@ -655,7 +655,7 @@ Settings:
 max(/Windows by Zabbix agent active/perf_counter_en["\Memory\Free System Page Table Entries"],5m)<{$MEM.PAGE_TABLE_CRIT.MIN}
 ```
 
-### Trigger: The Memory Pages/sec is too high
+### Trigger: Windows: The Memory Pages/sec is too high
 
 ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf)
 
@@ -670,7 +670,7 @@ Settings:
 min(/Windows by Zabbix agent active/perf_counter_en["\Memory\Pages/sec"],5m)>{$MEM.PAGE_SEC.CRIT.MAX}
 ```
 
-### Trigger: CPU interrupt time is too high
+### Trigger: Windows: CPU interrupt time is too high
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -685,7 +685,7 @@ Settings:
 min(/Windows by Zabbix agent active/perf_counter_en["\Processor Information(_total)\% Interrupt Time"],5m)>{$CPU.INTERRUPT.CRIT.MAX}
 ```
 
-### Trigger: CPU privileged time is too high
+### Trigger: Windows: CPU privileged time is too high
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -700,7 +700,7 @@ Settings:
 min(/Windows by Zabbix agent active/perf_counter_en["\Processor Information(_total)\% Privileged Time"],5m)>{$CPU.PRIV.CRIT.MAX}
 ```
 
-### Trigger: High CPU utilization
+### Trigger: Windows: High CPU utilization
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -715,7 +715,7 @@ Settings:
 min(/Windows by Zabbix agent active/system.cpu.util,5m)>{$CPU.UTIL.CRIT}
 ```
 
-### Trigger: System name has changed
+### Trigger: Windows: System name has changed
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -731,7 +731,7 @@ Settings:
 change(/Windows by Zabbix agent active/system.hostname) and length(last(/Windows by Zabbix agent active/system.hostname))>0
 ```
 
-### Trigger: Operating system description has changed
+### Trigger: Windows: Operating system description has changed
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -747,7 +747,7 @@ Settings:
 change(/Windows by Zabbix agent active/system.sw.os) and length(last(/Windows by Zabbix agent active/system.sw.os))>0
 ```
 
-### Trigger: Host has been restarted
+### Trigger: Windows: Host has been restarted
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -763,7 +763,7 @@ Settings:
 last(/Windows by Zabbix agent active/system.uptime)<10m
 ```
 
-### Trigger: High memory utilization
+### Trigger: Windows: High memory utilization
 
 ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf) ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -778,7 +778,7 @@ Settings:
 min(/Windows by Zabbix agent active/vm.memory.util,5m)>{$MEMORY.UTIL.MAX}
 ```
 
-### Trigger: Active checks are not available
+### Trigger: Windows: Active checks are not available
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
@@ -834,6 +834,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors
 
@@ -850,6 +851,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface {#IFNAME}({#IFALIAS}): Bits received
 
@@ -866,6 +868,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded
 
@@ -882,6 +885,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors
 
@@ -898,6 +902,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface {#IFNAME}({#IFALIAS}): Bits sent
 
@@ -914,6 +919,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 ##### Discovery Rule: Network interfaces discovery: Item Prototype: Interface {#IFNAME}({#IFALIAS}): Speed
 
@@ -930,6 +936,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `wmi.getall[root\cimv2,"select Name,Description,NetConnectionID,Speed,AdapterTypeId,NetConnectionStatus,GUID from win32_networkadapter where PhysicalAdapter=True and NetConnectionStatus>0"]` |
 
 Preprocessing steps:
@@ -955,6 +962,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `wmi.getall[root\cimv2,"select Name,Description,NetConnectionID,Speed,AdapterTypeId,NetConnectionStatus,GUID from win32_networkadapter where PhysicalAdapter=True and NetConnectionStatus>0"]` |
 
 Preprocessing steps:
@@ -979,6 +987,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `wmi.getall[root\cimv2,"select Name,Description,NetConnectionID,Speed,AdapterTypeId,NetConnectionStatus,GUID from win32_networkadapter where PhysicalAdapter=True and NetConnectionStatus>0"]` |
 
 Preprocessing steps:
@@ -990,7 +999,7 @@ Preprocessing steps:
 
 #### Discovery Rule: Network interfaces discovery: Discovery Triggers
 
-##### Discovery Rule: Network interfaces discovery: Trigger Prototype: Interface {#IFNAME}({#IFALIAS}): Link down
+##### Discovery Rule: Network interfaces discovery: Trigger Prototype: Windows: Interface {#IFNAME}({#IFALIAS}): Link down
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf)
 
@@ -1052,6 +1061,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT in % |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Average disk read queue length
 
@@ -1069,6 +1079,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Disk read request avg waiting time
 
@@ -1086,6 +1097,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT in s |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Disk write request avg waiting time
 
@@ -1103,6 +1115,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT in s |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Average disk write queue length
 
@@ -1120,6 +1133,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Disk average queue size (avgqu-sz)
 
@@ -1137,6 +1151,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Disk read rate
 
@@ -1154,6 +1169,7 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT in !r/s |
+| History | 7d |
 
 ##### Discovery Rule: Physical disks discovery: Item Prototype: {#DEVNAME}: Disk write rate
 
@@ -1171,10 +1187,11 @@ Settings:
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
 | Value type | FLOAT in !w/s |
+| History | 7d |
 
 #### Discovery Rule: Physical disks discovery: Discovery Triggers
 
-##### Discovery Rule: Physical disks discovery: Trigger Prototype: {#DEVNAME}: Disk is overloaded
+##### Discovery Rule: Physical disks discovery: Trigger Prototype: Windows: {#DEVNAME}: Disk is overloaded
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -1190,7 +1207,7 @@ Settings:
 min(/Windows by Zabbix agent active/perf_counter_en["\PhysicalDisk({#DEVNAME})\% Idle Time",60],15m)>{$VFS.DEV.UTIL.MAX.WARN}
 ```
 
-##### Discovery Rule: Physical disks discovery: Trigger Prototype: {#DEVNAME}: Disk read request responses are too high
+##### Discovery Rule: Physical disks discovery: Trigger Prototype: Windows: {#DEVNAME}: Disk read request responses are too high
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -1206,7 +1223,7 @@ Settings:
 min(/Windows by Zabbix agent active/perf_counter_en["\PhysicalDisk({#DEVNAME})\Avg. Disk sec/Read",60],15m) > {$VFS.DEV.READ.AWAIT.WARN:"{#DEVNAME}"}
 ```
 
-##### Discovery Rule: Physical disks discovery: Trigger Prototype: {#DEVNAME}: Disk write request responses are too high
+##### Discovery Rule: Physical disks discovery: Trigger Prototype: Windows: {#DEVNAME}: Disk write request responses are too high
 
 ![scope: performance](https://img.shields.io/badge/scope-performance-00c9bf)
 
@@ -1263,10 +1280,11 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | ZABBIX_ACTIVE |
+| History | 7d |
 
 #### Discovery Rule: Windows services discovery: Discovery Triggers
 
-##### Discovery Rule: Windows services discovery: Trigger Prototype: "{#SERVICE.NAME}" ({#SERVICE.DISPLAYNAME}) is not running
+##### Discovery Rule: Windows services discovery: Trigger Prototype: Windows: "{#SERVICE.NAME}" ({#SERVICE.DISPLAYNAME}) is not running
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -1320,6 +1338,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1344,6 +1363,7 @@ Settings:
 | ------------ | ----- |
 | Type | DEPENDENT |
 | Value type | FLOAT in % |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1367,6 +1387,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1390,6 +1411,7 @@ Settings:
 | Item Setting | Value |
 | ------------ | ----- |
 | Type | DEPENDENT |
+| History | 7d |
 | Source item | `vfs.fs.dependent[{#FSNAME},data]` |
 
 Preprocessing steps:
@@ -1425,7 +1447,7 @@ Preprocessing steps:
 
 #### Discovery Rule: Mounted filesystem discovery: Discovery Triggers
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSLABEL}({#FSNAME})]: Space is critically low
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Windows: FS [{#FSLABEL}({#FSNAME})]: Space is critically low
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf)
 
@@ -1444,7 +1466,7 @@ Settings:
 min(/Windows by Zabbix agent active/vfs.fs.dependent.size[{#FSNAME},pused],5m)>{$VFS.FS.PUSED.MAX.CRIT:"{#FSLABEL}({#FSNAME})"}
 ```
 
-##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: FS [{#FSLABEL}({#FSNAME})]: Space is low
+##### Discovery Rule: Mounted filesystem discovery: Trigger Prototype: Windows: FS [{#FSLABEL}({#FSNAME})]: Space is low
 
 ![scope: availability](https://img.shields.io/badge/scope-availability-00c9bf) ![scope: capacity](https://img.shields.io/badge/scope-capacity-00c9bf)
 
