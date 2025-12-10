@@ -1,9 +1,12 @@
 ---
 - name: 'RaBe Zabbix Templator'
   hosts: [localhost]
+  gather_facts: no
 
   vars:
     target_version: '7.0'
+    # readme_year: '{{ ansible_date_time.year }}'
+    readme_year: '2025'
     rabe_zabbix_templates:
       - template_name: "Apache with TLS by HTTP Stack"
       - template_name: "APC Smart-UPS 3000 Stack"
@@ -68,7 +71,7 @@
     ansible_zabbix_url_path: ''
     ansible_zabbix_auth_key: ''
 
-    __url_prefix: "https://raw.githubusercontent.com/zabbix/zabbix/release/"
+    __url_prefix: "https://raw.githubusercontent.com/zabbix/zabbix/refs/heads/release/"
 
   tasks:
     - name: 'RaBe Zabbix Templator : Get RaBe Zabbix Templates from Zabbix'
@@ -124,16 +127,26 @@
 
     - name: 'RaBe Zabbix Templator : Render DIFF.md for Upsteam Zabbix Templates'
       block:
+        - name: 'RaBe Zabbix Templator : Download upstream template'
+          ansible.builtin.get_url:
+            url: '{{ __url_prefix + target_version + "/templates/" + item.upstream | trim }}'
+            dest: '{{ "./Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/orig.yaml"}}'
+          loop: '{{ upstream_templates }}'
         - name: 'RaBe Zabbix Templator : Generate diff'
           ansible.utils.fact_diff:
-            before: '{{ lookup("ansible.builtin.url", __url_prefix + target_version + "/templates/" + item.upstream, split_lines=False) | trim }}'
+            before: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/orig.yaml") }}'
             after: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/" + ( item.template_name | replace(" ", "_") ) + ".yaml") | trim }}'
           loop: '{{ upstream_templates }}'
           changed_when: false
-          register: diff
+          register: fact_diff
+        - name: 'RaBe Zabbix Templator : Remove upstream template'
+          ansible.builtin.file:
+            path: '{{ "./Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/orig.yaml"}}'
+            state: absent
+          loop: '{{ upstream_templates }}'
 
         - name: 'RaBe Zabbix Templator : Write DIFF.md'
-          loop: '{{ diff.results | rejectattr("diff_text", "equalto", "") }}'
+          loop: '{{ fact_diff.results | rejectattr("diff_text", "equalto", "") }}'
           loop_control:
             loop_var: result
           ansible.builtin.copy:
@@ -150,7 +163,7 @@
               ```
 
         - name: 'RaBe Zabbix Templator : Remove result with missing diff'
-          loop: '{{ diff.results | selectattr("diff_text", "equalto", "") }}'
+          loop: '{{ fact_diff.results | selectattr("diff_text", "equalto", "") }}'
           loop_control:
             loop_var: result
           ansible.builtin.file:
@@ -158,7 +171,7 @@
             path: 'Overrides/{{ result.item.template_name | replace(" ", "_") }}/{{ target_version }}/'
 
         - name: 'RaBe Zabbix Templator : Assert non-empty diff'
-          loop: '{{ diff.results }}'
+          loop: '{{ fact_diff.results }}'
           loop_control:
             loop_var: result
           ansible.builtin.assert:
@@ -308,7 +321,7 @@
 
               ## Copyright
               
-              Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+              Copyright (c) 2017 - {{ readme_year }} [Radio Bern RaBe](http://www.rabe.ch)
 
 
     - name: 'RaBe Zabbix Templator : Template README.md files'
@@ -704,5 +717,5 @@
 
               ## Copyright
 
-              Copyright (c) 2017 - {{ ansible_date_time.year }} [Radio Bern RaBe](http://www.rabe.ch)
+              Copyright (c) 2017 - {{ readme_year }} [Radio Bern RaBe](http://www.rabe.ch)
               {% endif %}
