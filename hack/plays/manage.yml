@@ -238,11 +238,11 @@
 
               ### {{ stack.split('/')[0:2] | join(": ") | replace("_", " ") }}
               
-              | Name | 3.0 | 6.4 | 7.0 |
+              | Name | 3.0 | 7.0 | 8.0 |
               | ---- | --- | --- | --- |
               {% endif %}
               {% if (stack.split('/') | length) == 3 %}
-              | {{ stack.split('/')[2].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/3.0){% endif %} | {% if stack + '/6.4' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/6.4){% endif %} | {% if stack + '/7.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/7.0){% endif %} |
+              | {{ stack.split('/')[2].replace("_", " ") }} | {% if stack + '/3.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/3.0){% endif %} | {% if stack + '/7.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/7.0){% endif %} | {% if stack + '/8.0' in flat_stacks %}[✅](./{{ stack.split('/') | join('/') }}/8.0){% endif %} |
               {% endif %}
               {% endfor %}
 
@@ -253,11 +253,11 @@
 
               ### {{ template.split('/')[0:2] | join(": ") | replace("_", " ") }}
               
-              | Name | 3.0 | 6.4 | 7.0 |
+              | Name | 3.0 | 7.0 | 8.0 |
               | ---- | --- | --- | --- |
               {% endif %}
               {% if (template.split('/') | length) == 3 %}
-              | {{ template.split('/')[2].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/3.0){% endif %} | {% if template + '/6.4' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/6.4){% endif %} | {% if template + '/7.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/7.0){% endif %} |
+              | {{ template.split('/')[2].replace("_", " ") }} | {% if template + '/3.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/3.0){% endif %} | {% if template + '/7.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/7.0){% endif %} | {% if template + '/8.0' in flat_templates %}[✅](./{{ template.split('/') | join('/') }}/8.0){% endif %} |
               {% endif %}
               {% endfor %}
 
@@ -269,11 +269,11 @@
               with a generated diff against its upstream version.
 
               {% if flat_overrides %}
-              | Name | 6.4 | 7.0 |
+              | Name | 7.0 | 8.0 |
               | ---- | --- | --- |
               {% for override in flat_overrides %}
               {% if (override.split('/') | length) == 3 %}
-              | {{ override.split('/')[1] | replace("_", " ") }} | {% if '6.4' in override %}[✅](./{{ override }}){% endif %} | {% if '7.0' in override %}[✅](./{{ override }}){% endif %} |
+              | {{ override.split('/')[1] | replace("_", " ") }} | {% if '7.0' in override %}[✅](./{{ override }}){% endif %} | {% if '8.0' in override %}[✅](./{{ override }}){% endif %} |
               {% endif %}
               {% endfor %}
               {% else %}
@@ -287,14 +287,13 @@
               | Version | Supported | Description |
               | ------- | --------- | ----------- |
               | 3.0 | ✅ | legacy RaBe environment |
-              | 6.4 | | unsupported since 2024-12 |
               | 7.0 | ✅ | stable LTS |
               | 8.0 | | upcoming LTS |
 
               ## OS Version Support
 
               Our Zabbix 3.0 template mainly template EL7 installations based on CentOS 7.
-              The 6.4+ templates aim to support both EL7 as well as EL9, with EL7 on
+              The 7.0+ templates aim to support both EL7 as well as EL9, with EL7 on
               a best effort case (e.g. we don't workaround the lack of `timedatectl show`
               on old distros, their timedatectl stays unmonitored).
 
