@@ -23,63 +23,63 @@ inheritance problems.
 
 ### Stacks: Applications
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
-| Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/6.4) | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/7.0) |
-| Nginx with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/6.4) | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/7.0) |
-| Songticker Stack |  | [✅](./Stacks/Applications/Songticker_Stack/6.4) | [✅](./Stacks/Applications/Songticker_Stack/7.0) |
-| systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/6.4) | [✅](./Stacks/Applications/systemd_Stack/7.0) |
+| Apache with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Apache_with_TLS_by_HTTP_Stack/7.0) |  |
+| Nginx with TLS by HTTP Stack |  | [✅](./Stacks/Applications/Nginx_with_TLS_by_HTTP_Stack/7.0) |  |
+| Songticker Stack |  | [✅](./Stacks/Applications/Songticker_Stack/7.0) |  |
+| systemd Stack |  | [✅](./Stacks/Applications/systemd_Stack/7.0) |  |
 
 ### Stacks: Network devices
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
 | Netgear GS108Tv2 SNMPv2 | [✅](./Stacks/Network_devices/Netgear_GS108Tv2_SNMPv2/3.0) |  |  |
 | Netgear M5300 Series SNMPv2 | [✅](./Stacks/Network_devices/Netgear_M5300_Series_SNMPv2/3.0) |  |  |
 
 ### Stacks: Operating systems
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
-| EL7 Stack |  | [✅](./Stacks/Operating_systems/EL7_Stack/6.4) | [✅](./Stacks/Operating_systems/EL7_Stack/7.0) |
-| EL8 Stack |  | [✅](./Stacks/Operating_systems/EL8_Stack/6.4) | [✅](./Stacks/Operating_systems/EL8_Stack/7.0) |
-| EL9 Stack |  | [✅](./Stacks/Operating_systems/EL9_Stack/6.4) | [✅](./Stacks/Operating_systems/EL9_Stack/7.0) |
+| EL7 Stack |  | [✅](./Stacks/Operating_systems/EL7_Stack/7.0) |  |
+| EL8 Stack |  | [✅](./Stacks/Operating_systems/EL8_Stack/7.0) |  |
+| EL9 Stack |  | [✅](./Stacks/Operating_systems/EL9_Stack/7.0) |  |
 
 ### Stacks: Servers
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
-| EL7 KVM VM Stack |  | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/7.0) |
-| EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/7.0) |
-| EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/6.4) | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/7.0) |
+| EL7 KVM VM Stack |  | [✅](./Stacks/Servers/EL7_KVM_VM_Stack/7.0) |  |
+| EL8 KVM VM Stack |  | [✅](./Stacks/Servers/EL8_KVM_VM_Stack/7.0) |  |
+| EL9 KVM VM Stack |  | [✅](./Stacks/Servers/EL9_KVM_VM_Stack/7.0) |  |
 
 ### Stacks: Systems
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
-| APC Smart-UPS 3000 Stack |  |  | [✅](./Stacks/Systems/APC_Smart-UPS_3000_Stack/7.0) |
+| APC Smart-UPS 3000 Stack |  | [✅](./Stacks/Systems/APC_Smart-UPS_3000_Stack/7.0) |  |
 
 ## Templates
 
 ### Templates: Applications
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
 | Apache HTTP Server | [✅](./Templates/Applications/Apache_HTTP_Server/3.0) |  |  |
-| auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/6.4) | [✅](./Templates/Applications/auditd/7.0) |
+| auditd | [✅](./Templates/Applications/auditd/3.0) | [✅](./Templates/Applications/auditd/7.0) |  |
 | Axia ALSA Soundcard Driver for Livewire | [✅](./Templates/Applications/Axia_ALSA_Soundcard_Driver_for_Livewire/3.0) |  |  |
 | BSNMP | [✅](./Templates/Applications/BSNMP/3.0) |  |  |
-| candlepin-rhsmcertd |  | [✅](./Templates/Applications/candlepin-rhsmcertd/6.4) | [✅](./Templates/Applications/candlepin-rhsmcertd/7.0) |
+| candlepin-rhsmcertd |  | [✅](./Templates/Applications/candlepin-rhsmcertd/7.0) |  |
 | CARP | [✅](./Templates/Applications/CARP/3.0) |  |  |
-| certmonger |  | [✅](./Templates/Applications/certmonger/6.4) | [✅](./Templates/Applications/certmonger/7.0) |
-| chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/6.4) | [✅](./Templates/Applications/chrony/7.0) |
-| Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/6.4) | [✅](./Templates/Applications/Cronie/7.0) |
+| certmonger |  | [✅](./Templates/Applications/certmonger/7.0) |  |
+| chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/7.0) |  |
+| Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/7.0) |  |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
 | dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |
-| firewalld |  | [✅](./Templates/Applications/firewalld/6.4) | [✅](./Templates/Applications/firewalld/7.0) |
+| firewalld |  | [✅](./Templates/Applications/firewalld/7.0) |  |
 | GlusterFS Client | [✅](./Templates/Applications/GlusterFS_Client/3.0) |  |  |
 | GlusterFS Server | [✅](./Templates/Applications/GlusterFS_Server/3.0) |  |  |
-| gssproxy | [✅](./Templates/Applications/gssproxy/3.0) | [✅](./Templates/Applications/gssproxy/6.4) | [✅](./Templates/Applications/gssproxy/7.0) |
+| gssproxy | [✅](./Templates/Applications/gssproxy/3.0) | [✅](./Templates/Applications/gssproxy/7.0) |  |
 | Icecast | [✅](./Templates/Applications/Icecast/3.0) |  |  |
 | ISC DHCP daemon | [✅](./Templates/Applications/ISC_DHCP_daemon/3.0) |  |  |
 | ISC DHCP Relay Agent | [✅](./Templates/Applications/ISC_DHCP_Relay_Agent/3.0) |  |  |
@@ -90,26 +90,26 @@ inheritance problems.
 | LVM | [✅](./Templates/Applications/LVM/3.0) |  |  |
 | MD-RAID | [✅](./Templates/Applications/MD-RAID/3.0) |  |  |
 | ntpd | [✅](./Templates/Applications/ntpd/3.0) |  |  |
-| qemu-ga |  |  | [✅](./Templates/Applications/qemu-ga/7.0) |
-| qemu-ga active |  | [✅](./Templates/Applications/qemu-ga_active/6.4) | [✅](./Templates/Applications/qemu-ga_active/7.0) |
+| qemu-ga |  | [✅](./Templates/Applications/qemu-ga/7.0) |  |
+| qemu-ga active |  | [✅](./Templates/Applications/qemu-ga_active/7.0) |  |
 | Rotter | [✅](./Templates/Applications/Rotter/3.0) |  |  |
-| rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/6.4) | [✅](./Templates/Applications/rpc.gssd/7.0) |
-| rsyslog |  | [✅](./Templates/Applications/rsyslog/6.4) | [✅](./Templates/Applications/rsyslog/7.0) |
-| Songticker |  | [✅](./Templates/Applications/Songticker/6.4) | [✅](./Templates/Applications/Songticker/7.0) |
-| sssd |  | [✅](./Templates/Applications/sssd/6.4) | [✅](./Templates/Applications/sssd/7.0) |
-| systemd-journald |  | [✅](./Templates/Applications/systemd-journald/6.4) | [✅](./Templates/Applications/systemd-journald/7.0) |
-| systemd-logind |  | [✅](./Templates/Applications/systemd-logind/6.4) | [✅](./Templates/Applications/systemd-logind/7.0) |
-| systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/6.4) | [✅](./Templates/Applications/systemd-udevd/7.0) |
-| timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/6.4) | [✅](./Templates/Applications/timedatectl/7.0) |
-| tuned |  | [✅](./Templates/Applications/tuned/6.4) | [✅](./Templates/Applications/tuned/7.0) |
+| rpc.gssd |  | [✅](./Templates/Applications/rpc.gssd/7.0) |  |
+| rsyslog |  | [✅](./Templates/Applications/rsyslog/7.0) |  |
+| Songticker |  | [✅](./Templates/Applications/Songticker/7.0) |  |
+| sssd |  | [✅](./Templates/Applications/sssd/7.0) |  |
+| systemd-journald |  | [✅](./Templates/Applications/systemd-journald/7.0) |  |
+| systemd-logind |  | [✅](./Templates/Applications/systemd-logind/7.0) |  |
+| systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/7.0) |  |
+| timedatectl | [✅](./Templates/Applications/timedatectl/3.0) | [✅](./Templates/Applications/timedatectl/7.0) |  |
+| tuned |  | [✅](./Templates/Applications/tuned/7.0) |  |
 | zabbix-agent | [✅](./Templates/Applications/zabbix-agent/3.0) |  |  |
-| Zabbix unsupported items |  | [✅](./Templates/Applications/Zabbix_unsupported_items/6.4) | [✅](./Templates/Applications/Zabbix_unsupported_items/7.0) |
+| Zabbix unsupported items |  | [✅](./Templates/Applications/Zabbix_unsupported_items/7.0) |  |
 
 ### Templates: Network devices
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
-| Netgear GS by SNMP |  |  | [✅](./Templates/Network_devices/Netgear_GS_by_SNMP/7.0) |
+| Netgear GS by SNMP |  | [✅](./Templates/Network_devices/Netgear_GS_by_SNMP/7.0) |  |
 | SNMPv2 AVT AE1 DABPlus Go | [✅](./Templates/Network_devices/SNMPv2_AVT_AE1_DABPlus_Go/3.0) |  |  |
 | SNMPv2 Generic | [✅](./Templates/Network_devices/SNMPv2_Generic/3.0) |  |  |
 | SNMPv2 Interfaces HC | [✅](./Templates/Network_devices/SNMPv2_Interfaces_HC/3.0) |  |  |
@@ -124,14 +124,14 @@ inheritance problems.
 
 ### Templates: Operating systems
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
 | FreeBSD | [✅](./Templates/Operating_systems/FreeBSD/3.0) |  |  |
 | Linux | [✅](./Templates/Operating_systems/Linux/3.0) |  |  |
 
 ### Templates: Server hardware
 
-| Name | 3.0 | 6.4 | 7.0 |
+| Name | 3.0 | 7.0 | 8.0 |
 | ---- | --- | --- | --- |
 | Drive Slot Sensors | [✅](./Templates/Server_hardware/Drive_Slot_Sensors/3.0) |  |  |
 | Module Board Generic Sensors | [✅](./Templates/Server_hardware/Module_Board_Generic_Sensors/3.0) |  |  |
@@ -148,11 +148,11 @@ In some cases we override the Zabbix out-of-the-box templates to
 ensure they fit our use case. We publish the changed templates along
 with a generated diff against its upstream version.
 
-| Name | 6.4 | 7.0 |
+| Name | 7.0 | 8.0 |
 | ---- | --- | --- |
-| Linux by Zabbix agent |  | [✅](./Overrides/Linux_by_Zabbix_agent/7.0) |
-| PFSense by SNMP |  | [✅](./Overrides/PFSense_by_SNMP/7.0) |
-| Windows by Zabbix agent active |  | [✅](./Overrides/Windows_by_Zabbix_agent_active/7.0) |
+| Linux by Zabbix agent | [✅](./Overrides/Linux_by_Zabbix_agent/7.0) |  |
+| PFSense by SNMP | [✅](./Overrides/PFSense_by_SNMP/7.0) |  |
+| Windows by Zabbix agent active | [✅](./Overrides/Windows_by_Zabbix_agent_active/7.0) |  |
 
 ## Zabbix Version Support
 
@@ -161,14 +161,13 @@ We primarily support versions of Zabbix we use in production.
 | Version | Supported | Description |
 | ------- | --------- | ----------- |
 | 3.0 | ✅ | legacy RaBe environment |
-| 6.4 | | unsupported since 2024-12 |
 | 7.0 | ✅ | stable LTS |
 | 8.0 | | upcoming LTS |
 
 ## OS Version Support
 
 Our Zabbix 3.0 template mainly template EL7 installations based on CentOS 7.
-The 6.4+ templates aim to support both EL7 as well as EL9, with EL7 on
+The 7.0+ templates aim to support both EL7 as well as EL9, with EL7 on
 a best effort case (e.g. we don't workaround the lack of `timedatectl show`
 on old distros, their timedatectl stays unmonitored).
 
