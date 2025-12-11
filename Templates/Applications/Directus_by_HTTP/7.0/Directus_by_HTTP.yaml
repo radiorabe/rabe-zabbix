@@ -1,0 +1,99 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: 21792c81f39144a2a1442b9eef2fdf18
+      template: 'Directus by HTTP'
+      name: 'Directus by HTTP'
+      description: |
+        Monitoring of [Directus](https://directus.io/).
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 5ae620f6ffe1457389ca22bc90c2e4aa
+          name: 'Directus: Server Status'
+          type: DEPENDENT
+          key: directus.server.status
+          delay: '0'
+          history: 7d
+          description: 'Server health.'
+          valuemap:
+            name: 'Directus Server Status'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.status
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  if (value == "warn") {
+                    return 1;
+                  } else if (value == "error") {
+                    return 2;
+                  }
+                  return 0;
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 5m
+          master_item:
+            key: directus._get.server.status
+          tags:
+            - tag: component
+              value: server
+          triggers:
+            - uuid: 6694537c39f7440aa7cd287d04ee7e4f
+              expression: 'last(/Directus by HTTP/directus.server.status)=2'
+              name: 'Directus: Error status'
+              priority: HIGH
+              description: 'Directus is reporting an error status for the Directus server.'
+              tags:
+                - tag: scope
+                  value: availability
+            - uuid: 016c10699a43426195a9963ef16acd8a
+              expression: 'last(/Directus by HTTP/directus.server.status,#1)=1 and last(/Directus by HTTP/directus.server.status,#2)=1'
+              name: 'Directus: Warning status'
+              priority: WARNING
+              description: 'Directus is reporting a warning status for the Directus server.'
+              tags:
+                - tag: scope
+                  value: availability
+        - uuid: d3acf36611ee45cdbdb5120393666877
+          name: 'Directus: Get Status Page'
+          type: HTTP_AGENT
+          key: directus._get.server.status
+          history: '0'
+          value_type: TEXT
+          trends: '0'
+          description: 'Path to scrape from Directus, usually something like https://directus.example.org/server/health.'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '3600'
+          timeout: 3s
+          url: '{$DIRECTUS.SERVER.STATUS}'
+          tags:
+            - tag: component
+              value: raw
+      tags:
+        - tag: target
+          value: directus
+      macros:
+        - macro: '{$DIRECTUS.SERVER.STATUS}'
+      valuemaps:
+        - uuid: 30d8142a1e614b599d9ee37b578f300e
+          name: 'Directus Server Status'
+          mappings:
+            - value: '0'
+              newvalue: ok
+            - value: '1'
+              newvalue: warn
+            - value: '2'
+              newvalue: error
