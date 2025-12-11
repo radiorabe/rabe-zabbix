@@ -75,6 +75,7 @@ inheritance problems.
 | chrony | [✅](./Templates/Applications/chrony/3.0) | [✅](./Templates/Applications/chrony/7.0) |  |
 | Cronie | [✅](./Templates/Applications/Cronie/3.0) | [✅](./Templates/Applications/Cronie/7.0) |  |
 | Darkice | [✅](./Templates/Applications/Darkice/3.0) |  |  |
+| Directus by HTTP |  | [✅](./Templates/Applications/Directus_by_HTTP/7.0) |  |
 | dpinger | [✅](./Templates/Applications/dpinger/3.0) |  |  |
 | firewalld |  | [✅](./Templates/Applications/firewalld/7.0) |  |
 | GlusterFS Client | [✅](./Templates/Applications/GlusterFS_Client/3.0) |  |  |

@@ -15,6 +15,7 @@
       - template_name: "certmonger"
       - template_name: "chrony"
       - template_name: "Cronie"
+      - template_name: "Directus by HTTP"
       - template_name: "EL7 KVM VM Stack"
       - template_name: "EL7 Stack"
       - template_name: "EL8 KVM VM Stack"

@@ -562,6 +562,33 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Templates/Applications/Directus_by_HTTP/7.0/Directus_by_HTTP.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-Directus_by_HTTP
+  title: "Zabbix Template: Directus by HTTP"
+  description: |
+    Monitoring of [Directus](https://directus.io/).
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/Directus_by_HTTP/7.0
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/Directus_by_HTTP/7.0
+      title: GitHub
+      icon: github
+  tags: [directus]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Templates/Applications/firewalld/7.0/firewalld.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
