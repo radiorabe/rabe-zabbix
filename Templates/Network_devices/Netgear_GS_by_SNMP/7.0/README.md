@@ -18,7 +18,7 @@ This Zabbix template depends on the following templates.
 
 ## Items
 
-### Item: GS Hardware serial number
+### Item: Netgear Fastpath: Hardware serial number
 
 ![component: system](https://img.shields.io/badge/component-system-00c9bf)
 
@@ -39,7 +39,7 @@ Settings:
 
 ## Triggers
 
-### Trigger: GS Device has been replaced
+### Trigger: RaBe: Netgear Fastpath: Device has been replaced
 
 ![scope: notice](https://img.shields.io/badge/scope-notice-00c9bf)
 
@@ -77,4 +77,4 @@ Software Foundation, version 3 of the License.
 
 ## Copyright
 
-Copyright (c) 2017 - 2025 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2026 [Radio Bern RaBe](http://www.rabe.ch)

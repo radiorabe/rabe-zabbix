@@ -3,3 +3,4 @@
 **/selinux/*.pp
 site/
 venv/
+.var/lib/hackctl

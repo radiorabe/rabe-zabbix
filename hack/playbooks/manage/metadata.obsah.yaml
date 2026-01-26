@@ -1,0 +1,15 @@
+---
+help: |
+  Sync contents from remote source and update local working copy.
+
+variables:
+  ansible_host:
+    help: Zabbix host
+  ansible_zabbix_auth_key:
+    help: Zabbix Auth Key
+  readme_year:
+    help: Gets rendered into all READMEs
+  rabe_zabbix_templates:
+    help: Specify templates to download from RaBe instance, only used when api token is provided
+  upstream_templates:
+    help: Templates we sync from upstream to detect drift in overrides

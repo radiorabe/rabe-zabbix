@@ -92,20 +92,51 @@ RaBe servers it soley regenerates README files and documentation.
 
 ### Regenerating READMEs
 
+If you have obsah installed (e.g using pip), you can use the `hack/hackctl` script
+to conveniently provide a help and store your recent args.
+
 ```bash
-ansible-playbook hack/plays/manage.yml
+pip install obsah
+
+hack/hackctl manage --help
 ```
 
-### Fetching Templates using ansible
+NOTE: your args (like the API token) are persisted to the
+`.var/lib/hackctl/parameters.yaml` file when you use hackctl.
+
+If you prefer to use `ansible-playbook`, see below.
+
+### Fetching Templates using hackctl
 
 ```bash
-ansible-playbook hack/plays/manage.yml -e ansible_zabbix_auth_key=<AUTH_KEY>
+hack/hackctl manage --ansible-zabbix-auth-key=<API_TOKEN>
 ```
 
 If you just want to fetch a single template:
 
 ```bash
-ansible-playbook hack/plays/manage.yml -e ansible_zabbix_auth_key=<AUTH_KEY> -e 'rabe_zabbix_templates=[{"template_name":"CHANGEME"}]'
+hack/hackctl manage --ansible-zabbix-auth-key=<AUTH_KEY> --rabe-zabbix-templates='[{"template_name":"CHANGEME"}]'
+```
+
+To remove the API token from `.var/lib/hackctl/parameters.yaml` and rerun without fetching RaBe sources:
+
+```bash
+hack/hackctl manage --reset-ansible-zabbix-auth-key
+```
+
+### Fetching Templates using ansible
+
+
+```bash
+ansible-playbook hack/playbooks/manage/manage.yaml
+```
+
+```bash
+ansible-playbook hack/playbooks/manage/manage.yaml -e ansible_zabbix_auth_key=<AUTH_KEY>
+```
+
+```bash
+ansible-playbook hack/playbooks/manage/manage.yaml -e ansible_zabbix_auth_key=<AUTH_KEY> -e 'rabe_zabbix_templates=[{"template_name":"CHANGEME"}]'
 ```
 
 ### Adding new templates
