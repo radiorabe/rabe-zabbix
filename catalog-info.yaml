@@ -801,6 +801,37 @@ spec:
   system: rabe-zabbix
   subcomponentOf: rabe-zabbix-templates
 ---
+# Templates/Applications/SUISA_Sendemeldung/7.0/SUISA_Sendemeldung.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zabbix-template-SUISA_Sendemeldung
+  title: "Zabbix Template: SUISA Sendemeldung"
+  description: |
+    Monitoring for [SUISA Sendmeldung](https://radiorabe.github.io/suisa_sendemeldung/).
+
+    Contains a trapper item for monitoring sucessful runs based on their
+    last timestamp as a well as a trigger that alerts us when the last
+    run is more than a month old.
+
+    This template is part of [RaBe's Zabbix template and helpers
+    collection](https://github.com/radiorabe/rabe-zabbix).
+
+  annotations:
+    backstage.io/techdocs-ref: dir:./Templates/Applications/SUISA_Sendemeldung/7.0
+    github.com/project-slug: radiorabe/rabe-zabbix
+  links:
+    - url: https://github.com/radiorabe/rabe-zabbix/tree/develop/Templates/Applications/SUISA_Sendemeldung/7.0
+      title: GitHub
+      icon: github
+  tags: [suisa_sendemeldung]
+spec:
+  type: zabbix-template
+  lifecycle: experimental
+  owner: it-reaktion
+  system: rabe-zabbix
+  subcomponentOf: rabe-zabbix-templates
+---
 # Templates/Applications/systemd-journald/7.0/systemd-journald.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
