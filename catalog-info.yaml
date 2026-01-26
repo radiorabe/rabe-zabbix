@@ -1,5 +1,5 @@
 ---
-# hack/plays/manage.yml
+# hack/playbooks/manage/manage.yaml
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
@@ -16,7 +16,7 @@ spec:
   owner: it-reaktion
   domain: it
 ---
-# hack/plays/manage.yml
+# hack/playbooks/manage/manage.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:

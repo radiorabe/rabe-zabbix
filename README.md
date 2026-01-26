@@ -195,4 +195,4 @@ option) any later version.
 
 ## Copyright
 
-Copyright (c) 2017 - 2025 [Radio Bern RaBe](http://www.rabe.ch)
+Copyright (c) 2017 - 2026 [Radio Bern RaBe](http://www.rabe.ch)

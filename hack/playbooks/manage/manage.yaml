@@ -6,7 +6,7 @@
   vars:
     target_version: '7.0'
     # readme_year: '{{ ansible_date_time.year }}'
-    readme_year: '2025'
+    readme_year: '2026'
     rabe_zabbix_templates:
       - template_name: "Apache with TLS by HTTP Stack"
       - template_name: "APC Smart-UPS 3000 Stack"
@@ -135,8 +135,8 @@
           loop: '{{ upstream_templates }}'
         - name: 'RaBe Zabbix Templator : Generate diff'
           ansible.utils.fact_diff:
-            before: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/orig.yaml") }}'
-            after: '{{ lookup("ansible.builtin.file", "../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/" + ( item.template_name | replace(" ", "_") ) + ".yaml") | trim }}'
+            before: '{{ lookup("ansible.builtin.file", "../../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/orig.yaml") }}'
+            after: '{{ lookup("ansible.builtin.file", "../../../Overrides/" + ( item.template_name | replace(" ", "_") ) + "/" + target_version + "/" + ( item.template_name | replace(" ", "_") ) + ".yaml") | trim }}'
           loop: '{{ upstream_templates }}'
           changed_when: false
           register: fact_diff
@@ -346,7 +346,7 @@
             dest: 'catalog-info.yaml'
             content: |
               ---
-              # hack/plays/manage.yml
+              # hack/playbooks/manage/manage.yaml
               apiVersion: backstage.io/v1alpha1
               kind: System
               metadata:
@@ -363,7 +363,7 @@
                 owner: it-reaktion
                 domain: it
               ---
-              # hack/plays/manage.yml
+              # hack/playbooks/manage/manage.yaml
               apiVersion: backstage.io/v1alpha1
               kind: Component
               metadata:
@@ -381,7 +381,7 @@
                 system: rabe-zabbix
               {% for file in (yaml.files | map(attribute="path") | sort ) %}
               {% if '7.0' in file %}
-              {% set template = (lookup("ansible.builtin.file", "../../"+file) | from_yaml).zabbix_export %}
+              {% set template = (lookup("ansible.builtin.file", "../../../"+file) | from_yaml).zabbix_export %}
               ---
               # {{ file }}
               apiVersion: backstage.io/v1alpha1
@@ -414,7 +414,7 @@
           ansible.builtin.copy:
             dest: '{{ item | dirname }}/mkdocs.yaml'
             content: |
-              {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
+              {% set tpl = (lookup('ansible.builtin.file', "../../../"+item) | from_yaml).zabbix_export.templates[0] %}
               site_name: "Zabbix Template: {{ tpl.name }}"
               repo_url: https://github.com/radiorabe/rabe-zabbix
               repo_name: radiorabe/rabe-zabbix
@@ -459,7 +459,7 @@
             dest: '{{ item | dirname }}/README.md'
             content: |
               {% set triggers = [] %}
-              {% set tpl = (lookup('ansible.builtin.file', "../../"+item) | from_yaml).zabbix_export.templates[0] %}
+              {% set tpl = (lookup('ansible.builtin.file', "../../../"+item) | from_yaml).zabbix_export.templates[0] %}
               # Zabbix Template: {{ tpl.name }}
 
               {% for tag in tpl.tags %}![{{ tag.tag }}: {{ tag.value }}](https://img.shields.io/badge/{{ tag.tag }}-{{ tag.value }}-00c9bf){% if not loop.last %} {% endif %}{% endfor %}{% if 'vendor' in tpl %} ![vendor: {{ tpl.vendor.name }}](https://img.shields.io/badge/vendor-{{ tpl.vendor.name }}-00c9bf) ![version: {{ tpl.vendor.version }}](https://img.shields.io/badge/version-{{ tpl.vendor.version | replace("-", "--") }}-00c9bf){% endif %}

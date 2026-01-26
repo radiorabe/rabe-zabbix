@@ -18,6 +18,6 @@ jobs:
 
       - run: pip install ansible
 
-      - run: ansible-playbook hack/plays/manage.yml
+      - run: ansible-playbook hack/playbooks/manage/manage.yaml
 
       - run: git diff --exit-code

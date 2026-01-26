@@ -1,0 +1,14 @@
+#!/bin/bash
+
+OBSAH_NAME=hack/hackctl
+OBSAH_BASE=$(dirname $(readlink -f $0))/..
+OBSAH_DATA=${OBSAH_BASE}/hack
+OBSAH_INVENTORY=${OBSAH_BASE}/hack/inventories
+OBSAH_STATE=${OBSAH_BASE}/.var/lib/hackctl
+OBSAH_PERSIST_PARAMS=true
+export OBSAH_NAME OBSAH_DATA OBSAH_INVENTORY OBSAH_STATE OBSAH_PERSIST_PARAMS
+
+ANSIBLE_LOG_PATH=${OBSAH_BASE}/.var/lib/hackctl/ansible.log
+export ANSIBLE_LOG_PATH
+
+exec obsah "$@"
