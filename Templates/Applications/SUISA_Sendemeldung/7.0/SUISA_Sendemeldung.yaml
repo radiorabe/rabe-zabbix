@@ -1,0 +1,45 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    - uuid: d3992de5d8ca469fadc0a1345b043dc2
+      template: 'SUISA Sendemeldung'
+      name: 'SUISA Sendemeldung'
+      description: |
+        Monitoring for [SUISA Sendmeldung](https://radiorabe.github.io/suisa_sendemeldung/).
+        
+        Contains a trapper item for monitoring sucessful runs based on their
+        last timestamp as a well as a trigger that alerts us when the last
+        run is more than a month old.
+        
+        This template is part of [RaBe's Zabbix template and helpers
+        collection](https://github.com/radiorabe/rabe-zabbix).
+      vendor:
+        name: RaBe
+        version: '7.0'
+      groups:
+        - name: Templates/Applications
+      items:
+        - uuid: 14f2ae2794e04e88ab7a3ece27e94a72
+          name: 'Last Sucessful Run'
+          type: TRAP
+          key: rabe.suisa_sendemeldung.run.success
+          delay: '0'
+          history: 90d
+          units: unixtime
+          tags:
+            - tag: component
+              value: service
+          triggers:
+            - uuid: c090c4b36e024ba0ad41e3018798c11a
+              expression: '(now() - last(/SUISA Sendemeldung/rabe.suisa_sendemeldung.run.success)) > 2592000'
+              name: 'Last run expired'
+              priority: WARNING
+              tags:
+                - tag: scope
+                  value: compliance
+      tags:
+        - tag: target
+          value: suisa_sendemeldung

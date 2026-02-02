@@ -98,6 +98,7 @@ inheritance problems.
 | rsyslog |  | [✅](./Templates/Applications/rsyslog/7.0) |  |
 | Songticker |  | [✅](./Templates/Applications/Songticker/7.0) |  |
 | sssd |  | [✅](./Templates/Applications/sssd/7.0) |  |
+| SUISA Sendemeldung |  | [✅](./Templates/Applications/SUISA_Sendemeldung/7.0) |  |
 | systemd-journald |  | [✅](./Templates/Applications/systemd-journald/7.0) |  |
 | systemd-logind |  | [✅](./Templates/Applications/systemd-logind/7.0) |  |
 | systemd-udevd |  | [✅](./Templates/Applications/systemd-udevd/7.0) |  |

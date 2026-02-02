@@ -33,6 +33,7 @@
       - template_name: "Songticker"
       - template_name: "Songticker Stack"
       - template_name: "sssd"
+      - template_name: "SUISA Sendemeldung"
       - template_name: "systemd-journald"
       - template_name: "systemd-logind"
       - template_name: "systemd-udevd"
