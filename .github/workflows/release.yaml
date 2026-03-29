@@ -8,4 +8,4 @@ on:
 
 jobs:
   release-mkdocs:
-    uses: radiorabe/actions/.github/workflows/release-mkdocs.yaml@v0.41.3
+    uses: radiorabe/actions/.github/workflows/release-mkdocs.yaml@c7aef9928f610ec51b44f84debf2321189276d54 # v0.41.3
