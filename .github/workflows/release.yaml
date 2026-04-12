@@ -8,4 +8,9 @@ on:
 
 jobs:
   release-mkdocs:
-    uses: radiorabe/actions/.github/workflows/release-mkdocs.yaml@c7aef9928f610ec51b44f84debf2321189276d54 # v0.41.3
+    uses: radiorabe/actions/.github/workflows/release-mkdocs.yaml@479996126a091287dc3fd349786f6f8a6dd1b23c # v0.42.0
+  github-actions:
+    permissions:
+      contents: read
+      security-events: write # so zizmor can publish results to the Security tab
+    uses: radiorabe/actions/.github/workflows/test-github-actions.yaml@479996126a091287dc3fd349786f6f8a6dd1b23c # v0.42.0
