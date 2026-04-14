@@ -44,7 +44,7 @@ Settings:
 | Priority | WARNING |
 
 ```console
-(now() - last(/SUISA Sendemeldung/rabe.suisa_sendemeldung.run.success)) > 2592000
+(now() - last(/SUISA Sendemeldung/rabe.suisa_sendemeldung.run.success)) > 2678000
 ```
 
 ## License
