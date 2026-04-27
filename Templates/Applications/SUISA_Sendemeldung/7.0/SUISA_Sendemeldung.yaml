@@ -34,7 +34,7 @@ zabbix_export:
               value: service
           triggers:
             - uuid: c090c4b36e024ba0ad41e3018798c11a
-              expression: '(now() - last(/SUISA Sendemeldung/rabe.suisa_sendemeldung.run.success)) > 2592000'
+              expression: '(now() - last(/SUISA Sendemeldung/rabe.suisa_sendemeldung.run.success)) > 2678000'
               name: 'Last run expired'
               priority: WARNING
               tags:
