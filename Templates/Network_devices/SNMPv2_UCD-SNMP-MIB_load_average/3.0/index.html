@@ -12676,11 +12676,11 @@ It is set to 1 if the threshold is crossed, 0 otherwise.
 <h5 id="trigger-prototypes">Trigger Prototypes</h5>
 <ul>
 <li>Warning: Processor load is high (&gt; $1 over {$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:"{#LA_NAME}"} on {HOST.NAME}
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:&quot;{#LA_NAME}&quot;})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_THRESHOLD:&quot;{#LA_NAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:"{#LA_NAME}"})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_THRESHOLD:"{#LA_NAME}"}
 </code></pre></div>
   The average CPU load is over <code>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:"{#LA_NAME}"}</code> for the last <code>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_WARNING_TIME:"{#LA_NAME}}</code>.</li>
 <li>High: Processor load is very high (&gt; $1 over {$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:"{#LA_NAME}"} on {HOST.NAME}
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:&quot;{#LA_NAME}&quot;})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_THRESHOLD:&quot;{#LA_NAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{Template SNMPv2 UCD-SNMP-MIB load average:rabe.snmp.ucd-snmp-mib.laLoad[{#SNMPINDEX}].avg({$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:"{#LA_NAME}"})}&gt;{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_THRESHOLD:"{#LA_NAME}"}
 </code></pre></div>
   The average CPU load is over <code>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:"{#LA_NAME}"}</code> for the last <code>{$SNMPV2_UCD_SNMP_MIB_LOAD_AVERAGE_CPU_LOAD_HIGH_TIME:"{#LA_NAME}"}</code>.</li>
 <li>Warning: Processor load {#LA_NAME} is higher than the system watch point ({ITEM.VALUE1} &gt; {ITEM.VALUE2}) on {HOST.NAME})

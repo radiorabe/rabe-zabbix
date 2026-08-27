@@ -16554,7 +16554,7 @@ Settings:</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="go">min(/PFSense by SNMP/net.if.in.errors[{#SNMPINDEX}],5m)&gt;{$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="go">min(/PFSense by SNMP/net.if.in.errors[{#SNMPINDEX}],5m)&gt;{$IF.ERRORS.WARN:"{#IFNAME}"}</span>
 </code></pre></div>
 <h5 id="discovery-rule-network-interfaces-discovery-trigger-prototype-pfsense-interface-ifnameifalias-high-output-error-rate">Discovery Rule: Network interfaces discovery: Trigger Prototype: PFSense: Interface [{#IFNAME}({#IFALIAS})]: High output error rate</h5>
 <p><img alt="scope: availability" src="https://img.shields.io/badge/scope-availability-00c9bf" /></p>
@@ -16574,7 +16574,7 @@ Settings:</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">min(/PFSense by SNMP/net.if.out.errors[{#SNMPINDEX}],5m)&gt;{$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">min(/PFSense by SNMP/net.if.out.errors[{#SNMPINDEX}],5m)&gt;{$IF.ERRORS.WARN:"{#IFNAME}"}</span>
 </code></pre></div>
 <h5 id="discovery-rule-network-interfaces-discovery-trigger-prototype-pfsense-interface-ifnameifalias-link-down">Discovery Rule: Network interfaces discovery: Trigger Prototype: PFSense: Interface [{#IFNAME}({#IFALIAS})]: Link down</h5>
 <p><img alt="scope: availability" src="https://img.shields.io/badge/scope-availability-00c9bf" /></p>
@@ -16596,7 +16596,7 @@ Settings:</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and (last(/PFSense by SNMP/net.if.status[{#SNMPINDEX}])=2)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">{$IFCONTROL:"{#IFNAME}"}=1 and (last(/PFSense by SNMP/net.if.status[{#SNMPINDEX}])=2)</span>
 </code></pre></div>
 <h4 id="discovery-rule-network-interfaces-discovery-graph-prototypes">Discovery Rule: Network interfaces discovery: Graph Prototypes</h4>
 <p>The following graph prototypes are defined by this Template</p>

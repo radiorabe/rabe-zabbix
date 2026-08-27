@@ -12830,19 +12830,19 @@ collection</a>.</p>
 <h5 id="trigger-prototypes">Trigger Prototypes</h5>
 <ul>
 <li>Warning: Incoming network usage on {HOST.NAME}:{#IFNAME} is high ( &gt; $1/s over {$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_TIME:"{#IFNAME}"})
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_TIME:&quot;{#IFNAME}&quot;})} &gt; {$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_THRESHOLD:&quot;{#IFNAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_TIME:"{#IFNAME}"})} &gt; {$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_THRESHOLD:"{#IFNAME}"}
 </code></pre></div>
   The incoming network usage is above <code>{$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_THRESHOLD:"{#IFNAME}"}</code> for the last <code>{$OS_FREEBSD_NET_IN_BANDWIDTH_WARNING_TIME:"{#IFNAME}"}</code></li>
 <li>High: Incoming network usage on {HOST.NAME}:{#IFNAME} is very high ( &gt; $1/s over {$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_TIME:"{#IFNAME}"})
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_TIME:&quot;{#IFNAME}&quot;})} &gt; {$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_THRESHOLD:&quot;{#IFNAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_TIME:"{#IFNAME}"})} &gt; {$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_THRESHOLD:"{#IFNAME}"}
 </code></pre></div>
   The incoming network usage is above <code>{$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_THRESHOLD:"{#IFNAME}"}</code> for the last <code>{$OS_FREEBSD_NET_IN_BANDWIDTH_HIGH_TIME:"{#IFNAME}"}</code></li>
 <li>Warning: Outgoing network usage on {HOST.NAME}:{#IFNAME} is high ( &gt; $1/s over {$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_TIME:"{#IFNAME}"})
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_TIME:&quot;{#IFNAME}&quot;})} &gt; {$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_THRESHOLD:&quot;{#IFNAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_TIME:"{#IFNAME}"})} &gt; {$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_THRESHOLD:"{#IFNAME}"}
 </code></pre></div>
   The outgoing network usage is above <code>{$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_THRESHOLD:"{#IFNAME}"}</code> for the last <code>{$OS_FREEBSD_NET_OUT_BANDWIDTH_WARNING_TIME:"{#IFNAME}"})</code></li>
 <li>High: Outgoing network usage on {HOST.NAME}:{#IFNAME} is very high ( &gt; $1/s over {$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_TIME:"{#IFNAME}"})
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_TIME:&quot;{#IFNAME}&quot;})} &gt; {$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_THRESHOLD:&quot;{#IFNAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{Template OS FreeBSD active:net.if.in[{#IFNAME}].avg({$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_TIME:"{#IFNAME}"})} &gt; {$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_THRESHOLD:"{#IFNAME}"}
 </code></pre></div>
   The outgoing network usage is above <code>{$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_THRESHOLD:"{#IFNAME}"}</code> for the last <code>{$OS_FREEBSD_NET_OUT_BANDWIDTH_HIGH_TIME:"{#IFNAME}"})</code></li>
 </ul>
@@ -12875,30 +12875,30 @@ collection</a>.</p>
 <ul>
 <li>Warning: Free disk space on {HOST.NAME}:{#FSNAME} is low (&lt; $2 %, {ITEM.VALUE1} free)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{Template OS FreeBSD active:vfs.fs.size[{#FSNAME},free].last(0)}
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  &lt; {$OS_FREEBSD_FS_FREE_WARNING_THRESHOLD:&quot;{#FSNAME}&quot;}
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  &lt; {$OS_FREEBSD_FS_FREE_WARNING_THRESHOLD:"{#FSNAME}"}
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>and
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>{Template OS FreeBSD active:vfs.fs.size[{#FSNAME},pfree].last()}
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  &lt; {$OS_FREEBSD_FS_PFREE_WARNING_THRESHOLD:&quot;{#FSNAME}&quot;}
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  &lt; {$OS_FREEBSD_FS_PFREE_WARNING_THRESHOLD:"{#FSNAME}"}
 </code></pre></div>
   The free disk space on the filesystem is below <code>{$OS_FREEBSD_FS_FREE_WARNING_THRESHOLD:"{#FSNAME}"}</code> and <code>{$OS_FREEBSD_FS_PFREE_WARNING_THRESHOLD:"{#FSNAME}"}</code> percent.</li>
 <li>High: Free disk space on {HOST.NAME}:{#FSNAME} is very low (&lt; $2 %, {ITEM.VALUE1} free)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{Template OS FreeBSD active:vfs.fs.size[{#FSNAME},free].last(0)}
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  &lt; {$OS_FREEBSD_FS_FREE_HIGH_THRESHOLD:&quot;{#FSNAME}&quot;}
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  &lt; {$OS_FREEBSD_FS_FREE_HIGH_THRESHOLD:"{#FSNAME}"}
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>and
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>{Template OS FreeBSD active:vfs.fs.size[{#FSNAME},pfree].last()}
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  &lt; {$OS_FREEBSD_FS_PFREE_HIGH_THRESHOLD:&quot;{#FSNAME}&quot;}
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  &lt; {$OS_FREEBSD_FS_PFREE_HIGH_THRESHOLD:"{#FSNAME}"}
 </code></pre></div>
   The free disk space on the filesystem is below <code>{$OS_FREEBSD_FS_FREE_HIGH_THRESHOLD:"{#FSNAME}"}</code> and {$OS_FREEBSD_FS_PFREE_HIGH_THRESHOLD:"{#FSNAME}"}` percent.</li>
 <li>Warning: Free inodes on {HOST.NAME}:{#FSNAME} are low ({ITEM.VALUE1} &lt; $2 % )
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{Template OS FreeBSD active:vfs.fs.inode[{#FSNAME},pfree].last(0)} &lt; {$OS_FREEBSD_INODE_PFREE_WARNING_THRESHOLD:&quot;{#FSNAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{Template OS FreeBSD active:vfs.fs.inode[{#FSNAME},pfree].last(0)} &lt; {$OS_FREEBSD_INODE_PFREE_WARNING_THRESHOLD:"{#FSNAME}"}
 </code></pre></div>
   The free inodes on the filesystem are below <code>{$OS_FREEBSD_INODE_PFREE_WARNING_THRESHOLD:"{#FSNAME}"}</code></li>
 <li>High: Free inodes on {HOST.NAME}:{#FSNAME} are very low ({ITEM.VALUE1} &lt; $2 % )
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>{Template OS FreeBSD active:vfs.fs.inode[{#FSNAME},pfree].last(0)} &lt; {$OS_FREEBSD_INODE_PFREE_HIGH_THRESHOLD:&quot;{#FSNAME}&quot;}
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>{Template OS FreeBSD active:vfs.fs.inode[{#FSNAME},pfree].last(0)} &lt; {$OS_FREEBSD_INODE_PFREE_HIGH_THRESHOLD:"{#FSNAME}"}
 </code></pre></div>
   The free inodes on the filesystem are below <code>{$OS_FREEBSD_INODE_PFREE_HIGH_THRESHOLD:"{#FSNAME}"}</code></li>
 </ul>
